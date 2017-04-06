@@ -1,11 +1,12 @@
-package com.example.tests;
+package pageObjects.manager;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pageObjects.allUsers.PageObject;
 
 
-public class ManagePage extends PageObject{
+public class ManagePage extends PageObject {
     @FindBy(className = "h1.text-center")
     private WebElement hospitalName;
 

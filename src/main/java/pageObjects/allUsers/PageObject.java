@@ -1,4 +1,4 @@
-package com.example.tests;
+package pageObjects.allUsers;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;

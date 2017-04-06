@@ -1,13 +1,14 @@
-package com.example.tests;
+package pageObjects.manager;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pageObjects.allUsers.PageObject;
 
 /**
  * Created by radga on 06.04.2017.
  */
-public class ModerationFeedBackPage extends PageObject{
+public class ModerationFeedBackPage extends PageObject {
     @FindBy(css = "input[value=\"remove\"]")
     private WebDriver removeAfterDecideButton;
 
