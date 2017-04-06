@@ -4,6 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pageObjects.HospitalSearchResult;
+import pageObjects.HospitalSeekerHomePage;
+import pageObjects.MapSearch;
 
 /**
  * Created by Evgen on 05.04.2017.
@@ -50,12 +53,32 @@ public class BaseGeneralHeader {
         this.driver = driver;
     }
 
-    protected BaseGeneralHeader toHome() {
-        return new BaseGeneralHeader(driver);
+
+    public BaseGeneralHeader toHomePage() {
+        home.click();
+        return new HospitalSeekerHomePage(driver);
     }
 
-    protected toHospitalMap() {
+    public MapSearch toMapOfHospitals() {
+        nearestHospital.click();
+        return new MapSearch(driver);
+    }
 
+
+  /*  public BaseGeneralHeader changeLanguageToUa() {
+        uaLanguage.click();
+        return new BaseGeneralHeader(driver);
+    }
+    public BaseGeneralHeader changeLanguagetoEn() {
+        enLanguage.click();
+        return this;
+    }*/
+
+    public HospitalSearchResult findHospital(String hospitalName) {
+        hospitalSearchField.clear();
+        hospitalSearchField.sendKeys(hospitalName);
+        hospitalSearchButton.click();
+        return new HospitalSearchResult(driver);
     }
 
 }

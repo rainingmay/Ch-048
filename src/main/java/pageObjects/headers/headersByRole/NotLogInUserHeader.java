@@ -1,13 +1,14 @@
-package pageObjects.headers;
+package pageObjects.headers.baseHeaderExtnd;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pageObjects.headers.BaseHeader;
 
 /**
  * Created by Evgen on 05.04.2017.
  */
-public class NotLogInUserHeader extends BaseGeneralHeader {
+public class NotLogInUserHeader extends BaseHeader {
     @FindBy(css = "a[href$='/HospitalSeeker/login']")
     protected WebElement login;
 
