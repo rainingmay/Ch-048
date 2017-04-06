@@ -24,4 +24,5 @@ public class DoctorHeader extends BaseHeader{
 
     @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[6]/ul/li[2]/a")
     private WebElement logOut;
+
 }
