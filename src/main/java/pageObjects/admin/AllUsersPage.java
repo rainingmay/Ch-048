@@ -3,18 +3,16 @@ package pageObjects.admin;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pageObjects.allUsers.PageObject;
 import pageObjects.headers.headersByRole.AdminHeader;
 
 /**
  * Created by Evgen on 06.04.2017.
  */
-public class AllUsersPage {
+public class AllUsersPage extends PageObject{
     private WebDriver driver;
     private AdminHeader header;
 
-    public AllUsersPage(WebDriver driver) {
-        this.driver = driver;
-    }
 
     @FindBy(id = "userPerPage")
     private WebElement usersPerPagePopUp;
@@ -58,4 +56,7 @@ public class AllUsersPage {
     @FindBy(css = "body > section > div.content > div > div > ul > li:first-child > a")
     private WebElement firstPageButto;
 
+    public AllUsersPage(WebDriver driver) {
+        super(driver);
+    }
 }

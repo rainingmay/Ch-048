@@ -59,4 +59,9 @@ public class AdminHeader extends BaseHeader{
         allUsersIco.click();
         return new AllUsersPage(driver);
     }
+
+    public AllUsersPage addUser() {
+        allUsersIco.click();
+        return new AllUsersPage(driver);
+    }
 }
