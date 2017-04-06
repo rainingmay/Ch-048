@@ -15,34 +15,42 @@ public class AdminHeader extends BaseHeader{
     }
 
 
-    @FindBy(className = "nav navbar-nav dropdown dropdown-toggle active")
+    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/a")
     private WebElement actions;
 
-    @FindBy(className = "glyphicon glyphicon-list")
+    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/ul/li[2]/a")
     private WebElement allUsersIco;
 
-    @FindBy(className = "glyphicon glyphicon-plus-sign")
+    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/ul/li[2]/a")
     private WebElement addUserIco;
 
-    @FindBy(className = "glyphicon glyphicon-calendar")
+    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/ul/li[3]/a")
     private WebElement hospitalListIco;
 
-    @FindBy(css = "a[href$='/HospitalSeeker/admin/map/new']")
+    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/ul/li[4]/a")
     private WebElement addHospitalIco;
 
-    @FindBy(className = "glyphicon glyphicon-check")
+    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/ul/li[5]/a")
     private WebElement googlePoiIco;
 
-    @FindBy(className = "glyphicon glyphicon-briefcase")
+    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/ul/li[6]/a")
     private WebElement editManagers;
 
-    @FindBy(className = "glyphicon glyphicon-asterisk")
+    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/ul/li[7]/a")
     private WebElement tokenConfig;
 
-    @FindBy(css = "a[href$='/HospitalSeeker/admin/departmentName']")
+    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/ul/li[8]/a")
     private WebElement addDepartment;
 
 
 
+    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[5]/a")
+    private WebElement profile;
+
+    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[5]/ul/li[1]/a")
+    private WebElement myProfile;
+
+    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[5]/ul/li[2]/a")
+    private WebElement logOut;
 
 }

@@ -11,7 +11,7 @@ import pageObjects.MapSearch;
 /**
  * Created by Evgen on 05.04.2017.
  */
-public class BaseGeneralHeader {
+public class BaseHeader {
     protected WebDriver driver;
 
     @FindBy(className = "img-responsive logo")
@@ -49,14 +49,14 @@ public class BaseGeneralHeader {
     @FindBy(id = "select_doctor_search_button")
     protected WebElement doctorSearchButton;
 
-    public BaseGeneralHeader(WebDriver driver) {
+    public BaseHeader(WebDriver driver) {
         this.driver = driver;
     }
 
 
-    public BaseGeneralHeader toHomePage() {
+    public HospitalSeekerHomePage toHomePage() {
         home.click();
-        return new HospitalSeekerHomePage(driver);
+        return new HospitalSeekerHomePage(driver,this);
     }
 
     public MapSearch toMapOfHospitals() {
@@ -65,11 +65,11 @@ public class BaseGeneralHeader {
     }
 
 
-  /*  public BaseGeneralHeader changeLanguageToUa() {
+  /*  public BaseHeader changeLanguageToUa() {
         uaLanguage.click();
-        return new BaseGeneralHeader(driver);
+        return new BaseHeader(driver);
     }
-    public BaseGeneralHeader changeLanguagetoEn() {
+    public BaseHeader changeLanguagetoEn() {
         enLanguage.click();
         return this;
     }*/

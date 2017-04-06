@@ -1,4 +1,4 @@
-package pageObjects.headers.baseHeaderExtnd;
+package pageObjects.headers.headersByRole;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
