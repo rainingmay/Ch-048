@@ -1,12 +1,13 @@
 package pageObjects.manager;
 
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import pageObjects.allUsers.PageObject;
+import pageObjects.headers.headersByRole.AdminHeader;
+import pageObjects.headers.headersByRole.ManagerHeader;
 
 
 public class HospitalsPage extends PageObject {
@@ -281,10 +282,10 @@ public class HospitalsPage extends PageObject {
 
 
 
-
     public HospitalsPage(WebDriver driver) {
-        super(driver);
-    }
+        super(driver, new ManagerHeader(driver));
+
+
 
 
 

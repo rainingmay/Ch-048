@@ -5,6 +5,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import pageObjects.allUsers.PageObject;
+<<<<<<< HEAD
+import pageObjects.headers.headersByRole.ManagerHeader;
+import pageObjects.manager.ManagePage;
+=======
+>>>>>>> 9d372633f7fa148581a266237f107b3c2056fdc8
 
 public class SchedulerPage extends PageObject {
 
@@ -113,6 +118,6 @@ public class SchedulerPage extends PageObject {
     }
 
     public SchedulerPage(WebDriver driver) {
-        super(driver);
+        super(driver, new ManagerHeader(driver));
     }
 }

@@ -4,14 +4,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pageObjects.allUsers.PageObject;
+import pageObjects.headers.BaseHeader;
+import pageObjects.headers.headersByRole.AdminHeader;
 
 /**
  * Created by Evgen on 06.04.2017.
  */
 public class AddUserPage extends PageObject{
+
     public AddUserPage(WebDriver driver) {
-        super(driver);
+        super(driver, new AdminHeader(driver));
     }
+
 
     @FindBy(css = "/html/body/section/div/div/div/div/div/form/fieldset/h1")
     private WebElement addUserLabel;
