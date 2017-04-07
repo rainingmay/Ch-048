@@ -1,10 +1,10 @@
-package com.example.tests;
+package pageObjects.manager;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class SchedulerPage extends PageObject{
+public class SchedulerPage extends pageObjects.allUsers.PageObject {
 
     @FindBy(xpath = "/html/body/section/div/div/div[3]/div/form/div[2]/p")
     private WebElement doctorNameLabel;
