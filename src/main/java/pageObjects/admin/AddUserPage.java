@@ -12,8 +12,8 @@ import pageObjects.headers.headersByRole.AdminHeader;
  */
 public class AddUserPage extends PageObject{
 
-    public AddUserPage(WebDriver driver, AdminHeader header) {
-        super(driver, header);
+    public AddUserPage(WebDriver driver) {
+        super(driver, new AdminHeader(driver));
     }
 
 
