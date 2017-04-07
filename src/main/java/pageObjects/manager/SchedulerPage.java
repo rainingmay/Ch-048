@@ -3,6 +3,7 @@ package pageObjects.manager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 import pageObjects.allUsers.PageObject;
 
 public class SchedulerPage extends PageObject {
@@ -29,7 +30,7 @@ public class SchedulerPage extends PageObject {
     private WebElement apointmentSizeLabel;
 
     @FindBy(id="appointmentTime")
-    private WebElement apoitmentTimeSizeSelector;
+    private WebElement apointmentSizeSelector;
 
     @FindBy(id="saveData")
     private WebElement saveButton;
@@ -58,6 +59,58 @@ public class SchedulerPage extends PageObject {
     @FindBy(className = "div.dhx_cal_next_button")
     private WebElement nextMonthButton;
 
+    public void workWeekSizeSelector(String value){
+        Select select = new Select(workWeekSizeSelector);
+        select.selectByVisibleText(value);
+    }
+
+
+    public void workDayBeginAtSelector(String value){
+        Select select = new Select(workDayBeginAtSelector);
+        select.selectByVisibleText(value);
+    }
+
+    public void workDayEndAtSelector(String value){
+        Select select = new Select(workDayEndAtSelector);
+        select.selectByVisibleText(value);
+    }
+
+    public void apointmentSizeSelector(String value){
+        Select select = new Select(apointmentSizeSelector);
+        select.selectByVisibleText(value);
+    }
+
+    public void saveButton(){
+        saveButton.click();
+    }
+
+    public void dayTabButton(){
+        dayTabButton.click();
+    }
+
+    public void weekTabButton(){
+        weekTabButton.click();
+    }
+
+    public void monthTabButton(){
+        monthTabButton.click();
+    }
+
+    public void miniCalendarButton(){
+        miniCalendarButton.click();
+    }
+
+    public void todayButton(){
+        todayButton.click();
+    }
+
+    public void previousMonthButton(){
+        previousMonthButton.click();
+    }
+
+    public void nextMonthButton(){
+        nextMonthButton.click();
+    }
 
     public SchedulerPage(WebDriver driver) {
         super(driver);
