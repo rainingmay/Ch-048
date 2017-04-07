@@ -9,5 +9,6 @@ import org.openqa.selenium.support.FindBy;
 public class DepartmentsPage {
     @FindBy(xpath = "/html/body/section/div/div/h1")
     private WebElement departmentsLabel;
+    
 
 }
