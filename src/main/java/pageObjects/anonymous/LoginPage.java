@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pageObjects.allUsers.PageObject;
 import pageObjects.headers.BaseHeader;
+import pageObjects.interfaces.AfterLogin;
 
 /**
  * Created by ytomktc on 07.04.2017.
@@ -49,9 +50,10 @@ public class LoginPage extends PageObject {
         forgotPasswordButton.click();
     }
 
-    public void loginSubmitButton(){
-        loginSubmitButton.click();
-    }
+//    public AfterLogin loginSubmitButton(){
+//        loginSubmitButton.click();
+//        return new ;
+//    }
 
     public LoginPage(WebDriver driver, BaseHeader header) {
         super(driver, header);
