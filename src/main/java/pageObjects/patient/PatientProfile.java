@@ -1,15 +1,25 @@
 package pageObjects.patient;
 
+import org.openqa.selenium.support.ui.Select;
 import pageObjects.allUsers.PageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pageObjects.headers.headersByRole.ManagerHeader;
+import pageObjects.headers.headersByRole.PatientHeader;
 
 
 /**
  * Created by gregtar on 06.04.17.
  */
 public class PatientProfile extends PageObject{
+
+    private WebDriver driver;
+    private PatientHeader header;
+
+    public PatientProfile(WebDriver driver){
+        super(driver, new PatientHeader(driver));
+    }
 
     @FindBy(xpath = "//*[@id=\"image-div\"]/figure/a")
     private WebElement profileImage;
@@ -46,7 +56,7 @@ public class PatientProfile extends PageObject{
     private WebElement dateOfBirthLabel;
 
     @FindBy(id = "birthDate")
-    private WebElement getDateOfBirthInput;
+    private WebElement dateOfBirthInput;
 
     @FindBy(xpath = "//*[@id=\"patientProfileForm\"]/div/div[2]/div/div[2]/table/tbody/tr[4]/td[1]")
     private WebElement phoneNumberLabel;
@@ -64,7 +74,7 @@ public class PatientProfile extends PageObject{
     private WebElement homeAdressLabel;
 
     @FindBy(id = "address")
-    private WebElement HomeAdressInput;
+    private WebElement homeAdressInput;
 
     @FindBy(xpath = "//*[@id=\"patientProfileForm\"]/div/div[2]/div/div[3]/table/tbody/tr[2]/td[1]")
     private WebElement heightLabel;
@@ -150,7 +160,7 @@ public class PatientProfile extends PageObject{
     private WebElement relativePhoneLabelOne;
 
     @FindBy(id = "relativePhone")
-    private WebElement relativePhoneInput;
+    private WebElement relativePhoneInputOne;
 
     @FindBy(xpath = "//*[@id=\"patientProfileForm\"]/div/div[2]/div/div[7]/table/tbody/tr[2]/td[3]/p")
     private WebElement relationLabel;
@@ -174,20 +184,153 @@ public class PatientProfile extends PageObject{
     private WebElement relativeRelativeLabelTwo;
 
     @FindBy(xpath = "//*[@id=\"relativeRelation\"]")
-    private WebElement RelativeRelativeInputTwo;
+    private WebElement relativeRelativeInputTwo;
 
     @FindBy(id = "submitChanges")
     private WebElement submitChangesButton;
 
 
 
-
-
-
-
-
-
-    public PatientProfile(WebDriver driver) {
-        super(driver);
+    public void closeButton(){
+        closeButton.click();
     }
+
+    public void profileImage(){profileImage.click();}
+
+    public void enterFirstName(String value){
+        firstNameInput.clear();
+        firstNameInput.sendKeys(value);
+    }
+
+    public void enterLastName(String value){
+        lastNameInput.clear();
+        lastNameInput.sendKeys(value);
+    }
+
+    public void enterEmail(String value){
+        emailInput.clear();
+        emailInput.sendKeys(value);
+    }
+
+    public void enterBirthDate(String value){
+        dateOfBirthInput.clear();
+        dateOfBirthInput.sendKeys(value);
+
+    }
+
+    public void enterPhoneNumber(String value){
+        phoneNumberInput.clear();
+        phoneNumberInput.sendKeys(value);
+    }
+
+    public void selectGender(String value){
+        Select dropdown = new Select(genderSelector);
+        dropdown.selectByValue(value);
+
+    }
+
+    public void enterHomeAdress(String value){
+        homeAdressInput.clear();
+        homeAdressInput.sendKeys(value);
+    }
+
+    public void enterHeight(String value){
+        heightInput.clear();
+        heightInput.sendKeys(value);
+    }
+
+    public void enterWeight(String value){
+        weightInput.clear();
+        weightInput.sendKeys(value);
+    }
+
+    public void enterBloodType(String value){
+        bloodTypeInput.clear();
+        bloodTypeInput.sendKeys(value);
+    }
+
+    public void enterEyeColor(String value){
+        eyeColorInput.clear();
+        eyeColorInput.sendKeys(value);
+    }
+
+    public void enterHairColor(String value){
+        hairColorInput.clear();
+        hairColorInput.sendKeys(value);
+    }
+
+    public void enterAllergies(String value){
+        allergiesInput.clear();
+        allergiesInput.sendKeys(value);
+    }
+
+    public void enterCurrentMedication(String value){
+        currentMedicationInput.clear();
+        currentMedicationInput.sendKeys(value);
+    }
+
+    public void selectHearhProblemsPresent(String value){
+        Select dropdown = new Select(heartProblemsSelect);
+        dropdown.selectByValue(value);
+    }
+
+    public void selectDiabetesPresent(String value){
+        Select dropdown = new Select(diabetesSelector);
+        dropdown.selectByValue(value);
+    }
+
+    public void selectEpilepcyPresent(String value){
+        Select dropdown = new Select(heartProblemsSelect);
+        dropdown.selectByValue(value);
+    }
+
+    public void enterResrictions(String value){
+        restrictionsInput.clear();
+        restrictionsInput.sendKeys(value);
+    }
+
+    public void enterRelativeNameOne(String value){
+        relativeNameInputOne.clear();
+        relativeNameInputOne.sendKeys(value);
+    }
+
+    public void enterRelativePhoneOne(String value){
+        relativePhoneInputOne.clear();
+        relativePhoneInputOne.sendKeys(value);
+    }
+
+    public void enterRelationOne(String value){
+        relativeRelativeInputOne.clear();
+        relativeRelativeInputOne.sendKeys(value);
+    }
+
+    public void enterRelativeNameTwo(String value){
+        relativeNameInputTwo.clear();
+        relativeNameInputTwo.sendKeys(value);
+    }
+
+    public void enterRelativePhoneTwo(String value){
+        relativePhoneInputTwo.clear();
+        relativePhoneInputTwo.sendKeys(value);
+    }
+
+    public void enterRelationTwo(String value){
+        relativeRelativeInputTwo.clear();
+        relativePhoneInputTwo.sendKeys(value);
+    }
+
+    public void editChangesButtonClick(){
+        submitChangesButton.click();
+    }
+
+
+
+
+
+
+
+
+
+
+
 }

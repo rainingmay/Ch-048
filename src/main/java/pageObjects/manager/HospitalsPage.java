@@ -88,7 +88,7 @@ public class HospitalsPage extends PageObject {
     private WebElement categoryLabel;
 
     @FindBy(id="category")
-    private WebElement getSortByCategoryButton;
+    private WebElement sortByCategoryButton;
 
     @FindBy(xpath = "//*[@id=\"allDoctors\"]/thead/tr/th[7]/i")
     private WebElement actionLabel;
@@ -261,7 +261,7 @@ public class HospitalsPage extends PageObject {
     }
 
     public void sortByCategoryButtonClick(){
-        getSortByCategoryButton.click();
+        sortByCategoryButton.click();
     }
 
 

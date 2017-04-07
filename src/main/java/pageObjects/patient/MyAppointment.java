@@ -4,10 +4,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pageObjects.allUsers.PageObject;
+import pageObjects.headers.headersByRole.PatientHeader;
+
 /**
  * Created by gregtar on 06.04.17.
  */
 public class MyAppointment extends PageObject{
+
     @FindBy(id = "dhx_minical_icon")
     private WebElement calendarIcon;
 
@@ -38,8 +41,26 @@ public class MyAppointment extends PageObject{
     @FindBy(name = "month_tab")
     private WebElement monthTabButton;
 
+    public void calendarIconClick(){calendarIcon.click();}
 
-    public MyAppointment(WebDriver driver) {
-        super(driver);
+    public void todayButtonClick(){todayButton.click();}
+
+    public void prevButtonClick(){prevButton.click();}
+
+    public void nextButtonClick(){nextButton.click();}
+
+    public void backToTheTopButtonClick(){backToTopButton.click();}
+
+    public void dayTabButtonClick(){dayTabButton.click();}
+
+    public void weekTabButtonClick(){weekTabButton.click();}
+
+    public void monthTabButtonClick(){monthTabButton.click();}
+
+
+
+
+    public MyAppointment(WebDriver driver){
+        super(driver, new PatientHeader(driver));
     }
 }
