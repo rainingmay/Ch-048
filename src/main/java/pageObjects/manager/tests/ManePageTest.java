@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pageObjects.manager.HospitalsPage;
+import utilities.BaseNavigation;
 
 
 /**
@@ -15,22 +16,14 @@ public class ManePageTest extends FunctionalTest {
 
 
     @Test
-    public void testDoctorsPerPage(){
-        driver.get("https://localhost:8443/HospitalSeeker/");
-
-        driver.findElement(By.cssSelector("img.localization-flag")).click();
-        driver.findElement(By.linkText("Українська")).click();
-        driver.findElement(By.linkText("Ввійти")).click();
-        driver.findElement(By.id("email")).clear();
-        driver.findElement(By.id("email")).sendKeys("manager.jh@hospitals.ua");
-        driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys("1111");
-        driver.findElement(By.id("loginSubmit")).click();
+    public void testDoctorsPerPage() throws Exception {
+       BaseNavigation.login(driver, "manager.jh@hospitals.ua", "1111");
 
         HospitalsPage hospitalsPage = new HospitalsPage(driver);
-        hospitalsPage.select("doctorsPerPage", "10");
-        System.out.println(driver.findElements(By.tagName("tr")).size());
-        Assert.assertEquals(driver.findElements(By.tagName("tr")).size(), 10);
+        hospitalsPage.selectDoctorPerPage("10");
+        System.out.println(driver.findElements(By.tagName("tbody tr")).size());
+
+        Assert.assertEquals(driver.findElements(By.tagName("tbody tr")).size(), 10);
     }
 
 

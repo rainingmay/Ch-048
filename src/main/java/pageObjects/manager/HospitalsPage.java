@@ -200,6 +200,8 @@ public class HospitalsPage extends PageObject {
     @FindBy(xpath = "//html/body/section/a[2]")
     private WebElement backToTopButton;
 
+    @FindBy(tagName = "tbody")
+    private WebElement tableBody;
 
     public void selectDoctorPerPage(String value) {
         Select dropdown = new Select(doctorPerPageSelector);
@@ -214,7 +216,6 @@ public class HospitalsPage extends PageObject {
         Select dropdown = new Select(searchBySelector);
         dropdown.selectByValue(value);
     }
-
 
     public void searchByText(String value){
         searchTextFild.clear();
