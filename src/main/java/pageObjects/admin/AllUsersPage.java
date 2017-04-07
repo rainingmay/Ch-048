@@ -1,17 +1,19 @@
 package pageObjects.admin;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pageObjects.allUsers.PageObject;
 import pageObjects.headers.headersByRole.AdminHeader;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Created by Evgen on 06.04.2017.
  */
 public class AllUsersPage extends PageObject{
-    private WebDriver driver;
-    private AdminHeader header;
 
 
     @FindBy(id = "userPerPage")
@@ -57,6 +59,22 @@ public class AllUsersPage extends PageObject{
     private WebElement firstPageButto;
 
     public AllUsersPage(WebDriver driver) {
-        super(driver);
+        super(driver, new AdminHeader(driver));
     }
+
+
+
+    public List<String> getUserDataFromTableRow(int rowNumber) {
+        List<String> result = new LinkedList<>();
+        if (tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")")).isDisplayed()) {
+            result.add(tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(1)")).getText());
+            result.add(tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(2)")).getText());
+            result.add(tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(3)")).getText());
+            result.add(tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(4)")).getText());
+            result.add(tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(5)")).getText());
+        }
+        return result;
+    }
+
+
 }

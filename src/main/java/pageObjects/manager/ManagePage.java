@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pageObjects.allUsers.PageObject;
+import pageObjects.headers.headersByRole.AdminHeader;
+import pageObjects.headers.headersByRole.ManagerHeader;
 
 
 public class ManagePage extends PageObject {
@@ -248,7 +250,7 @@ public class ManagePage extends PageObject {
 
 
     public ManagePage(WebDriver driver) {
-        super(driver);
+        super(driver, new ManagerHeader(driver));
     }
 
 
