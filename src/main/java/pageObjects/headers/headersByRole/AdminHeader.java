@@ -3,6 +3,7 @@ package pageObjects.headers.headersByRole;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pageObjects.admin.AllUsersPage;
 import pageObjects.headers.BaseHeader;
 
 /**
@@ -53,4 +54,14 @@ public class AdminHeader extends BaseHeader{
     @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[5]/ul/li[2]/a")
     private WebElement logOut;
 
+
+    public AllUsersPage allUsersPage () {
+        allUsersIco.click();
+        return new AllUsersPage(driver);
+    }
+
+    public AllUsersPage addUser() {
+        allUsersIco.click();
+        return new AllUsersPage(driver);
+    }
 }
