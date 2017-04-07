@@ -1,5 +1,6 @@
 package pageObjects.manager;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -60,6 +61,7 @@ public class ManagePage extends PageObject {
 
     //Header row in table
 
+
     @FindBy(id = "email")
     private WebElement sortByEmailButton;
 
@@ -90,7 +92,8 @@ public class ManagePage extends PageObject {
     @FindBy(xpath = "//*[@id=\"allDoctors\"]/thead/tr/th[7]/i")
     private WebElement actionLabel;
 
-    //Rows
+
+     //Rows
 
     //First row
     @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[1]/td[1]")
@@ -122,43 +125,129 @@ public class ManagePage extends PageObject {
 
     @FindBy(xpath = "//table/tbody/tr[1]/td[7]/span[4]/a")
     private WebElement firstRowDeleteDoctorButton;
+//
+//    //Second Row
+//
+//    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[2]/td[1]")
+//    private WebElement secondRowNumber;
+//
+//    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[2]/td[2]")
+//    private WebElement secondRowEmail;
+//
+//    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[2]/td[3]")
+//    private WebElement secondRowName;
+//
+//    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[2]/td[4]")
+//    private WebElement secondRowSurname;
+//
+//    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[2]/td[5]")
+//    private WebElement secondRowSpecialization;
+//
+//    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[2]/td[6]")
+//    private WebElement secondRowCategory;
+//
+//    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[2]/td[7]/span[1]/a")
+//    private WebElement secondRowShowDoctorsDetailButton;
+//
+//    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[2]/td[7]/span[2]/a")
+//    private WebElement secondRowEditDoctorsDetailButton;
+//
+//    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[2]/td[7]/span[3]/a")
+//    private WebElement secondRowShowSchedulerButton;
+//
+//    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[2]/td[7]/span[4]/a")
+//    private WebElement secondRowDeleteDoctorButton;
 
-    //Second Row
 
-    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[2]/td[1]")
-    private WebElement secondRowNumber;
 
-    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[2]/td[2]")
-    private WebElement secondRowEmail;
+    //popUpForms
 
-    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[2]/td[3]")
-    private WebElement secondRowName;
+    @FindBy(xpath = "//*[@id=\"detailForm\"]/h1")
+    private WebElement formInformationAboutDoctorLabel;
 
-    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[2]/td[4]")
-    private WebElement secondRowSurname;
+    @FindBy(id="firstName")
+    private WebElement formFirstNameTextField;
 
-    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[2]/td[5]")
-    private WebElement secondRowSpecialization;
+    @FindBy(id="lastName")
+    private WebElement formLastNameTextField;
 
-    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[2]/td[6]")
-    private WebElement secondRowCategory;
+    @FindBy(id="email")
+    private WebElement formEmailTextField;
 
-    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[2]/td[7]/span[1]/a")
-    private WebElement secondRowShowDoctorsDetailButton;
+    @FindBy(id="image-uploaded")
+    private WebElement formImage;
 
-    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[2]/td[7]/span[2]/a")
-    private WebElement secondRowEditDoctorsDetailButton;
+    @FindBy(xpath = "//*[@id=\"detailForm\"]/div[2]/div[1]/div[1]")
+    private WebElement formSpecializationLabel;
 
-    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[2]/td[7]/span[3]/a")
-    private WebElement secondRowShowSchedulerButton;
+    @FindBy(id="specialization")
+    private WebElement formSpecializationSelector;
 
-    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[2]/td[7]/span[4]/a")
-    private WebElement secondRowDeleteDoctorButton;
+    @FindBy(xpath = "//*[@id=\"detailForm\"]/div[2]/div[1]/div[2]")
+    private WebElement formCategoryLabel;
+
+    @FindBy(id="category")
+    private WebElement formCategorySelector;
+
+    @FindBy(id="education")
+    private WebElement formEducationTextField;
+
+    @FindBy(id="address")
+    private WebElement formAddressTextField;
+
+    @FindBy(xpath = "//*[@id=\"detailForm\"]/div[4]/div[1]/div")
+    private WebElement formGenderLabel;
+
+    @FindBy(css = "input[value=\"MALE\"]")
+    private WebElement formMaleRadioButton;
+
+    @FindBy(xpath = "//*[@id=\"detailForm\"]/div[4]/div[2]/div/label")
+    private WebElement formMaleLabel;
+
+    @FindBy(css = "input[value=\"FEMALE\"]")
+    private WebElement formFemaleRadioButton;
+
+    @FindBy(xpath = "//*[@id=\"detailForm\"]/div[4]/div[3]/div/label")
+    private WebElement formFemaileLabel;
+
+    @FindBy(xpath = "//*[@id=\"detailForm\"]/div[6]/div[1]/div")
+    private WebElement formDataOfBirthLabel;
+
+    @FindBy(id="birthDate")
+    private WebElement formDateOfBirthField;
+
+    @FindBy(xpath = "//*[@id=\"detailForm\"]/div[6]/div[3]/div")
+    private WebElement formPhoneLabel;
+
+    @FindBy(id="phone")
+    private WebElement formPhoneField;
+
+    @FindBy(id="cancel")
+    private WebElement formCancelButton;
+
+    @FindBy(id="editUser")
+    private WebElement formSaveButton;
+
 
     @FindBy(xpath = "//html/body/section/a[2]")
     private WebElement backToTopButton;
 
-    //Popups??
+    public WebElement viewButton(int i) {
+        return driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #viewUser"));
+    }
+
+    public WebElement editButton(int i) {
+        return driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #ediUser"));
+    }
+    public WebElement scheduleButton(int i) {
+        return driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #schedule"));
+    }
+
+    public WebElement deleteButton(int i) {
+        return driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #deleteDoctor"));
+    }
+
+
 
     public ManagePage(WebDriver driver) {
         super(driver, new ManagerHeader(driver));
