@@ -3,17 +3,15 @@ package pageObjects.admin;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pageObjects.allUsers.PageObject;
 import pageObjects.headers.headersByRole.AdminHeader;
 
-/**
- * Created by Jeksonis on 06.04.2017.
- */
-public class AddNewHospital {
+public class AddNewHospitalPage extends PageObject{
     private WebDriver driver;
     private AdminHeader header;
 
-    public AddNewHospital(WebDriver driver) {
-        this.driver = driver;
+    public AddNewHospitalPage(WebDriver driver) {
+        super(driver, new AdminHeader(driver));
     }
 
     @FindBy(id = "addressGeo")
@@ -96,8 +94,8 @@ public class AddNewHospital {
         resetButton.click();
    }
 
-   // realization HospitalList class
-   // realization save method with transition to Hospital List
-
-
+   public HospitalListPage pushSave() {
+        saveButton.click();
+        return new HospitalListPage(driver);
+   }
 }
