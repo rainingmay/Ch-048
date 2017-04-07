@@ -286,7 +286,5 @@ public class HospitalsPage extends PageObject {
         super(driver, new ManagerHeader(driver));
 
 
-
-
-
+    }
 }
