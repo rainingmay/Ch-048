@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import pageObjects.allUsers.PageObject;
-import pageObjects.headers.headersByRole.AdminHeader;
 import pageObjects.headers.headersByRole.ManagerHeader;
 
 
@@ -34,7 +33,7 @@ public class HospitalsPage extends PageObject {
     private WebElement searchBySelector;
 
     @FindBy(id = "search")
-    private WebElement searchTextFild;
+    private WebElement searchInput;
 
     @FindBy(id = "searchButton")
     private WebElement searchButton;
@@ -94,53 +93,19 @@ public class HospitalsPage extends PageObject {
     private WebElement actionLabel;
 
 
-     //Rows
-
-    //First row
-    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[1]/td[1]")
-    private WebElement firstRowNumber;
-
-    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[1]/td[2]")
-    private WebElement firstRowEmail;
-
-    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[1]/td[3]")
-    private WebElement firstRowName;
-
-    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[1]/td[4]")
-    private WebElement firstRowSurname;
-
-    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[1]/td[5]")
-    private WebElement firstRowSpecialization;
-
-    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[1]/td[6]")
-    private WebElement firstRowCategory;
-
-    @FindBy(xpath = "//table/tbody/tr[1]/td[7]/span[1]/a")
-    private WebElement firstRowShowDoctorsDetailButton;
-
-    @FindBy(xpath = "//table/tbody/tr[1]/td[7]/span[2]/a")
-    private WebElement firstRowEditDoctorsDetailButton;
-
-    @FindBy(xpath = "//table/tbody/tr[1]/td[7]/span[3]/a")
-    private WebElement firstRowShowSchedulerButton;
-
-    @FindBy(xpath = "//table/tbody/tr[1]/td[7]/span[4]/a")
-    private WebElement firstRowDeleteDoctorButton;
-
-
     //popUpForms
 
     @FindBy(xpath = "//*[@id=\"detailForm\"]/h1")
     private WebElement formInformationAboutDoctorLabel;
 
     @FindBy(id="firstName")
-    private WebElement formFirstNameTextField;
+    private WebElement formFirstNameInput;
 
     @FindBy(id="lastName")
-    private WebElement formLastNameTextField;
+    private WebElement formLastNameInput;
 
     @FindBy(id="email")
-    private WebElement formEmailTextField;
+    private WebElement formEmailInput;
 
     @FindBy(id="image-uploaded")
     private WebElement formImage;
@@ -158,10 +123,10 @@ public class HospitalsPage extends PageObject {
     private WebElement formCategorySelector;
 
     @FindBy(id="education")
-    private WebElement formEducationTextField;
+    private WebElement formEducationInput;
 
     @FindBy(id="address")
-    private WebElement formAddressTextField;
+    private WebElement formAddressInput;
 
     @FindBy(xpath = "//*[@id=\"detailForm\"]/div[4]/div[1]/div")
     private WebElement formGenderLabel;
@@ -182,13 +147,13 @@ public class HospitalsPage extends PageObject {
     private WebElement formDataOfBirthLabel;
 
     @FindBy(id="birthDate")
-    private WebElement formDateOfBirthField;
+    private WebElement formDateOfBirthInput;
 
     @FindBy(xpath = "//*[@id=\"detailForm\"]/div[6]/div[3]/div")
     private WebElement formPhoneLabel;
 
     @FindBy(id="phone")
-    private WebElement formPhoneField;
+    private WebElement formPhoneInput;
 
     @FindBy(id="cancel")
     private WebElement formCancelButton;
@@ -200,6 +165,8 @@ public class HospitalsPage extends PageObject {
     @FindBy(xpath = "//html/body/section/a[2]")
     private WebElement backToTopButton;
 
+    @FindBy(tagName = "tbody")
+    private WebElement tableBody;
 
     public void selectDoctorPerPage(String value) {
         Select dropdown = new Select(doctorPerPageSelector);
@@ -215,10 +182,9 @@ public class HospitalsPage extends PageObject {
         dropdown.selectByValue(value);
     }
 
-
     public void searchByText(String value){
-        searchTextFild.clear();
-        searchTextFild.sendKeys(value);
+        searchInput.clear();
+        searchInput.sendKeys(value);
     }
 
     public void searchButtonClick(){

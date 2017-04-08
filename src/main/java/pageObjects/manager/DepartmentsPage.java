@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pageObjects.allUsers.PageObject;
+import pageObjects.headers.headersByRole.ManagerHeader;
 
 /**
  * Created by ytomktc on 06.04.2017.
@@ -48,6 +49,6 @@ public class DepartmentsPage extends PageObject {
 
 
     public DepartmentsPage(WebDriver driver) {
-        super(driver);
+        super(driver, new ManagerHeader(driver));
     }
 }

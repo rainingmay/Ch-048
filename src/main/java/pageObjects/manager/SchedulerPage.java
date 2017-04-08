@@ -6,7 +6,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import pageObjects.allUsers.PageObject;
 import pageObjects.headers.headersByRole.ManagerHeader;
-import pageObjects.manager.ManagePage;
 
 
 public class SchedulerPage extends PageObject {
