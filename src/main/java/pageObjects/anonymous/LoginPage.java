@@ -50,12 +50,12 @@ public class LoginPage extends PageObject {
         forgotPasswordButton.click();
     }
 
-//    public AfterLogin loginSubmitButton(){
-//        loginSubmitButton.click();
+    public void loginSubmitButton(){
+        loginSubmitButton.click();
 //        return new ;
-//    }
+    }
 
-    public LoginPage(WebDriver driver, BaseHeader header) {
-        super(driver, header);
+    public LoginPage(WebDriver driver) {
+        super(driver, new BaseHeader(driver));
     }
 }

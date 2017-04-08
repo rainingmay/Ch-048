@@ -15,7 +15,7 @@ public class NotLogInUserHeader extends BaseHeader {
 //
     public LoginPage loginButton(){
         login.click();
-        return new LoginPage(driver, new NotLogInUserHeader(driver));
+        return new LoginPage(driver);
     }
 
     public NotLogInUserHeader(WebDriver driver) {

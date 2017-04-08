@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pageObjects.allUsers.DoctorInfo;
 import pageObjects.headers.BaseHeader;
+import pageObjects.headers.headersByRole.DoctorHeader;
 
 /**
  * Created by Yana on 06.04.2017.
@@ -33,13 +34,13 @@ public class DoctorSearchList {
     //??
     public DoctorInfo toDoctorInfoFromPhoto() {
         doctorPhotoAtList.click();
-        return new DoctorInfo (driver, this);
+        return new DoctorInfo (driver);
     }
 
     //??
     public DoctorInfo toDoctorInfoFromList() {
         doctorPhotoAtList.click();
-        return new DoctorInfo (driver, this);
+        return new DoctorInfo (driver);
     }
 
 //   driver.findElement(By.cssSelector("[class='panel-heading']")).size());
