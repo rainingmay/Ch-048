@@ -2,6 +2,8 @@ package utilities;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import pageObjects.allUsers.HospitalSeekerHomePage;
+import pageObjects.anonymous.LoginPage;
 
 
 /**
@@ -10,6 +12,12 @@ import org.openqa.selenium.WebDriver;
 public class BaseNavigation {
 
     public static void login(WebDriver driver, String email, String password) throws InterruptedException {
+//TODO in proccess of designe
+//        HospitalSeekerHomePage hospitalSeekerHomePage = new HospitalSeekerHomePage(driver);
+//        LoginPage loginPage = hospitalSeekerHomePage.moveToLoginPage();
+//        loginPage.enterEmail(email);
+//        loginPage.enterPassword(password);
+//        loginPage.loginSubmitButton();
 
         driver.findElement(By.cssSelector("a[href=\"/HospitalSeeker/login\"]")).click();
         driver.findElement(By.id("email")).clear();
