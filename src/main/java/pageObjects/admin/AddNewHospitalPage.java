@@ -69,7 +69,7 @@ public class AddNewHospitalPage extends PageObject{
     }
 
     public void changeBuilding(String text) {
-        buildingInputField.clear();
+           buildingInputField.clear();
         buildingInputField.sendKeys(text);
     }
 

@@ -28,7 +28,7 @@ public class ManePageTest extends FunctionalTest {
         driver.findElement(By.id("loginSubmit")).click();
 
         HospitalsPage hospitalsPage = new HospitalsPage(driver);
-        hospitalsPage.select("doctorsPerPage", "10");
+        //hospitalsPage.select("doctorsPerPage", "10");
         System.out.println(driver.findElements(By.tagName("tr")).size());
         Assert.assertEquals(driver.findElements(By.tagName("tr")).size(), 10);
     }
