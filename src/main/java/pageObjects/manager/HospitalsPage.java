@@ -291,19 +291,20 @@ public class HospitalsPage extends PageObject {
         return tableBody.findElements(By.cssSelector("tr")).size();
     }
 
-    public WebElement viewButton(int i) {
-        return driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #viewUser"));
+    public void viewButtonClick(int i) {
+        driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #viewUser")).click();
     }
 
-    public WebElement editButton(int i) {
-        return driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #ediUser"));
+    public void editButtonClick(int i) {
+        driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #ediUser")).click();
     }
-    public WebElement scheduleButton(int i) {
-        return driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #schedule"));
+    public SchedulerPage scheduleButtonClick(int i) {
+         driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #schedule")).click();
+         return new SchedulerPage(driver);
     }
 
-    public WebElement deleteButton(int i) {
-        return driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #deleteDoctor"));
+    public void deleteButtonClick(int i) {
+        driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #deleteDoctor")).click();
     }
 
 

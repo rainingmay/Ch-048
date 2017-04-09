@@ -82,36 +82,39 @@ public class SchedulerPage extends PageObject {
         select.selectByVisibleText(value);
     }
 
-    public void saveButton(){
+    public void saveButtonClick(){
         saveButton.click();
     }
 
-    public void dayTabButton(){
+    public void dayTabButtonClick(){
         dayTabButton.click();
     }
 
-    public void weekTabButton(){
+    public void weekTabButtonClick(){
         weekTabButton.click();
     }
 
-    public void monthTabButton(){
+    public void monthTabButtonClick(){
         monthTabButton.click();
     }
 
-    public void miniCalendarButton(){
+    public void miniCalendarButtonClick(){
         miniCalendarButton.click();
     }
 
-    public void todayButton(){
+    public void todayButtonClick(){
         todayButton.click();
     }
 
-    public void previousMonthButton(){
+    public void previousMonthButtonClick(){
         previousMonthButton.click();
     }
 
-    public void nextMonthButton(){
+    public void nextMonthButtonClick(){
         nextMonthButton.click();
+    }
+    public String getDate(){
+        return dateLabel.getText();
     }
 
     public SchedulerPage(WebDriver driver) {
