@@ -177,9 +177,7 @@ public class HospitalsPage extends PageObject {
     }
     public void selectSpecialization(String value) {
         Select dropdown = new Select(specializationSelector);
-        System.out.println(dropdown.getOptions());
         dropdown.selectByVisibleText(value);
-        System.out.println(dropdown.getAllSelectedOptions());
     }
 
     public void selectSerchBy(String value) {
@@ -283,7 +281,7 @@ public class HospitalsPage extends PageObject {
                 td = "7";
                 break;
         }
-        for( WebElement webElement : driver.findElements(By.cssSelector("tbody tr td:nth-child(2)"))){
+        for( WebElement webElement : driver.findElements(By.cssSelector("tbody tr td:nth-child("+ td +")"))){
             list.add(webElement.getText());
         }
         return list;

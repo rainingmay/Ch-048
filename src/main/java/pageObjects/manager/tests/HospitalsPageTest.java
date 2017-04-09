@@ -16,7 +16,7 @@ import java.util.List;
  * Created by radga on 07.04.2017.
  */
 public class HospitalsPageTest extends FunctionalTest {
-    private HospitalsPage hospitalsPage = new HospitalsPage(driver);
+   // private HospitalsPage hospitalsPage = new HospitalsPage(driver);
 
     @Test
     public void testAllElementPresence(){
@@ -26,7 +26,7 @@ public class HospitalsPageTest extends FunctionalTest {
     @Test
     public void testDoctorsPerPage() throws Exception {
        BaseNavigation.login(driver, "manager.jh@hospitals.ua", "1111");
-
+        HospitalsPage hospitalsPage = new HospitalsPage(driver);
 
         hospitalsPage.selectDoctorPerPage("10");
 
@@ -37,12 +37,12 @@ public class HospitalsPageTest extends FunctionalTest {
     @Test
     public void testSpecializationSelector() throws Exception{
         BaseNavigation.login(driver, "manager.jh@hospitals.ua", "1111");
-
+        HospitalsPage hospitalsPage = new HospitalsPage(driver);
         hospitalsPage.selectSpecialization("Neurologist");
         hospitalsPage.searchButtonClick();
+        Thread.sleep(1000);
         List<String > result =  hospitalsPage.getCoulumn("specialization");
-        System.out.println(result.size());
-        System.out.println(result.stream().allMatch(i -> i.equals("Neurologist")));
+
         Assert.assertTrue(result.stream().allMatch(i -> i.equals("Neurologist")));
     }
 
