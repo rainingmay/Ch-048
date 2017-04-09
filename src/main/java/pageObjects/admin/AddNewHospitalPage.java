@@ -3,17 +3,16 @@ package pageObjects.admin;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pageObjects.allUsers.PageObject;
 import pageObjects.headers.headersByRole.AdminHeader;
 
 /**
  * Created by Jeksonis on 06.04.2017.
  */
-public class AddNewHospital {
-    private WebDriver driver;
-    private AdminHeader header;
+public class AddNewHospitalPage extends PageObject{
 
-    public AddNewHospital(WebDriver driver) {
-        this.driver = driver;
+    public AddNewHospitalPage(WebDriver driver){
+        super(driver, new AdminHeader(driver));
     }
 
     @FindBy(id = "addressGeo")

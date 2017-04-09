@@ -5,7 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pageObjects.headers.BaseHeader;
 import pageObjects.manager.AddNewDoctorPage;
-import pageObjects.manager.ManagePage;
+import pageObjects.manager.DepartmentsPage;
+import pageObjects.manager.HospitalsPage;
 import pageObjects.manager.ModerationFeedBackPage;
 
 /**
@@ -45,15 +46,16 @@ public class ManagerHeader extends BaseHeader{
         return new AddNewDoctorPage(driver);
     }
 
-    public ManagePage managePage() {
+    public HospitalsPage managePage() {
         hospitals.click();
-        return new ManagePage(driver);
+        return new HospitalsPage(driver);
     }
 
     public ModerationFeedBackPage feedBackPage() {
         feedbacks.click();
         return new ModerationFeedBackPage(driver);
     }
+
 
 
 
