@@ -10,7 +10,7 @@ import pageObjects.headers.BaseHeader;
  * Created by Evgen on 05.04.2017.
  */
 public class NotLogInUserHeader extends BaseHeader {
-    @FindBy(css = "a[href$='/HospitalSeeker/login']")
+    @FindBy(xpath = "//*[@id=\"bs-example-navbar-collapse-1\"]/ul/li[4]/a")
     protected WebElement login;
 //
     public LoginPage loginButton(){

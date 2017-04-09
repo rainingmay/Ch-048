@@ -8,6 +8,9 @@ import org.openqa.selenium.support.ui.Select;
 import pageObjects.allUsers.PageObject;
 import pageObjects.headers.headersByRole.ManagerHeader;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class HospitalsPage extends PageObject {
     @FindBy(className = "h1.text-center")
@@ -170,16 +173,18 @@ public class HospitalsPage extends PageObject {
 
     public void selectDoctorPerPage(String value) {
         Select dropdown = new Select(doctorPerPageSelector);
-        dropdown.selectByValue(value);
+        dropdown.selectByVisibleText(value);
     }
     public void selectSpecialization(String value) {
         Select dropdown = new Select(specializationSelector);
-        dropdown.selectByValue(value);
+        System.out.println(dropdown.getOptions());
+        dropdown.selectByVisibleText(value);
+        System.out.println(dropdown.getAllSelectedOptions());
     }
 
     public void selectSerchBy(String value) {
         Select dropdown = new Select(searchBySelector);
-        dropdown.selectByValue(value);
+        dropdown.selectByVisibleText(value);
     }
 
     public void searchByText(String value){
@@ -230,6 +235,63 @@ public class HospitalsPage extends PageObject {
         sortByCategoryButton.click();
     }
 
+    public String getValue(String row, String colName){
+        String td = null;
+        switch (colName){
+            case "email":
+                td = "2";
+                break;
+            case "first name":
+                td = "3";
+                break;
+            case "last name":
+                td = "4";
+                break;
+            case "specialization":
+                td = "5";
+                break;
+            case "category":
+                td = "6";
+                break;
+            case "actions":
+                td = "7";
+                break;
+        }
+       return driver.findElement(By.cssSelector("tbody tr:nth-child(" + row + ") td:nth-child(" + td + ")")).getText();
+    }
+
+    public List<String> getCoulumn(String colName){
+        String td = null;
+        ArrayList<String> list = new ArrayList<>();
+        switch (colName){
+            case "email":
+                td = "2";
+                break;
+            case "first name":
+                td = "3";
+                break;
+            case "last name":
+                td = "4";
+                break;
+            case "specialization":
+                td = "5";
+                break;
+            case "category":
+                td = "6";
+                break;
+            case "actions":
+                td = "7";
+                break;
+        }
+        for( WebElement webElement : driver.findElements(By.cssSelector("tbody tr td:nth-child(2)"))){
+            list.add(webElement.getText());
+        }
+        return list;
+    }
+
+    public int getNumberOfRows(){
+        return tableBody.findElements(By.cssSelector("tr")).size();
+    }
 
     public WebElement viewButton(int i) {
         return driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #viewUser"));

@@ -9,15 +9,17 @@ import pageObjects.headers.headersByRole.ManagerHeader;
 import pageObjects.manager.HospitalsPage;
 import utilities.BaseNavigation;
 
+import java.util.List;
+
 
 /**
  * Created by radga on 07.04.2017.
  */
 public class HospitalsPageTest extends FunctionalTest {
+    private HospitalsPage hospitalsPage = new HospitalsPage(driver);
 
     @Test
     public void testAllElementPresence(){
-        HospitalsPage hospitalsPage = new HospitalsPage(driver);
     }
 
 
@@ -25,10 +27,23 @@ public class HospitalsPageTest extends FunctionalTest {
     public void testDoctorsPerPage() throws Exception {
        BaseNavigation.login(driver, "manager.jh@hospitals.ua", "1111");
 
-        HospitalsPage hospitalsPage = new HospitalsPage(driver);
+
         hospitalsPage.selectDoctorPerPage("10");
-        System.out.println(driver.findElements(By.tagName("tbody tr")).size());
-        Assert.assertEquals(driver.findElements(By.tagName("tbody tr")).size(), 10);
+
+
+       Assert.assertEquals(hospitalsPage.getNumberOfRows(), 10);
+    }
+
+    @Test
+    public void testSpecializationSelector() throws Exception{
+        BaseNavigation.login(driver, "manager.jh@hospitals.ua", "1111");
+
+        hospitalsPage.selectSpecialization("Neurologist");
+        hospitalsPage.searchButtonClick();
+        List<String > result =  hospitalsPage.getCoulumn("specialization");
+        System.out.println(result.size());
+        System.out.println(result.stream().allMatch(i -> i.equals("Neurologist")));
+        Assert.assertTrue(result.stream().allMatch(i -> i.equals("Neurologist")));
     }
 
 
