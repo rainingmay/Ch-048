@@ -3,6 +3,7 @@ package pageObjects.headers.headersByRole;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pageObjects.anonymous.LoginPage;
 import pageObjects.headers.BaseHeader;
 
 /**
@@ -11,6 +12,11 @@ import pageObjects.headers.BaseHeader;
 public class NotLogInUserHeader extends BaseHeader {
     @FindBy(css = "a[href$='/HospitalSeeker/login']")
     protected WebElement login;
+//
+    public LoginPage loginButton(){
+        login.click();
+        return new LoginPage(driver);
+    }
 
     public NotLogInUserHeader(WebDriver driver) {
         super(driver);

@@ -8,6 +8,7 @@ import pageObjects.allUsers.PageObject;
 import pageObjects.headers.headersByRole.ManagerHeader;
 import pageObjects.manager.HospitalsPage;
 
+
 public class SchedulerPage extends PageObject {
 
     @FindBy(xpath = "/html/body/section/div/div/div[3]/div/form/div[2]/p")

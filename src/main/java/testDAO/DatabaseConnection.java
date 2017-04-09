@@ -9,7 +9,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import static org.bouncycastle.cms.RecipientId.password;
 
 /**
  * Created by Evgen on 07.04.2017.
