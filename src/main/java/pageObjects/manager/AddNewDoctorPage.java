@@ -3,6 +3,7 @@ package pageObjects.manager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 import pageObjects.allUsers.PageObject;
 import pageObjects.headers.headersByRole.ManagerHeader;
 
@@ -93,6 +94,45 @@ public class AddNewDoctorPage extends PageObject {
     @FindBy(xpath = "/html/body/section/a")
     private WebElement backToTopButton;
 
+    public void firstName(String firstName){
+        firstNameTextField.clear();
+        firstNameTextField.sendKeys(firstName);
+    }
+
+    public void lastName(String lastName){
+        lastNameTextField.clear();
+        lastNameTextField.sendKeys(lastName);
+    }
+
+    public void email(String email){
+        emailTextField.clear();
+        emailTextField.sendKeys(email);
+    }
+
+    public void specializationSelector(String value){
+        Select select = new Select(specializtionSelector);
+        select.selectByVisibleText(value);
+    }
+
+    public void categorySelector(String value){
+        Select select = new Select(categorySelector);
+        select.selectByVisibleText(value);
+    }
+
+    public void education(String education){
+        emailTextField.clear();
+        educationTextField.sendKeys(education);
+    }
+
+    public void address(String education){
+        addressTextField.clear();
+        addressTextField.sendKeys(education);
+    }
+
+    public void hospitalSelector(String value){
+        Select select = new Select(hospitalSelector);
+        select.selectByVisibleText(value);
+    }
 
 
     public AddNewDoctorPage(WebDriver driver){

@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pageObjects.allUsers.PageObject;
+import pageObjects.headers.BaseHeader;
 import pageObjects.headers.headersByRole.AdminHeader;
 
 import java.util.LinkedList;
@@ -15,6 +16,9 @@ import java.util.List;
  */
 public class AllUsersPage extends PageObject{
 
+    public AllUsersPage(WebDriver driver, BaseHeader header) {
+        super(driver, header);
+    }
 
     @FindBy(id = "userPerPage")
     private WebElement usersPerPagePopUp;
@@ -52,14 +56,66 @@ public class AllUsersPage extends PageObject{
     @FindBy(css = "pagination pagination-lg")
     private WebElement navigation;
 
-    @FindBy(css = "body > section > div.content > div > div > ul > li:last-child")
+    @FindBy(css = "body section div.content div div ul li:last-child")
     private WebElement lastPageButton;
 
-    @FindBy(css = "body > section > div.content > div > div > ul > li:first-child > a")
+    @FindBy(css = "body section div.content div div ul li:first-child a")
     private WebElement firstPageButto;
+
+    @FindBy(id = "email")
+    private WebElement sortByEmailButton;
+
+    @FindBy(id = "detail.firstName")
+    private WebElement sortByFirsNamButton;
+
+    @FindBy(id = "detail.lastName")
+    private WebElement sortByLastNameButton;
+
+    @FindBy(id = "roles.type")
+    private WebElement sortByRoleButton;
+
+    @FindBy(className = "table-hover")
+    private WebElement viewWindow;
+
+    @FindBy(className = "table table-user-information")
+    private WebElement editWindow;
+
+    @FindBy(className = "table table-user-information form-control")
+    private WebElement editRoleSelect;
+
+
+
+
 
     public AllUsersPage(WebDriver driver) {
         super(driver, new AdminHeader(driver));
+    }
+
+
+    public void changeCountOfUsersOnPage(int count) {
+        usersPerPagePopUp.findElement(By.cssSelector("option[value=" + count + "]")).click();
+    }
+
+    public void changeRole(String role) {
+        this.role.findElement(By.cssSelector("option[value=" + role + "]")).click();
+    }
+
+    public void changeSearchBy(String field) {
+        this.searchBy.findElement(By.cssSelector("option[value=" + field + "]"));
+    }
+
+    public void sendKeysToSearchField(String keys) {
+        searchWindow.clear();
+        searchWindow.sendKeys(keys);
+    }
+
+    public AllUsersPage find(int count, String role, String field, String keys) {
+        changeCountOfUsersOnPage(count);
+        changeRole(role);
+        changeSearchBy(field);
+        sendKeysToSearchField(keys);
+        searchButton.click();
+        return new AllUsersPage(driver, new AdminHeader(driver));
     }
 
 
@@ -67,7 +123,6 @@ public class AllUsersPage extends PageObject{
     public List<String> getUserDataFromTableRow(int rowNumber) {
         List<String> result = new LinkedList<>();
         if (tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")")).isDisplayed()) {
-            result.add(tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(1)")).getText());
             result.add(tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(2)")).getText());
             result.add(tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(3)")).getText());
             result.add(tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(4)")).getText());
@@ -76,6 +131,9 @@ public class AllUsersPage extends PageObject{
         return result;
     }
 
+<<<<<<< HEAD
+=======
     
+>>>>>>> master
 
 }
