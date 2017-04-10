@@ -3,6 +3,7 @@ package pageObjects.admin;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 import pageObjects.allUsers.PageObject;
 import pageObjects.headers.BaseHeader;
 import pageObjects.headers.headersByRole.AdminHeader;
@@ -21,21 +22,21 @@ public class AddUserPage extends PageObject{
     private WebElement addUserLabel;
 
     @FindBy(id = "email")
-    private WebElement emailField;
+    private WebElement emailInput;
 
     @FindBy(id = "password")
-    private WebElement passwordField;
+    private WebElement passwordInput;
 
     @FindBy(id = "confirmPassword")
-    private WebElement confirmPasswordField;
+    private WebElement confirmPasswordInput;
 
     @FindBy(className = "col-sm-2 control-label")
     private WebElement roleLable;
 
     @FindBy(id = "userRoles")
-    private WebElement userRoles;
+    private WebElement userRolesSelect;
 
-    @FindBy(className = "btn btn-default")
+    @FindBy(xpath = "//*[@id=\"enabledUserCheckbox\"]/button")
     private WebElement enableButton;
 
     @FindBy(id = "newUserSubmit")
@@ -54,4 +55,41 @@ public class AddUserPage extends PageObject{
         return new AllUsersPage(driver);
     }
 
+    public void enterEmail(String value){
+        emailInput.clear();
+        emailInput.sendKeys(value);
+    }
+
+    public void enterPassword(String value){
+        passwordInput.clear();
+        passwordInput.sendKeys(value);
+    }
+
+    public void confirmPassword(String value){
+        confirmPasswordInput.clear();
+        confirmPasswordInput.sendKeys(value);
+    }
+
+    public void selectRole(String value){
+        Select dropdown = new Select(userRolesSelect);
+        dropdown.selectByValue(value);
+
+    }
+
+    public void enableButtonClick(){enableButton.click();}
+
+
+
+
+    public void addNewUser(String email, String password, String role) throws InterruptedException {
+        Thread.sleep(1000);
+        enterEmail(email);
+        enterPassword(password);
+        confirmPassword(password);
+        selectRole(role);
+        enableButtonClick();
+        submitAdding();
+
+    }
 }
+
