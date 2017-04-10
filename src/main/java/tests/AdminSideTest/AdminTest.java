@@ -1,5 +1,6 @@
 package tests.AdminSideTest;
 
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.admin.AllUsersPage;
@@ -19,11 +20,16 @@ public class AdminTest extends FunctionalTest {
     public void correctUsersDataTest() {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, "admin@hospitals.ua", "1111");
-            //for (int i = 1; i < allUsersPage.gecCountOfUsersInTable(); i++) {
-                List<String> actual = allUsersPage.getUserDataFromTableRow(1);
-                List<String> expected = UserDAO.getUserFromDatabaseByEmail("a@a.co");
-                Assert.assertEquals(actual, expected);
-            //}
+            while (true) {
+                Thread.sleep(2000);
+                for (int i = 1; i < allUsersPage.gecCountOfUsersInTable(); i++) {
+                    List<String> actual = allUsersPage.getUserDataFromTableRow(i);
+                    List<String> expected = UserDAO.getUserFromDatabaseByEmail(actual.get(0));
+                    Assert.assertEquals(actual, expected);
+                }
+                if (driver.findElements(By.cssSelector("a[aria-label='Next']")).size() == 0) break;
+                else allUsersPage.nextPageButton.click();
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

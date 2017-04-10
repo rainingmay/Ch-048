@@ -81,6 +81,9 @@ public class AllUsersPage extends PageObject {
     @FindBy(className = "table table-user-information form-control")
     private WebElement editRoleSelect;
 
+    @FindBy(css = "a[aria-label='Next']")
+    public WebElement nextPageButton;
+
 
 
 
