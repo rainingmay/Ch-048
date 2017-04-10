@@ -13,7 +13,7 @@ import pageObjects.headers.headersByRole.NotLogInUserHeader;
 public class HospitalSeekerHomePage extends PageObject {
 
     //Temporary field
-    NotLogInUserHeader notLogInUserHeader = new NotLogInUserHeader(driver);
+    NotLogInUserHeader notLogInUserHeader;
 
 
 
@@ -43,6 +43,7 @@ public class HospitalSeekerHomePage extends PageObject {
 
 
     public HospitalSeekerHomePage(WebDriver driver) {
-        super(driver, new BaseHeader(driver));
+        super(driver);
+        notLogInUserHeader = new NotLogInUserHeader(driver);
     }
 }

@@ -11,9 +11,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class HospitalListPage extends PageObject{
-
+    public AdminHeader adminHeader;
     public HospitalListPage(WebDriver driver) {
-        super(driver, new AdminHeader(driver));
+        super(driver);
+        adminHeader = new AdminHeader(driver);
     }
 
     @FindBy(xpath = "/html/body/section/div/div/div/div[1]/div[1]/a[1]")

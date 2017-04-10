@@ -13,6 +13,7 @@ import java.util.List;
 
 
 public class HospitalsPage extends PageObject {
+
     public ManagerHeader managerHeader;
     @FindBy(className = "h1.text-center")
     private WebElement hospitalName;

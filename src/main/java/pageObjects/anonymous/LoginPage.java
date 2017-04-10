@@ -11,6 +11,7 @@ import pageObjects.interfaces.AfterLogin;
  * Created by ytomktc on 07.04.2017.
  */
 public class LoginPage extends PageObject {
+    public BaseHeader baseHeader;
     @FindBy(xpath = "//*[@id=\"loginForm\"]/fieldset/h2")
     private WebElement loginText;
 
@@ -57,6 +58,7 @@ public class LoginPage extends PageObject {
 
 
     public LoginPage(WebDriver driver) {
-        super(driver, new BaseHeader(driver));
+        super(driver);
+        baseHeader = new BaseHeader(driver);
     }
 }
