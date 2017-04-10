@@ -49,7 +49,5 @@ public class BaseNavigation {
         return null;
     }
 
-    public static PageObject loginAsPatient(WebDriver driver, String email, String password) {
-        return null;
-    }
+     
 }

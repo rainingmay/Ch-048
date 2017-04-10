@@ -24,6 +24,7 @@ public class DatabaseConnection {
     public static Connection connectToDatabase() {
         try {
             if (connection == null || connection.isClosed()) {
+                getProperties();
                 Class.forName(driver);
                 connection = DriverManager.getConnection(url, username, password);
             }
