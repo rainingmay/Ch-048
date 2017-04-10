@@ -12,7 +12,6 @@ import utilities.BaseNavigation;
 public class SchedulerPageTest extends FunctionalTest{
     @Test
     public void testEventCreation() throws Exception{
-        WebDriverWait wait = new WebDriverWait(driver, 1000);
         BaseNavigation.login(driver, "manager.jh@hospitals.ua", "1111");
         HospitalsPage hospitalsPage = new HospitalsPage(driver);
         SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
@@ -20,8 +19,8 @@ public class SchedulerPageTest extends FunctionalTest{
         schedulerPage.saveButtonClick();
 
 
+        schedulerPage.managerHeader.logOut();
 
-        Thread.sleep(1000);
         driver.findElement(By.xpath("(//a[contains(@href, '#')])[2]")).click();
         driver.findElement(By.xpath("(//ul[@id='dropdawn']/li[2]/a/span)[2]")).click();
 

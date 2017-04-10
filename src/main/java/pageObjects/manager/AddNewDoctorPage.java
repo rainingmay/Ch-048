@@ -11,7 +11,7 @@ import pageObjects.headers.headersByRole.ManagerHeader;
  * Created by radga on 06.04.2017.
  */
 public class AddNewDoctorPage extends PageObject {
-    ManagerHeader managerHeader;
+    public ManagerHeader managerHeader;
 
     @FindBy(className = "h1.text-center")
     private WebElement headerTextLabel;

@@ -18,7 +18,8 @@ import java.util.List;
 
 public class SchedulerPage extends PageObject {
 
-    ManagerHeader managerHeader;
+    public ManagerHeader managerHeader;
+
     @FindBy(xpath = "/html/body/section/div/div/div[3]/div/form/div[2]/p")
     private WebElement doctorNameLabel;
 

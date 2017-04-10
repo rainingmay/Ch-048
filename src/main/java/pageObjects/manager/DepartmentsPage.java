@@ -12,7 +12,7 @@ import pageObjects.headers.headersByRole.ManagerHeader;
  */
 public class DepartmentsPage extends PageObject {
 
-    ManagerHeader managerHeader;
+    public ManagerHeader managerHeader;
     @FindBy(xpath = "/html/body/section/div/div/h1")
     private WebElement departmentsLabel;
     private WebElement departmentsText;
