@@ -1,4 +1,4 @@
-package pageObjects.manager.tests;
+package pages.manager.tests;
 
 
 import org.openqa.selenium.WebDriver;

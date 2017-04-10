@@ -1,4 +1,4 @@
-package pageObjects.allUsers;
+package pages.allUsers;
 
 import org.openqa.selenium.WebDriver;
 

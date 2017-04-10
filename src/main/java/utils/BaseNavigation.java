@@ -1,16 +1,12 @@
-package utilities;
+package utils;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import pageObjects.admin.AllUsersPage;
-import pageObjects.allUsers.HospitalSeekerHomePage;
-import pageObjects.allUsers.PageObject;
-import pageObjects.anonymous.LoginPage;
-import pageObjects.headers.BaseHeader;
-import pageObjects.interfaces.AfterLogin;
-import pageObjects.manager.HospitalsPage;
+import pages.admin.AllUsersPage;
+import pages.allUsers.PageObject;
+import pages.manager.HospitalsPage;
 
 
 /**

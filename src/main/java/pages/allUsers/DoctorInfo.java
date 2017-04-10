@@ -1,7 +1,8 @@
-package pageObjects.allUsers;
+package pages.allUsers;
 
 import org.openqa.selenium.WebDriver;
-import pageObjects.headers.BaseHeader;
+import pages.headers.BaseHeader;
+
 
 /**
  * Created by Yana on 06.04.2017.

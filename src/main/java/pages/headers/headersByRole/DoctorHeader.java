@@ -1,14 +1,14 @@
-package pageObjects.headers.headersByRole;
+package pages.headers.headersByRole;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pageObjects.headers.BaseHeader;
+import pages.headers.BaseHeader;
 
 /**
  * Created by Evgen on 06.04.2017.
  */
-public class DoctorHeader extends BaseHeader{
+public class DoctorHeader extends BaseHeader {
     public DoctorHeader(WebDriver driver) {
         super(driver);
     }

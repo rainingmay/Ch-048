@@ -1,11 +1,12 @@
-package pageObjects.headers;
+package pages.headers;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pageObjects.allUsers.HospitalSearchResult;
-import pageObjects.allUsers.HospitalSeekerHomePage;
-import pageObjects.allUsers.MapSearch;
+import pages.allUsers.HospitalSearchResult;
+import pages.allUsers.HospitalSeekerHomePage;
+import pages.allUsers.MapSearch;
+
 
 /**
  * Created by Evgen on 05.04.2017.

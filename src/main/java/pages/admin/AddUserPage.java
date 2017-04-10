@@ -1,16 +1,16 @@
-package pageObjects.admin;
+package pages.admin;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pageObjects.allUsers.PageObject;
-import pageObjects.headers.BaseHeader;
-import pageObjects.headers.headersByRole.AdminHeader;
+import pages.allUsers.PageObject;
+import pages.headers.headersByRole.AdminHeader;
+
 
 /**
  * Created by Evgen on 06.04.2017.
  */
-public class AddUserPage extends PageObject{
+public class AddUserPage extends PageObject {
 
     public AdminHeader header;
 

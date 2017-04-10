@@ -1,19 +1,18 @@
-package pageObjects.headers.headersByRole;
+package pages.headers.headersByRole;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pageObjects.allUsers.HospitalSeekerHomePage;
-import pageObjects.headers.BaseHeader;
-import pageObjects.manager.AddNewDoctorPage;
-import pageObjects.manager.DepartmentsPage;
-import pageObjects.manager.HospitalsPage;
-import pageObjects.manager.ModerationFeedBackPage;
+import pages.headers.BaseHeader;
+import pages.manager.AddNewDoctorPage;
+import pages.manager.HospitalsPage;
+import pages.manager.ModerationFeedBackPage;
+
 
 /**
  * Created by Evgen on 06.04.2017.
  */
-public class ManagerHeader extends BaseHeader{
+public class ManagerHeader extends BaseHeader {
 
     public ManagerHeader(WebDriver driver) {
         super(driver);

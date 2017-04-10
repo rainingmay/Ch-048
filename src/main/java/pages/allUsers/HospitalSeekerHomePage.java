@@ -1,11 +1,11 @@
-package pageObjects.allUsers;
+package pages.allUsers;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pageObjects.anonymous.LoginPage;
-import pageObjects.headers.BaseHeader;
-import pageObjects.headers.headersByRole.NotLogInUserHeader;
+import pages.anonymous.LoginPage;
+import pages.headers.headersByRole.NotLogInUserHeader;
+
 
 /**
  * Created by Evgen on 05.04.2017.

@@ -1,13 +1,13 @@
-package pageObjects.manager.tests;
+package pages.manager.tests;
 
 
 import org.openqa.selenium.By;
 
 import org.testng.Assert;
 import org.testng.annotations.*;
-import pageObjects.headers.headersByRole.ManagerHeader;
-import pageObjects.manager.HospitalsPage;
-import utilities.BaseNavigation;
+import pages.manager.HospitalsPage;
+import utils.BaseNavigation;
+
 
 import java.util.List;
 

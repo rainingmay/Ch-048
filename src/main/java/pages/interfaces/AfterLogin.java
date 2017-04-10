@@ -1,7 +1,8 @@
-package pageObjects.interfaces;
+package pages.interfaces;
 
 import org.openqa.selenium.WebDriver;
-import pageObjects.allUsers.PageObject;
+import pages.allUsers.PageObject;
+
 
 /**
  * Created by ytomktc on 07.04.2017.

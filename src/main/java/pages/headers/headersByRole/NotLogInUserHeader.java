@@ -1,10 +1,11 @@
-package pageObjects.headers.headersByRole;
+package pages.headers.headersByRole;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pageObjects.anonymous.LoginPage;
-import pageObjects.headers.BaseHeader;
+import pages.anonymous.LoginPage;
+import pages.headers.BaseHeader;
+
 
 /**
  * Created by Evgen on 05.04.2017.
@@ -12,7 +13,7 @@ import pageObjects.headers.BaseHeader;
 public class NotLogInUserHeader extends BaseHeader {
     @FindBy(xpath = "//*[@id=\"bs-example-navbar-collapse-1\"]/ul/li[4]/a")
     protected WebElement login;
-//
+
     public LoginPage loginButton(){
         login.click();
         return new LoginPage(driver);

@@ -1,11 +1,10 @@
-package pageObjects.allUsers;
+package pages.allUsers;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pageObjects.allUsers.DoctorInfo;
-import pageObjects.headers.BaseHeader;
-import pageObjects.headers.headersByRole.DoctorHeader;
+import pages.headers.BaseHeader;
+
 
 /**
  * Created by Yana on 06.04.2017.

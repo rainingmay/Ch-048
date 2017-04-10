@@ -2,17 +2,18 @@ package tests.AdminSideTest;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.admin.AllUsersPage;
+import pages.admin.AllUsersPage;
 import testDAO.UserDAO;
 import tests.FunctionalTest;
-import utilities.BaseNavigation;
+import utils.BaseNavigation;
+
 
 import java.util.List;
 
 /**
  * Created by Evgen on 10.04.2017.
  */
-public class AdminTest extends FunctionalTest{
+public class AdminTest extends FunctionalTest {
 
     @Test
     public void correctUsersDataTest() {

@@ -1,4 +1,4 @@
-package pageObjects.manager;
+package pages.manager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -7,9 +7,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
-import pageObjects.allUsers.PageObject;
-import pageObjects.headers.headersByRole.ManagerHeader;
-import utilities.BaseNavigation;
+import pages.allUsers.PageObject;
+import pages.headers.headersByRole.ManagerHeader;
+import utils.BaseNavigation;
 
 import javax.swing.*;
 import java.util.ArrayList;

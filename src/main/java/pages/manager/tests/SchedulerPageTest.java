@@ -1,13 +1,13 @@
-package pageObjects.manager.tests;
+package pages.manager.tests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pageObjects.allUsers.HospitalSeekerHomePage;
-import pageObjects.manager.HospitalsPage;
-import pageObjects.manager.SchedulerPage;
-import utilities.BaseNavigation;
+import pages.manager.HospitalsPage;
+import pages.manager.SchedulerPage;
+import utils.BaseNavigation;
+
 
 public class SchedulerPageTest extends FunctionalTest{
 

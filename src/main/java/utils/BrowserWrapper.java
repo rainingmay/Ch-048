@@ -12,6 +12,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BrowserWrapper {
 
+    public static final int STANDARD_WAIT_TIME = 1000;
+
     protected WebDriver driver;
     
     BrowserWrapper(WebDriver driver) {
