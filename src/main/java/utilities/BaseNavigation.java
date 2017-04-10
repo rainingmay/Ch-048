@@ -36,7 +36,7 @@ public class BaseNavigation {
 
     public static void logOut(WebDriver driver){
         BaseHeader baseHeader = new BaseHeader(driver);
-        baseHeader.l
+
     }
 
     public static void doubleClick(WebDriver driver, WebElement element){
