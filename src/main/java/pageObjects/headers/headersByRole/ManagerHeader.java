@@ -35,10 +35,10 @@ public class ManagerHeader extends BaseHeader{
     @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[5]/a")
     private WebElement profile;
 
-    @FindBy(xpath = "(//a[contains(@href, '#')])[2]")
+    @FindBy(xpath = "//a[contains(@href, '#')])[2]")
     private WebElement myProfile;
 
-    @FindBy(xpath = "(//ul[@id='dropdawn']/li[2]/a/span)[2]")
+    @FindBy(xpath = "//ul[@id='dropdawn']/li[2]/a/span)[2]")
     private WebElement logOut;
 
     public void logOut() throws InterruptedException {
