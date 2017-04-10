@@ -298,7 +298,8 @@ public class HospitalsPage extends PageObject {
     public void editButtonClick(int i) {
         driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #ediUser")).click();
     }
-    public SchedulerPage scheduleButtonClick(int i) {
+    public SchedulerPage scheduleButtonClick(int i) throws InterruptedException {
+        Thread.sleep(3000);
          driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #schedule")).click();
          return new SchedulerPage(driver);
     }

@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.testng.annotations.*;
 
 import java.util.concurrent.TimeUnit;
@@ -24,6 +25,7 @@ public class FunctionalTest {
         ffProfile.setAssumeUntrustedCertificateIssuer(false);
        System.setProperty("webdriver.gecko.driver", "/home/radgast/geckodriver");
         driver = new FirefoxDriver(ffProfile);
+        //driver = new HtmlUnitDriver();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.get("https://localhost:8443/HospitalSeeker/");
 
