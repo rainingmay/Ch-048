@@ -11,8 +11,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class HospitalListPage extends PageObject{
-    private WebDriver driver;
-    private AdminHeader header;
 
     public HospitalListPage(WebDriver driver) {
         super(driver, new AdminHeader(driver));
