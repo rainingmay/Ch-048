@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import pageObjects.allUsers.HospitalSeekerHomePage;
 import pageObjects.headers.BaseHeader;
 import pageObjects.manager.AddNewDoctorPage;
+import pageObjects.manager.DepartmentsPage;
 import pageObjects.manager.HospitalsPage;
 import pageObjects.manager.ModerationFeedBackPage;
 
@@ -60,6 +61,7 @@ public class ManagerHeader extends BaseHeader{
         feedbacks.click();
         return new ModerationFeedBackPage(driver);
     }
+
 
 
 

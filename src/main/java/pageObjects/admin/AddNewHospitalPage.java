@@ -6,11 +6,12 @@ import org.openqa.selenium.support.FindBy;
 import pageObjects.allUsers.PageObject;
 import pageObjects.headers.headersByRole.AdminHeader;
 
+/**
+ * Created by Jeksonis on 06.04.2017.
+ */
 public class AddNewHospitalPage extends PageObject{
-    private WebDriver driver;
-    private AdminHeader header;
 
-    public AddNewHospitalPage(WebDriver driver) {
+    public AddNewHospitalPage(WebDriver driver){
         super(driver, new AdminHeader(driver));
     }
 
@@ -94,8 +95,8 @@ public class AddNewHospitalPage extends PageObject{
         resetButton.click();
    }
 
-   public HospitalListPage pushSave() {
-        saveButton.click();
-        return new HospitalListPage(driver);
-   }
+   // realization HospitalList class
+   // realization save method with transition to Hospital List
+
+
 }

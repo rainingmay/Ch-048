@@ -11,7 +11,9 @@ import pageObjects.headers.headersByRole.ManagerHeader;
  * Created by ytomktc on 06.04.2017.
  */
 public class DepartmentsPage extends PageObject {
+
     @FindBy(xpath = "/html/body/section/div/div/h1")
+    private WebElement departmentsLabel;
     private WebElement departmentsText;
 
     @FindBy(xpath = "//*[@id=\"allDepartment\"]/thead/tr/th[1]")

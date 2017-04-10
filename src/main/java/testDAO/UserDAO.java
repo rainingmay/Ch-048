@@ -12,6 +12,7 @@ import java.util.Map;
  * Created by Evgen on 07.04.2017.
  */
 public class UserDAO {
+
     public static List<String> getUserFromDatabaseByEmail(String email) {
         List<String> result = new LinkedList<>();
         try {

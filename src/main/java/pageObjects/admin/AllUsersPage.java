@@ -118,10 +118,11 @@ public class AllUsersPage extends PageObject{
         return new AllUsersPage(driver, new AdminHeader(driver));
     }
 
+
+
     public List<String> getUserDataFromTableRow(int rowNumber) {
         List<String> result = new LinkedList<>();
         if (tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")")).isDisplayed()) {
-            result.add(tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(1)")).getText());
             result.add(tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(2)")).getText());
             result.add(tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(3)")).getText());
             result.add(tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(4)")).getText());
@@ -130,5 +131,8 @@ public class AllUsersPage extends PageObject{
         return result;
     }
 
+    public int gecCountOfUsersInTable() {
+        return tableBody.findElements(By.cssSelector("tr")).size();
+    }
 
 }
