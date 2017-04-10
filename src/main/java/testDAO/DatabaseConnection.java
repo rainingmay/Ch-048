@@ -41,7 +41,7 @@ public class DatabaseConnection {
         Properties properties = new Properties();
         InputStream inputStream;
         try {
-            inputStream = new FileInputStream("../../resources/database.properties");
+            inputStream = new FileInputStream("src/main/resources/database.properties");
             properties.load(inputStream);
 
             driver = properties.getProperty("db.driver");

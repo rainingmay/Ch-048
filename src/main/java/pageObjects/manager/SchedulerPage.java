@@ -115,7 +115,7 @@ public class SchedulerPage extends PageObject {
     public void setAppointment(String text, int column) throws InterruptedException {
         nextMonthButtonClick();
         WebElement col  = tabelColomns.get(column+1);
-        BaseNavigation.doubleClick(col,driver);
+        //BaseNavigation.doubleClick(column,driver);
         Thread.sleep(3000);
         eventInput.sendKeys(text);
         saveEvent.click();

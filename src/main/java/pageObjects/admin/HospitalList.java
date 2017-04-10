@@ -13,8 +13,11 @@ import pageObjects.headers.headersByRole.AdminHeader;
  */
 public class HospitalList extends PageObject {
 
+    public AdminHeader header;
+
     public HospitalList(WebDriver driver) {
-        super(driver, new AdminHeader(driver));
+        super(driver);
+        this.header = new AdminHeader(driver);
     }
 
     @FindBy(css = ".btn-group a:first-child")

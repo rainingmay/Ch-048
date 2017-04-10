@@ -10,9 +10,10 @@ import pageObjects.headers.headersByRole.AdminHeader;
  * Created by Jeksonis on 06.04.2017.
  */
 public class AddNewHospitalPage extends PageObject{
-
+    public AdminHeader header;
     public AddNewHospitalPage(WebDriver driver){
-        super(driver, new AdminHeader(driver));
+        super(driver);
+        this.header = new AdminHeader(driver);
     }
 
     @FindBy(id = "addressGeo")

@@ -33,11 +33,11 @@ public class BaseNavigation {
         driver.findElement(By.id("loginSubmit")).click();
     }
 
-    public static void doubleClick(WebDriver driver, WebElement element){
+    /*public static void doubleClick(int driver, WebDriver element){
         JavascriptExecutor js = (JavascriptExecutor)driver;
         String doubleClickJS = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('dblclick',true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject){ arguments[0].fireEvent('ondblclick');}window.stop();";
         js.executeScript(doubleClickJS, element);
-    }
+    }*/
 
     public String getPageTitle(WebDriver driver){
         return driver.getTitle();

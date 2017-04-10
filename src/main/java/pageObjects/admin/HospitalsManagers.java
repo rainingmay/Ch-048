@@ -13,8 +13,11 @@ import pageObjects.headers.headersByRole.AdminHeader;
  */
 public class HospitalsManagers extends PageObject{
 
+    public AdminHeader header;
+
     public HospitalsManagers(WebDriver driver) {
-        super(driver, new AdminHeader(driver));
+        super(driver);
+        this.header = new AdminHeader(driver);
     }
 
     @FindBy(css = "tbody")

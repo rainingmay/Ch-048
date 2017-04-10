@@ -12,8 +12,11 @@ import java.util.List;
 
 public class HospitalListPage extends PageObject{
 
+    public AdminHeader header;
+
     public HospitalListPage(WebDriver driver) {
-        super(driver, new AdminHeader(driver));
+        super(driver);
+        this.header = new AdminHeader(driver);
     }
 
     @FindBy(xpath = "/html/body/section/div/div/div/div[1]/div[1]/a[1]")

@@ -16,9 +16,7 @@ import java.util.List;
  */
 public class AllUsersPage extends PageObject{
 
-    public AllUsersPage(WebDriver driver, BaseHeader header) {
-        super(driver, header);
-    }
+    public AdminHeader header;
 
     @FindBy(id = "userPerPage")
     private WebElement usersPerPagePopUp;
@@ -88,7 +86,9 @@ public class AllUsersPage extends PageObject{
 
 
     public AllUsersPage(WebDriver driver) {
-        super(driver, new AdminHeader(driver));
+
+        super(driver);
+        this.header = new AdminHeader(driver);
     }
 
 
@@ -115,7 +115,7 @@ public class AllUsersPage extends PageObject{
         changeSearchBy(field);
         sendKeysToSearchField(keys);
         searchButton.click();
-        return new AllUsersPage(driver, new AdminHeader(driver));
+        return new AllUsersPage(driver);
     }
 
 
