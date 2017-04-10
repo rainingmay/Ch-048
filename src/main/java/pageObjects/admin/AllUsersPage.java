@@ -131,4 +131,8 @@ public class AllUsersPage extends PageObject{
         return result;
     }
 
+    public int gecCountOfUsersInTable() {
+        return tableBody.findElements(By.cssSelector("tr")).size();
+    }
+
 }

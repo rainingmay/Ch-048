@@ -40,16 +40,6 @@ public class FunctionalTest {
 
     }
 
-    @Test
-    public void toAllUsersPage() {
-        try {
-            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, "admin@hospitals.ua", "1111");
-            Assert.assertEquals(allUsersPage.getUserDataFromTableRow(1), 0);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
         driver.quit();
