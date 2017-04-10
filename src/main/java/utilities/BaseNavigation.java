@@ -1,7 +1,9 @@
 package utilities;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import pageObjects.admin.AllUsersPage;
 import pageObjects.allUsers.HospitalSeekerHomePage;
 import pageObjects.allUsers.PageObject;
@@ -29,6 +31,12 @@ public class BaseNavigation {
         driver.findElement(By.id("password")).clear();
         driver.findElement(By.id("password")).sendKeys(password);
         driver.findElement(By.id("loginSubmit")).click();
+    }
+
+    public static void doubleClick(WebDriver driver, WebElement element){
+        JavascriptExecutor js = (JavascriptExecutor)driver;
+        String doubleClickJS = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('dblclick',true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject){ arguments[0].fireEvent('ondblclick');}window.stop();";
+        js.executeScript(doubleClickJS, element);
     }
 
     public String getPageTitle(WebDriver driver){
