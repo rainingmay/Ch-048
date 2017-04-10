@@ -81,9 +81,6 @@ public class AddUserPage extends PageObject{
 
 
 
-
-
-
     public void addNewUser(String email, String password, String role) throws InterruptedException {
         Thread.sleep(1000);
         enterEmail(email);
