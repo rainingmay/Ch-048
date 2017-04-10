@@ -15,7 +15,6 @@ public class AdminHeader extends BaseHeader{
         super(driver);
     }
 
-
     @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/a")
     private WebElement actions;
 

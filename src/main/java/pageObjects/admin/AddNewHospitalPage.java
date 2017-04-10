@@ -16,6 +16,12 @@ public class AddNewHospitalPage extends PageObject{
         this.header = new AdminHeader(driver);
     }
 
+    @FindBy(id = "image-uploaded")
+    private WebElement imageButton;
+
+    @FindBy(id = "googleMap")
+    private WebElement googleMap;
+
     @FindBy(id = "addressGeo")
     private WebElement addressInputField;
 
@@ -84,20 +90,27 @@ public class AddNewHospitalPage extends PageObject{
         descriptionInputField.sendKeys(text);
     }
 
-   public void pushFind() {
+   public void pushFindButton() {
         findButton.click();
    }
 
-   public void pushFill() {
+   public void pushFillButton() {
         fillButton.click();
    }
 
-   public void pushReset() {
+   public void pushResetButton() {
+        if (resetButton.isEnabled())
         resetButton.click();
    }
 
-   // realization HospitalList class
-   // realization save method with transition to Hospital List
+   public HospitalListPage pushSaveButton() {
+        if (addressInputField.isEnabled() && countryInputField.isEnabled() && streetInputField.isEnabled()
+                && buildingInputField.isEnabled() && cityInputField.isEnabled()
+                && nameInputField.isEnabled() && descriptionInputField.isEnabled()) {
+            saveButton.click();
+        }
+        return new HospitalListPage(driver);
+   }
 
 
 }

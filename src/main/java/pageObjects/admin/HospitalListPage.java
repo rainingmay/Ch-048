@@ -12,15 +12,12 @@ import java.util.List;
 
 public class HospitalListPage extends PageObject{
 
-
     public AdminHeader header;
 
     public HospitalListPage(WebDriver driver) {
         super(driver);
         this.header = new AdminHeader(driver);
     }
-
-
 
     @FindBy(xpath = "/html/body/section/div/div/div/div[1]/div[1]/a[1]")
     private WebElement addNewHospitalButton;
@@ -44,6 +41,18 @@ public class HospitalListPage extends PageObject{
         return new CheckGooglePOIPage(driver);
     }
 
+    public WebElement showOnMapButton(int rowNumber) {
+        return driver.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(3) form button:nth-child(2)"));
+    }
+
+    public WebElement editButton(int rowNumber) {
+        return driver.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(3) form a"));
+    }
+
+    public WebElement removeButton(int rowNumber) {
+        return driver.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(3) form button:nth-child(4)"));
+    }
+
     public List<String> getHospitalDataFromTableRow(int rowNumber) {
         List<String> result = new LinkedList<>();
         if (tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")")).isDisplayed()) {
@@ -51,5 +60,9 @@ public class HospitalListPage extends PageObject{
             result.add(tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(2)")).getText());
         }
         return result;
+    }
+
+    public int getCountOfHospitalsInTable() {
+        return tableBody.findElements(By.cssSelector("tr")).size();
     }
 }
