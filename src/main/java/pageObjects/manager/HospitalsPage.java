@@ -13,6 +13,8 @@ import java.util.List;
 
 
 public class HospitalsPage extends PageObject {
+
+    public ManagerHeader managerHeader;
     @FindBy(className = "h1.text-center")
     private WebElement hospitalName;
 
@@ -311,8 +313,7 @@ public class HospitalsPage extends PageObject {
 
 
     public HospitalsPage(WebDriver driver) {
-        super(driver, new ManagerHeader(driver));
-
-
+        super(driver);
+        managerHeader = new ManagerHeader(driver);
     }
 }

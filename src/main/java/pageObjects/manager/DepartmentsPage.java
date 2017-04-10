@@ -12,6 +12,7 @@ import pageObjects.headers.headersByRole.ManagerHeader;
  */
 public class DepartmentsPage extends PageObject {
 
+    public ManagerHeader managerHeader;
     @FindBy(xpath = "/html/body/section/div/div/h1")
     private WebElement departmentsLabel;
     private WebElement departmentsText;
@@ -51,6 +52,7 @@ public class DepartmentsPage extends PageObject {
 
 
     public DepartmentsPage(WebDriver driver) {
-        super(driver, new ManagerHeader(driver));
+        super(driver);
+        managerHeader = new ManagerHeader(driver);
     }
 }

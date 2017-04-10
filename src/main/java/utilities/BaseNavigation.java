@@ -8,6 +8,7 @@ import pageObjects.admin.AllUsersPage;
 import pageObjects.allUsers.HospitalSeekerHomePage;
 import pageObjects.allUsers.PageObject;
 import pageObjects.anonymous.LoginPage;
+import pageObjects.headers.BaseHeader;
 import pageObjects.interfaces.AfterLogin;
 import pageObjects.manager.HospitalsPage;
 
@@ -33,7 +34,16 @@ public class BaseNavigation {
         driver.findElement(By.id("loginSubmit")).click();
     }
 
+<<<<<<< HEAD
     /*public static void doubleClick(int driver, WebDriver element){
+=======
+    public static void logOut(WebDriver driver){
+        BaseHeader baseHeader = new BaseHeader(driver);
+
+    }
+
+    public static void doubleClick(WebDriver driver, WebElement element){
+>>>>>>> 1c15c20239dd35c991dae1a871918a5ccdd230cb
         JavascriptExecutor js = (JavascriptExecutor)driver;
         String doubleClickJS = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('dblclick',true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject){ arguments[0].fireEvent('ondblclick');}window.stop();";
         js.executeScript(doubleClickJS, element);

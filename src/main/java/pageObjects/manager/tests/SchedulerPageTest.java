@@ -1,6 +1,7 @@
 package pageObjects.manager.tests;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjects.allUsers.HospitalSeekerHomePage;
@@ -15,15 +16,14 @@ public class SchedulerPageTest extends FunctionalTest{
         HospitalsPage hospitalsPage = new HospitalsPage(driver);
         SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
         schedulerPage.setAppointment("Test",3);
-       // BaseNavigation.logout(driver);
-        Thread.sleep(6000);
+        schedulerPage.saveButtonClick();
 
-        driver.findElement(By.xpath("")).click();
-        driver.findElement(By.xpath("//*[@id=\"dropdawn\"]/li[2]/a/span")).click();
 
-        BaseNavigation.login(driver, "manager.jh@hospitals.ua", "1111");
+        schedulerPage.managerHeader.logOut();
 
-        System.out.println("I'me here two");
+        driver.findElement(By.xpath("(//a[contains(@href, '#')])[2]")).click();
+        driver.findElement(By.xpath("(//ul[@id='dropdawn']/li[2]/a/span)[2]")).click();
+
         Assert.assertTrue( schedulerPage.getEvents().size() > 0 && schedulerPage.getEvents().contains("Test"));
 
 

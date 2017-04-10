@@ -35,15 +35,15 @@ public class ManagerHeader extends BaseHeader{
     @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[5]/a")
     private WebElement profile;
 
-    @FindBy(xpath = "//*[@id=\"bs-example-navbar-collapse-1\"]/ul/li[5]/a")
+    @FindBy(xpath = "(//a[contains(@href, '#')])[2]")
     private WebElement myProfile;
 
-    @FindBy(xpath = "//*[@id=\"dropdawn\"]/li[2]/a")
+    @FindBy(xpath = "(//ul[@id='dropdawn']/li[2]/a/span)[2]")
     private WebElement logOut;
 
     public void logOut() throws InterruptedException {
+        Thread.sleep(1000);
         myProfile.click();
-        Thread.sleep(3000);
         logOut.click();
     }
 

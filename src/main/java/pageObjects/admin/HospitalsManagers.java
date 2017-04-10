@@ -20,6 +20,9 @@ public class HospitalsManagers extends PageObject{
         this.header = new AdminHeader(driver);
     }
 
+    public AdminHeader adminHeader;
+
+
     @FindBy(css = "tbody")
     private WebElement table;
 
