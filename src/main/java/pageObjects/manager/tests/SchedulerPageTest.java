@@ -18,16 +18,13 @@ public class SchedulerPageTest extends FunctionalTest{
         SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
         schedulerPage.setAppointment("Test",3);
         schedulerPage.saveButtonClick();
-       // BaseNavigation.logout(driver);
-        Thread.sleep(6000);
-        System.out.println("1");
-        System.out.println(driver.findElement(By.xpath("//*[@id=\"bs-example-navbar-collapse-1\"]/ul/li[5]/a")));
-        driver.findElement(By.xpath("//*[@id=\"bs-example-navbar-collapse-1\"]/ul/li[5]/a")).click();
-        driver.findElement(By.xpath("//*[@id=\"dropdawn\"]/li[2]/a/span")).click();
 
-        BaseNavigation.login(driver, "manager.jh@hospitals.ua", "1111");
 
-        System.out.println("I'me here two");
+
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("(//a[contains(@href, '#')])[2]")).click();
+        driver.findElement(By.xpath("(//ul[@id='dropdawn']/li[2]/a/span)[2]")).click();
+
         Assert.assertTrue( schedulerPage.getEvents().size() > 0 && schedulerPage.getEvents().contains("Test"));
 
 

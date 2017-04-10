@@ -18,6 +18,7 @@ import java.util.List;
 
 public class SchedulerPage extends PageObject {
 
+    ManagerHeader managerHeader;
     @FindBy(xpath = "/html/body/section/div/div/div[3]/div/form/div[2]/p")
     private WebElement doctorNameLabel;
 
@@ -189,6 +190,7 @@ public class SchedulerPage extends PageObject {
 
 
     public SchedulerPage(WebDriver driver) {
-        super(driver, new ManagerHeader(driver));
+        super(driver);
+        managerHeader = new ManagerHeader(driver);
     }
 }

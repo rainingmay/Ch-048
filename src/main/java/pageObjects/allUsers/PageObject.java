@@ -7,12 +7,10 @@ import pageObjects.headers.BaseHeader;
 public class PageObject {
 
     protected WebDriver driver;
-    protected BaseHeader header;
 
 
-    public PageObject(WebDriver driver, BaseHeader header){
+    public PageObject(WebDriver driver){
         this.driver = driver;
-        this.header = header;
         PageFactory.initElements(driver, this);
     }
 }

@@ -10,6 +10,8 @@ import pageObjects.headers.headersByRole.ManagerHeader;
  * Created by radga on 06.04.2017.
  */
 public class ModerationFeedBackPage extends PageObject {
+    ManagerHeader managerHeader;
+
     @FindBy(css = "input[value=\"remove\"]")
     private WebDriver removeAfterDecideButton;
 
@@ -70,6 +72,7 @@ public class ModerationFeedBackPage extends PageObject {
     private WebElement backToTopButton;
 
     public ModerationFeedBackPage(WebDriver driver){
-        super(driver, new ManagerHeader(driver));
+        super(driver);
+        managerHeader = new ManagerHeader(driver);
     }
 }

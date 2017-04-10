@@ -8,6 +8,7 @@ import pageObjects.admin.AllUsersPage;
 import pageObjects.allUsers.HospitalSeekerHomePage;
 import pageObjects.allUsers.PageObject;
 import pageObjects.anonymous.LoginPage;
+import pageObjects.headers.BaseHeader;
 import pageObjects.interfaces.AfterLogin;
 import pageObjects.manager.HospitalsPage;
 
@@ -31,6 +32,11 @@ public class BaseNavigation {
         driver.findElement(By.id("password")).clear();
         driver.findElement(By.id("password")).sendKeys(password);
         driver.findElement(By.id("loginSubmit")).click();
+    }
+
+    public static void logOut(WebDriver driver){
+        BaseHeader baseHeader = new BaseHeader(driver);
+        baseHeader.l
     }
 
     public static void doubleClick(WebDriver driver, WebElement element){
