@@ -30,6 +30,7 @@ public class BaseNavigation {
         driver.findElement(By.id("password")).clear();
         driver.findElement(By.id("password")).sendKeys(password);
         driver.findElement(By.id("loginSubmit")).click();
+
     }
 
 

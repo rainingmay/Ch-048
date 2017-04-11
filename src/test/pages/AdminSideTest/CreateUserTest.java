@@ -3,14 +3,14 @@
 // (powered by Fernflower decompiler)
 //
 
-package tests.AdminCreateUserTest;
+package pages.AdminSideTest;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.annotations.Test;
-import pageObjects.admin.AddUserPage;
-import tests.AdminCreateUserTest.BaseTest;
-import utilities.BaseNavigation;
+import pages.admin.AddUserPage;
+import utils.BaseNavigation;
+
 
 public class CreateUserTest extends BaseTest {
     public CreateUserTest() {
@@ -21,7 +21,7 @@ public class CreateUserTest extends BaseTest {
         BaseNavigation.loginAsAdmin(driver, "admin@hospitals.ua", "1111");
         AddUserPage addUserPage = new AddUserPage(this.driver);
         addUserPage.addNewUser("testwadmin@gmail.com", "Q12345w", "ADMIN");
-        BaseNavigation.logout(driver);
+        //BaseNavigation.logout(driver);
     }
 
     @Test
@@ -29,9 +29,9 @@ public class CreateUserTest extends BaseTest {
         BaseNavigation.login(driver, "admin@hospitals.ua", "1111");
         AddUserPage addUserPage = new AddUserPage(driver);
         addUserPage.addNewUser("test2admin@gmailcom", "Q12345w", "ADMIN");
-        BaseNavigation.logout(driver);
+        //BaseNavigation.logout(driver);
         BaseNavigation.login(driver, "test2admin@gmailcom", "Q12345w");
-        BaseNavigation.logout(driver);
+        //BaseNavigation.logout(driver);
     }
 
     @Test

@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.admin.AllUsersPage;
-import testDAO.UserDAO;
+import databaseUtil.UserDAO;
 import utils.BaseNavigation;
 import utils.BaseTest;
 

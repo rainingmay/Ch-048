@@ -1,9 +1,8 @@
-package testDAO;
+package databaseUtil;
 
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Evgen on 07.04.2017.

@@ -1,4 +1,4 @@
-package testDAO;
+package databaseUtil;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

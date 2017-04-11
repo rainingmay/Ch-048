@@ -1,5 +1,5 @@
 
-package tests.AdminCreateUserTest;
+package pages.AdminSideTest;
 
 
 import org.openqa.selenium.By;
