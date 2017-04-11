@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import pages.allUsers.PageObject;
 import pages.headers.headersByRole.ManagerHeader;
+import utilities.WebElementWrapper;
 import utils.BaseNavigation;
 
 import javax.swing.*;
@@ -109,6 +110,38 @@ public class SchedulerPage extends PageObject {
 
     @FindBy(css = "div.dhx_btn_set.dhx_right_btn_set.dhx_delete_btn_set")
     private WebElement deleteDetailedChanges;
+
+    @FindBy(css = "dhx_scale_hour:first-child")
+    private WebElement beginingHour;
+
+    @FindBy(css = "dhx_scale_hour:last-child")
+    private WebElement endingHour;
+
+    @FindAll({
+            @FindBy(css = "dhx_scale_holder_now "),
+            @FindBy(css = "dhx_scale_holder")
+    })
+    private List<WebElement> allDays;
+
+    @FindAll(@FindBy(css = "dhx_scale_ignore"))
+    private List<WebElement> ignoredDays;
+
+
+    public int getDays(){
+        return allDays.size()-ignoredDays.size()-1;
+    }
+
+
+    public String getBeginingHour(){
+        return beginingHour.getText();
+    }
+
+    public String getEndingHour(){
+        return endingHour.getText();
+    }
+
+
+
 
     public void nextMonthButtonClick() throws InterruptedException {
         Thread.sleep(3000);

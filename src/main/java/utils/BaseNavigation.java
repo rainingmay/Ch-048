@@ -5,7 +5,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import pages.admin.AllUsersPage;
+import pages.allUsers.HospitalSeekerHomePage;
 import pages.allUsers.PageObject;
+import pages.anonymous.LoginPage;
 import pages.manager.HospitalsPage;
 
 
