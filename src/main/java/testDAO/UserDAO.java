@@ -1,9 +1,6 @@
 package testDAO;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -17,9 +14,11 @@ public class UserDAO {
         List<String> result = new LinkedList<>();
         try {
             Statement statement = DatabaseConnection.connectToDatabase().createStatement();
-
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM users " +
-                    "INNER JOIN userdetail ON users.userdetails_id = userdetail.id WHERE email= '" + email + "'");
+            String sql = "SELECT * FROM users  INNER JOIN userdetail ON users.userdetails_id = userdetail.id WHERE email=?";
+            statement.getConnection().setAutoCommit(false);
+            PreparedStatement preparedStatement = statement.getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery(preparedStatement.toString());
             if (resultSet.next()) {
                 result.add(resultSet.getString("email"));
                 result.add(resultSet.getString("firstname"));

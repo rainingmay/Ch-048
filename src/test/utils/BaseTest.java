@@ -16,8 +16,8 @@ import java.util.Properties;
 public class BaseTest {
 
     /*public WebElementWrapper browser;
-    //public DataSetUtils dataSetUtils;
-    //public static String language = LocalizationConfig.setLanguage();
+    public DataSetUtils dataSetUtils;
+    public static String language = LocalizationConfig.setLanguage();
 
     public WebElementWrapper getWrapper() {
         return browser;

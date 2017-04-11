@@ -8,8 +8,8 @@ import pages.allUsers.PageObject;
  * Created by ytomktc on 07.04.2017.
  */
 public interface AfterLogin {
-    public PageObject loginAsAdmin(String email, String password) throws InterruptedException;
-    public PageObject loginAsManager(String email, String password) throws InterruptedException;
-    public PageObject loginAsDoctor(String email, String password);
-    public PageObject loginAsPatient(String email, String password);
+    PageObject loginAsAdmin(String email, String password) throws InterruptedException;
+    PageObject loginAsManager(String email, String password) throws InterruptedException;
+    PageObject loginAsDoctor(String email, String password);
+    PageObject loginAsPatient(String email, String password);
 }
