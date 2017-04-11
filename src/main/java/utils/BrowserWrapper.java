@@ -25,9 +25,6 @@ public class BrowserWrapper {
 
     private static WebDriver driver = browserInitialization();
     private static WebDriverWait wait = new WebDriverWait(driver,10);
-    /*public WebElementWrapper(WebDriver driver){
-        this.driver = driver;
-    }*/
 
     public static WebDriver browserInitialization() {
         ProfilesIni profile = new ProfilesIni();
