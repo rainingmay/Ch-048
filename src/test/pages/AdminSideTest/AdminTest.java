@@ -1,12 +1,12 @@
-package tests.AdminSideTest;
+package pages.AdminSideTest;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.admin.AllUsersPage;
 import testDAO.UserDAO;
-import tests.FunctionalTest;
 import utils.BaseNavigation;
+import utils.BaseTest;
 
 
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by Evgen on 10.04.2017.
  */
-public class AdminTest extends FunctionalTest {
+public class AdminTest extends BaseTest {
 
     @Test
     public void correctUsersDataTest() {
@@ -33,6 +33,10 @@ public class AdminTest extends FunctionalTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void viewInformTest () {
     }
 
 }
