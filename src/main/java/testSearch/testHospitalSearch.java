@@ -62,7 +62,7 @@ public class testHospitalSearch extends FunctionalTest {
 
     @Test(dataProvider="SearchProvider")
     public void testFindHospital(String searchWord, int expected) throws Exception {
-        hospitalSearchResult.isElementPresent(By.cssSelector(hospitalSearchResult.getHospitalPerPage()));
+       // hospitalSearchResult.isElementPresent(By.cssSelector(hospitalSearchResult.getHospitalPerPage()));
 
         //need import of BaseSearch Class
         assertEquals(expected, hospitalSearchResult.testMain(searchWord));
