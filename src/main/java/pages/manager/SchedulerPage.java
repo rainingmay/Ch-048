@@ -212,8 +212,12 @@ public class SchedulerPage extends PageObject {
     }
 
     public boolean checkNextButton(){
-        return BrowserWrapper.isElementPresent(nextMonthButton);
-    }
+        if(BrowserWrapper.isElementPresent(nextMonthButton)){
+            return true;
+        }else{
+            errors.append("dayButton");
+            return false;
+        }    }
 
     public boolean checkDaysSelector(){
         return BrowserWrapper.isElementPresent(workWeekSizeSelector);
