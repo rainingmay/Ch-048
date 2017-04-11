@@ -16,9 +16,7 @@ import java.util.List;
  */
 public class AllUsersPage extends PageObject{
 
-    public AllUsersPage(WebDriver driver, BaseHeader header) {
-        super(driver, header);
-    }
+    public AdminHeader header;
 
     @FindBy(id = "userPerPage")
     private WebElement usersPerPagePopUp;
@@ -88,7 +86,9 @@ public class AllUsersPage extends PageObject{
 
 
     public AllUsersPage(WebDriver driver) {
-        super(driver, new AdminHeader(driver));
+
+        super(driver);
+        this.header = new AdminHeader(driver);
     }
 
 
@@ -115,13 +115,14 @@ public class AllUsersPage extends PageObject{
         changeSearchBy(field);
         sendKeysToSearchField(keys);
         searchButton.click();
-        return new AllUsersPage(driver, new AdminHeader(driver));
+        return new AllUsersPage(driver);
     }
+
+
 
     public List<String> getUserDataFromTableRow(int rowNumber) {
         List<String> result = new LinkedList<>();
         if (tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")")).isDisplayed()) {
-            result.add(tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(1)")).getText());
             result.add(tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(2)")).getText());
             result.add(tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(3)")).getText());
             result.add(tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(4)")).getText());
@@ -130,5 +131,8 @@ public class AllUsersPage extends PageObject{
         return result;
     }
 
+    public int gecCountOfUsersInTable() {
+        return tableBody.findElements(By.cssSelector("tr")).size();
+    }
 
 }

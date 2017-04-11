@@ -3,12 +3,14 @@ package testSearch;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pageObjects.allUsers.HospitalSearchResult;
+import tests.FunctionalTest;
 
 import java.util.concurrent.TimeUnit;
 
@@ -20,8 +22,10 @@ import static org.testng.Assert.fail;
 /**
  * Created by Yana on 07.04.2017.
  */
-public class testHospitalSearch {
-    private WebDriver driver;
+public class testHospitalSearch extends FunctionalTest {
+    public testHospitalSearch(WebDriver driver) {
+        super(driver);
+    };
 //    private String baseUrl;
 //    private boolean acceptNextAlert = true;
 //    private StringBuffer verificationErrors = new StringBuffer();
@@ -33,6 +37,8 @@ public class testHospitalSearch {
 //    String classOfCss = "[class='card panel panel-default text-xs-right']";
     int expected;
     String searchWord;
+    private boolean acceptNextAlert = true;
+    private StringBuffer verificationErrors = new StringBuffer();
     HospitalSearchResult hospitalSearchResult = new HospitalSearchResult(driver);
 
     //@Parameters
@@ -50,17 +56,16 @@ public class testHospitalSearch {
 
     @BeforeClass(alwaysRun = true)
     public void setUp() throws Exception {
-        driver   = new FirefoxDriver();
-        HospitalSearchResult.baseUrl = "https://localhost:8443/";
+        driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
     @Test(dataProvider="SearchProvider")
-    public void testSeleniumTestFindHospital(String searchWord, int expected) throws Exception {
-        HospitalSearchResult.isElementPresent(hospitalSearchResult);
+    public void testFindHospital(String searchWord, int expected) throws Exception {
+        hospitalSearchResult.isElementPresent(By.cssSelector(hospitalSearchResult.getHospitalPerPage()));
 
         //need import of BaseSearch Class
-        assertEquals(expected, HospitalSearchResult.testMain(searchWord));
+        assertEquals(expected, hospitalSearchResult.testMain(searchWord));
     }
 
 

@@ -55,7 +55,7 @@ public class BaseHeader {
 
     public HospitalSeekerHomePage toHomePage() {
         home.click();
-        return new HospitalSeekerHomePage(driver,this);
+        return new HospitalSeekerHomePage(driver);
     }
 
     public MapSearch toMapOfHospitals() {

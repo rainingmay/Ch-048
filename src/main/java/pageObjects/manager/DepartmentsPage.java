@@ -5,12 +5,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pageObjects.allUsers.PageObject;
+import pageObjects.headers.headersByRole.ManagerHeader;
 
 /**
  * Created by ytomktc on 06.04.2017.
  */
 public class DepartmentsPage extends PageObject {
+
+    public ManagerHeader managerHeader;
     @FindBy(xpath = "/html/body/section/div/div/h1")
+    private WebElement departmentsLabel;
     private WebElement departmentsText;
 
     @FindBy(xpath = "//*[@id=\"allDepartment\"]/thead/tr/th[1]")
@@ -49,5 +53,6 @@ public class DepartmentsPage extends PageObject {
 
     public DepartmentsPage(WebDriver driver) {
         super(driver);
+        managerHeader = new ManagerHeader(driver);
     }
 }

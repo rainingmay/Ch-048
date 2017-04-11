@@ -1,17 +1,24 @@
 package pageObjects.manager;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import pageObjects.allUsers.PageObject;
-<<<<<<< HEAD
 import pageObjects.headers.headersByRole.ManagerHeader;
-import pageObjects.manager.ManagePage;
-=======
->>>>>>> 9d372633f7fa148581a266237f107b3c2056fdc8
+import utilities.BaseNavigation;
+
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class SchedulerPage extends PageObject {
+
+    public ManagerHeader managerHeader;
 
     @FindBy(xpath = "/html/body/section/div/div/div[3]/div/form/div[2]/p")
     private WebElement doctorNameLabel;
@@ -61,8 +68,79 @@ public class SchedulerPage extends PageObject {
     @FindBy(className = "div.dhx_cal_prev_button")
     private WebElement previousMonthButton;
 
-    @FindBy(className = "div.dhx_cal_next_button")
+    @FindBy(css = "div.dhx_cal_next_button")
     private WebElement nextMonthButton;
+
+    @FindAll(@FindBy(css = "div.dhx_scale_holder"))
+    private List<WebElement> tabelColomns;
+
+    @FindAll(@FindBy(className = "dhx_scale_hour"))
+    private List<WebElement> tabelRows;
+
+    @FindAll(@FindBy(css = "div.dhx_body"))
+    private List<WebElement> eventBodys;
+
+    @FindAll(@FindBy(css = "div.dhx_cal_event"))
+    private List<WebElement> events;
+
+    @FindBy(css= "div.dhx_cal_editor")
+    private WebElement eventInput;
+
+    @FindBy(css = "div.dhx_menu_icon.icon_save")
+    private WebElement saveEvent;
+
+    @FindBy(className = "div.icon_cancel")
+    private WebElement cancelEvent;
+
+    @FindBy(className = "div.icon_details")
+    private WebElement detaisEvent;
+
+    @FindBy(className = "div.icon_edit")
+    private WebElement editEvent;
+
+    @FindBy(className = "div.dhx_title")
+    private WebElement eventTitle;
+
+    @FindBy(css = "div.dhx_cal_ltext")
+    private WebElement detailedEditorField;
+
+    @FindBy(css = "div.dhx_btn_set.dhx_left_btn_set.dhx_cancel_btn_set")
+    private WebElement cancelDetailedChanges;
+
+    @FindBy(css = "div.dhx_btn_set.dhx_right_btn_set.dhx_delete_btn_set")
+    private WebElement deleteDetailedChanges;
+
+    public void nextMonthButtonClick() throws InterruptedException {
+        Thread.sleep(3000);
+        nextMonthButton.click();
+    }
+    public void setAppointment(String text, int column) throws InterruptedException {
+        nextMonthButtonClick();
+        WebElement col  = tabelColomns.get(column+1);
+<<<<<<< HEAD
+        //BaseNavigation.doubleClick(column,driver);
+=======
+        BaseNavigation.doubleClick(driver,col);
+>>>>>>> 1c15c20239dd35c991dae1a871918a5ccdd230cb
+        Thread.sleep(3000);
+        eventInput.sendKeys(text);
+        saveEvent.click();
+
+
+    }
+
+    public List<String> getEvents(){
+        List<String> list = new ArrayList<>();
+
+        if(eventBodys.size() == 0){
+            return list;
+        }
+        for(WebElement element : eventBodys){
+            list.add(element.getText());
+        }
+
+        return list;
+    }
 
     public void workWeekSizeSelector(String value){
         Select select = new Select(workWeekSizeSelector);
@@ -85,39 +163,39 @@ public class SchedulerPage extends PageObject {
         select.selectByVisibleText(value);
     }
 
-    public void saveButton(){
+    public void saveButtonClick(){
         saveButton.click();
     }
 
-    public void dayTabButton(){
+    public void dayTabButtonClick(){
         dayTabButton.click();
     }
 
-    public void weekTabButton(){
+    public void weekTabButtonClick(){
         weekTabButton.click();
     }
 
-    public void monthTabButton(){
+    public void monthTabButtonClick(){
         monthTabButton.click();
     }
 
-    public void miniCalendarButton(){
+    public void miniCalendarButtonClick(){
         miniCalendarButton.click();
     }
 
-    public void todayButton(){
+    public void todayButtonClick(){
         todayButton.click();
     }
 
-    public void previousMonthButton(){
+    public void previousMonthButtonClick(){
         previousMonthButton.click();
     }
 
-    public void nextMonthButton(){
-        nextMonthButton.click();
-    }
+
+
 
     public SchedulerPage(WebDriver driver) {
-        super(driver, new ManagerHeader(driver));
+        super(driver);
+        managerHeader = new ManagerHeader(driver);
     }
 }

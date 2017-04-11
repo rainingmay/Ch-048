@@ -6,11 +6,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import pageObjects.allUsers.PageObject;
-import pageObjects.headers.headersByRole.AdminHeader;
 import pageObjects.headers.headersByRole.ManagerHeader;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class HospitalsPage extends PageObject {
+
+    public ManagerHeader managerHeader;
     @FindBy(className = "h1.text-center")
     private WebElement hospitalName;
 
@@ -34,7 +38,7 @@ public class HospitalsPage extends PageObject {
     private WebElement searchBySelector;
 
     @FindBy(id = "search")
-    private WebElement searchTextFild;
+    private WebElement searchInput;
 
     @FindBy(id = "searchButton")
     private WebElement searchButton;
@@ -88,44 +92,10 @@ public class HospitalsPage extends PageObject {
     private WebElement categoryLabel;
 
     @FindBy(id="category")
-    private WebElement getSortByCategoryButton;
+    private WebElement sortByCategoryButton;
 
     @FindBy(xpath = "//*[@id=\"allDoctors\"]/thead/tr/th[7]/i")
     private WebElement actionLabel;
-
-
-     //Rows
-
-    //First row
-    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[1]/td[1]")
-    private WebElement firstRowNumber;
-
-    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[1]/td[2]")
-    private WebElement firstRowEmail;
-
-    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[1]/td[3]")
-    private WebElement firstRowName;
-
-    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[1]/td[4]")
-    private WebElement firstRowSurname;
-
-    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[1]/td[5]")
-    private WebElement firstRowSpecialization;
-
-    @FindBy(xpath = "//*[@id=\"allDoctors\"]/tbody/tr[1]/td[6]")
-    private WebElement firstRowCategory;
-
-    @FindBy(xpath = "//table/tbody/tr[1]/td[7]/span[1]/a")
-    private WebElement firstRowShowDoctorsDetailButton;
-
-    @FindBy(xpath = "//table/tbody/tr[1]/td[7]/span[2]/a")
-    private WebElement firstRowEditDoctorsDetailButton;
-
-    @FindBy(xpath = "//table/tbody/tr[1]/td[7]/span[3]/a")
-    private WebElement firstRowShowSchedulerButton;
-
-    @FindBy(xpath = "//table/tbody/tr[1]/td[7]/span[4]/a")
-    private WebElement firstRowDeleteDoctorButton;
 
 
     //popUpForms
@@ -134,13 +104,13 @@ public class HospitalsPage extends PageObject {
     private WebElement formInformationAboutDoctorLabel;
 
     @FindBy(id="firstName")
-    private WebElement formFirstNameTextField;
+    private WebElement formFirstNameInput;
 
     @FindBy(id="lastName")
-    private WebElement formLastNameTextField;
+    private WebElement formLastNameInput;
 
     @FindBy(id="email")
-    private WebElement formEmailTextField;
+    private WebElement formEmailInput;
 
     @FindBy(id="image-uploaded")
     private WebElement formImage;
@@ -158,10 +128,10 @@ public class HospitalsPage extends PageObject {
     private WebElement formCategorySelector;
 
     @FindBy(id="education")
-    private WebElement formEducationTextField;
+    private WebElement formEducationInput;
 
     @FindBy(id="address")
-    private WebElement formAddressTextField;
+    private WebElement formAddressInput;
 
     @FindBy(xpath = "//*[@id=\"detailForm\"]/div[4]/div[1]/div")
     private WebElement formGenderLabel;
@@ -182,13 +152,13 @@ public class HospitalsPage extends PageObject {
     private WebElement formDataOfBirthLabel;
 
     @FindBy(id="birthDate")
-    private WebElement formDateOfBirthField;
+    private WebElement formDateOfBirthInput;
 
     @FindBy(xpath = "//*[@id=\"detailForm\"]/div[6]/div[3]/div")
     private WebElement formPhoneLabel;
 
     @FindBy(id="phone")
-    private WebElement formPhoneField;
+    private WebElement formPhoneInput;
 
     @FindBy(id="cancel")
     private WebElement formCancelButton;
@@ -200,25 +170,26 @@ public class HospitalsPage extends PageObject {
     @FindBy(xpath = "//html/body/section/a[2]")
     private WebElement backToTopButton;
 
+    @FindBy(tagName = "tbody")
+    private WebElement tableBody;
 
     public void selectDoctorPerPage(String value) {
         Select dropdown = new Select(doctorPerPageSelector);
-        dropdown.selectByValue(value);
+        dropdown.selectByVisibleText(value);
     }
     public void selectSpecialization(String value) {
         Select dropdown = new Select(specializationSelector);
-        dropdown.selectByValue(value);
+        dropdown.selectByVisibleText(value);
     }
 
     public void selectSerchBy(String value) {
         Select dropdown = new Select(searchBySelector);
-        dropdown.selectByValue(value);
+        dropdown.selectByVisibleText(value);
     }
 
-
     public void searchByText(String value){
-        searchTextFild.clear();
-        searchTextFild.sendKeys(value);
+        searchInput.clear();
+        searchInput.sendKeys(value);
     }
 
     public void searchButtonClick(){
@@ -261,30 +232,88 @@ public class HospitalsPage extends PageObject {
     }
 
     public void sortByCategoryButtonClick(){
-        getSortByCategoryButton.click();
+        sortByCategoryButton.click();
     }
 
-
-    public WebElement viewButton(int i) {
-        return driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #viewUser"));
+    public String getValue(String row, String colName){
+        String td = null;
+        switch (colName){
+            case "email":
+                td = "2";
+                break;
+            case "first name":
+                td = "3";
+                break;
+            case "last name":
+                td = "4";
+                break;
+            case "specialization":
+                td = "5";
+                break;
+            case "category":
+                td = "6";
+                break;
+            case "actions":
+                td = "7";
+                break;
+        }
+       return driver.findElement(By.cssSelector("tbody tr:nth-child(" + row + ") td:nth-child(" + td + ")")).getText();
     }
 
-    public WebElement editButton(int i) {
-        return driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #ediUser"));
-    }
-    public WebElement scheduleButton(int i) {
-        return driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #schedule"));
+    public List<String> getCoulumn(String colName){
+        String td = null;
+        ArrayList<String> list = new ArrayList<>();
+        switch (colName){
+            case "email":
+                td = "2";
+                break;
+            case "first name":
+                td = "3";
+                break;
+            case "last name":
+                td = "4";
+                break;
+            case "specialization":
+                td = "5";
+                break;
+            case "category":
+                td = "6";
+                break;
+            case "actions":
+                td = "7";
+                break;
+        }
+        for( WebElement webElement : driver.findElements(By.cssSelector("tbody tr td:nth-child("+ td +")"))){
+            list.add(webElement.getText());
+        }
+        return list;
     }
 
-    public WebElement deleteButton(int i) {
-        return driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #deleteDoctor"));
+    public int getNumberOfRows(){
+        return tableBody.findElements(By.cssSelector("tr")).size();
+    }
+
+    public void viewButtonClick(int i) {
+        driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #viewUser")).click();
+    }
+
+    public void editButtonClick(int i) {
+        driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #ediUser")).click();
+    }
+    public SchedulerPage scheduleButtonClick(int i) throws InterruptedException {
+        Thread.sleep(3000);
+         driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #schedule")).click();
+         return new SchedulerPage(driver);
+    }
+
+    public void deleteButtonClick(int i) {
+        driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #deleteDoctor")).click();
     }
 
 
 
     public HospitalsPage(WebDriver driver) {
-        super(driver, new ManagerHeader(driver));
-
-
+        super(driver);
+        managerHeader = new ManagerHeader(driver);
     }
 }

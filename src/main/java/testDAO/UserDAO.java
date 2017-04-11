@@ -12,13 +12,14 @@ import java.util.Map;
  * Created by Evgen on 07.04.2017.
  */
 public class UserDAO {
+
     public static List<String> getUserFromDatabaseByEmail(String email) {
         List<String> result = new LinkedList<>();
         try {
             Statement statement = DatabaseConnection.connectToDatabase().createStatement();
 
-            ResultSet resultSet = statement.executeQuery("SELECT id, email FROM users WHERE email =" + email +
-                    "ORDER BY email INNER JOIN userdetail ON users.userdetails_id = userdetail.id ");
+            ResultSet resultSet = statement.executeQuery("SELECT email FROM users WHERE email = \'" + email +
+                    "\' INNER JOIN userdetail ON users.userdetails_id = userdetail.id ");
             result.add(resultSet.getString("email"));
             result.add(resultSet.getString("firstname"));
             result.add(resultSet.getString("lastname"));
