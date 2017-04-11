@@ -1,7 +1,11 @@
-package hospitalSeeker.tools;
+package utils;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
+import utils.WebElementWrapper;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,11 +15,11 @@ import java.util.Properties;
 
 public class BaseTest {
 
-    public BrowserWrapper browser;
-    public DataSetUtils dataSetUtils;
-    public static String language = LocalizationConfig.setLanguage();
+    /*public WebElementWrapper browser;
+    //public DataSetUtils dataSetUtils;
+    //public static String language = LocalizationConfig.setLanguage();
 
-    public BrowserWrapper getWrapper() {
+    public WebElementWrapper getWrapper() {
         return browser;
     }
 
@@ -60,5 +64,16 @@ public class BaseTest {
     public void after() {
         browser.getDriver().quit();
         dataSetUtils.databaseTearDown();
+    }*/
+
+    protected WebDriver driver;
+    @BeforeTest
+    public void before() {
+        driver = BrowserWrapper.browserInitialization();
+    }
+
+    @AfterTest
+    public void after() {
+        BrowserWrapper.browserClose(driver);
     }
 }

@@ -18,25 +18,18 @@ public class BaseNavigation {
 
     public static void login(WebDriver driver, String email, String password) throws InterruptedException {
 //TODO in proccess of designe
-       HospitalSeekerHomePage hospitalSeekerHomePage = new HospitalSeekerHomePage(driver);
+//        HospitalSeekerHomePage hospitalSeekerHomePage = new HospitalSeekerHomePage(driver);
 //        LoginPage loginPage = hospitalSeekerHomePage.moveToLoginPage();
 //        loginPage.enterEmail(email);
 //        loginPage.enterPassword(password);
 //        loginPage.loginSubmitButton();
-
-        LoginPage loginPage = new LoginPage(driver);
-        System.out.println("coco");
-        loginPage.enterEmail(email);
-        loginPage.enterPassword(password);
-        loginPage.loginSubmitButton();
-
-
-//        driver.findElement(By.cssSelector("a[href=\"/HospitalSeeker/login\"]")).click();
-//        driver.findElement(By.id("email")).clear();
-//        driver.findElement(By.id("email")).sendKeys(email);
-//        driver.findElement(By.id("password")).clear();
-//        driver.findElement(By.id("password")).sendKeys(password);
-//        driver.findElement(By.id("loginSubmit")).click();
+        driver.findElement(By.cssSelector("a[href=\'/HospitalSeeker/login\']")).click();
+        Thread.sleep(3000);
+        driver.findElement(By.id("email")).clear();
+        driver.findElement(By.id("email")).sendKeys(email);
+        driver.findElement(By.id("password")).clear();
+        driver.findElement(By.id("password")).sendKeys(password);
+        driver.findElement(By.id("loginSubmit")).click();
     }
 
 
