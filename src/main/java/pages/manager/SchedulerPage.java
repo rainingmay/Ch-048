@@ -157,6 +157,10 @@ public class SchedulerPage extends PageObject {
         return BrowserWrapper.isElementEnable(dayTabButton);
     }
 
+    public boolean checkDay(){
+        return false;
+    }
+
     public List<String> getEvents(){
         List<String> list = new ArrayList<>();
 
