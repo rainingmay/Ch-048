@@ -8,9 +8,9 @@ package tests.AdminCreateUserTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.annotations.Test;
-import pageObjects.admin.AddUserPage;
+import pages.admin.AddUserPage;
 import tests.AdminCreateUserTest.BaseTest;
-import utilities.BaseNavigation;
+import utils.BaseNavigation;
 
 public class CreateUserTest extends BaseTest {
     public CreateUserTest() {

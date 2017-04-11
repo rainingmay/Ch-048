@@ -4,9 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
-import pageObjects.allUsers.PageObject;
-import pageObjects.headers.BaseHeader;
-import pageObjects.headers.headersByRole.AdminHeader;
+import pages.allUsers.PageObject;
+import pages.headers.BaseHeader;
+import pages.headers.headersByRole.AdminHeader;
 
 /**
  * Created by Evgen on 06.04.2017.
