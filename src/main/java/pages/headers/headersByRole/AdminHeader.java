@@ -3,8 +3,10 @@ package pages.headers.headersByRole;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pages.admin.AddNewHospitalPage;
 import pages.admin.AddUserPage;
 import pages.admin.AllUsersPage;
+import pages.admin.HospitalListPage;
 import pages.headers.BaseHeader;
 import utils.BrowserWrapper;
 
@@ -46,6 +48,7 @@ public class AdminHeader extends BaseHeader {
     private WebElement addDepartment;
 
 
+
     @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[5]/a")
     private WebElement profile;
 
@@ -56,15 +59,29 @@ public class AdminHeader extends BaseHeader {
     private WebElement logOut;
 
 
-    public AllUsersPage allUsersPage() {
+    public AllUsersPage allUsersPage () {
         allUsersIco.click();
         return new AllUsersPage(driver);
     }
 
-    public void  addUser() throws InterruptedException {
+    public AddUserPage addUser() throws InterruptedException {
         actions.click();
-        BrowserWrapper.sleep(1);
+        Thread.sleep(1000);
         addUserIco.click();
+        return new AddUserPage(driver);
     }
 
+    public HospitalListPage allHospitalsPage() throws InterruptedException {
+        actions.click();
+        Thread.sleep(1000);
+        hospitalListIco.click();
+        return new HospitalListPage(driver);
+    }
+
+    public AddNewHospitalPage addHospital() throws InterruptedException {
+        actions.click();
+        Thread.sleep(1000);
+        addHospitalIco.click();
+        return new AddNewHospitalPage(driver);
+    }
 }
