@@ -4,14 +4,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
-import pageObjects.allUsers.PageObject;
-import pageObjects.headers.BaseHeader;
-import pageObjects.headers.headersByRole.AdminHeader;
+import pages.allUsers.PageObject;
+import pages.headers.headersByRole.AdminHeader;
+
+import java.sql.Driver;
+
 
 /**
  * Created by Evgen on 06.04.2017.
  */
-public class AddUserPage extends PageObject{
+public class AddUserPage extends PageObject {
 
     public AdminHeader header;
 
@@ -85,6 +87,7 @@ public class AddUserPage extends PageObject{
 
 
     public void addNewUser(String email, String password, String role) throws InterruptedException {
+        AdminHeader.addUser();
         Thread.sleep(1000);
         enterEmail(email);
         enterPassword(password);

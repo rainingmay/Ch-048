@@ -12,16 +12,18 @@ import pages.admin.AddUserPage;
 import tests.AdminCreateUserTest.BaseTest;
 import utils.BaseNavigation;
 
+import java.sql.Driver;
+
 public class CreateUserTest extends BaseTest {
     public CreateUserTest() {
     }
 
     @Test
     public void atest() throws Exception {
-        BaseNavigation.loginAsAdmin(driver, "admin@hospitals.ua", "1111");
-        AddUserPage addUserPage = new AddUserPage(this.driver);
-        addUserPage.addNewUser("testwadmin@gmail.com", "Q12345w", "ADMIN");
-        //BaseNavigation.logout(driver);
+        BaseNavigation.loginAsAdmin(driver, "patient.cd@hospitals.ua", "1111");
+        //AddUserPage addUserPage = new AddUserPage(driver);
+        //addUserPage.addNewUser("testwadmin@gmail.com", "Q12345w", "ADMIN");
+        BaseNavigation.logout(driver);
     }
 
     @Test
