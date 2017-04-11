@@ -6,12 +6,9 @@ import org.openqa.selenium.support.FindBy;
 import pages.allUsers.PageObject;
 import pages.headers.headersByRole.AdminHeader;
 
-
-/**
- * Created by Jeksonis on 06.04.2017.
- */
 public class AddNewHospitalPage extends PageObject {
     public AdminHeader header;
+
     public AddNewHospitalPage(WebDriver driver){
         super(driver);
         this.header = new AdminHeader(driver);
@@ -100,18 +97,20 @@ public class AddNewHospitalPage extends PageObject {
    }
 
    public void pushResetButton() {
-        if (resetButton.isEnabled())
         resetButton.click();
    }
 
-   public HospitalListPage pushSaveButton() {
-        if (addressInputField.isEnabled() && countryInputField.isEnabled() && streetInputField.isEnabled()
-                && buildingInputField.isEnabled() && cityInputField.isEnabled()
-                && nameInputField.isEnabled() && descriptionInputField.isEnabled()) {
-            saveButton.click();
-        }
-        return new HospitalListPage(driver);
+   public void pushSaveButton() {
+        saveButton.click();
    }
 
-
+   public void addNewHospital(String address, String name, String description) throws InterruptedException {
+        Thread.sleep(500);
+        addressData(address);
+        pushFillButton();
+        pushFindButton();
+        addHospitalName(name);
+        addHospitalDescription(description);
+        pushSaveButton();
+   }
 }
