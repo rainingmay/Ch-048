@@ -9,7 +9,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pageObjects.allUsers.HospitalSearchResult;
+import pages.allUsers.HospitalSearchResult;
 import tests.FunctionalTest;
 
 import java.util.concurrent.TimeUnit;
