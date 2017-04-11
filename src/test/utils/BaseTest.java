@@ -66,6 +66,7 @@ public class BaseTest {
     }*/
 
     protected WebDriver driver;
+
     @BeforeTest
     public void before() {
         driver = BrowserWrapper.browserInitialization();
@@ -73,6 +74,6 @@ public class BaseTest {
 
     @AfterTest
     public void after() {
-        BrowserWrapper.browserClose(driver);
+        BrowserWrapper.browserClose(this.driver);
     }
 }

@@ -85,7 +85,7 @@ public class AllUsersPage extends PageObject {
     public WebElement nextPageButton;
 
 
-
+    private WebElement editButton;
 
 
     public AllUsersPage(WebDriver driver) {
@@ -134,23 +134,37 @@ public class AllUsersPage extends PageObject {
         return result;
     }
 
-    public List<String> getUserDataFromInfoWindow(int rowNumber) {
+    public List<String> getUserDataFromInfoWindow(int rowNumber) throws InterruptedException {
         List<String> result = new LinkedList<>();
         if (tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")")).isDisplayed()) {
             WebElement tableRow = tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")"));
             WebElement infoButton = tableRow.findElement(By.id("viewUser"));
             infoButton.click();
+            Thread.sleep(2000);
             viewWindow = driver.findElement(By.className("modal-content"));
-            result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(1) td:last-child")).getText());
+            //result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(1) td:last-child")).getText());
             result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(2) td:last-child")).getText());
             result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(4) td:last-child")).getText());
-
+            closeViewWindow();
+            Thread.sleep(2000);
         }
         return result;
     }
 
     public int gecCountOfUsersInTable() {
         return tableBody.findElements(By.cssSelector("tr")).size();
+    }
+
+    private void closeViewWindow(){
+        viewWindow.findElement(By.className("close")).click();
+    }
+
+    public void openEditWindow(int rowNumber) {
+        if (tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")")).isDisplayed()) {
+            WebElement tableRow = tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")"));
+            WebElement editButton = tableRow.findElement(By.id("ediUser"));
+            editButton.click();
+        }
     }
 
 }
