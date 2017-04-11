@@ -36,9 +36,15 @@ public class SchedulerPageTest extends BaseTest{
         BaseNavigation.login(driver, "manager.jh@hospitals.ua", "1111");
         HospitalsPage hospitalsPage = new HospitalsPage(driver);
         SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
+        BrowserWrapper.sleep(6);
+        schedulerPage.workWeekSizeSelector("6 days");
+        schedulerPage.workDayBeginAtSelector("11:00");
+        schedulerPage.workDayEndAtSelector("20:00");
+        schedulerPage.saveButtonClick();
 
-
-
+        Assert.assertEquals(schedulerPage.getDaysNumber(), 6);
+        Assert.assertEquals(schedulerPage.getBeginingHour(),"11 00");
+        Assert.assertEquals(schedulerPage.getEndingHour(), "20 00");
     }
 
 

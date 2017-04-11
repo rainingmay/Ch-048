@@ -114,7 +114,7 @@ public class SchedulerPage extends PageObject {
     private WebElement deleteDetailedChanges;
 
     @FindBy(css = "div.dhx_scale_hour:first-child")
-    public WebElement beginingHour;
+    public WebElement beginningHour;
 
     @FindBy(css = "div.dhx_scale_hour:last-child")
     public WebElement endHour;
@@ -135,17 +135,27 @@ public class SchedulerPage extends PageObject {
         Thread.sleep(3000);
         eventInput.sendKeys(text);
         saveEvent.click();
-
-
     }
+
+
 
     public int getDaysNumber(){
 
         return tableColomns.size() - tableIgnoredColumn.size() - 1;
     }
 
+    public String getBeginingHour(){
+       return beginningHour.getText();
+    }
+
+    public String getEndingHour(){
+        return endHour.getText();
+    }
+
+
+//TODO add to constant;
     public boolean checkDefaultConditionScheduler(){
-        return  beginingHour.getText().equals("0 00") && endHour.getText().endsWith("23 00") && getDaysNumber()==5;
+        return  beginningHour.getText().equals("0 00") && endHour.getText().endsWith("23 00") && getDaysNumber()==5;
     }
 
 
@@ -184,7 +194,7 @@ public class SchedulerPage extends PageObject {
     }
 
     public boolean checkBeginAtHourSelector(){
-      return BrowserWrapper.isElementPresent(beginingHour);
+      return BrowserWrapper.isElementPresent(beginningHour);
     }
 
     public boolean checkEndAtHourSelector() {
@@ -239,9 +249,6 @@ public class SchedulerPage extends PageObject {
             throw new Exception(errors.toString());
         }
         return true;
-
-
-
     }
 
     public List<String> getEvents(){
@@ -258,24 +265,20 @@ public class SchedulerPage extends PageObject {
     }
 
     public void workWeekSizeSelector(String value){
-        Select select = new Select(workWeekSizeSelector);
-        select.selectByVisibleText(value);
+       BrowserWrapper.selectDropdown(workWeekSizeSelector, value);
     }
 
 
     public void workDayBeginAtSelector(String value){
-        Select select = new Select(workDayBeginAtSelector);
-        select.selectByVisibleText(value);
+        BrowserWrapper.selectDropdown(workDayBeginAtSelector, value);
     }
 
     public void workDayEndAtSelector(String value){
-        Select select = new Select(workDayEndAtSelector);
-        select.selectByVisibleText(value);
+        BrowserWrapper.selectDropdown(workDayEndAtSelector, value);
     }
 
     public void apointmentSizeSelector(String value){
-        Select select = new Select(apointmentSizeSelector);
-        select.selectByVisibleText(value);
+        BrowserWrapper.selectDropdown(apointmentSizeSelector, value);
     }
 
     public void saveButtonClick(){
