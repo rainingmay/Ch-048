@@ -33,6 +33,11 @@ public class BaseNavigation {
     }
 
 
+    public static void logout(WebDriver driver) throws InterruptedException {
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("(//a[contains(@href, '#')])[2]")).click();
+        driver.findElement(By.xpath("(//ul[@id='dropdawn']/li[2]/a/span)[2]")).click();
+    }
 
 
     public static void doubleClick(WebDriver driver, WebElement element){

@@ -32,7 +32,6 @@ public class HospitalList extends PageObject {
     private WebElement showOnMapButton;
 
     private WebElement editButton;
-
     private WebElement deleteButton;
     private WebElement submitButton;
     private WebElement cancelButton;
