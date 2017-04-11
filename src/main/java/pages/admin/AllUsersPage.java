@@ -72,7 +72,7 @@ public class AllUsersPage extends PageObject {
     @FindBy(id = "roles.type")
     private WebElement sortByRoleButton;
 
-    @FindBy(className = "table-hover")
+
     private WebElement viewWindow;
 
     @FindBy(className = "table table-user-information")
@@ -130,6 +130,21 @@ public class AllUsersPage extends PageObject {
             result.add(tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(3)")).getText());
             result.add(tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(4)")).getText());
             result.add(tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(5)")).getText());
+        }
+        return result;
+    }
+
+    public List<String> getUserDataFromInfoWindow(int rowNumber) {
+        List<String> result = new LinkedList<>();
+        if (tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")")).isDisplayed()) {
+            WebElement tableRow = tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")"));
+            WebElement infoButton = tableRow.findElement(By.id("viewUser"));
+            infoButton.click();
+            viewWindow = driver.findElement(By.className("modal-content"));
+            result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(1) td:last-child")).getText());
+            result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(2) td:last-child")).getText());
+            result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(4) td:last-child")).getText());
+
         }
         return result;
     }

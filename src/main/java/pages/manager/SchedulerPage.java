@@ -119,6 +119,8 @@ public class SchedulerPage extends PageObject {
     @FindBy(css = "div.dhx_scale_hour:last-child")
     public WebElement endHour;
 
+    public StringBuilder errors;
+
     public void nextMonthButtonClick() throws InterruptedException {
         Thread.sleep(3000);
         nextMonthButton.click();
@@ -148,17 +150,109 @@ public class SchedulerPage extends PageObject {
         if(beginingHour.getText().equals("0 00") && endHour.getText().endsWith("23 00") && getDaysNumber()==5){
             return true;
         }else {
+            errors.append("scheduler");
             return false;
         }
     }
 
 
     public boolean checkDayButton(){
-        return BrowserWrapper.isElementEnable(dayTabButton);
+        if(BrowserWrapper.isElementPresent(dayTabButton)){
+            return true;
+        }else{
+            errors.append("dayButton");
+            return false;
+        }
     }
 
-    public boolean checkDay(){
-        return false;
+    public boolean checkWeekButton(){
+        if(BrowserWrapper.isElementPresent(weekTabButton)){
+            return true;
+        }else{
+            errors.append("weekButton");
+            return false;
+        }
+    }
+
+    public boolean checkMonthButton(){
+        if(BrowserWrapper.isElementPresent(monthTabButton)){
+            return true;
+        }else{
+            errors.append("monthButton");
+            return false;
+        }
+    }
+
+    public boolean checkMiniCalendarButton(){
+        if(BrowserWrapper.isElementPresent(miniCalendarButton)){
+            return true;
+        }else{
+            errors.append("miniCalendarButton");
+            return false;
+        }
+    }
+
+
+    public boolean checkTodayButton(){
+        if(BrowserWrapper.isElementPresent(todayButton)){
+            return true;
+        }else{
+            errors.append("todayButton");
+            return false;
+        }
+    }
+
+    public boolean checkPreviousButton(){
+        if(BrowserWrapper.isElementPresent(previousMonthButton)){
+            return true;
+        }else{
+            errors.append("previousButton");
+            return false;
+        }
+    }
+
+    public boolean checkNextButton(){
+        if(BrowserWrapper.isElementPresent(nextMonthButton)){
+            return true;
+        }else{
+            errors.append("dayButton");
+            return false;
+        }    }
+
+    public boolean checkDaysSelector(){
+        return BrowserWrapper.isElementPresent(workWeekSizeSelector);
+    }
+
+    public boolean checkBeginAtHourSelector(){
+        return BrowserWrapper.isElementPresent(workDayBeginAtSelector);
+    }
+
+    public boolean checkEndAtHourSelector(){
+        return BrowserWrapper.isElementPresent(workDayEndAtSelector);
+    }
+
+    public boolean checkAppointmentSizeSelector(){
+        return BrowserWrapper.isElementPresent(apointmentSizeSelector);
+
+    }
+
+    public boolean isPageReady(){
+        boolean result = false;
+        if(checkAppointmentSizeSelector()
+                && checkBeginAtHourSelector()
+                && checkDayButton()
+                && checkDaysSelector()
+                && checkDefaultConditionScheduler()
+                && checkEndAtHourSelector()
+                && checkMiniCalendarButton()
+                && checkMonthButton()
+                && checkNextButton()
+                && checkTodayButton()
+                && checkWeekButton()
+                && checkPreviousButton()){
+            result = true;
+        }
+        return result;
     }
 
     public List<String> getEvents(){
