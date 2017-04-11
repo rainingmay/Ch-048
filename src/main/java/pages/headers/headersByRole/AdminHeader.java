@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import pages.admin.AddUserPage;
 import pages.admin.AllUsersPage;
 import pages.headers.BaseHeader;
+import utils.BrowserWrapper;
 
 
 /**
@@ -45,7 +46,6 @@ public class AdminHeader extends BaseHeader {
     private WebElement addDepartment;
 
 
-
     @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[5]/a")
     private WebElement profile;
 
@@ -56,15 +56,15 @@ public class AdminHeader extends BaseHeader {
     private WebElement logOut;
 
 
-    public AllUsersPage allUsersPage () {
+    public AllUsersPage allUsersPage() {
         allUsersIco.click();
         return new AllUsersPage(driver);
     }
 
-    public AddUserPage addUser() throws InterruptedException {
+    public void  addUser() throws InterruptedException {
         actions.click();
-        Thread.sleep(1000);
+        BrowserWrapper.sleep(1);
         addUserIco.click();
-        return new AddUserPage(driver);
     }
+
 }

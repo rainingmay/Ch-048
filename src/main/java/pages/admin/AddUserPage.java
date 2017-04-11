@@ -60,30 +60,30 @@ public class AddUserPage extends PageObject {
         return new AllUsersPage(driver);
     }
 
-    public void enterEmail(String value){
+    public void enterEmail(String value) {
         emailInput.clear();
         emailInput.sendKeys(value);
     }
 
-    public void enterPassword(String value){
+    public void enterPassword(String value) {
         passwordInput.clear();
         passwordInput.sendKeys(value);
     }
 
-    public void confirmPassword(String value){
+    public void confirmPassword(String value) {
         confirmPasswordInput.clear();
         confirmPasswordInput.sendKeys(value);
     }
 
-    public void selectRole(String value){
+    public void selectRole(String value) {
         Select dropdown = new Select(userRolesSelect);
         dropdown.selectByValue(value);
 
     }
 
-    public void enableButtonClick(){enableButton.click();}
-
-
+    public void enableButtonClick() {
+        enableButton.click();
+    }
 
 
     public void addNewUser(String email, String password, String role) throws InterruptedException {

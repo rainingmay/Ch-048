@@ -123,6 +123,8 @@ public class AllUsersPage extends PageObject {
 
 
 
+
+
     public List<String> getUserDataFromTableRow(int rowNumber) {
         List<String> result = new LinkedList<>();
         if (tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")")).isDisplayed()) {
@@ -151,6 +153,11 @@ public class AllUsersPage extends PageObject {
 
     public int gecCountOfUsersInTable() {
         return tableBody.findElements(By.cssSelector("tr")).size();
+    }
+
+    public AddUserPage goToAddUser() throws InterruptedException {
+        header.addUser();
+        return new AddUserPage(driver);
     }
 
 }
