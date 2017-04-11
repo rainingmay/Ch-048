@@ -1,12 +1,11 @@
-package pageObjects.patient;
+package pages.patient;
 
-import org.openqa.selenium.support.ui.Select;
-import pageObjects.allUsers.PageObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pageObjects.headers.headersByRole.ManagerHeader;
-import pageObjects.headers.headersByRole.PatientHeader;
+import org.openqa.selenium.support.ui.Select;
+import pages.allUsers.PageObject;
+import pages.headers.headersByRole.PatientHeader;
 
 
 public class PatientProfile extends PageObject {

@@ -1,13 +1,14 @@
-package pageObjects.patient;
+package pages.patient;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pageObjects.allUsers.PageObject;
+import pages.allUsers.PageObject;
+
 /**
  * Created by gregtar on 06.04.17.
  */
-public class MyAppointment extends PageObject{
+public class MyAppointment extends PageObject {
     @FindBy(id = "dhx_minical_icon")
     private WebElement calendarIcon;
 

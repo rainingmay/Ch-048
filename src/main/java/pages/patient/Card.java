@@ -1,14 +1,15 @@
-package pageObjects.patient;
+package pages.patient;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pageObjects.allUsers.PageObject;
+import pages.allUsers.PageObject;
+
 
 /**
  * Created by gregtar on 06.04.17.
  */
-public class Card extends  PageObject{
+public class Card extends PageObject {
 
     @FindBy(id = "headingOne")
     private WebElement diagnosisLabel;
