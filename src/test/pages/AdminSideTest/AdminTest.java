@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.admin.AllUsersPage;
-import databaseUtil.UserDAO;
+
 import utils.BaseNavigation;
 import utils.BaseTest;
 
@@ -20,7 +20,7 @@ public class AdminTest extends BaseTest {
     private static final String LOGIN = "admin@hospitals.ua";
     private static final String PASSWORD = "1111";
 
-
+/*
     @Test
     public void correctUsersDataTest() {
         try {
@@ -38,10 +38,10 @@ public class AdminTest extends BaseTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
-    @Test
-    public void viewInformTest () {
+   // @Test
+  /*  public void viewInformTest () {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, LOGIN, PASSWORD);
             while (true) {
@@ -60,6 +60,6 @@ public class AdminTest extends BaseTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
 }

@@ -1,23 +1,28 @@
-package databaseUtil;
+/*
+package testDAO;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
+*/
 /**
  * Created by Evgen on 07.04.2017.
- */
+ *//*
+
 public class UserDAO {
 
     public static List<String> getUserFromDatabaseByEmail(String email) {
         List<String> result = new LinkedList<>();
         try {
             Statement statement = DatabaseConnection.connectToDatabase().createStatement();
-            String sql = "SELECT * FROM users  INNER JOIN userdetail ON users.userdetails_id = userdetail.id WHERE email=?";
-            statement.getConnection().setAutoCommit(false);
-            PreparedStatement preparedStatement = statement.getConnection().prepareStatement(sql);
-            preparedStatement.setString(1, email);
-            ResultSet resultSet = statement.executeQuery(preparedStatement.toString());
+
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM users " +
+                    "INNER JOIN userdetail ON users.userdetails_id = userdetail.id WHERE email= '" + email + "'");
             if (resultSet.next()) {
                 result.add(resultSet.getString("email"));
                 result.add(resultSet.getString("firstname"));
@@ -48,3 +53,4 @@ public class UserDAO {
         return null;
     }
 }
+*/

@@ -87,7 +87,7 @@ public class AddUserPage extends PageObject {
 
 
     public void addNewUser(String email, String password, String role) throws InterruptedException {
-        AdminHeader.addUser();
+        AddUserPage addUserPage = new AddUserPage(driver);
         Thread.sleep(1000);
         enterEmail(email);
         enterPassword(password);
