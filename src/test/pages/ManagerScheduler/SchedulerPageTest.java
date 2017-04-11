@@ -1,4 +1,4 @@
-package pages.manager.tests;
+package pages.ManagerScheduler;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -7,9 +7,10 @@ import org.testng.annotations.Test;
 import pages.manager.HospitalsPage;
 import pages.manager.SchedulerPage;
 import utils.BaseNavigation;
+import utils.BaseTest;
 
 
-public class SchedulerPageTest extends FunctionalTest{
+public class SchedulerPageTest extends BaseTest{
 
     @Test
     public void testDefaultCondition() throws Exception{
@@ -17,8 +18,7 @@ public class SchedulerPageTest extends FunctionalTest{
         HospitalsPage hospitalsPage = new HospitalsPage(driver);
         SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
 
-        Assert.assertTrue(schedulerPage.checkDefaultConditionScheduler());
-
+        System.out.println(schedulerPage.isPageReady());
     }
 
 

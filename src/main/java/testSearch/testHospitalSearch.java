@@ -23,9 +23,7 @@ import static org.testng.Assert.fail;
  * Created by Yana on 07.04.2017.
  */
 public class testHospitalSearch extends FunctionalTest {
-    public testHospitalSearch(WebDriver driver) {
-        super(driver);
-    };
+
 //    private String baseUrl;
 //    private boolean acceptNextAlert = true;
 //    private StringBuffer verificationErrors = new StringBuffer();

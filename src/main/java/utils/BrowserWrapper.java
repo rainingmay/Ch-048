@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class BrowserWrapper {
 
-    private static final String FIREFOX_PROFIE_NAME = "default";
+    private static final String FIREFOX_PROFIE_NAME = "QAAutomation";
     private static final String WEBDRIVER_NAME = "webdriver.gecko.driver";
     private static final String WEBDRIVER_PATH = "src/main/resources/geckodriver.exe";
     private static final String BASE_URL = "https://localhost:8443/HospitalSeeker/";
