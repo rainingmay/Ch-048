@@ -5,7 +5,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import pages.admin.AllUsersPage;
+import pages.allUsers.HospitalSeekerHomePage;
 import pages.allUsers.PageObject;
+import pages.anonymous.LoginPage;
 import pages.manager.HospitalsPage;
 
 
@@ -16,18 +18,25 @@ public class BaseNavigation {
 
     public static void login(WebDriver driver, String email, String password) throws InterruptedException {
 //TODO in proccess of designe
-//        HospitalSeekerHomePage hospitalSeekerHomePage = new HospitalSeekerHomePage(driver);
+       HospitalSeekerHomePage hospitalSeekerHomePage = new HospitalSeekerHomePage(driver);
 //        LoginPage loginPage = hospitalSeekerHomePage.moveToLoginPage();
 //        loginPage.enterEmail(email);
 //        loginPage.enterPassword(password);
 //        loginPage.loginSubmitButton();
 
-        driver.findElement(By.cssSelector("a[href=\"/HospitalSeeker/login\"]")).click();
-        driver.findElement(By.id("email")).clear();
-        driver.findElement(By.id("email")).sendKeys(email);
-        driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys(password);
-        driver.findElement(By.id("loginSubmit")).click();
+        LoginPage loginPage = new LoginPage(driver);
+        System.out.println("coco");
+        loginPage.enterEmail(email);
+        loginPage.enterPassword(password);
+        loginPage.loginSubmitButton();
+
+
+//        driver.findElement(By.cssSelector("a[href=\"/HospitalSeeker/login\"]")).click();
+//        driver.findElement(By.id("email")).clear();
+//        driver.findElement(By.id("email")).sendKeys(email);
+//        driver.findElement(By.id("password")).clear();
+//        driver.findElement(By.id("password")).sendKeys(password);
+//        driver.findElement(By.id("loginSubmit")).click();
     }
 
 
