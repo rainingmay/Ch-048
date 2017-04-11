@@ -1,7 +1,5 @@
 package pages.manager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -10,8 +8,8 @@ import org.openqa.selenium.support.ui.Select;
 import pages.allUsers.PageObject;
 import pages.headers.headersByRole.ManagerHeader;
 import utils.BaseNavigation;
+import utils.BrowserWrapper;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +17,6 @@ import java.util.List;
 public class SchedulerPage extends PageObject {
 
     public ManagerHeader managerHeader;
-
     @FindBy(xpath = "/html/body/section/div/div/div[3]/div/form/div[2]/p")
     private WebElement doctorNameLabel;
 
@@ -71,8 +68,14 @@ public class SchedulerPage extends PageObject {
     @FindBy(css = "div.dhx_cal_next_button")
     private WebElement nextMonthButton;
 
-    @FindAll(@FindBy(css = "div.dhx_scale_holder"))
-    private List<WebElement> tabelColomns;
+    @FindAll({
+            @FindBy(css = "div.dhx_scale_holder"),
+            @FindBy(css = "div.dhx_scale_holder_now")
+    })
+    private List<WebElement> tableColomns;
+
+    @FindAll(@FindBy(css = "div.dhx_scale_ignore"))
+    private List<WebElement> tableIgnoredColumn;
 
     @FindAll(@FindBy(className = "dhx_scale_hour"))
     private List<WebElement> tabelRows;
@@ -89,8 +92,8 @@ public class SchedulerPage extends PageObject {
     @FindBy(css = "div.dhx_menu_icon.icon_save")
     private WebElement saveEvent;
 
-    @FindBy(className = "div.icon_cancel")
-    private WebElement cancelEvent;
+    @FindBy(css = "div.icon_cancel")
+    public WebElement cancelEvent;
 
     @FindBy(className = "div.icon_details")
     private WebElement detaisEvent;
@@ -110,37 +113,11 @@ public class SchedulerPage extends PageObject {
     @FindBy(css = "div.dhx_btn_set.dhx_right_btn_set.dhx_delete_btn_set")
     private WebElement deleteDetailedChanges;
 
-    @FindBy(css = "dhx_scale_hour:first-child")
-    private WebElement beginingHour;
+    @FindBy(css = "div.dhx_scale_hour:first-child")
+    public WebElement beginingHour;
 
-    @FindBy(css = "dhx_scale_hour:last-child")
-    private WebElement endingHour;
-
-    @FindAll({
-            @FindBy(css = "dhx_scale_holder_now "),
-            @FindBy(css = "dhx_scale_holder")
-    })
-    private List<WebElement> allDays;
-
-    @FindAll(@FindBy(css = "dhx_scale_ignore"))
-    private List<WebElement> ignoredDays;
-
-
-    public int getDays(){
-        return allDays.size()-ignoredDays.size()-1;
-    }
-
-
-    public String getBeginingHour(){
-        return beginingHour.getText();
-    }
-
-    public String getEndingHour(){
-        return endingHour.getText();
-    }
-
-
-
+    @FindBy(css = "div.dhx_scale_hour:last-child")
+    public WebElement endHour;
 
     public void nextMonthButtonClick() throws InterruptedException {
         Thread.sleep(3000);
@@ -148,7 +125,7 @@ public class SchedulerPage extends PageObject {
     }
     public void setAppointment(String text, int column) throws InterruptedException {
         nextMonthButtonClick();
-        WebElement col  = tabelColomns.get(column+1);
+        WebElement col  = tableColomns.get(column+1);
 
         //BaseNavigation.doubleClick(column,driver);
 
@@ -159,6 +136,29 @@ public class SchedulerPage extends PageObject {
         saveEvent.click();
 
 
+    }
+
+    public int getDaysNumber(){
+
+        return tableColomns.size() - tableIgnoredColumn.size() - 1;
+    }
+
+    public boolean checkDefaultConditionScheduler(){
+
+        if(beginingHour.getText().equals("0 00") && endHour.getText().endsWith("23 00") && getDaysNumber()==5){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+
+    public boolean checkDayButton(){
+        return BrowserWrapper.isElementEnable(dayTabButton);
+    }
+
+    public boolean checkDay(){
+        return false;
     }
 
     public List<String> getEvents(){

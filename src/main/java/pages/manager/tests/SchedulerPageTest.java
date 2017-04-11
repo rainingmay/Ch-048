@@ -11,15 +11,29 @@ import utils.BaseNavigation;
 
 public class SchedulerPageTest extends FunctionalTest{
 
+    @Test
+    public void testDefaultCondition() throws Exception{
+        BaseNavigation.login(driver, "manager.jh@hospitals.ua", "1111");
+        HospitalsPage hospitalsPage = new HospitalsPage(driver);
+        SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
+
+        Assert.assertTrue(schedulerPage.checkDefaultConditionScheduler());
+
+    }
+
+
+
+
+
+
+
 
     @Test
     public void testSchedulerCreation() throws Exception{
         BaseNavigation.login(driver, "manager.jh@hospitals.ua", "1111");
         HospitalsPage hospitalsPage = new HospitalsPage(driver);
         SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
-        System.out.println(schedulerPage.getDays());
-        System.out.println(schedulerPage.getBeginingHour());
-        System.out.println(schedulerPage.getEndingHour());
+
     }
 
 

@@ -32,6 +32,12 @@ public class HospitalListPage extends PageObject {
     @FindBy(css = "table")
     private WebElement tableBody;
 
+    WebElement showOnMap;
+    WebElement editButton;
+    WebElement removeButton;
+    WebElement deleteButton;
+    WebElement cancelButton;
+
     public AddNewHospitalPage submitAddNewHospital() {
         addNewHospitalButton.click();
         return new AddNewHospitalPage(driver);
@@ -42,16 +48,25 @@ public class HospitalListPage extends PageObject {
         return new CheckGooglePOIPage(driver);
     }
 
-    public WebElement showOnMapButton(int rowNumber) {
-        return driver.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(3) form button:nth-child(2)"));
+    public HospitalListPage showOnMapButton(int rowNumber) {
+        showOnMap = tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(3) form button:nth-child(2)"));
+        showOnMap.click();
+        return new HospitalListPage(driver);
     }
 
-    public WebElement editButton(int rowNumber) {
-        return driver.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(3) form a"));
+    public AddNewHospitalPage editButton(int rowNumber) {
+        editButton = tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(3) form a"));
+        editButton.click();
+        return new AddNewHospitalPage(driver);
     }
 
-    public WebElement removeButton(int rowNumber) {
-        return driver.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(3) form button:nth-child(4)"));
+    public HospitalListPage removeButton(int rowNumber) {
+        removeButton = driver.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(3) form button:nth-child(4)"));
+        removeButton.click();
+        deleteButton = driver.findElement(By.xpath("//*[@id=\"6\"]/div/div/div[3]/button[1]"));
+        cancelButton = driver.findElement(By.xpath("//*[@id=\"6\"]/div/div/div[3]/button[2]"));
+        deleteButton.click();
+        return new HospitalListPage(driver);
     }
 
     public List<String> getHospitalDataFromTableRow(int rowNumber) {
