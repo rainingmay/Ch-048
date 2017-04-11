@@ -1,14 +1,15 @@
-package pageObjects.doctor;
+package pages.doctor;
 
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pageObjects.allUsers.PageObject;
-import pageObjects.headers.headersByRole.DoctorHeader;
+import pages.allUsers.PageObject;
+import pages.headers.headersByRole.AdminHeader;
+import pages.headers.headersByRole.DoctorHeader;
 
 public class EditRecordPage extends PageObject {
-
+    public DoctorHeader header;
     @FindBy (id = "complaint")
     private WebElement complaintTextField;
 
@@ -25,7 +26,8 @@ public class EditRecordPage extends PageObject {
     private WebElement submitButton;
 
     public EditRecordPage(WebDriver driver) {
-        super(driver, new DoctorHeader(driver));
+        super(driver);
+        this.header =  new DoctorHeader(driver);
     }
 
     public void modifyComplaint(String value){

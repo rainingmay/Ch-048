@@ -1,13 +1,15 @@
-package pageObjects.doctor;
+package pages.doctor;
 
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pageObjects.allUsers.PageObject;
-import pageObjects.headers.headersByRole.DoctorHeader;
+import pages.allUsers.PageObject;
+import pages.headers.headersByRole.AdminHeader;
+import pages.headers.headersByRole.DoctorHeader;
 
 public class CreateNewRecord extends PageObject {
+    public DoctorHeader header;
     @FindBy(className = "label[for=\"complaint\"]")
     private WebElement complaintLabel;
 
@@ -34,7 +36,8 @@ public class CreateNewRecord extends PageObject {
 
 
    public CreateNewRecord(WebDriver driver) {
-        super(driver, new DoctorHeader(driver));
+        super(driver);
+        this.header = new DoctorHeader(driver);
     }
 
     public void inputComplaint(String value){
