@@ -8,23 +8,26 @@ import pages.manager.HospitalsPage;
 import pages.manager.SchedulerPage;
 import utils.BaseNavigation;
 import utils.BaseTest;
+import utils.BrowserWrapper;
 
 
 public class SchedulerPageTest extends BaseTest{
 
     @Test
     public void testDefaultCondition() throws Exception{
-        BaseNavigation.login(driver, "manager.jh@hospitals.ua", "1111");
+        BaseNavigation.loginAsManager(driver, "manager.jh@hospitals.ua", "1111");
         HospitalsPage hospitalsPage = new HospitalsPage(driver);
         SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
+        BrowserWrapper.sleep(6);
 
-        System.out.println(schedulerPage.isPageReady());
+        try{
+            schedulerPage.isPageReady();
+        }catch (Exception e){
+            throw new AssertionError(e.getMessage());
+        }
+        Assert.assertTrue(schedulerPage.isPageReady());
+
     }
-
-
-
-
-
 
 
 
@@ -34,7 +37,12 @@ public class SchedulerPageTest extends BaseTest{
         HospitalsPage hospitalsPage = new HospitalsPage(driver);
         SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
 
+
+
     }
+
+
+
 
 
     @Test
