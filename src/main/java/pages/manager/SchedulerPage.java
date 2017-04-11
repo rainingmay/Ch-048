@@ -1,19 +1,15 @@
 package pages.manager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.ui.Select;
 import pages.allUsers.PageObject;
 import pages.headers.headersByRole.ManagerHeader;
-import utilities.WebElementWrapper;
 import utils.BaseNavigation;
+import utils.BrowserWrapper;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +17,6 @@ import java.util.List;
 public class SchedulerPage extends PageObject {
 
     public ManagerHeader managerHeader;
-    private WebElementWrapper webElementWrapper = new WebElementWrapper(driver);
     @FindBy(xpath = "/html/body/section/div/div/div[3]/div/form/div[2]/p")
     private WebElement doctorNameLabel;
 
@@ -159,7 +154,7 @@ public class SchedulerPage extends PageObject {
 
 
     public boolean checkDayButton(){
-        return webElementWrapper.isElementEnable(dayTabButton);
+        return BrowserWrapper.isElementEnable(dayTabButton);
     }
 
     public List<String> getEvents(){
