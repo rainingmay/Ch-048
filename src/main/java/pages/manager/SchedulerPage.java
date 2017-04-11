@@ -9,7 +9,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import pages.allUsers.PageObject;
 import pages.headers.headersByRole.ManagerHeader;
-import utilities.WebElementWrapper;
 import utils.BaseNavigation;
 
 import javax.swing.*;
