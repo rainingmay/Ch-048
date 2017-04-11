@@ -20,16 +20,9 @@ public class CreateUserTest extends BaseTest {
     @Test
     public void addNewUserTest() throws Exception {
         BaseNavigation.loginAsAdmin(driver, "admin@hospitals.ua", "1111");
-        AllUsersPage allUsersPage = new AllUsersPage(driver);
-        allUsersPage.goToAddUser();
-        BaseNavigation.logout(driver);
-    }
-    @Test
-    public void testSchedulerCreation() throws Exception{
-        BaseNavigation.login(driver, "manager.jh@hospitals.ua", "1111");
-        HospitalsPage hospitalsPage = new HospitalsPage(driver);
-        SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
-
+        AddUserPage addUserPage = new AddUserPage(this.driver);
+        addUserPage.addNewUser("testwadmin@gmail.com", "Q12345w", "ADMIN");
+        //BaseNavigation.logout(driver);
     }
 
     @Test

@@ -7,8 +7,6 @@ import org.openqa.selenium.support.ui.Select;
 import pages.allUsers.PageObject;
 import pages.headers.headersByRole.AdminHeader;
 
-import java.sql.Driver;
-
 
 /**
  * Created by Evgen on 06.04.2017.
@@ -87,7 +85,6 @@ public class AddUserPage extends PageObject {
 
 
     public void addNewUser(String email, String password, String role) throws InterruptedException {
-        AddUserPage addUserPage = new AddUserPage(driver);
         Thread.sleep(1000);
         enterEmail(email);
         enterPassword(password);

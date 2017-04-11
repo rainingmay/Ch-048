@@ -27,7 +27,7 @@ public class SchedulerPage extends PageObject {
     private WebElement workWeekSizeSelector;
 
     @FindBy(css = "label[for=\"workdayBeginAt\"]")
-    private WebElement workDayHoursLabel;
+    private WebElement workDayHours;
 
     @FindBy(id="workDayBeginAt")
     private WebElement workDayBeginAtSelector;
@@ -56,13 +56,13 @@ public class SchedulerPage extends PageObject {
     @FindBy(id="dhx_minical_icon")
     private WebElement miniCalendarButton;
 
-    @FindBy(css="div.hx_cal_date")
+    @FindBy(className="div.hx_cal_date")
     private WebElement dateLabel;
 
-    @FindBy(css = "div.dhx_cal_today_button")
+    @FindBy(className = "div.dhx_cal_today_button")
     private WebElement todayButton;
 
-    @FindBy(css = "div.dhx_cal_prev_button")
+    @FindBy(className = "div.dhx_cal_prev_button")
     private WebElement previousMonthButton;
 
     @FindBy(css = "div.dhx_cal_next_button")
@@ -95,13 +95,13 @@ public class SchedulerPage extends PageObject {
     @FindBy(css = "div.icon_cancel")
     public WebElement cancelEvent;
 
-    @FindBy(css = "div.icon_details")
+    @FindBy(className = "div.icon_details")
     private WebElement detaisEvent;
 
-    @FindBy(css = "div.icon_edit")
+    @FindBy(className = "div.icon_edit")
     private WebElement editEvent;
 
-    @FindBy(css = "div.dhx_title")
+    @FindBy(className = "div.dhx_title")
     private WebElement eventTitle;
 
     @FindBy(css = "div.dhx_cal_ltext")
@@ -114,12 +114,10 @@ public class SchedulerPage extends PageObject {
     private WebElement deleteDetailedChanges;
 
     @FindBy(css = "div.dhx_scale_hour:first-child")
-    public WebElement beginningHour;
+    public WebElement beginingHour;
 
     @FindBy(css = "div.dhx_scale_hour:last-child")
     public WebElement endHour;
-
-    public StringBuilder errors = new StringBuilder();
 
     public void nextMonthButtonClick() throws InterruptedException {
         Thread.sleep(3000);
@@ -129,126 +127,38 @@ public class SchedulerPage extends PageObject {
         nextMonthButtonClick();
         WebElement col  = tableColomns.get(column+1);
 
+        //BaseNavigation.doubleClick(column,driver);
 
         BaseNavigation.doubleClick(driver,col);
 
         Thread.sleep(3000);
         eventInput.sendKeys(text);
         saveEvent.click();
+
+
     }
-
-
 
     public int getDaysNumber(){
 
         return tableColomns.size() - tableIgnoredColumn.size() - 1;
     }
 
-    public String getBeginingHour(){
-       return beginningHour.getText();
-    }
-
-    public String getEndingHour(){
-        return endHour.getText();
-    }
-
-
-//TODO add to constant;
     public boolean checkDefaultConditionScheduler(){
-        return  beginningHour.getText().equals("0 00") && endHour.getText().endsWith("23 00") && getDaysNumber()==5;
+
+        if(beginingHour.getText().equals("0 00") && endHour.getText().endsWith("23 00") && getDaysNumber()==5){
+            return true;
+        }else {
+            return false;
+        }
     }
 
 
     public boolean checkDayButton(){
-        return (BrowserWrapper.isElementPresent(dayTabButton));
+        return BrowserWrapper.isElementEnable(dayTabButton);
     }
 
-    public boolean checkWeekButton(){
-        return BrowserWrapper.isElementPresent(weekTabButton);
-
-    }
-
-    public boolean checkMonthButton(){
-        return BrowserWrapper.isElementPresent(monthTabButton);
-    }
-
-    public boolean checkMiniCalendarButton(){
-        return BrowserWrapper.isElementPresent(miniCalendarButton);
-    }
-
-
-    public boolean checkTodayButton(){
-        return BrowserWrapper.isElementPresent(todayButton);
-    }
-
-    public boolean checkPreviousButton(){
-        return BrowserWrapper.isElementPresent(previousMonthButton);
-    }
-
-    public boolean checkNextButton(){
-        return BrowserWrapper.isElementPresent(nextMonthButton);
-    }
-
-    public boolean checkWeekSizeSelectorSelector(){
-        return BrowserWrapper.isElementPresent(workWeekSizeSelector);
-    }
-
-    public boolean checkBeginAtHourSelector(){
-      return BrowserWrapper.isElementPresent(beginningHour);
-    }
-
-    public boolean checkEndAtHourSelector() {
-        return BrowserWrapper.isElementPresent(endHour);
-    }
-
-    public boolean checkAppointmentSizeSelector(){
-        return BrowserWrapper.isElementPresent(apointmentSizeSelector);
-    }
-
-    public boolean isPageReady() throws Exception {
-        StringBuilder errors = new StringBuilder();
-        if(!checkAppointmentSizeSelector()){
-            errors.append("appointment size selector, ");
-        }
-        if(!checkBeginAtHourSelector()){
-            errors.append("begin at hour selector, ");
-        }
-        if(!checkDayButton()){
-            errors.append("day button, ");
-        }
-        if(!checkWeekSizeSelectorSelector()){
-            errors.append("week size selector, ");
-        }
-        if(!checkDefaultConditionScheduler()){
-            errors.append("default scheduler parameters, ");
-        }
-        if(!checkEndAtHourSelector()){
-            errors.append("end at hour selector, ");
-        }
-        if(!checkMiniCalendarButton()){
-            errors.append("mini calendar button, ");
-        }
-        if(!checkMonthButton()){
-            errors.append("month button, ");
-        }
-        if(!checkNextButton()){
-            errors.append("next button, ");
-        }
-        if(!checkTodayButton()){
-            errors.append("today button,");
-        }
-        if(!checkWeekButton()){
-            errors.append("week button, ");
-        }
-        if(!checkPreviousButton()) {
-            errors.append("previous button, ");
-        }
-        if(!errors.toString().isEmpty()){
-            errors.deleteCharAt(errors.length()-2);
-            errors.append("not present");
-            throw new Exception(errors.toString());
-        }
-        return true;
+    public boolean checkDay(){
+        return false;
     }
 
     public List<String> getEvents(){
@@ -265,20 +175,24 @@ public class SchedulerPage extends PageObject {
     }
 
     public void workWeekSizeSelector(String value){
-       BrowserWrapper.selectDropdown(workWeekSizeSelector, value);
+        Select select = new Select(workWeekSizeSelector);
+        select.selectByVisibleText(value);
     }
 
 
     public void workDayBeginAtSelector(String value){
-        BrowserWrapper.selectDropdown(workDayBeginAtSelector, value);
+        Select select = new Select(workDayBeginAtSelector);
+        select.selectByVisibleText(value);
     }
 
     public void workDayEndAtSelector(String value){
-        BrowserWrapper.selectDropdown(workDayEndAtSelector, value);
+        Select select = new Select(workDayEndAtSelector);
+        select.selectByVisibleText(value);
     }
 
     public void apointmentSizeSelector(String value){
-        BrowserWrapper.selectDropdown(apointmentSizeSelector, value);
+        Select select = new Select(apointmentSizeSelector);
+        select.selectByVisibleText(value);
     }
 
     public void saveButtonClick(){

@@ -4,24 +4,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.headers.BaseHeader;
-import pages.headers.headersByRole.NotLogInUserHeader;
 
 
 /**
  * Created by Yana on 06.04.2017.
  */
-public class DoctorSearchList extends PageObject{
-    public NotLogInUserHeader header;
+public class DoctorSearchList {
+
+    protected WebDriver driver;
+    private BaseHeader header;
 
     public DoctorSearchList(WebDriver driver) {
-        super(driver);
-        this.header = new NotLogInUserHeader(driver);
+        this.driver = driver;
     }
-
-//
-//    public DoctorSearchList(WebDriver driver) {
-//        this.driver = driver;
-//    }
 
     @FindBy(css = "[class='filter-col'])")
     private WebElement rowsPerPage;

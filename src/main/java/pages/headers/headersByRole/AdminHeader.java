@@ -3,10 +3,7 @@ package pages.headers.headersByRole;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.admin.AddNewHospitalPage;
-import pages.admin.AddUserPage;
 import pages.admin.AllUsersPage;
-import pages.admin.HospitalListPage;
 import pages.headers.BaseHeader;
 import utils.BrowserWrapper;
 
@@ -20,13 +17,13 @@ public class AdminHeader extends BaseHeader {
         super(driver);
     }
 
-    @FindBy(xpath = "//*[@id=\"bs-example-navbar-collapse-1\"]/ul/li[4]/a")
+    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/a")
     private WebElement actions;
 
     @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/ul/li[2]/a")
     private WebElement allUsersIco;
 
-    @FindBy(xpath = "//*[@id=\"dropdawn\"]/li[2]/a/span")
+    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/ul/li[2]/a")
     private WebElement addUserIco;
 
     @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/ul/li[3]/a")
@@ -64,24 +61,8 @@ public class AdminHeader extends BaseHeader {
         return new AllUsersPage(driver);
     }
 
-    public AddUserPage addUser() throws InterruptedException {
-        actions.click();
-        Thread.sleep(1000);
-        addUserIco.click();
-        return new AddUserPage(driver);
-    }
-
-    public HospitalListPage allHospitalsPage() throws InterruptedException {
-        actions.click();
-        Thread.sleep(1000);
-        hospitalListIco.click();
-        return new HospitalListPage(driver);
-    }
-
-    public AddNewHospitalPage addHospital() throws InterruptedException {
-        actions.click();
-        Thread.sleep(1000);
-        addHospitalIco.click();
-        return new AddNewHospitalPage(driver);
+    public AllUsersPage addUser() {
+        allUsersIco.click();
+        return new AllUsersPage(driver);
     }
 }

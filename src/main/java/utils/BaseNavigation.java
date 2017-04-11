@@ -24,7 +24,7 @@ public class BaseNavigation {
 //        loginPage.enterPassword(password);
 //        loginPage.loginSubmitButton();
         driver.findElement(By.cssSelector("a[href=\'/HospitalSeeker/login\']")).click();
-        Thread.sleep(1000);
+        Thread.sleep(3000);
         driver.findElement(By.id("email")).clear();
         driver.findElement(By.id("email")).sendKeys(email);
         driver.findElement(By.id("password")).clear();
@@ -66,6 +66,5 @@ public class BaseNavigation {
         return null;
     }
 
-
-
+     
 }

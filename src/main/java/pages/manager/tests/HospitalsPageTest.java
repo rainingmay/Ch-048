@@ -35,7 +35,7 @@ public class HospitalsPageTest extends FunctionalTest {
     }
 
     @Test
-    public void testSpecializationSelector() throws Exception {
+    public void testSpecializationSelector() throws Exception{
         BaseNavigation.login(driver, "manager.jh@hospitals.ua", "1111");
         HospitalsPage hospitalsPage = new HospitalsPage(driver);
         hospitalsPage.selectSpecialization("Neurologist");
