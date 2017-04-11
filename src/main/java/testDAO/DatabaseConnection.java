@@ -9,7 +9,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import static org.bouncycastle.cms.RecipientId.password;
 
 /**
  * Created by Evgen on 07.04.2017.
@@ -25,6 +24,7 @@ public class DatabaseConnection {
     public static Connection connectToDatabase() {
         try {
             if (connection == null || connection.isClosed()) {
+                getProperties();
                 Class.forName(driver);
                 connection = DriverManager.getConnection(url, username, password);
             }
@@ -41,7 +41,7 @@ public class DatabaseConnection {
         Properties properties = new Properties();
         InputStream inputStream;
         try {
-            inputStream = new FileInputStream("../../resources/database.properties");
+            inputStream = new FileInputStream("src/main/resources/database.properties");
             properties.load(inputStream);
 
             driver = properties.getProperty("db.driver");

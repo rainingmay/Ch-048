@@ -11,6 +11,7 @@ import pageObjects.headers.headersByRole.ManagerHeader;
  * Created by radga on 06.04.2017.
  */
 public class AddNewDoctorPage extends PageObject {
+    public ManagerHeader managerHeader;
 
     @FindBy(className = "h1.text-center")
     private WebElement headerTextLabel;
@@ -136,6 +137,7 @@ public class AddNewDoctorPage extends PageObject {
 
 
     public AddNewDoctorPage(WebDriver driver){
-        super(driver, new ManagerHeader(driver));
+        super(driver);
+        managerHeader = new ManagerHeader(driver);
     }
 }
