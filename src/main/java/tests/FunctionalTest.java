@@ -27,8 +27,14 @@ public class FunctionalTest {
     protected static final String WEBDRIVER_PATH = "src/main/resources/geckodriver.exe";
     protected static final String BASE_URL = "https://localhost:8443/HospitalSeeker/";
 
+    public static String getBaseUrl() {
+        return BASE_URL;
+    }
+
+
+
     @BeforeClass(alwaysRun = true)
-    public  void setUp(){
+    public  void setUp() throws Exception {
         ProfilesIni profile = new ProfilesIni();
         FirefoxProfile ffProfile = profile.getProfile(FIREFOX_PROFIE_NAME);
         ffProfile.setAcceptUntrustedCertificates(true);
