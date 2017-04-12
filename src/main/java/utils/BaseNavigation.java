@@ -13,7 +13,7 @@ import pages.manager.HospitalsPage;
  */
 public class BaseNavigation {
 
-    public static void login(WebDriver driver, String email, String password) throws InterruptedException {
+    public static void login1(WebDriver driver, String email, String password) throws InterruptedException {
 
         BrowserWrapper.sleep(3);
         Thread.sleep(3000);
@@ -29,19 +29,16 @@ public class BaseNavigation {
 
     }
 
-    public static void login1(WebDriver driver, String email, String password) throws InterruptedException{
+    public static void login(WebDriver driver, String email, String password) throws InterruptedException{
         BrowserWrapper.sleep(3);
         HospitalSeekerHomePage hospitalSeekerHomePage = new HospitalSeekerHomePage(driver);
         LoginPage loginPage = hospitalSeekerHomePage.notLogInUserHeader.loginButton();
-
-        System.out.println("12123");
         BrowserWrapper.sleep(3);
         loginPage.enterEmail(email);
         BrowserWrapper.sleep(3);
         loginPage.enterPassword(password);
         BrowserWrapper.sleep(1);
         loginPage.loginSubmitButton();
-
     }
 
 

@@ -37,6 +37,7 @@ public class BrowserWrapper {
                 break;
             case "Windows 10":
                 System.setProperty(WEBDRIVER_NAME, WEBDRIVER_PATH);
+                break;
         }
 
         WebDriver driver = new FirefoxDriver(ffProfile);
