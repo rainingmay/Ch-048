@@ -37,15 +37,12 @@ public class BaseNavigation {
         BrowserWrapper.sleep(3);
         HospitalSeekerHomePage hospitalSeekerHomePage = new HospitalSeekerHomePage(driver);
         LoginPage loginPage = hospitalSeekerHomePage.notLogInUserHeader.loginButton();
-
-        System.out.println("12123");
         BrowserWrapper.sleep(3);
         loginPage.enterEmail(email);
         BrowserWrapper.sleep(3);
         loginPage.enterPassword(password);
         BrowserWrapper.sleep(1);
         loginPage.loginSubmitButton();
-
     }
 
     public static void login2(WebDriver driver, String email, String password){
@@ -78,6 +75,7 @@ public class BaseNavigation {
     }
 
     public static AllUsersPage loginAsAdmin(WebDriver driver, String email, String password) throws InterruptedException {
+        System.out.println("This is console");
         login(driver, email, password);
         return new AllUsersPage(driver);
     }
