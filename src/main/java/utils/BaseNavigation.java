@@ -59,7 +59,6 @@ public class BaseNavigation {
     }
 
     public static AllUsersPage loginAsAdmin(WebDriver driver, String email, String password) throws InterruptedException {
-        System.out.println("This is console");
         login(driver, email, password);
         return new AllUsersPage(driver);
     }

@@ -13,6 +13,7 @@ import utils.BrowserWrapper;
  */
 public class AddNewHospitalPage extends PageObject {
     public AdminHeader header;
+
     public AddNewHospitalPage(WebDriver driver){
         super(driver);
         this.header = new AdminHeader(driver);
@@ -115,7 +116,9 @@ public class AddNewHospitalPage extends PageObject {
        addHospitalName(name);
        addHospitalDescription(description);
        pushFillButton();
+       BrowserWrapper.sleep(1);
        pushFindButton();
+       BrowserWrapper.sleep(1);
        pushSaveButton();
    }
 
