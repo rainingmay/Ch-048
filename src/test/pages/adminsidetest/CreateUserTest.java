@@ -3,7 +3,7 @@
 // (powered by Fernflower decompiler)
 //
 
-package pages.AdminSideTest;
+package pages.adminsidetest;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;

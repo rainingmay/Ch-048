@@ -1,4 +1,4 @@
-package databaseUtil;
+package utils.databaseutil;
 
 import java.sql.*;
 import java.util.LinkedList;

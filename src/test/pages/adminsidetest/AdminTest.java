@@ -1,14 +1,12 @@
-package pages.AdminSideTest;
+package pages.adminsidetest;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.admin.AllUsersPage;
-import databaseUtil.UserDAO;
+import utils.databaseutil.UserDAO;
 import utils.BaseNavigation;
 import utils.BaseTest;
-import utils.BrowserWrapper;
 
 
 import java.util.LinkedList;
