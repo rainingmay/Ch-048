@@ -1,4 +1,4 @@
-package databaseUtil;
+package utils.databaseutil;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

@@ -1,5 +1,5 @@
 
-package pages.AdminSideTest;
+package pages.adminsidetest;
 
 
 import org.openqa.selenium.By;
