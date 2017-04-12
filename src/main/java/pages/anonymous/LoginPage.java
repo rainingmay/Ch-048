@@ -14,11 +14,6 @@ import utils.BrowserWrapper;
  */
 public class LoginPage extends PageObject {
     public BaseHeader baseHeader;
-
-    public LoginPage(WebDriver driver) {
-        super(driver);
-        baseHeader = new BaseHeader(driver);
-    }
     @FindBy(xpath = "//*[@id=\"loginForm\"]/fieldset/h2")
     private WebElement loginText;
 
@@ -48,18 +43,6 @@ public class LoginPage extends PageObject {
         loginSubmitButton.click();
     }
 
-//    public void enterEmail(String email){
-//
-//                emailTextField.clear();
-//                emailTextField.sendKeys(email);
-//
-//    }
-//
-//    public void enterPassword(String email){
-//        passwordTextField.clear();
-//        passwordTextField.sendKeys(email);
-//    }
-
     public void rememberMeButtonClick(){
         rememberMeButton.click();
     }
@@ -73,5 +56,8 @@ public class LoginPage extends PageObject {
     }
 
 
-
+    public LoginPage(WebDriver driver) {
+        super(driver);
+        baseHeader = new BaseHeader(driver);
+    }
 }

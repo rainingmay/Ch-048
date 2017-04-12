@@ -50,10 +50,8 @@ public class BaseHeader extends PageObject {
     @FindBy(id = "select_doctor_search_button")
     protected WebElement doctorSearchButton;
 
-    public BaseHeader(WebDriver driver)
-    {
+    public BaseHeader(WebDriver driver) {
         super(driver);
-       // this.driver = driver;
     }
 
 

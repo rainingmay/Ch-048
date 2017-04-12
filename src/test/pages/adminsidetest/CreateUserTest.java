@@ -1,39 +1,39 @@
 
-package pages.adminsidetest;
+package pages.AdminSideTest;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.annotations.Test;
 import pages.admin.AddUserPage;
 import pages.admin.AllUsersPage;
+import pages.anonymous.LoginPage;
 import pages.manager.HospitalsPage;
 import pages.manager.SchedulerPage;
 import utils.BaseNavigation;
 import utils.BaseTest;
+import org.testng.annotations.Parameters;
 
 import java.sql.Driver;
 
 public class CreateUserTest extends BaseTest {
-    public CreateUserTest() {
-    }
+
+    public static final String NEWUSERLOGIN = "testwadmin2@gmail.com.ua.bb";
+    public static final String NEWUSERPASSWORD = "Q12345w";
+    public static final String NEWUSERROLE = "ADMIN";
+
+
 
     @Test
     public void addNewUserTest() throws Exception {
-        BaseNavigation.loginAsAdmin(driver, "admin@hospitals.ua", "1111");
-        AddUserPage addUserPage = new AddUserPage(this.driver);
-        addUserPage.addNewUser("testwadmin@gmail.com", "Q12345w", "ADMIN");
+        BaseNavigation.loginAsAdmin(driver, ADMIN_LOGIN, ADMIN_PASSWORD);
+        AllUsersPage allUsersPage = new AllUsersPage(driver);
+        AddUserPage addUserPage = new AddUserPage(driver);
+        addUserPage.addNewUser(NEWUSERLOGIN, NEWUSERPASSWORD, NEWUSERROLE);
         //BaseNavigation.logout(driver);
     }
 
-    @Test
-    public void emailWithoutDotTest() throws Exception {
-        BaseNavigation.login(driver, "admin@hospitals.ua", "1111");
-        AddUserPage addUserPage = new AddUserPage(driver);
-        addUserPage.addNewUser("test2admin@gmailcom", "Q12345w", "ADMIN");
-        BaseNavigation.logout(driver);
-        BaseNavigation.login(driver, "test2admin@gmailcom", "Q12345w");
-        BaseNavigation.logout(driver);
 
 
-    }
+
+
 }
