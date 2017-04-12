@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import pages.allUsers.PageObject;
 import pages.headers.headersByRole.AdminHeader;
+import utils.BrowserWrapper;
 
 
 /**
@@ -85,6 +86,8 @@ public class AddUserPage extends PageObject {
 
 
     public void addNewUser(String email, String password, String role) throws InterruptedException {
+        BrowserWrapper.sleep(1);
+        driver.get("https://localhost:8443/HospitalSeeker/admin/newUser");
         Thread.sleep(1000);
         enterEmail(email);
         enterPassword(password);

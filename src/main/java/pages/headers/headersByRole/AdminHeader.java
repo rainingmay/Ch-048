@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.admin.AllUsersPage;
+import utils.BrowserWrapper;
 import pages.admin.HospitalListPage;
 import utils.BrowserWrapper;
 
@@ -62,6 +63,8 @@ public class AdminHeader extends AuthorizedHeader {
     }
 
     public AllUsersPage addUser() {
+        actions.click();
+        BrowserWrapper.sleep(2);
         allUsersIco.click();
         return new AllUsersPage(driver);
     }

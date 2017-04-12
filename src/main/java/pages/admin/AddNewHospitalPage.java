@@ -46,7 +46,7 @@ public class AddNewHospitalPage extends PageObject {
     @FindBy(id = "description")
     private WebElement descriptionInputField;
 
-    @FindBy(id = "button-find")
+    @FindBy(id = "button-search")
     private WebElement findButton;
 
     @FindBy(id = "button-fill")

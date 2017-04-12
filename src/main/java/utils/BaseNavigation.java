@@ -7,18 +7,22 @@ import pages.allUsers.PageObject;
 import pages.anonymous.LoginPage;
 import pages.manager.HospitalsPage;
 
+import java.sql.Driver;
+
 
 /**
  * Created by ytomktc on 07.04.2017.
  */
 public class BaseNavigation {
 
+
+
+
     public static void login(WebDriver driver, String email, String password) throws InterruptedException {
 
-        BrowserWrapper.sleep(3);
-        Thread.sleep(3000);
+        BrowserWrapper.sleep(1);
         driver.findElement(By.cssSelector("a[href=\'/HospitalSeeker/login\']")).click();
-        BrowserWrapper.sleep(3);
+        BrowserWrapper.sleep(1);
         driver.findElement(By.id("email")).clear();
         driver.findElement(By.id("email")).sendKeys(email);
         BrowserWrapper.sleep(1);
@@ -41,9 +45,19 @@ public class BaseNavigation {
         loginPage.loginSubmitButton();
     }
 
+    public static void login2(WebDriver driver, String email, String password){
+        LoginPage loginPage = new LoginPage(driver);
+        BrowserWrapper.sleep(1);
+        loginPage.enterEmail(email);
+        loginPage.enterPassword(password);
+        loginPage.loginSubmitButton();
+
+
+    }
+
 
     public static void logout(WebDriver driver) throws InterruptedException {
-        BrowserWrapper.sleep(2);
+        BrowserWrapper.sleep(1);
         driver.findElement(By.cssSelector("ul.my-navbar>li:nth-last-child(3)")).click();
         driver.findElement(By.cssSelector("ul.my-navbar>li:nth-last-child(3) li:last-child a")).click();
     }

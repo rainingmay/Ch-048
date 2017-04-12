@@ -1,11 +1,13 @@
 package pages.admin;
 
+import org.apache.bcel.generic.Select;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.allUsers.PageObject;
 import pages.headers.headersByRole.AdminHeader;
+import utils.BrowserWrapper;
 
 
 import java.util.LinkedList;
@@ -31,7 +33,7 @@ public class AllUsersPage extends PageObject {
     private WebElement searchWindow;
 
     @FindBy(id = "searchButton")
-    private WebElement searchButton;
+    public WebElement searchButton;
 
     @FindBy(id = "clearButton")
     private WebElement clearButton;
@@ -87,6 +89,7 @@ public class AllUsersPage extends PageObject {
     private WebElement editButton;
 
 
+
     public AllUsersPage(WebDriver driver) {
 
         super(driver);
@@ -94,24 +97,33 @@ public class AllUsersPage extends PageObject {
     }
 
 
-    public void changeCountOfUsersOnPage(int count) {
-        usersPerPagePopUp.findElement(By.cssSelector("option[value=" + count + "]")).click();
+
+
+
+
+    public AllUsersPage changeCountOfUsersOnPage(int count) {
+        selectDropdownCount(usersPerPagePopUp, String.valueOf(count));
+        BrowserWrapper.sleep(3);
+        return new AllUsersPage(driver);
     }
+
 
     public void changeRole(String role) {
         this.role.findElement(By.cssSelector("option[value=" + role + "]")).click();
     }
 
+
     public void changeSearchBy(String field) {
         this.searchBy.findElement(By.cssSelector("option[value=" + field + "]"));
     }
+
 
     public void sendKeysToSearchField(String keys) {
         searchWindow.clear();
         searchWindow.sendKeys(keys);
     }
 
-    public AllUsersPage find(int count, String role, String field, String keys) {
+    public AllUsersPage search(int count, String role, String field, String keys) {
         changeCountOfUsersOnPage(count);
         changeRole(role);
         changeSearchBy(field);
@@ -133,6 +145,8 @@ public class AllUsersPage extends PageObject {
         return result;
     }
 
+
+
     public List<String> getUserDataFromInfoWindow(int rowNumber) throws InterruptedException {
         List<String> result = new LinkedList<>();
         if (tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")")).isDisplayed()) {
@@ -149,28 +163,55 @@ public class AllUsersPage extends PageObject {
         return result;
     }
 
-    public int gecCountOfUsersInTable() {
+
+    public int getCountOfUsersInTable() {
         return tableBody.findElements(By.cssSelector("tr")).size();
     }
+
 
     public void closeViewWindow(){
         viewWindow.findElement(By.className("close")).click();
     }
 
+
     public void closeEditWindow() {
-        viewWindow.findElement(By.className("close"));
+        editWindow.findElement(By.className("close")).click();
     }
+
+
 
     public WebElement openEditWindow(int rowNumber) {
         if (tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")")).isDisplayed()) {
             WebElement tableRow = tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")"));
             WebElement editButton = tableRow.findElement(By.id("ediUser"));
             editButton.click();
-            editWindow = driver.findElement(By.className("panel-body"));
+            BrowserWrapper.sleep(1);
+            editWindow = driver.findElement(By.id("detailForm"));
             return editWindow;
         }
         return null;
     }
 
 
+
+    public void changeRoleInEditWindow(int rowNumber, String role) {
+        openEditWindow(rowNumber);
+        selectDropdownRole(editWindow.findElement(By.id("userRoles")), role);
+        BrowserWrapper.sleep(2);
+        editWindow.findElement(By.cssSelector("input[value=\"Edit\"]")).click();
+    }
+
+    public static void selectDropdownRole(WebElement element, String text) {
+        org.openqa.selenium.support.ui.Select dropdown = new org.openqa.selenium.support.ui.Select(element);
+        //dropdown.selectByVisibleText(text);
+        if (dropdown.getAllSelectedOptions().size() != 0) dropdown.deselectAll();
+        dropdown.selectByValue(text);
+    }
+
+    public static void selectDropdownCount(WebElement element, String text) {
+        org.openqa.selenium.support.ui.Select dropdown = new org.openqa.selenium.support.ui.Select(element);
+        //dropdown.selectByVisibleText(text);
+        //if (dropdown.getAllSelectedOptions().size() != 0) dropdown.deselectAll();
+        dropdown.selectByValue(text);
+    }
 }
