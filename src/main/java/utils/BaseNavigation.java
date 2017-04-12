@@ -15,6 +15,9 @@ import java.sql.Driver;
  */
 public class BaseNavigation {
 
+
+
+
     public static void login(WebDriver driver, String email, String password) throws InterruptedException {
 
         BrowserWrapper.sleep(1);
