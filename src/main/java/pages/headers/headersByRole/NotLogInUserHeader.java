@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.anonymous.LoginPage;
 import pages.headers.BaseHeader;
+import utils.BrowserWrapper;
 
 
 /**
@@ -15,7 +16,10 @@ public class NotLogInUserHeader extends BaseHeader {
     protected WebElement login;
 
     public LoginPage loginButton(){
+        System.out.println("1");
+//TODO exeption here!!!!
         login.click();
+        System.out.println("2");
         return new LoginPage(driver);
     }
 

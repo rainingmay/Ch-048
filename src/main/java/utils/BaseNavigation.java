@@ -33,6 +33,7 @@ public class BaseNavigation {
         BrowserWrapper.sleep(3);
         HospitalSeekerHomePage hospitalSeekerHomePage = new HospitalSeekerHomePage(driver);
         LoginPage loginPage = hospitalSeekerHomePage.notLogInUserHeader.loginButton();
+
         System.out.println("12123");
         BrowserWrapper.sleep(3);
         loginPage.enterEmail(email);
