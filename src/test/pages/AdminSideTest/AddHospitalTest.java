@@ -1,4 +1,4 @@
-package pages.adminsidetest;
+package pages.AdminSideTest;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
