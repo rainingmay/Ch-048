@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.admin.AllUsersPage;
+import pages.admin.HospitalListPage;
 import pages.headers.BaseHeader;
 import utils.BrowserWrapper;
 
@@ -64,5 +65,12 @@ public class AdminHeader extends BaseHeader {
     public AllUsersPage addUser() {
         allUsersIco.click();
         return new AllUsersPage(driver);
+    }
+
+    public HospitalListPage allHospitalsPage() {
+        BrowserWrapper.sleep(1);
+        actions.click();
+        BrowserWrapper.selectDropdown(hospitalListIco, " Hospital list");
+        return new HospitalListPage(driver);
     }
 }
