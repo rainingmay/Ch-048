@@ -1,23 +1,24 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
 
 package pages.adminsidetest;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.annotations.Test;
+import pages.AdminSideTest.BaseTest;
 import pages.admin.AddUserPage;
+import pages.admin.AllUsersPage;
+import pages.manager.HospitalsPage;
+import pages.manager.SchedulerPage;
 import utils.BaseNavigation;
 
+import java.sql.Driver;
 
 public class CreateUserTest extends BaseTest {
     public CreateUserTest() {
     }
 
     @Test
-    public void atest() throws Exception {
+    public void addNewUserTest() throws Exception {
         BaseNavigation.loginAsAdmin(driver, "admin@hospitals.ua", "1111");
         AddUserPage addUserPage = new AddUserPage(this.driver);
         addUserPage.addNewUser("testwadmin@gmail.com", "Q12345w", "ADMIN");
@@ -29,22 +30,10 @@ public class CreateUserTest extends BaseTest {
         BaseNavigation.login(driver, "admin@hospitals.ua", "1111");
         AddUserPage addUserPage = new AddUserPage(driver);
         addUserPage.addNewUser("test2admin@gmailcom", "Q12345w", "ADMIN");
-        //BaseNavigation.logout(driver);
+        BaseNavigation.logout(driver);
         BaseNavigation.login(driver, "test2admin@gmailcom", "Q12345w");
-        //BaseNavigation.logout(driver);
-    }
+        BaseNavigation.logout(driver);
 
-    @Test
-    public void emailWithoytSymbolTest() throws Exception {
-    }
 
-    @Test
-    private boolean isElementPresent(By by) {
-        try {
-            this.driver.findElement(by);
-            return true;
-        } catch (NoSuchElementException var3) {
-            return false;
-        }
     }
 }
