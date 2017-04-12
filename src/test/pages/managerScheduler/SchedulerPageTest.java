@@ -1,6 +1,7 @@
 package pages.managerScheduler;
 
 
+import com.sun.jna.platform.win32.WinBase;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.manager.HospitalsPage;

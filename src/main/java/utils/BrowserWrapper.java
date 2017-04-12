@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class BrowserWrapper {
 
-    private static final String FIREFOX_PROFIE_NAME = "default";
+    private static final String FIREFOX_PROFIE_NAME = "myProfile";
     private static final String WEBDRIVER_NAME = "webdriver.gecko.driver";
     private static final String LINUX_WEBDRIVER_PATH = "src/main/resources/geckodriver";
     private static final String WEBDRIVER_PATH = "src/main/resources/geckodriver.exe";
@@ -108,7 +108,9 @@ public class BrowserWrapper {
 
     public static void selectDropdown(WebElement element, String text) {
         Select dropdown = new Select(element);
-        dropdown.selectByVisibleText(text);
+        //dropdown.selectByVisibleText(text);
+        if (dropdown.getAllSelectedOptions().size() != 0) dropdown.deselectAll();
+        dropdown.selectByValue(text);
     }
     public static void sleep(int Seconds) {
         try {
