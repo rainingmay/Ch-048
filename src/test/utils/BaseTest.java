@@ -11,6 +11,9 @@ import java.util.Properties;
 
 public class BaseTest {
 
+    public static final String MANAGER_LOGIN = "manager.jh@hospitals.ua";
+    public static final String MANAGER_PASSWORD = "1111";
+
     protected WebDriver driver;
 
     @BeforeClass
