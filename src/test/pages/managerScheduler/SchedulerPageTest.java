@@ -10,6 +10,8 @@ import utils.BaseNavigation;
 import utils.BaseTest;
 import utils.BrowserWrapper;
 
+import java.util.concurrent.TimeUnit;
+
 
 public class SchedulerPageTest extends BaseTest{
 
@@ -21,11 +23,12 @@ public class SchedulerPageTest extends BaseTest{
     public static final String EXPECTED_END_AT_HOUR = "19 00";
 
     @Test
-    public void testDefaultCondition() throws Exception{
+    public void testElementPresence() throws Exception{
         BaseNavigation.loginAsManager(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
         HospitalsPage hospitalsPage = new HospitalsPage(driver);
         SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
-        BrowserWrapper.sleep(6);
+        BrowserWrapper.sleep(1);
+        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         try{
             schedulerPage.isPageReady();
         }catch (Exception e){
@@ -35,13 +38,27 @@ public class SchedulerPageTest extends BaseTest{
 
     }
 
+    @Test
+    public void testDefaultSchedulerValues() throws Exception{
+        BaseNavigation.loginAsManager(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
+        HospitalsPage hospitalsPage = new HospitalsPage(driver);
+        SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
+        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+        try{
+            schedulerPage.checkDefaultConditionScheduler();
+        }catch (Exception e){
+            throw new AssertionError(e.getMessage());
+        }
+        Assert.assertTrue(schedulerPage.checkDefaultConditionScheduler());
+    }
+
 
     @Test
     public void testWeekSize() throws Exception{
         BaseNavigation.login(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
         HospitalsPage hospitalsPage = new HospitalsPage(driver);
         SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
-        BrowserWrapper.sleep(6);
+        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         schedulerPage.workWeekSizeSelector(TEST_WEEK_SIZE);
         schedulerPage.saveButtonClick();
         Assert.assertEquals(schedulerPage.getDaysNumber(), EXPECTED_WEEK_SIZE);
@@ -52,7 +69,7 @@ public class SchedulerPageTest extends BaseTest{
         BaseNavigation.login(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
         HospitalsPage hospitalsPage = new HospitalsPage(driver);
         SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
-        BrowserWrapper.sleep(6);
+        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         schedulerPage.setDayDuration(TEST_BEGIN_AT_HOUR, TEST_END_AT_HOUR);
         schedulerPage.saveButtonClick();
         Assert.assertTrue(schedulerPage.getBeginningHour().equals(EXPECTED_BEGIN_AT_HOUR) && schedulerPage.getEndingHour().equals(EXPECTED_END_AT_HOUR));

@@ -13,21 +13,6 @@ import pages.manager.HospitalsPage;
  */
 public class BaseNavigation {
 
-    public static void login1(WebDriver driver, String email, String password) throws InterruptedException {
-
-        BrowserWrapper.sleep(1);
-        driver.findElement(By.cssSelector("a[href=\'/HospitalSeeker/login\']")).click();
-        BrowserWrapper.sleep(1);
-        driver.findElement(By.id("email")).clear();
-        driver.findElement(By.id("email")).sendKeys(email);
-        BrowserWrapper.sleep(1);
-        driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys(password);
-        BrowserWrapper.sleep(1);
-        driver.findElement(By.id("loginSubmit")).click();
-
-    }
-
 
     public static void login(WebDriver driver, String email, String password) throws InterruptedException{
         BrowserWrapper.sleep(1);

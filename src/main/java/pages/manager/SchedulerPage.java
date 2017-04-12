@@ -1,5 +1,7 @@
 package pages.manager;
 
+
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -8,9 +10,10 @@ import pages.allUsers.PageObject;
 import pages.headers.headersByRole.ManagerHeader;
 import utils.BaseNavigation;
 import utils.BrowserWrapper;
-
+import org.openqa.selenium.WebDriverException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 public class SchedulerPage extends PageObject {
@@ -125,17 +128,14 @@ public class SchedulerPage extends PageObject {
     public StringBuilder errors = new StringBuilder();
 
     public void nextMonthButtonClick() throws InterruptedException {
-        BrowserWrapper.sleep(3);
+        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         nextMonthButton.click();
     }
     public void setAppointment(String text, int column) throws InterruptedException {
         nextMonthButtonClick();
         WebElement col  = tableColomns.get(column+1);
-
-
         BaseNavigation.doubleClick(driver,col);
-
-        BrowserWrapper.sleep(3);
+        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         eventInput.sendKeys(text);
         saveEvent.click();
     }
@@ -156,7 +156,6 @@ public class SchedulerPage extends PageObject {
     }
 
 
-    //TODO add to constant;
     public boolean checkDefaultConditionScheduler(){
         return  beginningHour.getText().equals(DEFAULT_BEGINNING_HOUR)
                 && endHour.getText().endsWith(DEFAULT_ENDING_HOUR)
@@ -228,9 +227,6 @@ public class SchedulerPage extends PageObject {
         if(!checkWeekSizeSelectorSelector()){
             errors.append("week size selector, ");
         }
-        if(!checkDefaultConditionScheduler()){
-            errors.append("default scheduler parameters, ");
-        }
         if(!checkEndAtHourSelector()){
             errors.append("end at hour selector, ");
         }
@@ -244,7 +240,7 @@ public class SchedulerPage extends PageObject {
             errors.append("next button, ");
         }
         if(!checkTodayButton()){
-            errors.append("today button,");
+            errors.append("today button, ");
         }
         if(!checkWeekButton()){
             errors.append("week button, ");
@@ -255,7 +251,7 @@ public class SchedulerPage extends PageObject {
         if(!errors.toString().isEmpty()){
             errors.deleteCharAt(errors.length()-2);
             errors.append("not present");
-            throw new Exception(errors.toString());
+            throw new NoSuchElementException(errors.toString());
         }
         return true;
     }
