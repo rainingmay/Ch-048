@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
-import pages.allUsers.PageObject;
+import pages.allUsers.BasePage;
 import pages.headers.headersByRole.ManagerHeader;
 import utils.BaseNavigation;
 import utils.BrowserWrapper;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SchedulerPage extends PageObject {
+public class SchedulerPage extends BasePage {
 
     private static final int DEFAULT_NUMBER_OF_DAYS = 5;
     private static final String DEFAULT_BEGINNING_HOUR = "0 00";

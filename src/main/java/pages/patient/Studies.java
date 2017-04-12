@@ -3,13 +3,13 @@ package pages.patient;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.allUsers.PageObject;
+import pages.allUsers.BasePage;
 
 
 /**
  * Created by gregtar on 06.04.17.
  */
-public class Studies extends PageObject {
+public class Studies extends BasePage {
 
     @FindBy(xpath = "/html/body/section/div/div/ul/li[1]/a")
     private WebElement resultOfStudiesTab;

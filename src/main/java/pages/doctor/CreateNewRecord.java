@@ -4,11 +4,10 @@ package pages.doctor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.allUsers.PageObject;
-import pages.headers.headersByRole.AdminHeader;
+import pages.allUsers.BasePage;
 import pages.headers.headersByRole.DoctorHeader;
 
-public class CreateNewRecord extends PageObject {
+public class CreateNewRecord extends BasePage {
     public DoctorHeader header;
     @FindBy(className = "label[for=\"complaint\"]")
     private WebElement complaintLabel;

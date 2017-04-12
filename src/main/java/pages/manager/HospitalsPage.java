@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
-import pages.allUsers.PageObject;
+import pages.allUsers.BasePage;
 import pages.headers.headersByRole.ManagerHeader;
 
 
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class HospitalsPage extends PageObject {
+public class HospitalsPage extends BasePage {
 
     public ManagerHeader managerHeader;
     @FindBy(className = "h1.text-center")

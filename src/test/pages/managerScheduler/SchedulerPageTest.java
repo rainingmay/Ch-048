@@ -48,7 +48,6 @@ public class SchedulerPageTest extends BaseTest{
 
     @Test
     public void testWorkingDayDuration() throws Exception {
-
         BaseNavigation.login(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
         HospitalsPage hospitalsPage = new HospitalsPage(driver);
         SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);

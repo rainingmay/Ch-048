@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.allUsers.PageObject;
+import pages.allUsers.BasePage;
 import pages.headers.headersByRole.AdminHeader;
 
 
@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by Evgen on 06.04.2017.
  */
-public class AllUsersPage extends PageObject {
+public class AllUsersPage extends BasePage {
 
     public AdminHeader header;
 

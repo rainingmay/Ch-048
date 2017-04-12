@@ -3,7 +3,7 @@ package utils;
 import org.openqa.selenium.*;
 import pages.admin.AllUsersPage;
 import pages.allUsers.HospitalSeekerHomePage;
-import pages.allUsers.PageObject;
+import pages.allUsers.BasePage;
 import pages.anonymous.LoginPage;
 import pages.manager.HospitalsPage;
 
@@ -30,15 +30,13 @@ public class BaseNavigation {
     }
 
     public static void login(WebDriver driver, String email, String password) throws InterruptedException{
-        BrowserWrapper.sleep(3);
-        HospitalSeekerHomePage hospitalSeekerHomePage = new HospitalSeekerHomePage(driver);
-        LoginPage loginPage = hospitalSeekerHomePage.notLogInUserHeader.loginButton();
-        BrowserWrapper.sleep(3);
-        loginPage.enterEmail(email);
-        BrowserWrapper.sleep(3);
-        loginPage.enterPassword(password);
         BrowserWrapper.sleep(1);
-        loginPage.loginSubmitButton();
+        HospitalSeekerHomePage hospitalSeekerHomePage = new HospitalSeekerHomePage(driver);
+        BrowserWrapper.sleep(1);
+        LoginPage loginPage = hospitalSeekerHomePage.notLogInUserHeader.loginButton();
+        BrowserWrapper.sleep(1);
+        loginPage.authorization(email, password);
+
     }
 
 
@@ -65,12 +63,12 @@ public class BaseNavigation {
         return new AllUsersPage(driver);
     }
 
-    public static PageObject loginAsManager(WebDriver driver, String email, String password) throws InterruptedException {
+    public static BasePage loginAsManager(WebDriver driver, String email, String password) throws InterruptedException {
         login(driver, email, password);
         return new HospitalsPage(driver);
     }
 
-    public static PageObject loginAsDoctor(WebDriver driver, String email, String password) {
+    public static BasePage loginAsDoctor(WebDriver driver, String email, String password) {
         return null;
     }
 
