@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.allUsers.PageObject;
 import pages.headers.headersByRole.AdminHeader;
+import utils.BrowserWrapper;
 
 
 import java.util.LinkedList;
@@ -154,6 +155,15 @@ public class AllUsersPage extends PageObject {
     public int gecCountOfUsersInTable() {
         return tableBody.findElements(By.cssSelector("tr")).size();
     }
+
+    public void  goToAddUserPage() throws InterruptedException {
+            BrowserWrapper.sleep(1);
+            driver.findElement(By.xpath("//*[@id=\"bs-example-navbar-collapse-1\"]/ul/li[4]/a")).click();
+            BrowserWrapper.sleep(1);
+            driver.findElement(By.xpath("//*[@id=\"dropdawn\"]/li[2]/a"));
+
+
+        }
 
     private void closeViewWindow(){
         viewWindow.findElement(By.className("close")).click();

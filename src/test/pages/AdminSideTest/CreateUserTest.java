@@ -20,20 +20,11 @@ public class CreateUserTest extends BaseTest {
     @Test
     public void addNewUserTest() throws Exception {
         BaseNavigation.loginAsAdmin(driver, "admin@hospitals.ua", "1111");
-        AddUserPage addUserPage = new AddUserPage(this.driver);
+        AllUsersPage allUsersPage = new AllUsersPage(driver);
+        allUsersPage.goToAddUserPage();
+        AddUserPage addUserPage = new AddUserPage(driver);
         addUserPage.addNewUser("testwadmin@gmail.com", "Q12345w", "ADMIN");
         //BaseNavigation.logout(driver);
     }
 
-    @Test
-    public void emailWithoutDotTest() throws Exception {
-        BaseNavigation.login(driver, "admin@hospitals.ua", "1111");
-        AddUserPage addUserPage = new AddUserPage(driver);
-        addUserPage.addNewUser("test2admin@gmailcom", "Q12345w", "ADMIN");
-        BaseNavigation.logout(driver);
-        BaseNavigation.login(driver, "test2admin@gmailcom", "Q12345w");
-        BaseNavigation.logout(driver);
-
-
-    }
 }
