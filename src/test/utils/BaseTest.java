@@ -37,10 +37,11 @@ public class BaseTest {
     public static final String REGISTER_URL = HOME_URL.concat("registration");
     public static final String FIND_URL = HOME_URL.concat("mapsearch");
     public static final String VALIDATE_URL = HOME_URL.concat("admin/map/validate");
+*/
 
     public static final String ADMIN_LOGIN = "admin@hospitals.ua";
     public static final String ADMIN_PASSWORD = "1111";
-    public static final String MANAGER_LOGIN = "manager.kh@hospitals.ua";
+    public static final String MANAGER_LOGIN = "manager.jh@hospitals.ua";
     public static final String MANAGER_PASSWORD = "1111";
     public static final String DOCTOR_GH_LOGIN = "doctor.gh@hospitals.ua";
     public static final String DOCTOR_GH_PASSWORD = "1111";
@@ -50,7 +51,7 @@ public class BaseTest {
     public static final String PATIENT_PASSWORD = "1111";
     public static final String SECOND_PATIENT_LOGIN = "patient.in@hospitals.ua";
     public static final String SECOND_PATIENT_PASSWORD = "1111";
-
+/*
     @BeforeMethod
     public void before() {
         dataSetUtils = new DataSetUtils();
