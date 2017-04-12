@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
 import pages.allUsers.PageObject;
 import pages.headers.headersByRole.ManagerHeader;
 import utils.BaseNavigation;
@@ -15,6 +14,10 @@ import java.util.List;
 
 
 public class SchedulerPage extends PageObject {
+
+    public static final int DEFAULT_NUMBER_OF_DAYS = 5;
+    public static final String DEFAULT_BEGINNING_HOUR = "0 00";
+    public static final String DEFAULT_ENDING_HOUR = "23 00";
 
     public ManagerHeader managerHeader;
     @FindBy(xpath = "/html/body/section/div/div/div[3]/div/form/div[2]/p")
@@ -122,7 +125,7 @@ public class SchedulerPage extends PageObject {
     public StringBuilder errors = new StringBuilder();
 
     public void nextMonthButtonClick() throws InterruptedException {
-        Thread.sleep(3000);
+        BrowserWrapper.sleep(3);
         nextMonthButton.click();
     }
     public void setAppointment(String text, int column) throws InterruptedException {
@@ -132,7 +135,7 @@ public class SchedulerPage extends PageObject {
 
         BaseNavigation.doubleClick(driver,col);
 
-        Thread.sleep(3000);
+        BrowserWrapper.sleep(3);
         eventInput.sendKeys(text);
         saveEvent.click();
     }
@@ -155,7 +158,9 @@ public class SchedulerPage extends PageObject {
 
     //TODO add to constant;
     public boolean checkDefaultConditionScheduler(){
-        return  beginningHour.getText().equals("0 00") && endHour.getText().endsWith("23 00") && getDaysNumber()==5;
+        return  beginningHour.getText().equals(DEFAULT_BEGINNING_HOUR)
+                && endHour.getText().endsWith(DEFAULT_ENDING_HOUR)
+                && getDaysNumber()== DEFAULT_NUMBER_OF_DAYS;
     }
 
 

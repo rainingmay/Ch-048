@@ -28,7 +28,7 @@ public class BaseNavigation {
 
 
     public static void logout(WebDriver driver) throws InterruptedException {
-        Thread.sleep(1000);
+        BrowserWrapper.sleep(2);
         driver.findElement(By.cssSelector("ul.my-navbar>li:nth-last-child(3)")).click();
         driver.findElement(By.cssSelector("ul.my-navbar>li:nth-last-child(3) li:last-child a")).click();
     }
