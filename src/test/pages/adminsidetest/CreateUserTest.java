@@ -16,17 +16,19 @@ import org.testng.annotations.Parameters;
 import java.sql.Driver;
 
 public class CreateUserTest extends BaseTest {
-    public CreateUserTest() {
-    }
+
+    public static final String NEWUSERLOGIN = "testwadmin2@gmail.com.ua.bb";
+    public static final String NEWUSERPASSWORD = "Q12345w";
+    public static final String NEWUSERROLE = "ADMIN";
+
+
 
     @Test
     public void addNewUserTest() throws Exception {
-
-
-        BaseNavigation.loginAsAdmin(driver, "admin@hospitals.ua", "1111");
+        BaseNavigation.loginAsAdmin(driver, ADMIN_LOGIN, ADMIN_PASSWORD);
         AllUsersPage allUsersPage = new AllUsersPage(driver);
         AddUserPage addUserPage = new AddUserPage(driver);
-        addUserPage.addNewUser("testwadmin2@gmail.com.ua", "Q12345w", "ADMIN");
+        addUserPage.addNewUser(NEWUSERLOGIN, NEWUSERPASSWORD, NEWUSERROLE);
         //BaseNavigation.logout(driver);
     }
 
