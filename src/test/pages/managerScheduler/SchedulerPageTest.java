@@ -16,7 +16,8 @@ public class SchedulerPageTest extends BaseTest{
     public static final String TEST_BEGIN_AT_HOUR = "11:00";
     public static final String TEST_END_AT_HOUR = "20:00";
     public static final String TEST_WEEK_SIZE = "6 days";
-
+    public static final String MANAGER_LOGIN = "";
+    public static final String MANAGER_PASSWORD = "";
 
     @Test
     public void testDefaultCondition() throws Exception{
