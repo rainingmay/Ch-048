@@ -9,6 +9,7 @@ import pages.admin.AllUsersPage;
 import pages.manager.HospitalsPage;
 import pages.manager.SchedulerPage;
 import utils.BaseNavigation;
+import utils.BaseTest;
 
 import java.sql.Driver;
 
