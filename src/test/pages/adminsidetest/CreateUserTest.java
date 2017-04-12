@@ -3,6 +3,7 @@ package pages.AdminSideTest;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.admin.AddUserPage;
 import pages.admin.AllUsersPage;
@@ -17,20 +18,42 @@ import java.sql.Driver;
 
 public class CreateUserTest extends BaseTest {
 
-    public static final String NEWUSERLOGIN = "testwadmin2@gmail.com.ua.bb";
+    public static final String NEWUSERLOGIN = "testwadmin2@gmail.com.ua";
     public static final String NEWUSERPASSWORD = "Q12345w";
     public static final String NEWUSERROLE = "ADMIN";
 
 
 
-    @Test
+    @Test (priority = 1)
     public void addNewUserTest() throws Exception {
         BaseNavigation.loginAsAdmin(driver, ADMIN_LOGIN, ADMIN_PASSWORD);
         AllUsersPage allUsersPage = new AllUsersPage(driver);
         AddUserPage addUserPage = new AddUserPage(driver);
         addUserPage.addNewUser(NEWUSERLOGIN, NEWUSERPASSWORD, NEWUSERROLE);
-        //BaseNavigation.logout(driver);
     }
+
+    @DataProvider(name = "emailValidation")
+    public static Object[][] credentials() {
+
+        return new Object[][] { { NEWUSERLOGIN, NEWUSERPASSWORD }, { NEWUSERLOGIN + ".cc", NEWUSERPASSWORD }};
+
+    }
+
+    @Test(dataProvider = "emailValidation")
+    public void emailValidationTest(String addUserName, String addUserPassword) throws Exception {
+        BaseNavigation.loginAsAdmin(driver, ADMIN_LOGIN, ADMIN_PASSWORD);
+        AllUsersPage allUsersPage = new AllUsersPage(driver);
+        AddUserPage addUserPage = new AddUserPage(driver);
+        addUserPage.addNewUser(addUserName, addUserPassword, NEWUSERROLE);
+
+
+
+
+    }
+
+
+
+
 
 
 
