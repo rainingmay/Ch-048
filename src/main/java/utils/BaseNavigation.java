@@ -14,6 +14,7 @@ public class BaseNavigation {
     public static void login(WebDriver driver, String email, String password) throws InterruptedException {
 
         BrowserWrapper.sleep(3);
+        Thread.sleep(3000);
         driver.findElement(By.cssSelector("a[href=\'/HospitalSeeker/login\']")).click();
         BrowserWrapper.sleep(3);
         driver.findElement(By.id("email")).clear();

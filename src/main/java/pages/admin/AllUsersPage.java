@@ -72,7 +72,6 @@ public class AllUsersPage extends PageObject {
     @FindBy(id = "roles.type")
     private WebElement sortByRoleButton;
 
-
     private WebElement viewWindow;
 
     @FindBy(className = "table table-user-information")
@@ -142,7 +141,6 @@ public class AllUsersPage extends PageObject {
             infoButton.click();
             Thread.sleep(2000);
             viewWindow = driver.findElement(By.className("modal-content"));
-            //result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(1) td:last-child")).getText());
             result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(2) td:last-child")).getText());
             result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(4) td:last-child")).getText());
             closeViewWindow();
@@ -155,16 +153,24 @@ public class AllUsersPage extends PageObject {
         return tableBody.findElements(By.cssSelector("tr")).size();
     }
 
-    private void closeViewWindow(){
+    public void closeViewWindow(){
         viewWindow.findElement(By.className("close")).click();
     }
 
-    public void openEditWindow(int rowNumber) {
+    public void closeEditWindow() {
+        viewWindow.findElement(By.className("close"));
+    }
+
+    public WebElement openEditWindow(int rowNumber) {
         if (tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")")).isDisplayed()) {
             WebElement tableRow = tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")"));
             WebElement editButton = tableRow.findElement(By.id("ediUser"));
             editButton.click();
+            editWindow = driver.findElement(By.className("panel-body"));
+            return editWindow;
         }
+        return null;
     }
+
 
 }

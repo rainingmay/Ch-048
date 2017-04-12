@@ -4,14 +4,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.admin.AllUsersPage;
-import pages.headers.BaseHeader;
-import utils.BrowserWrapper;
 
 
 /**
  * Created by Evgen on 06.04.2017.
  */
-public class AdminHeader extends BaseHeader {
+public class AdminHeader extends AuthorizedHeader {
 
     public AdminHeader(WebDriver driver) {
         super(driver);
