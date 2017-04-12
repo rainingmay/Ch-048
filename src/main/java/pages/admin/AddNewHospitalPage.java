@@ -104,8 +104,9 @@ public class AddNewHospitalPage extends PageObject {
         resetButton.click();
    }
 
-   public void pushSaveButton() {
+   public HospitalListPage pushSaveButton() {
         saveButton.click();
+        return new HospitalListPage(driver);
    }
 
    public void addNewHospital(String address, String name, String description) {
