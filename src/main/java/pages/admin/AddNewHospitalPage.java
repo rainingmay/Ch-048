@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.allUsers.PageObject;
 import pages.headers.headersByRole.AdminHeader;
+import utils.BrowserWrapper;
 
 
 /**
@@ -100,17 +101,22 @@ public class AddNewHospitalPage extends PageObject {
    }
 
    public void pushResetButton() {
-        if (resetButton.isEnabled())
         resetButton.click();
    }
 
    public HospitalListPage pushSaveButton() {
-        if (addressInputField.isEnabled() && countryInputField.isEnabled() && streetInputField.isEnabled()
-                && buildingInputField.isEnabled() && cityInputField.isEnabled()
-                && nameInputField.isEnabled() && descriptionInputField.isEnabled()) {
-            saveButton.click();
-        }
+        saveButton.click();
         return new HospitalListPage(driver);
+   }
+
+   public void addNewHospital(String address, String name, String description) {
+       BrowserWrapper.sleep(1);
+       addressData(address);
+       addHospitalName(name);
+       addHospitalDescription(description);
+       pushFillButton();
+       pushFindButton();
+       pushSaveButton();
    }
 
 

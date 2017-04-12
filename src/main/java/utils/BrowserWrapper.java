@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class BrowserWrapper {
 
-    private static final String FIREFOX_PROFIE_NAME = "default";
+    private static final String FIREFOX_PROFIE_NAME = "myProfile";
     private static final String WEBDRIVER_NAME = "webdriver.gecko.driver";
     private static final String LINUX_WEBDRIVER_PATH = "src/main/resources/geckodriver";
     private static final String WEBDRIVER_PATH = "src/main/resources/geckodriver.exe";
@@ -37,6 +37,7 @@ public class BrowserWrapper {
                 break;
             case "Windows 10":
                 System.setProperty(WEBDRIVER_NAME, WEBDRIVER_PATH);
+                break;
         }
 
         WebDriver driver = new FirefoxDriver(ffProfile);
@@ -46,7 +47,7 @@ public class BrowserWrapper {
     }
 
     public static void browserClose(WebDriver driver) {
-        driver.close();
+        driver.quit();
     }
 
     public static boolean isElementPresent(WebElement webElement) {

@@ -16,8 +16,9 @@ public class SchedulerPageTest extends BaseTest{
     public static final String TEST_BEGIN_AT_HOUR = "11:00";
     public static final String TEST_END_AT_HOUR = "20:00";
     public static final String TEST_WEEK_SIZE = "6 days";
-    public static final String MANAGER_LOGIN = "";
-    public static final String MANAGER_PASSWORD = "";
+    public static final int EXPECTED_WEEK_SIZE = 6;
+    public static final String EXPECTED_BEGIN_AT_HOUR = "11 00";
+    public static final String EXPECTED_END_AT_HOUR = "19 00";
 
     @Test
     public void testDefaultCondition() throws Exception{
@@ -41,9 +42,9 @@ public class SchedulerPageTest extends BaseTest{
         HospitalsPage hospitalsPage = new HospitalsPage(driver);
         SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
         BrowserWrapper.sleep(6);
-        schedulerPage.workWeekSizeSelector("6 days");
+        schedulerPage.workWeekSizeSelector(TEST_WEEK_SIZE);
         schedulerPage.saveButtonClick();
-        Assert.assertEquals(schedulerPage.getDaysNumber(), 6);
+        Assert.assertEquals(schedulerPage.getDaysNumber(), EXPECTED_WEEK_SIZE);
     }
 
     @Test
@@ -53,11 +54,10 @@ public class SchedulerPageTest extends BaseTest{
         HospitalsPage hospitalsPage = new HospitalsPage(driver);
         SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
         BrowserWrapper.sleep(6);
-        schedulerPage.workDayBeginAtSelector("11:00");
-        schedulerPage.workDayEndAtSelector("20:00");
+        schedulerPage.setDayDuration(TEST_BEGIN_AT_HOUR, TEST_END_AT_HOUR);
         schedulerPage.saveButtonClick();
-        Assert.assertEquals(schedulerPage.getBeginningHour(),"11 00");
-        Assert.assertEquals(schedulerPage.getEndingHour(), "19 00");
+        Assert.assertTrue(schedulerPage.getBeginningHour().equals(EXPECTED_BEGIN_AT_HOUR) && schedulerPage.getEndingHour().equals(EXPECTED_END_AT_HOUR));
+
     }
 
 

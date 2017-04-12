@@ -2,7 +2,9 @@ package utils;
 
 import org.openqa.selenium.*;
 import pages.admin.AllUsersPage;
+import pages.allUsers.HospitalSeekerHomePage;
 import pages.allUsers.PageObject;
+import pages.anonymous.LoginPage;
 import pages.manager.HospitalsPage;
 
 
@@ -27,6 +29,18 @@ public class BaseNavigation {
 
     }
 
+    public static void login1(WebDriver driver, String email, String password) throws InterruptedException{
+        BrowserWrapper.sleep(3);
+        HospitalSeekerHomePage hospitalSeekerHomePage = new HospitalSeekerHomePage(driver);
+        LoginPage loginPage = hospitalSeekerHomePage.notLogInUserHeader.loginButton();
+        BrowserWrapper.sleep(3);
+        loginPage.enterEmail(email);
+        BrowserWrapper.sleep(3);
+        loginPage.enterPassword(password);
+        BrowserWrapper.sleep(1);
+        loginPage.loginSubmitButton();
+    }
+
 
     public static void logout(WebDriver driver) throws InterruptedException {
         BrowserWrapper.sleep(2);
@@ -47,6 +61,7 @@ public class BaseNavigation {
     }
 
     public static AllUsersPage loginAsAdmin(WebDriver driver, String email, String password) throws InterruptedException {
+        System.out.println("This is console");
         login(driver, email, password);
         return new AllUsersPage(driver);
     }
