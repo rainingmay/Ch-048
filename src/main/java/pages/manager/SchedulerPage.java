@@ -15,9 +15,9 @@ import java.util.List;
 
 public class SchedulerPage extends PageObject {
 
-    public static final int DEFAULT_NUMBER_OF_DAYS = 5;
-    public static final String DEFAULT_BEGINNING_HOUR = "0 00";
-    public static final String DEFAULT_ENDING_HOUR = "23 00";
+    private static final int DEFAULT_NUMBER_OF_DAYS = 5;
+    private static final String DEFAULT_BEGINNING_HOUR = "0 00";
+    private static final String DEFAULT_ENDING_HOUR = "23 00";
 
     public ManagerHeader managerHeader;
     @FindBy(xpath = "/html/body/section/div/div/div[3]/div/form/div[2]/p")
@@ -163,6 +163,10 @@ public class SchedulerPage extends PageObject {
                 && getDaysNumber()== DEFAULT_NUMBER_OF_DAYS;
     }
 
+    public void setDayDuration(String begin, String end){
+        BrowserWrapper.selectDropdown(workDayBeginAtSelector, begin);
+        BrowserWrapper.selectDropdown(workDayEndAtSelector, end);
+    }
 
     public boolean checkDayButton(){
         return (BrowserWrapper.isElementPresent(dayTabButton));

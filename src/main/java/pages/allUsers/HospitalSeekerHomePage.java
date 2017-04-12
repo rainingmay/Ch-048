@@ -13,7 +13,7 @@ import pages.headers.headersByRole.NotLogInUserHeader;
 public class HospitalSeekerHomePage extends PageObject {
 
     //Temporary field
-    NotLogInUserHeader notLogInUserHeader;
+    public NotLogInUserHeader notLogInUserHeader;
 
 
 

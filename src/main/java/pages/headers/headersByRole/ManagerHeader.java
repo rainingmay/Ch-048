@@ -3,7 +3,6 @@ package pages.headers.headersByRole;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.headers.BaseHeader;
 import pages.manager.AddNewDoctorPage;
 import pages.manager.HospitalsPage;
 import pages.manager.ModerationFeedBackPage;
@@ -12,7 +11,7 @@ import pages.manager.ModerationFeedBackPage;
 /**
  * Created by Evgen on 06.04.2017.
  */
-public class ManagerHeader extends BaseHeader {
+public class ManagerHeader extends AuthorizedHeader {
 
     public ManagerHeader(WebDriver driver) {
         super(driver);

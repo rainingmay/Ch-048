@@ -46,7 +46,7 @@ public class BrowserWrapper {
     }
 
     public static void browserClose(WebDriver driver) {
-        driver.close();
+        driver.quit();
     }
 
     public static boolean isElementPresent(WebElement webElement) {
