@@ -6,12 +6,13 @@ import org.openqa.selenium.support.FindBy;
 import pages.allUsers.HospitalSearchResult;
 import pages.allUsers.HospitalSeekerHomePage;
 import pages.allUsers.MapSearch;
+import pages.allUsers.PageObject;
 
 
 /**
  * Created by Evgen on 05.04.2017.
  */
-public class BaseHeader {
+public class BaseHeader extends PageObject{
     protected WebDriver driver;
 
     @FindBy(className = "img-responsive logo")
@@ -50,7 +51,7 @@ public class BaseHeader {
     protected WebElement doctorSearchButton;
 
     public BaseHeader(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
 

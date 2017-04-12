@@ -18,6 +18,7 @@ public class BrowserWrapper {
     private static final String FIREFOX_PROFIE_NAME = "default";
     private static final String WEBDRIVER_NAME = "webdriver.gecko.driver";
     private static final String LINUX_WEBDRIVER_PATH = "src/main/resources/geckodriver";
+    private static final String MACOS_WEBDRIVER_PATH = "src/main/resources/geckodriver";
     private static final String WEBDRIVER_PATH = "src/main/resources/geckodriver.exe";
     private static final String BASE_URL = "https://localhost:8443/HospitalSeeker/";
 
@@ -37,6 +38,9 @@ public class BrowserWrapper {
                 break;
             case "Windows 10":
                 System.setProperty(WEBDRIVER_NAME, WEBDRIVER_PATH);
+             break;
+            case "MacOS":
+                 System.setProperty(WEBDRIVER_NAME, MACOS_WEBDRIVER_PATH);
         }
 
         WebDriver driver = new FirefoxDriver(ffProfile);

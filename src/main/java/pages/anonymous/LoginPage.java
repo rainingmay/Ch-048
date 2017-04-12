@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.allUsers.PageObject;
 import pages.headers.BaseHeader;
+import utils.BrowserWrapper;
 
 
 /**
@@ -55,6 +56,8 @@ public class LoginPage extends PageObject {
         loginSubmitButton.click();
 //        return new ;
     }
+
+
 
 
     public LoginPage(WebDriver driver) {
