@@ -68,7 +68,6 @@ public class AdminHeader extends AuthorizedHeader {
 
     public HospitalListPage allHospitalsPage() {
         actions.click();
-        BrowserWrapper.selectDropdown(hospitalListIco, " Hospital list");
         hospitalListIco.click();
         return new HospitalListPage(driver);
     }
