@@ -72,8 +72,17 @@ public class BaseTest {
         driver = BrowserWrapper.browserInitialization();
     }
 
+    @AfterMethod
+    public void afterMethod(){
+        try {
+            BaseNavigation.logout(this.driver);
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
     @AfterTest
     public void after() {
-        BrowserWrapper.browserClose(this.driver);
+            BrowserWrapper.browserClose(this.driver);
+
     }
 }
