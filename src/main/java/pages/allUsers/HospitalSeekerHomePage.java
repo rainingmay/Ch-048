@@ -10,7 +10,7 @@ import pages.headers.headersByRole.NotLogInUserHeader;
 /**
  * Created by Evgen on 05.04.2017.
  */
-public class HospitalSeekerHomePage extends BasePage {
+public class HospitalSeekerHomePage extends PageObject {
 
     //Temporary field
     public NotLogInUserHeader notLogInUserHeader;

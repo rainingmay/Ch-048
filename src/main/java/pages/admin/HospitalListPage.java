@@ -4,14 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.allUsers.BasePage;
+import pages.allUsers.PageObject;
 import pages.headers.headersByRole.AdminHeader;
 
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class HospitalListPage extends BasePage {
+public class HospitalListPage extends PageObject {
 
     public AdminHeader header;
 

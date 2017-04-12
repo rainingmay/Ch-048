@@ -4,14 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.allUsers.BasePage;
+import pages.allUsers.PageObject;
 import pages.headers.headersByRole.AdminHeader;
 
 
 /**
  * Created by Evgen on 09.04.2017.
  */
-public class HospitalsManagers extends BasePage {
+public class HospitalsManagers extends PageObject {
 
     public AdminHeader header;
 

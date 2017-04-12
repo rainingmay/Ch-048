@@ -3,14 +3,14 @@ package pages.manager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.allUsers.BasePage;
+import pages.allUsers.PageObject;
 import pages.headers.headersByRole.ManagerHeader;
 
 
 /**
  * Created by radga on 06.04.2017.
  */
-public class ModerationFeedBackPage extends BasePage {
+public class ModerationFeedBackPage extends PageObject {
     public ManagerHeader managerHeader;
 
     @FindBy(css = "input[value=\"remove\"]")

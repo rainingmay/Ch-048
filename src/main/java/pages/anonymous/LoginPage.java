@@ -1,16 +1,18 @@
 package pages.anonymous;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.allUsers.BasePage;
+import pages.allUsers.PageObject;
 import pages.headers.BaseHeader;
+import utils.BrowserWrapper;
 
 
 /**
  * Created by ytomktc on 07.04.2017.
  */
-public class LoginPage extends BasePage {
+public class LoginPage extends PageObject {
     public BaseHeader baseHeader;
 
     public LoginPage(WebDriver driver) {

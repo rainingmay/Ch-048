@@ -4,14 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.allUsers.BasePage;
+import pages.allUsers.PageObject;
 import pages.headers.headersByRole.ManagerHeader;
 
 
 /**
  * Created by ytomktc on 06.04.2017.
  */
-public class DepartmentsPage extends BasePage {
+public class DepartmentsPage extends PageObject {
 
     public ManagerHeader managerHeader;
     @FindBy(xpath = "/html/body/section/div/div/h1")

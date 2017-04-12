@@ -6,13 +6,13 @@ import org.openqa.selenium.support.FindBy;
 import pages.allUsers.HospitalSearchResult;
 import pages.allUsers.HospitalSeekerHomePage;
 import pages.allUsers.MapSearch;
-import pages.allUsers.BasePage;
+import pages.allUsers.PageObject;
 
 
 /**
  * Created by Evgen on 05.04.2017.
  */
-public class BaseHeader extends BasePage {
+public class BaseHeader extends PageObject {
 
 
     @FindBy(className = "img-responsive logo")
