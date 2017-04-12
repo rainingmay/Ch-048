@@ -107,7 +107,9 @@ public class BrowserWrapper {
 
     public static void selectDropdown(WebElement element, String text) {
         Select dropdown = new Select(element);
-        dropdown.selectByVisibleText(text);
+        //dropdown.selectByVisibleText(text);
+        if (dropdown.getAllSelectedOptions().size() != 0) dropdown.deselectAll();
+        dropdown.selectByValue(text);
     }
     public static void sleep(int Seconds) {
         try {

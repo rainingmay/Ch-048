@@ -1,9 +1,6 @@
 package pages.adminsidetest;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotVisibleException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.admin.AllUsersPage;
@@ -32,7 +29,7 @@ public class AdminTest extends BaseTest {
     public void correctUsersDataTest() {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, LOGIN, PASSWORD);
-            BrowserWrapper.sleep(3);
+            BrowserWrapper.sleep(1);
 
             List<String> actual = allUsersPage.getUserDataFromTableRow(4);
             List<String> expected = UserDAO.getUserFromDatabaseByEmail(actual.get(0));
@@ -44,17 +41,17 @@ public class AdminTest extends BaseTest {
     }
 
     @Test(priority = 2)
-    public void viewInformTest () {
+    public void viewWindowTest() {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, LOGIN, PASSWORD);
-            BrowserWrapper.sleep(2);
+            BrowserWrapper.sleep(1);
 
             List<String> actual = allUsersPage.getUserDataFromInfoWindow(5);
             List<String> allInfo = UserDAO.getUserFromDatabaseByEmail(actual.get(0));
             List<String> expected = new LinkedList<>();
             Collections.addAll(expected, new String[]{allInfo.get(0), "true"});
 
-            BrowserWrapper.sleep(2);
+            BrowserWrapper.sleep(1);
 
             Assert.assertEquals(actual, expected);
         } catch (InterruptedException e) {
@@ -66,26 +63,59 @@ public class AdminTest extends BaseTest {
     public void editWindowTest() {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, LOGIN, PASSWORD);
-            BrowserWrapper.sleep(3);
+            BrowserWrapper.sleep(1);
 
-            boolean actual;
+            boolean actual = false;
             try{
                 actual = allUsersPage.openEditWindow(1).findElement(By.cssSelector("input")).isDisplayed();
-            } catch (ElementNotVisibleException e) {actual = false;}
+            } catch (Exception e) {
+                actual = false;
+            } finally {
+                allUsersPage.closeEditWindow();
+                BrowserWrapper.sleep(1);
+                Assert.assertEquals(actual, true);
+            }
 
-            allUsersPage.closeEditWindow();
-
-            BrowserWrapper.sleep(3);
-
-            Assert.assertEquals(actual, true);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    @Test
+    @Test(priority = 4)
     public void changeRoleTest() {
+        try {
+            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, LOGIN, PASSWORD);
+            BrowserWrapper.sleep(1);
 
+            String expected = "MANAGER";
+
+            allUsersPage.changeRoleInEditWindow(2, "MANAGER");
+
+            BrowserWrapper.sleep(3);
+
+            String actual = allUsersPage.getUserDataFromTableRow(2).get(3);
+
+            Assert.assertEquals(actual, expected);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test(priority = 5)
+    public void changeCountOfUsersOnPageTest() {
+        try {
+            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, LOGIN, PASSWORD);
+            BrowserWrapper.sleep(1);
+            int expected = 20;
+            allUsersPage = allUsersPage.changeCountOfUsersOnPage(expected);
+            int actual = allUsersPage.getCountOfUsersInTable();
+
+            Assert.assertEquals(actual, expected);
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -96,5 +126,4 @@ public class AdminTest extends BaseTest {
             return true;
         }
     }
-
 }
