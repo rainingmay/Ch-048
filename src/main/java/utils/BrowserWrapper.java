@@ -1,9 +1,6 @@
 package utils;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
@@ -20,20 +17,31 @@ public class BrowserWrapper {
 
     private static final String FIREFOX_PROFIE_NAME = "default";
     private static final String WEBDRIVER_NAME = "webdriver.gecko.driver";
+    private static final String LINUX_WEBDRIVER_PATH = "src/main/resources/geckodriver";
     private static final String WEBDRIVER_PATH = "src/main/resources/geckodriver.exe";
     private static final String BASE_URL = "https://localhost:8443/HospitalSeeker/";
 
-    private static WebDriver driver = browserInitialization();
-    private static WebDriverWait wait = new WebDriverWait(driver,10);
+    private static WebDriverWait wait;
+
 
     public static WebDriver browserInitialization() {
+
         ProfilesIni profile = new ProfilesIni();
         FirefoxProfile ffProfile = profile.getProfile(FIREFOX_PROFIE_NAME);
         ffProfile.setAcceptUntrustedCertificates(true);
         ffProfile.setAssumeUntrustedCertificateIssuer(false);
-        System.setProperty(WEBDRIVER_NAME, WEBDRIVER_PATH);
+        String osName = System.getProperty("os.name");
+        switch (osName){
+            case "Linux":
+                System.setProperty(WEBDRIVER_NAME, LINUX_WEBDRIVER_PATH);
+                break;
+            case "Windows 10":
+                System.setProperty(WEBDRIVER_NAME, WEBDRIVER_PATH);
+        }
+
         WebDriver driver = new FirefoxDriver(ffProfile);
         driver.get(BASE_URL);
+        wait = new WebDriverWait(driver,10);
         return driver;
     }
 
