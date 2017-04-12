@@ -74,6 +74,7 @@ public class BaseTest {
     public void afterMethod(){
         try {
             BaseNavigation.logout(this.driver);
+
         }catch (InterruptedException e){
             e.printStackTrace();
         }
