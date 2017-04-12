@@ -38,7 +38,7 @@ public class BrowserWrapper {
             case "Linux":
                 System.setProperty(WEBDRIVER_NAME, LINUX_WEBDRIVER_PATH);
                 break;
-            case "Windows":
+            case "Windows 10":
                 System.setProperty(WEBDRIVER_NAME, WEBDRIVER_PATH);
         }
 
@@ -49,7 +49,7 @@ public class BrowserWrapper {
     }
 
     public static void browserClose(WebDriver driver) {
-        driver.quit();
+        driver.close();
     }
 
     public static boolean isElementPresent(WebElement webElement) {

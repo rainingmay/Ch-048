@@ -4,7 +4,6 @@ package pages.adminsidetest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.annotations.Test;
-import pages.AdminSideTest.BaseTest;
 import pages.admin.AddUserPage;
 import pages.admin.AllUsersPage;
 import pages.manager.HospitalsPage;

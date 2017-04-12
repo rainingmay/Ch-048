@@ -1,10 +1,7 @@
 package utils;
 
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
