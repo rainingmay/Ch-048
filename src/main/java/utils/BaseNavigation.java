@@ -7,18 +7,13 @@ import pages.allUsers.PageObject;
 import pages.anonymous.LoginPage;
 import pages.manager.HospitalsPage;
 
-import java.sql.Driver;
-
 
 /**
  * Created by ytomktc on 07.04.2017.
  */
 public class BaseNavigation {
 
-
-
-
-    public static void login(WebDriver driver, String email, String password) throws InterruptedException {
+    public static void login1(WebDriver driver, String email, String password) throws InterruptedException {
 
         BrowserWrapper.sleep(1);
         driver.findElement(By.cssSelector("a[href=\'/HospitalSeeker/login\']")).click();
@@ -33,31 +28,20 @@ public class BaseNavigation {
 
     }
 
-    public static void login1(WebDriver driver, String email, String password) throws InterruptedException{
-        BrowserWrapper.sleep(3);
+
+    public static void login(WebDriver driver, String email, String password) throws InterruptedException{
+        BrowserWrapper.sleep(1);
         HospitalSeekerHomePage hospitalSeekerHomePage = new HospitalSeekerHomePage(driver);
+        BrowserWrapper.sleep(1);
         LoginPage loginPage = hospitalSeekerHomePage.notLogInUserHeader.loginButton();
-        BrowserWrapper.sleep(3);
-        loginPage.enterEmail(email);
-        BrowserWrapper.sleep(3);
-        loginPage.enterPassword(password);
         BrowserWrapper.sleep(1);
-        loginPage.loginSubmitButton();
-    }
-
-    public static void login2(WebDriver driver, String email, String password){
-        LoginPage loginPage = new LoginPage(driver);
-        BrowserWrapper.sleep(1);
-        loginPage.enterEmail(email);
-        loginPage.enterPassword(password);
-        loginPage.loginSubmitButton();
-
+        loginPage.authorization(email, password);
 
     }
 
 
     public static void logout(WebDriver driver) throws InterruptedException {
-        BrowserWrapper.sleep(1);
+        BrowserWrapper.sleep(2);
         driver.findElement(By.cssSelector("ul.my-navbar>li:nth-last-child(3)")).click();
         driver.findElement(By.cssSelector("ul.my-navbar>li:nth-last-child(3) li:last-child a")).click();
     }
@@ -75,7 +59,6 @@ public class BaseNavigation {
     }
 
     public static AllUsersPage loginAsAdmin(WebDriver driver, String email, String password) throws InterruptedException {
-        System.out.println("This is console");
         login(driver, email, password);
         return new AllUsersPage(driver);
     }

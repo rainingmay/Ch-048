@@ -1,5 +1,6 @@
 package pages.anonymous;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -17,7 +18,7 @@ public class LoginPage extends PageObject {
     private WebElement loginText;
 
     @FindBy(id="email")
-    private WebElement emailTextField;
+    public WebElement emailTextField;
 
     @FindBy(id="password")
     private WebElement passwordTextField;
@@ -34,14 +35,12 @@ public class LoginPage extends PageObject {
     @FindBy(id="registerRedirect")
     private WebElement registerButton;
 
-    public void enterEmail(String email){
+    public void authorization(String email, String password){
         emailTextField.clear();
         emailTextField.sendKeys(email);
-    }
-
-    public void enterPassword(String email){
         passwordTextField.clear();
-        passwordTextField.sendKeys(email);
+        passwordTextField.sendKeys(password);
+        loginSubmitButton.click();
     }
 
     public void rememberMeButtonClick(){
@@ -55,8 +54,6 @@ public class LoginPage extends PageObject {
     public void loginSubmitButton(){
         loginSubmitButton.click();
     }
-
-
 
 
     public LoginPage(WebDriver driver) {

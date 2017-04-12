@@ -14,17 +14,17 @@ import utils.BrowserWrapper;
  */
 public class NotLogInUserHeader extends BaseHeader {
 
-    @FindBy(css = "//*[@id=\"bs-example-navbar-collapse-1\"]/ul/li[4]/a")
+    @FindBy(xpath = "//*[@id=\"bs-example-navbar-collapse-1\"]/ul/li[4]/a")
     protected WebElement login;
 
     public LoginPage loginButton(){
         try {
             login.click();
-            System.out.println("2");
         }catch (Exception e){
             e.printStackTrace();
         }
-        return new LoginPage(driver);
+        LoginPage loginPage = new LoginPage(driver);
+        return loginPage;
     }
 
     public NotLogInUserHeader(WebDriver driver) {

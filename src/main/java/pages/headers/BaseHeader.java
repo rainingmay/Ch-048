@@ -12,8 +12,8 @@ import pages.allUsers.PageObject;
 /**
  * Created by Evgen on 05.04.2017.
  */
-public class BaseHeader extends PageObject{
-    protected WebDriver driver;
+public class BaseHeader extends PageObject {
+
 
     @FindBy(className = "img-responsive logo")
     protected WebElement logo;
