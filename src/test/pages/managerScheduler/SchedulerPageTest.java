@@ -1,7 +1,6 @@
 package pages.managerScheduler;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.manager.HospitalsPage;
@@ -29,21 +28,6 @@ public class SchedulerPageTest extends BaseTest{
     }
 
 
-
-//    @Test
-//    public void testSchedulerCreation() throws Exception{
-//        BaseNavigation.login(driver, "manager.jh@hospitals.ua", "1111");
-//        HospitalsPage hospitalsPage = new HospitalsPage(driver);
-//        SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
-//        BrowserWrapper.sleep(6);
-//        schedulerPage.workWeekSizeSelector("6 days");
-//
-//
-//        Assert.assertEquals(schedulerPage.getDaysNumber(), 6);
-//        Assert.assertEquals(schedulerPage.getBeginningHour(),"11 00");
-//        Assert.assertEquals(schedulerPage.getEndingHour(), "19 00");
-//    }
-
     @Test
     public void testWeekSize() throws Exception{
         BaseNavigation.login(driver, "manager.jh@hospitals.ua", "1111");
@@ -51,6 +35,7 @@ public class SchedulerPageTest extends BaseTest{
         SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
         BrowserWrapper.sleep(6);
         schedulerPage.workWeekSizeSelector("6 days");
+        schedulerPage.saveButtonClick();
         Assert.assertEquals(schedulerPage.getDaysNumber(), 6);
     }
 

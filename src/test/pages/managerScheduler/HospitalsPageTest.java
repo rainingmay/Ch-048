@@ -1,4 +1,4 @@
-package pages.manager.tests;
+package pages.managerScheduler;
 
 
 import org.openqa.selenium.By;
@@ -6,7 +6,9 @@ import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.manager.HospitalsPage;
+import pages.manager.tests.FunctionalTest;
 import utils.BaseNavigation;
+import utils.BaseTest;
 
 
 import java.util.List;
@@ -15,7 +17,7 @@ import java.util.List;
 /**
  * Created by radga on 07.04.2017.
  */
-public class HospitalsPageTest extends FunctionalTest {
+public class HospitalsPageTest extends BaseTest {
    // private HospitalsPage hospitalsPage = new HospitalsPage(driver);
 
     @Test

@@ -1,14 +1,8 @@
 package utils;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.*;
 import pages.admin.AllUsersPage;
-import pages.allUsers.HospitalSeekerHomePage;
 import pages.allUsers.PageObject;
-import pages.anonymous.LoginPage;
 import pages.manager.HospitalsPage;
 
 
@@ -18,12 +12,8 @@ import pages.manager.HospitalsPage;
 public class BaseNavigation {
 
     public static void login(WebDriver driver, String email, String password) throws InterruptedException {
-//TODO in proccess of designe
-//        HospitalSeekerHomePage hospitalSeekerHomePage = new HospitalSeekerHomePage(driver);
-//        LoginPage loginPage = hospitalSeekerHomePage.moveToLoginPage();
-//        loginPage.enterEmail(email);
-//        loginPage.enterPassword(password);
-//        loginPage.loginSubmitButton();
+
+        BrowserWrapper.sleep(3);
         driver.findElement(By.cssSelector("a[href=\'/HospitalSeeker/login\']")).click();
         BrowserWrapper.sleep(3);
         driver.findElement(By.id("email")).clear();
@@ -39,8 +29,8 @@ public class BaseNavigation {
 
     public static void logout(WebDriver driver) throws InterruptedException {
         Thread.sleep(1000);
-        driver.findElement(By.xpath("(//a[contains(@href, '#')])[2]")).click();
-        driver.findElement(By.xpath("(//ul[@id='dropdawn']/li[2]/a/span)[2]")).click();
+        driver.findElement(By.cssSelector("ul.my-navbar>li:nth-last-child(3)")).click();
+        driver.findElement(By.cssSelector("ul.my-navbar>li:nth-last-child(3) li:last-child a")).click();
     }
 
 
