@@ -85,6 +85,9 @@ public class AllUsersPage extends PageObject {
     @FindBy(css = "a[aria-label='Next']")
     public WebElement nextPageButton;
 
+    @FindBy(xpath = "/html/body/section/div[1]/div[1]/div/h4")
+    public WebElement createdLabel;
+
 
     private WebElement editButton;
 
@@ -97,8 +100,10 @@ public class AllUsersPage extends PageObject {
     }
 
 
-
-
+    public AllUsersPage getCreatedTableText(WebDriver driver){
+        createdLabel.getText();
+        return new AllUsersPage(driver);
+    }
 
 
     public AllUsersPage changeCountOfUsersOnPage(int count) {

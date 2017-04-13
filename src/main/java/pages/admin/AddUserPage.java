@@ -35,7 +35,7 @@ public class AddUserPage extends PageObject {
     private WebElement confirmPasswordInput;
 
     @FindBy(className = "col-sm-2 control-label")
-    private WebElement roleLable;
+    private WebElement roleLabel;
 
     @FindBy(id = "userRoles")
     private WebElement userRolesSelect;
@@ -48,6 +48,15 @@ public class AddUserPage extends PageObject {
 
     @FindBy(id = "cancel")
     private WebElement cancelButton;
+
+    @FindBy(id="email-error")
+    public WebElement emailErrorLabel;
+
+    @FindBy(id="password-error")
+    private WebElement passwordErrorLabel;
+
+    @FindBy(id = "userRoles-error")
+    public WebElement userRolesErrorLabel;
 
     public AllUsersPage submitAdding() {
         newUserButton.click();
