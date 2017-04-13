@@ -25,23 +25,31 @@ public class BaseTest {
 
     protected WebDriver driver;
 
-    @BeforeClass
+    @BeforeMethod
     public void before() {
-        driver = BrowserWrapper.browserInitialization();
+        this.driver = BrowserWrapper.browserInitialization();
+
     }
+
+//    @BeforeMethod
+//    private void beforeMethod(){
+//        this.driver.get("https://localhost:8443/HospitalSeeker/");
+//    }
 
     @AfterMethod
     public void afterMethod(){
         try {
             BaseNavigation.logout(this.driver);
-
+            BrowserWrapper.browserClose(driver);
         }catch (InterruptedException e){
             e.printStackTrace();
         }
+
+
     }
+
     @AfterClass
     public void after() {
             BrowserWrapper.browserClose(this.driver);
-
     }
 }

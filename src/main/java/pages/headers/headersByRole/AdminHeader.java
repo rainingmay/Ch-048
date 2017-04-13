@@ -3,10 +3,10 @@ package pages.headers.headersByRole;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pages.admin.AddNewHospitalPage;
 import pages.admin.AllUsersPage;
 import utils.BrowserWrapper;
 import pages.admin.HospitalListPage;
-import utils.BrowserWrapper;
 
 
 /**
@@ -69,9 +69,15 @@ public class AdminHeader extends AuthorizedHeader {
         return new AllUsersPage(driver);
     }
 
-    public HospitalListPage allHospitalsPage() {
+    public HospitalListPage goToAllHospitalsPage() {
         actions.click();
         hospitalListIco.click();
         return new HospitalListPage(driver);
+    }
+
+    public AddNewHospitalPage goToAddNewHospitalPage() {
+        actions.click();
+        addHospitalIco.click();
+        return new AddNewHospitalPage(driver);
     }
 }

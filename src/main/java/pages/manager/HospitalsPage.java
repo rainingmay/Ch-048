@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import pages.allUsers.PageObject;
 import pages.headers.headersByRole.ManagerHeader;
+import utils.BrowserWrapper;
 
 
 import java.util.ArrayList;
@@ -237,33 +238,13 @@ public class HospitalsPage extends PageObject {
     }
 
     public String getValue(String row, String colName){
-        String td = null;
-        switch (colName){
-            case "email":
-                td = "2";
-                break;
-            case "first name":
-                td = "3";
-                break;
-            case "last name":
-                td = "4";
-                break;
-            case "specialization":
-                td = "5";
-                break;
-            case "category":
-                td = "6";
-                break;
-            case "actions":
-                td = "7";
-                break;
-        }
+        String td = tdFinder(colName);
+
        return driver.findElement(By.cssSelector("tbody tr:nth-child(" + row + ") td:nth-child(" + td + ")")).getText();
     }
 
-    public List<String> getCoulumn(String colName){
+    public String tdFinder(String colName){
         String td = null;
-        ArrayList<String> list = new ArrayList<>();
         switch (colName){
             case "email":
                 td = "2";
@@ -284,6 +265,13 @@ public class HospitalsPage extends PageObject {
                 td = "7";
                 break;
         }
+        return td;
+    }
+
+    public List<String> getCoulumn(String colName){
+        String td = tdFinder(colName);
+        ArrayList<String> list = new ArrayList<>();
+
         for( WebElement webElement : driver.findElements(By.cssSelector("tbody tr td:nth-child("+ td +")"))){
             list.add(webElement.getText());
         }
@@ -302,8 +290,9 @@ public class HospitalsPage extends PageObject {
         driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #ediUser")).click();
     }
     public SchedulerPage scheduleButtonClick(int i) throws InterruptedException {
-        Thread.sleep(3000);
-         driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #schedule")).click();
+         WebElement element = driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #schedule"));
+        BrowserWrapper.waitUntilElementClickable(element);
+        element.click();
          return new SchedulerPage(driver);
     }
 

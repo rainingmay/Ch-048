@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Evgen on 11.04.2017.
@@ -43,16 +44,22 @@ public class BrowserWrapper {
                  System.setProperty(WEBDRIVER_NAME, MACOS_WEBDRIVER_PATH);
                 break;
         }
-
         WebDriver driver = new FirefoxDriver(ffProfile);
         driver.get(BASE_URL);
         wait = new WebDriverWait(driver,10);
         return driver;
     }
 
+
     public static void browserClose(WebDriver driver) {
         driver.quit();
     }
+
+
+    public static void pageClose(WebDriver driver){
+        driver.close();
+    }
+
 
     public static boolean isElementPresent(WebElement webElement) {
         try {
@@ -62,6 +69,7 @@ public class BrowserWrapper {
         }
     }
 
+
     public static boolean isElementEnable(WebElement webElement) {
         try {
             return webElement.isEnabled();
@@ -70,55 +78,79 @@ public class BrowserWrapper {
         }
     }
 
+
     public static void waitUntilAlertIsPresent() {
         wait.until(ExpectedConditions.alertIsPresent());
     }
+
 
     public static void waitUntilElementSelectionState(WebElement element, boolean bool) {
         wait.until(ExpectedConditions.elementSelectionStateToBe(element, bool));
     }
 
+
     public static void waitUntilElementClickable(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
+
 
     public static void waitUntilElementSelected(WebElement element) {
         wait.until(ExpectedConditions.elementToBeSelected(element));
     }
 
+
     public static void waitUntilElementVisible(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
+
 
     public static void waitUntilElementInvisible(By locator) {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
     }
 
+
     public static void waitUntilTitleContains(String title) {
         wait.until(ExpectedConditions.titleContains(title));
     }
+
 
     public static void waitUntilAllVisible(List<WebElement> elements) {
         wait.until(ExpectedConditions.visibilityOfAllElements(elements));
     }
 
+
     public static void waitUntilElementIsPresent(By locator) {
         wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
+
 
     public static void waitUntilUrlAvaliable(String url) {
         wait.until(ExpectedConditions.urlToBe(url));
     }
 
+
     public static void selectDropdown(WebElement element, String text) {
         Select dropdown = new Select(element);
         dropdown.selectByVisibleText(text);
     }
+
+
     public static void sleep(int Seconds) {
         try {
             Thread.sleep(Seconds * 1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+
+    public static void implicitWait(WebDriver driver){
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+    }
+
+
+    public static void waitForPage(WebDriver driver){
+        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
     }
 }

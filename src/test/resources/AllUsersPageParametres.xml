@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<suite name="test-parametres">
+    <test name="AllUsersPageTest">
+
+        <parameter name="login" value="admin@hospitals.ua"/>
+        <parameter name="password" value="1111"/>
+        <parameter name="role" value="PATIENT"/>
+        <parameter name="fieldForSearch" value="firstName"/>
+        <parameter name="valueOfField" value="a"/>
+        <parameter name="count" value="20"/>
+
+        <classes>
+            <class name="pages.adminsidetest.AllUsersPageTest"/>
+        </classes>
+    </test>
+
+</suite>
