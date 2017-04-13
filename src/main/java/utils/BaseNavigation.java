@@ -5,6 +5,7 @@ import pages.admin.AllUsersPage;
 import pages.allUsers.HospitalSeekerHomePage;
 import pages.allUsers.PageObject;
 import pages.anonymous.LoginPage;
+import pages.headers.headersByRole.AuthorizedHeader;
 import pages.manager.HospitalsPage;
 
 
@@ -13,39 +14,34 @@ import pages.manager.HospitalsPage;
  */
 public class BaseNavigation {
 
-    public static void login(WebDriver driver, String email, String password) throws InterruptedException {
 
-        BrowserWrapper.sleep(3);
-        Thread.sleep(3000);
-        driver.findElement(By.cssSelector("a[href=\'/HospitalSeeker/login\']")).click();
-        BrowserWrapper.sleep(3);
-        driver.findElement(By.id("email")).clear();
-        driver.findElement(By.id("email")).sendKeys(email);
-        BrowserWrapper.sleep(1);
-        driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys(password);
-        BrowserWrapper.sleep(1);
-        driver.findElement(By.id("loginSubmit")).click();
-
-    }
-
-    public static void login1(WebDriver driver, String email, String password) throws InterruptedException{
-        BrowserWrapper.sleep(3);
+    public static void login(WebDriver driver, String email, String password) throws InterruptedException{
         HospitalSeekerHomePage hospitalSeekerHomePage = new HospitalSeekerHomePage(driver);
         LoginPage loginPage = hospitalSeekerHomePage.notLogInUserHeader.loginButton();
-        BrowserWrapper.sleep(3);
-        loginPage.enterEmail(email);
-        BrowserWrapper.sleep(3);
-        loginPage.enterPassword(password);
-        BrowserWrapper.sleep(1);
-        loginPage.loginSubmitButton();
+        BrowserWrapper.implicitWait(driver);
+        loginPage.authorization(email, password);
+
     }
 
 
-    public static void logout(WebDriver driver) throws InterruptedException {
-        BrowserWrapper.sleep(2);
+    public static void logout1(WebDriver driver) throws InterruptedException {
+        BrowserWrapper.waitUntilElementClickable(driver.findElement(By.cssSelector("ul.my-navbar>li:nth-last-child(3)")));
         driver.findElement(By.cssSelector("ul.my-navbar>li:nth-last-child(3)")).click();
+        BrowserWrapper.implicitWait(driver);
+
+        BrowserWrapper.waitUntilElementClickable( driver.findElement(By.cssSelector("ul.my-navbar>li:nth-last-child(3) li:last-child a")));
         driver.findElement(By.cssSelector("ul.my-navbar>li:nth-last-child(3) li:last-child a")).click();
+        BrowserWrapper.waitForPage(driver);
+
+    }
+
+
+    public static HospitalSeekerHomePage logout(WebDriver driver) throws InterruptedException{
+        AuthorizedHeader authorizedHeader = new AuthorizedHeader(driver);
+        authorizedHeader.profileButtonClick();
+        HospitalSeekerHomePage hospitalSeekerHomePage = authorizedHeader.logoutButtonClick();
+        BrowserWrapper.implicitWait(driver);
+        return hospitalSeekerHomePage;
     }
 
 
@@ -61,7 +57,6 @@ public class BaseNavigation {
     }
 
     public static AllUsersPage loginAsAdmin(WebDriver driver, String email, String password) throws InterruptedException {
-        System.out.println("This is console");
         login(driver, email, password);
         return new AllUsersPage(driver);
     }

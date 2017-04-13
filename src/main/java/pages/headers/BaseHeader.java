@@ -13,7 +13,7 @@ import pages.allUsers.PageObject;
  * Created by Evgen on 05.04.2017.
  */
 public class BaseHeader extends PageObject {
-    protected WebDriver driver;
+
 
     @FindBy(className = "img-responsive logo")
     protected WebElement logo;
@@ -50,10 +50,8 @@ public class BaseHeader extends PageObject {
     @FindBy(id = "select_doctor_search_button")
     protected WebElement doctorSearchButton;
 
-    public BaseHeader(WebDriver driver)
-    {
+    public BaseHeader(WebDriver driver) {
         super(driver);
-       // this.driver = driver;
     }
 
 

@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Evgen on 11.04.2017.
@@ -18,6 +19,7 @@ public class BrowserWrapper {
     private static final String FIREFOX_PROFIE_NAME = "default";
     private static final String WEBDRIVER_NAME = "webdriver.gecko.driver";
     private static final String LINUX_WEBDRIVER_PATH = "src/main/resources/geckodriver";
+    private static final String MACOS_WEBDRIVER_PATH = "src/main/resources/geckodriver";
     private static final String WEBDRIVER_PATH = "src/main/resources/geckodriver.exe";
     private static final String BASE_URL = "https://localhost:8443/HospitalSeeker/";
 
@@ -37,9 +39,11 @@ public class BrowserWrapper {
                 break;
             case "Windows 10":
                 System.setProperty(WEBDRIVER_NAME, WEBDRIVER_PATH);
+             break;
+            case "MacOS":
+                 System.setProperty(WEBDRIVER_NAME, MACOS_WEBDRIVER_PATH);
                 break;
         }
-
         WebDriver driver = new FirefoxDriver(ffProfile);
         driver.get(BASE_URL);
         wait = new WebDriverWait(driver,10);
@@ -48,6 +52,10 @@ public class BrowserWrapper {
 
     public static void browserClose(WebDriver driver) {
         driver.quit();
+    }
+
+    public static void pageClose(WebDriver driver){
+        driver.close();
     }
 
     public static boolean isElementPresent(WebElement webElement) {
@@ -108,9 +116,7 @@ public class BrowserWrapper {
 
     public static void selectDropdown(WebElement element, String text) {
         Select dropdown = new Select(element);
-        //dropdown.selectByVisibleText(text);
-        if (dropdown.getAllSelectedOptions().size() != 0) dropdown.deselectAll();
-        dropdown.selectByValue(text);
+        dropdown.selectByVisibleText(text);
     }
     public static void sleep(int Seconds) {
         try {
@@ -118,5 +124,12 @@ public class BrowserWrapper {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+    public static void implicitWait(WebDriver driver){
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+    }
+    public static void waitForPage(WebDriver driver){
+        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
     }
 }

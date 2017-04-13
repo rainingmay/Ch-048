@@ -14,13 +14,13 @@ import utils.BrowserWrapper;
  */
 public class NotLogInUserHeader extends BaseHeader {
 
-    @FindBy(css = "//*[@id=\"bs-example-navbar-collapse-1\"]/ul/li[4]/a")
+    @FindBy(css = "ul.my-navbar li:nth-child(4)>a")
     protected WebElement login;
 
     public LoginPage loginButton(){
         try {
+            BrowserWrapper.waitUntilElementClickable(login);
             login.click();
-            System.out.println("2");
         }catch (Exception e){
             e.printStackTrace();
         }
