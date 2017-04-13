@@ -106,5 +106,19 @@ public class AddUserPage extends PageObject {
         submitAdding();
 
     }
+
+    public void addNewUserWithotRole(String email, String password) throws InterruptedException {
+        BrowserWrapper.sleep(1);
+        driver.get("https://localhost:8443/HospitalSeeker/admin/newUser");
+        Thread.sleep(1000);
+        enterEmail(email);
+        enterPassword(password);
+        confirmPassword(password);
+        enableButtonClick();
+        submitAdding();
+
+    }
+
+
 }
 
