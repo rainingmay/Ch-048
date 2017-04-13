@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Evgen on 11.04.2017.
@@ -43,7 +44,6 @@ public class BrowserWrapper {
                  System.setProperty(WEBDRIVER_NAME, MACOS_WEBDRIVER_PATH);
                 break;
         }
-
         WebDriver driver = new FirefoxDriver(ffProfile);
         driver.get(BASE_URL);
         wait = new WebDriverWait(driver,10);
@@ -52,6 +52,10 @@ public class BrowserWrapper {
 
     public static void browserClose(WebDriver driver) {
         driver.quit();
+    }
+
+    public static void pageClose(WebDriver driver){
+        driver.close();
     }
 
     public static boolean isElementPresent(WebElement webElement) {
@@ -120,5 +124,12 @@ public class BrowserWrapper {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+    public static void implicitWait(WebDriver driver){
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+    }
+    public static void waitForPage(WebDriver driver){
+        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
     }
 }

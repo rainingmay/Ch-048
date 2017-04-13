@@ -1,5 +1,7 @@
 package pages.manager;
 
+
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
@@ -8,9 +10,10 @@ import pages.allUsers.PageObject;
 import pages.headers.headersByRole.ManagerHeader;
 import utils.BaseNavigation;
 import utils.BrowserWrapper;
-
+import org.openqa.selenium.WebDriverException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 public class SchedulerPage extends PageObject {
@@ -122,21 +125,19 @@ public class SchedulerPage extends PageObject {
     @FindBy(css = "div.dhx_scale_hour:last-child")
     public WebElement endHour;
 
-    public StringBuilder errors = new StringBuilder();
 
     public void nextMonthButtonClick() throws InterruptedException {
-        BrowserWrapper.sleep(3);
+        BrowserWrapper.implicitWait(driver);
         nextMonthButton.click();
     }
     public void setAppointment(String text, int column) throws InterruptedException {
         nextMonthButtonClick();
         WebElement col  = tableColomns.get(column+1);
-
-
+        BrowserWrapper.waitUntilElementClickable(col);
         BaseNavigation.doubleClick(driver,col);
-
-        BrowserWrapper.sleep(3);
+        BrowserWrapper.implicitWait(driver);
         eventInput.sendKeys(text);
+        BrowserWrapper.waitUntilElementClickable(saveButton);
         saveEvent.click();
     }
 
@@ -156,7 +157,6 @@ public class SchedulerPage extends PageObject {
     }
 
 
-    //TODO add to constant;
     public boolean checkDefaultConditionScheduler(){
         return  beginningHour.getText().equals(DEFAULT_BEGINNING_HOUR)
                 && endHour.getText().endsWith(DEFAULT_ENDING_HOUR)
@@ -164,98 +164,102 @@ public class SchedulerPage extends PageObject {
     }
 
     public void setDayDuration(String begin, String end){
+        BrowserWrapper.waitUntilElementClickable(workDayBeginAtSelector);
         BrowserWrapper.selectDropdown(workDayBeginAtSelector, begin);
+        BrowserWrapper.waitUntilElementClickable(workDayEndAtSelector);
         BrowserWrapper.selectDropdown(workDayEndAtSelector, end);
     }
 
-    public boolean checkDayButton(){
+    private boolean checkDayButton(){
         return (BrowserWrapper.isElementPresent(dayTabButton));
     }
 
-    public boolean checkWeekButton(){
+    private boolean checkWeekButton(){
         return BrowserWrapper.isElementPresent(weekTabButton);
 
     }
 
-    public boolean checkMonthButton(){
+    private boolean checkMonthButton(){
         return BrowserWrapper.isElementPresent(monthTabButton);
     }
 
-    public boolean checkMiniCalendarButton(){
+    private boolean checkMiniCalendarButton(){
         return BrowserWrapper.isElementPresent(miniCalendarButton);
     }
 
 
-    public boolean checkTodayButton(){
+    private boolean checkTodayButton(){
         return BrowserWrapper.isElementPresent(todayButton);
     }
 
-    public boolean checkPreviousButton(){
+    private boolean checkPreviousButton(){
         return BrowserWrapper.isElementPresent(previousMonthButton);
     }
 
-    public boolean checkNextButton(){
+    private boolean checkNextButton(){
         return BrowserWrapper.isElementPresent(nextMonthButton);
     }
 
-    public boolean checkWeekSizeSelectorSelector(){
+    private boolean checkWeekSizeSelectorSelector(){
         return BrowserWrapper.isElementPresent(workWeekSizeSelector);
     }
 
-    public boolean checkBeginAtHourSelector(){
+    private boolean checkBeginAtHourSelector(){
         return BrowserWrapper.isElementPresent(beginningHour);
     }
 
-    public boolean checkEndAtHourSelector() {
+    private boolean checkEndAtHourSelector() {
         return BrowserWrapper.isElementPresent(endHour);
     }
 
-    public boolean checkAppointmentSizeSelector(){
+    private boolean checkAppointmentSizeSelector(){
         return BrowserWrapper.isElementPresent(apointmentSizeSelector);
     }
 
+    private boolean checkDoctorLabel(){return BrowserWrapper.isElementPresent(doctorNameLabel); };
+
     public boolean isPageReady() throws Exception {
+        BrowserWrapper.waitUntilElementVisible(doctorNameLabel);
         StringBuilder errors = new StringBuilder();
         if(!checkAppointmentSizeSelector()){
-            errors.append("appointment size selector, ");
+            errors.append("appointment size selector\n");
         }
         if(!checkBeginAtHourSelector()){
-            errors.append("begin at hour selector, ");
+            errors.append("begin at hour selector\n");
         }
         if(!checkDayButton()){
-            errors.append("day button, ");
+            errors.append("day button\n");
         }
         if(!checkWeekSizeSelectorSelector()){
-            errors.append("week size selector, ");
-        }
-        if(!checkDefaultConditionScheduler()){
-            errors.append("default scheduler parameters, ");
+            errors.append("week size selector\n");
         }
         if(!checkEndAtHourSelector()){
-            errors.append("end at hour selector, ");
+            errors.append("end at hour selector\n");
         }
         if(!checkMiniCalendarButton()){
-            errors.append("mini calendar button, ");
+            errors.append("mini calendar button\n");
         }
         if(!checkMonthButton()){
-            errors.append("month button, ");
+            errors.append("month button\n");
         }
         if(!checkNextButton()){
-            errors.append("next button, ");
+            errors.append("next button\n");
         }
         if(!checkTodayButton()){
-            errors.append("today button,");
+            errors.append("today button\n");
         }
         if(!checkWeekButton()){
-            errors.append("week button, ");
+            errors.append("week button\n");
         }
         if(!checkPreviousButton()) {
-            errors.append("previous button, ");
+            errors.append("previous button\n");
+        }
+        if(!checkDoctorLabel()){
+            errors.append("doctor label\n");
         }
         if(!errors.toString().isEmpty()){
-            errors.deleteCharAt(errors.length()-2);
-            errors.append("not present");
-            throw new Exception(errors.toString());
+            errors.append("are not present");
+            throw new NoSuchElementException(errors.toString());
         }
         return true;
     }
@@ -274,6 +278,7 @@ public class SchedulerPage extends PageObject {
     }
 
     public void workWeekSizeSelector(String value){
+        BrowserWrapper.waitUntilElementClickable(workWeekSizeSelector);
         BrowserWrapper.selectDropdown(workWeekSizeSelector, value);
     }
 
@@ -291,6 +296,7 @@ public class SchedulerPage extends PageObject {
     }
 
     public void saveButtonClick(){
+        BrowserWrapper.waitUntilElementClickable(saveButton);
         saveButton.click();
     }
 
