@@ -77,7 +77,9 @@ public class CreateUserTest extends BaseTest {
                 {"sd@sdj",NEWUSERPASSWORD},
                 {"aa@sd.",NEWUSERPASSWORD},
                 {"skdjw@.c",NEWUSERPASSWORD},
-                {"sd@.com.ua.ss.oo", NEWUSERPASSWORD}};
+                {"sd)@.com.ua", NEWUSERPASSWORD},
+                {"sdd@@com.ua", NEWUSERPASSWORD}
+        };
     }
 
     @DataProvider(name="notValidPasswords")
