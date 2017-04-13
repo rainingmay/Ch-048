@@ -76,16 +76,16 @@ public class SchedulerPageTest extends BaseTest{
 
 
 
-   // @Test
+    @Test
     public void testEventCreation() throws Exception{
         BaseNavigation.login(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
         HospitalsPage hospitalsPage = new HospitalsPage(driver);
         SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
+        BrowserWrapper.implicitWait(driver);
         schedulerPage.setAppointment("Test",3);
         schedulerPage.saveButtonClick();
 
         schedulerPage.managerHeader.logOut();
-
         BaseNavigation.login(driver, "manager.jh@hospitals.ua", "1111");
         hospitalsPage = new HospitalsPage(driver);
         schedulerPage = hospitalsPage.scheduleButtonClick(1);
