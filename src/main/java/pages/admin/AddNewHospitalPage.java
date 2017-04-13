@@ -7,7 +7,6 @@ import pages.allUsers.PageObject;
 import pages.headers.headersByRole.AdminHeader;
 import utils.BrowserWrapper;
 
-
 /**
  * Created by Jeksonis on 06.04.2017.
  */
@@ -111,14 +110,14 @@ public class AddNewHospitalPage extends PageObject {
    }
 
    public void addNewHospital(String address, String name, String description) {
-       BrowserWrapper.sleep(1);
+       BrowserWrapper.sleep(2);
        addressData(address);
        addHospitalName(name);
        addHospitalDescription(description);
        pushFillButton();
-       BrowserWrapper.sleep(1);
+       BrowserWrapper.sleep(2);
        pushFindButton();
-       BrowserWrapper.sleep(1);
+       BrowserWrapper.sleep(2);
        pushSaveButton();
    }
 

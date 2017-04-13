@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.allUsers.PageObject;
 import pages.headers.headersByRole.AdminHeader;
+import utils.BrowserWrapper;
 
 
 import java.util.LinkedList;
@@ -37,6 +38,10 @@ public class HospitalListPage extends PageObject {
     WebElement removeButton;
     WebElement deleteButton;
     WebElement cancelButton;
+
+    public boolean checkAddNewHospitalButton() {
+        return BrowserWrapper.isElementPresent(addNewHospitalButton);
+    }
 
     public AddNewHospitalPage submitAddNewHospital() {
         addNewHospitalButton.click();

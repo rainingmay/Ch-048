@@ -6,7 +6,6 @@ import org.openqa.selenium.support.FindBy;
 import pages.admin.AllUsersPage;
 import utils.BrowserWrapper;
 import pages.admin.HospitalListPage;
-import utils.BrowserWrapper;
 
 
 /**

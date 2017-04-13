@@ -8,29 +8,30 @@ import utils.BaseNavigation;
 import utils.BaseTest;
 import utils.BrowserWrapper;
 
+
+
 public class AddHospitalTest extends BaseTest {
 
-    private static final String email = "admin@hospitals.ua";
-    private static final String password = "1111";
+    private static final String EMAIL = "admin@hospitals.ua";
+    private static final String PASSWORD = "1111";
 
     public AddHospitalTest() {
     }
 
     @Test
     public void addHospitalTest() throws Exception {
-        BaseNavigation.loginAsAdmin(driver, email, password);
-        BrowserWrapper.sleep(2);
+        BaseNavigation.loginAsAdmin(driver, EMAIL, PASSWORD);
+        BrowserWrapper.sleep(1);
         HospitalListPage hospitalListPage = new HospitalListPage(driver);
-        BrowserWrapper.sleep(2);
+        BrowserWrapper.sleep(1);
         hospitalListPage.header.allHospitalsPage();
-        BrowserWrapper.sleep(2);
+        BrowserWrapper.sleep(1);
         int hospitalsCountOfRow = hospitalListPage.getCountOfHospitalsInTable();
         System.out.println("How much row in the table: " + hospitalsCountOfRow);
         hospitalListPage.submitAddNewHospital();
-        BrowserWrapper.sleep(2);
         AddNewHospitalPage addNewHospitalPage = new AddNewHospitalPage(driver);
-        addNewHospitalPage.addNewHospital("Вулиця Головна, 129, Чернівці, Чернівецька область, Україна", "МІСЬКИЙ КЛІНІЧНИЙ ПОЛОГОВИЙ БУДИНОК № 1", "");
-        BrowserWrapper.sleep(2);
+        addNewHospitalPage.addNewHospital("Вулиця Комарова, 32б, Чернівці, Чернівецька область, Україна", "AS КЛІНІКА ЛАЗЕРНОЇ МІКРОХІРУРГІЇ ОКА 1", "");
+        BrowserWrapper.sleep(1);
         int hospitalsCountOfRowAfterAdding = hospitalListPage.getCountOfHospitalsInTable();
         Assert.assertFalse(hospitalsCountOfRow == hospitalsCountOfRowAfterAdding);
     }

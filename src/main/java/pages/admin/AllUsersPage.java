@@ -98,7 +98,9 @@ public class AllUsersPage extends PageObject {
 
 
 
-
+    public boolean checkAllUsers() {
+        return BrowserWrapper.isElementPresent(allUsers);
+    }
 
 
     public AllUsersPage changeCountOfUsersOnPage(int count) {
