@@ -17,11 +17,49 @@ import java.util.List;
 /**
  * Created by Evgen on 10.04.2017.
  */
-public class AdminTest extends BaseTest {
+public class AllUsersPageTest extends BaseTest {
 
 
     private static final String LOGIN = "admin@hospitals.ua";
     private static final String PASSWORD = "1111";
+
+    //Test of change vision of users
+
+    @Test
+    public void enableUsersViewTest() {
+        try {
+            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, LOGIN, PASSWORD);
+            allUsersPage = allUsersPage.showEnableUsers();
+            boolean actual = true;
+            boolean expected = UserDAO.getStatusByEmail(allUsersPage.getUserDataFromTableRow(4).get(0));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
