@@ -93,8 +93,11 @@ public class AllUsersPage extends PageObject {
     }
 
 
+
+
+
+
     public AllUsersPage showAllUsers() {
-        //allUsersButton.click();
         ((JavascriptExecutor)driver).executeScript("arguments[0].click();" , enableButton);
         return new AllUsersPage(driver);
     }
@@ -105,7 +108,6 @@ public class AllUsersPage extends PageObject {
     }
 
     public AllUsersPage showDisableUsers() {
-        //disableButton.click();
         ((JavascriptExecutor)driver).executeScript("arguments[0].click();" , disableButton);
         return new AllUsersPage(driver);
     }
@@ -125,8 +127,6 @@ public class AllUsersPage extends PageObject {
 
     public void changeSearchBy(String field) {
         searchBy.findElement(By.cssSelector("option[value=" + field + "]")).click();
-        //searchButton.click();
-        //return new AllUsersPage(driver);
     }
 
     public void sendKeysToSearchField(String keys) {
@@ -201,7 +201,7 @@ public class AllUsersPage extends PageObject {
     public AllUsersPage changeRoleInEditWindow(int rowNumber, String role) {
         openEditWindow(rowNumber);
         selectDropdownRole(editWindow.findElement(By.id("userRoles")), role);
-        BrowserWrapper.sleep(2);
+        BrowserWrapper.sleep(3);
         editWindow.findElement(By.cssSelector("input[value=\"Edit\"]")).click();
         return new AllUsersPage(driver);
     }

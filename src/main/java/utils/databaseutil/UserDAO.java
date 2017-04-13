@@ -34,6 +34,7 @@ public class UserDAO {
         return null;
     }
 
+
     private static String getRoleById(String id) {
         try {
             Statement statement = DatabaseConnection.connectToDatabase().createStatement();
@@ -50,6 +51,8 @@ public class UserDAO {
         return null;
     }
 
+
+
     public static List<String> getEnableUsersEmails() {
         try {
             Statement statement = DatabaseConnection.connectToDatabase().createStatement();
@@ -64,6 +67,8 @@ public class UserDAO {
         }
         return null;
     }
+
+
 
     public static boolean getStatusByEmail(String email) {
         List<String> list = getEnableUsersEmails();
