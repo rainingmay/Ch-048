@@ -2,6 +2,7 @@ package pages.admin;
 
 import org.apache.bcel.generic.Select;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -70,6 +71,10 @@ public class AllUsersPage extends PageObject {
 
     @FindBy(id = "detail.lastName")
     private WebElement sortByLastNameButton;
+
+    @FindBy(xpath = "/html/body/section/div[1]/div[1]/div/h4")
+    public WebElement createdLabel;
+
 
     @FindBy(id = "roles.type")
     private WebElement sortByRoleButton;
