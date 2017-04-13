@@ -36,10 +36,13 @@ public class LoginPage extends PageObject {
     private WebElement registerButton;
 
     public void authorization(String email, String password){
+        BrowserWrapper.waitUntilElementClickable(emailTextField);
         emailTextField.clear();
         emailTextField.sendKeys(email);
+        BrowserWrapper.waitUntilElementClickable(passwordTextField);
         passwordTextField.clear();
         passwordTextField.sendKeys(password);
+        BrowserWrapper.waitUntilElementClickable(loginSubmitButton);
         loginSubmitButton.click();
     }
 
