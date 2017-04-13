@@ -119,12 +119,14 @@ public class AllUsersPageTest extends BaseTest {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, LOGIN, PASSWORD);
             allUsersPage = allUsersPage.search(20, "MANAGER", "firstName", "a");
+            BrowserWrapper.implicitWait(driver);
             int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
             List<String> expected = new LinkedList<>();
-            Collections.addAll(expected, new String[]{"20", "a", "MANAGER"});
+            Collections.addAll(expected, new String[]{"a", "MANAGER"});
             List<String> allInfo = allUsersPage.getUserDataFromTableRow(rowNumber);
             List<String> actual = new LinkedList<>();
-            if (actual.get(1).contains("a"))actual.add("a");
+            if (allInfo.get(1).contains("a"))actual.add("a");
+                else actual.add("noSame");
             actual.add(allInfo.get(3));
             Assert.assertEquals(actual, expected);
 
@@ -132,22 +134,6 @@ public class AllUsersPageTest extends BaseTest {
             e.printStackTrace();
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     /*@Test(priority = 1)
@@ -164,47 +150,7 @@ public class AllUsersPageTest extends BaseTest {
             e.printStackTrace();
         }
     }
-
-
-    @Test(priority = 3)
-    public void editWindowTest() {
-        try {
-            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, LOGIN, PASSWORD);
-            BrowserWrapper.sleep(1);
-
-            boolean actual = false;
-            try{
-                actual = allUsersPage.openEditWindow(1).findElement(By.cssSelector("input")).isDisplayed();
-            } catch (Exception e) {
-                actual = false;
-            } finally {
-                allUsersPage.closeEditWindow();
-                BrowserWrapper.sleep(1);
-                Assert.assertEquals(actual, true);
-            }
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
-    @Test(priority = 5)
-    public void changeCountOfUsersOnPageTest() {
-        try {
-            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, LOGIN, PASSWORD);
-            BrowserWrapper.sleep(1);
-            int expected = 20;
-            allUsersPage = allUsersPage.changeCountOfUsersOnPage(expected);
-            int actual = allUsersPage.getCountOfUsersInTable();
-
-            Assert.assertEquals(actual, expected);
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }*/
+*/
 
 
     public int randomNumber(int max) {

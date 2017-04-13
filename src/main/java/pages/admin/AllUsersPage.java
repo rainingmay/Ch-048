@@ -124,7 +124,7 @@ public class AllUsersPage extends PageObject {
     }
 
     public void changeSearchBy(String field) {
-        this.searchBy.findElement(By.cssSelector("option[value=" + field + "]"));
+        searchBy.findElement(By.cssSelector("option[value=" + field + "]")).click();
         //searchButton.click();
         //return new AllUsersPage(driver);
     }
