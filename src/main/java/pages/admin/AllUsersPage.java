@@ -38,14 +38,14 @@ public class AllUsersPage extends PageObject {
     @FindBy(id = "clearButton")
     private WebElement clearButton;
 
-    @FindBy(xpath = "/html/body/section/div[1]/div/form/div[5]/a[1]")
-    private WebElement enable;
+    @FindBy(css = "div.pull-right.btn-group a.btn.btn-default:first-child")
+    private WebElement enableButton;
 
-    @FindBy(xpath = "//*[@id=\"searchForm\"]/div[5]/a[2]")
-    private WebElement disable;
+    @FindBy(css = ".pull-right .btn-group a:nth-child(2)")
+    private WebElement disableButton;
 
-    @FindBy(xpath = "//*[@id=\"searchForm\"]/div[5]/a[3]")
-    private WebElement allUsers;
+    @FindBy(css = ".pull-right .btn-group a:last-child")
+    private WebElement allUsersButton;
 
     @FindBy(css = "thead")
     private WebElement tableHead;
@@ -85,20 +85,23 @@ public class AllUsersPage extends PageObject {
     @FindBy(css = "a[aria-label='Next']")
     public WebElement nextPageButton;
 
-
     private WebElement editButton;
 
-
-
     public AllUsersPage(WebDriver driver) {
-
         super(driver);
         this.header = new AdminHeader(driver);
     }
 
 
+    public AllUsersPage showAllUsers() {
+        allUsersButton.click();
+        return new AllUsersPage(driver);
+    }
 
-
+    public AllUsersPage showEnableUsers() {
+        enableButton.click();
+        return new AllUsersPage(driver);
+    }
 
 
     public AllUsersPage changeCountOfUsersOnPage(int count) {
@@ -107,16 +110,13 @@ public class AllUsersPage extends PageObject {
         return new AllUsersPage(driver);
     }
 
-
     public void changeRole(String role) {
         this.role.findElement(By.cssSelector("option[value=" + role + "]")).click();
     }
 
-
     public void changeSearchBy(String field) {
         this.searchBy.findElement(By.cssSelector("option[value=" + field + "]"));
     }
-
 
     public void sendKeysToSearchField(String keys) {
         searchWindow.clear();
@@ -133,7 +133,6 @@ public class AllUsersPage extends PageObject {
     }
 
 
-
     public List<String> getUserDataFromTableRow(int rowNumber) {
         List<String> result = new LinkedList<>();
         if (tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")")).isDisplayed()) {
@@ -144,7 +143,6 @@ public class AllUsersPage extends PageObject {
         }
         return result;
     }
-
 
 
     public List<String> getUserDataFromInfoWindow(int rowNumber) throws InterruptedException {
@@ -168,17 +166,13 @@ public class AllUsersPage extends PageObject {
         return tableBody.findElements(By.cssSelector("tr")).size();
     }
 
-
     public void closeViewWindow(){
         viewWindow.findElement(By.className("close")).click();
     }
 
-
     public void closeEditWindow() {
         editWindow.findElement(By.className("close")).click();
     }
-
-
 
     public WebElement openEditWindow(int rowNumber) {
         if (tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")")).isDisplayed()) {
@@ -192,8 +186,6 @@ public class AllUsersPage extends PageObject {
         return null;
     }
 
-
-
     public void changeRoleInEditWindow(int rowNumber, String role) {
         openEditWindow(rowNumber);
         selectDropdownRole(editWindow.findElement(By.id("userRoles")), role);
@@ -203,15 +195,12 @@ public class AllUsersPage extends PageObject {
 
     public static void selectDropdownRole(WebElement element, String text) {
         org.openqa.selenium.support.ui.Select dropdown = new org.openqa.selenium.support.ui.Select(element);
-        //dropdown.selectByVisibleText(text);
         if (dropdown.getAllSelectedOptions().size() != 0) dropdown.deselectAll();
         dropdown.selectByValue(text);
     }
 
     public static void selectDropdownCount(WebElement element, String text) {
         org.openqa.selenium.support.ui.Select dropdown = new org.openqa.selenium.support.ui.Select(element);
-        //dropdown.selectByVisibleText(text);
-        //if (dropdown.getAllSelectedOptions().size() != 0) dropdown.deselectAll();
         dropdown.selectByValue(text);
     }
 }

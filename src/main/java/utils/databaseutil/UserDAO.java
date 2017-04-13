@@ -1,9 +1,10 @@
 package utils.databaseutil;
 
+
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
-
+import java.lang.String;
 /**
  * Created by Evgen on 07.04.2017.
  */
@@ -46,5 +47,26 @@ public class UserDAO {
         }
 
         return null;
+    }
+
+    public static List<String> getEnableUsersEmails() {
+        try {
+            Statement statement = DatabaseConnection.connectToDatabase().createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT users.email FROM users WHERE users.enable = TRUE ");
+            List<String> result = new LinkedList<>();
+            while (resultSet.next()) {
+                result.add(resultSet.getString("email"));
+            }
+            return result;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static boolean getStatusByEmail(String email) {
+        List<String> list = getEnableUsersEmails();
+        if (list.contains(email)) return true;
+        return false;
     }
 }
