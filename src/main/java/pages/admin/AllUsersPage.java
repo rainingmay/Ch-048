@@ -1,7 +1,7 @@
 package pages.admin;
 
-import org.apache.bcel.generic.Select;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -38,10 +38,10 @@ public class AllUsersPage extends PageObject {
     @FindBy(id = "clearButton")
     private WebElement clearButton;
 
-    @FindBy(css = "div.pull-right.btn-group a.btn.btn-default:first-child")
+    @FindBy(xpath = "/html/body/section/div[1]/div/form/div[5]/a[1]")
     private WebElement enableButton;
 
-    @FindBy(css = ".pull-right .btn-group a:nth-child(2)")
+    @FindBy(xpath = "/html/body/section/div[1]/div/form/div[5]/a[2]")
     private WebElement disableButton;
 
     @FindBy(css = ".pull-right .btn-group a:last-child")
@@ -51,7 +51,7 @@ public class AllUsersPage extends PageObject {
     private WebElement tableHead;
 
     @FindBy(css = "tbody")
-    private WebElement tableBody;
+    public WebElement tableBody;
 
     @FindBy(css = "pagination pagination-lg")
     private WebElement navigation;
@@ -94,12 +94,19 @@ public class AllUsersPage extends PageObject {
 
 
     public AllUsersPage showAllUsers() {
-        allUsersButton.click();
+        //allUsersButton.click();
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click();" , enableButton);
         return new AllUsersPage(driver);
     }
 
     public AllUsersPage showEnableUsers() {
         enableButton.click();
+        return new AllUsersPage(driver);
+    }
+
+    public AllUsersPage showDisableUsers() {
+        //disableButton.click();
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click();" , disableButton);
         return new AllUsersPage(driver);
     }
 
@@ -110,12 +117,16 @@ public class AllUsersPage extends PageObject {
         return new AllUsersPage(driver);
     }
 
-    public void changeRole(String role) {
+    public AllUsersPage changeRole(String role) {
         this.role.findElement(By.cssSelector("option[value=" + role + "]")).click();
+        searchButton.click();
+        return new AllUsersPage(driver);
     }
 
     public void changeSearchBy(String field) {
         this.searchBy.findElement(By.cssSelector("option[value=" + field + "]"));
+        //searchButton.click();
+        //return new AllUsersPage(driver);
     }
 
     public void sendKeysToSearchField(String keys) {
@@ -153,6 +164,7 @@ public class AllUsersPage extends PageObject {
             infoButton.click();
             Thread.sleep(2000);
             viewWindow = driver.findElement(By.className("modal-content"));
+            result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(1) td:last-child")).getText());
             result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(2) td:last-child")).getText());
             result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(4) td:last-child")).getText());
             closeViewWindow();
@@ -186,11 +198,12 @@ public class AllUsersPage extends PageObject {
         return null;
     }
 
-    public void changeRoleInEditWindow(int rowNumber, String role) {
+    public AllUsersPage changeRoleInEditWindow(int rowNumber, String role) {
         openEditWindow(rowNumber);
         selectDropdownRole(editWindow.findElement(By.id("userRoles")), role);
         BrowserWrapper.sleep(2);
         editWindow.findElement(By.cssSelector("input[value=\"Edit\"]")).click();
+        return new AllUsersPage(driver);
     }
 
     public static void selectDropdownRole(WebElement element, String text) {

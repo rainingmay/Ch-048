@@ -13,6 +13,7 @@ import utils.databaseutil.UserDAO;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Evgen on 10.04.2017.
@@ -23,15 +24,110 @@ public class AllUsersPageTest extends BaseTest {
     private static final String LOGIN = "admin@hospitals.ua";
     private static final String PASSWORD = "1111";
 
-    //Test of change vision of users
 
     @Test
     public void enableUsersViewTest() {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, LOGIN, PASSWORD);
+            BrowserWrapper.implicitWait(driver);
             allUsersPage = allUsersPage.showEnableUsers();
-            boolean actual = true;
-            boolean expected = UserDAO.getStatusByEmail(allUsersPage.getUserDataFromTableRow(4).get(0));
+            boolean actual = UserDAO.getStatusByEmail(allUsersPage.getUserDataFromTableRow(4).get(0));
+            Assert.assertEquals(actual, true);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void disableUsersViewTest() {
+        try {
+            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, LOGIN, PASSWORD);
+            BrowserWrapper.implicitWait(driver);
+            AllUsersPage allUsersPage1 = allUsersPage.showDisableUsers();
+            int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
+            boolean actual = UserDAO.getStatusByEmail(allUsersPage1.getUserDataFromTableRow(rowNumber).get(0));
+            Assert.assertEquals(actual, false);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void viewWindowTest() {
+        try {
+            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, LOGIN, PASSWORD);
+            int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
+            List<String> actual = allUsersPage.getUserDataFromInfoWindow(rowNumber);
+            List<String> allInfo = UserDAO.getUserFromDatabaseByEmail(actual.get(1));
+            List<String> expected = new LinkedList<>();
+            Collections.addAll(expected, new String[]{allInfo.get(0),allInfo.get(1), "true"});
+            BrowserWrapper.implicitWait(driver);
+            Assert.assertEquals(actual, expected);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void changeRoleTest() {
+        try {
+            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, LOGIN, PASSWORD);
+            BrowserWrapper.implicitWait(driver);
+            String expected = "MANAGER";
+            int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
+            allUsersPage = allUsersPage.changeRoleInEditWindow(rowNumber, "MANAGER");
+            BrowserWrapper.sleep(3);
+            String actual = allUsersPage.getUserDataFromTableRow(rowNumber).get(3);
+            Assert.assertEquals(actual, expected);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void changeCountOfUsersOnPageTest() {
+        try {
+            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, LOGIN, PASSWORD);
+            BrowserWrapper.implicitWait(driver);
+            int expected = 20;
+            allUsersPage = allUsersPage.changeCountOfUsersOnPage(expected);
+            int actual = allUsersPage.getCountOfUsersInTable();
+            Assert.assertEquals(actual, expected);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void searchByRoleTest() {
+        try {
+            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, LOGIN, PASSWORD);
+            String expected = "MANAGER";
+            allUsersPage = allUsersPage.changeRole(expected);
+            BrowserWrapper.sleep(3);
+            int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
+            String actual = allUsersPage.getUserDataFromTableRow(rowNumber).get(3);
+            Assert.assertEquals(actual, expected);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @Test
+    public void searchTest() {
+        try {
+            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, LOGIN, PASSWORD);
+            allUsersPage = allUsersPage.search(20, "MANAGER", "firstName", "a");
+            int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
+            List<String> expected = new LinkedList<>();
+            Collections.addAll(expected, new String[]{"20", "a", "MANAGER"});
+            List<String> allInfo = allUsersPage.getUserDataFromTableRow(rowNumber);
+            List<String> actual = new LinkedList<>();
+            if (actual.get(1).contains("a"))actual.add("a");
+            actual.add(allInfo.get(3));
+            Assert.assertEquals(actual, expected);
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -54,16 +150,7 @@ public class AllUsersPageTest extends BaseTest {
 
 
 
-
-
-
-
-
-
-
-
-
-    @Test(priority = 1)
+    /*@Test(priority = 1)
     public void correctUsersDataTest() {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, LOGIN, PASSWORD);
@@ -78,24 +165,6 @@ public class AllUsersPageTest extends BaseTest {
         }
     }
 
-    @Test(priority = 2)
-    public void viewWindowTest() {
-        try {
-            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, LOGIN, PASSWORD);
-            BrowserWrapper.sleep(1);
-
-            List<String> actual = allUsersPage.getUserDataFromInfoWindow(5);
-            List<String> allInfo = UserDAO.getUserFromDatabaseByEmail(actual.get(0));
-            List<String> expected = new LinkedList<>();
-            Collections.addAll(expected, new String[]{allInfo.get(0), "true"});
-
-            BrowserWrapper.sleep(1);
-
-            Assert.assertEquals(actual, expected);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
 
     @Test(priority = 3)
     public void editWindowTest() {
@@ -119,26 +188,7 @@ public class AllUsersPageTest extends BaseTest {
         }
     }
 
-    @Test(priority = 4)
-    public void changeRoleTest() {
-        try {
-            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, LOGIN, PASSWORD);
-            BrowserWrapper.sleep(1);
 
-            String expected = "MANAGER";
-
-            allUsersPage.changeRoleInEditWindow(2, "MANAGER");
-
-            BrowserWrapper.sleep(3);
-
-            String actual = allUsersPage.getUserDataFromTableRow(2).get(3);
-
-            Assert.assertEquals(actual, expected);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     @Test(priority = 5)
     public void changeCountOfUsersOnPageTest() {
@@ -154,6 +204,12 @@ public class AllUsersPageTest extends BaseTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }*/
+
+
+    public int randomNumber(int max) {
+        Random random = new Random();
+        return random.nextInt(max-1)+1;
     }
 
 
