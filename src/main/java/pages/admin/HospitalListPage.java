@@ -65,12 +65,22 @@ public class HospitalListPage extends PageObject {
         return new AddNewHospitalPage(driver);
     }
 
-    public HospitalListPage removeButton(int rowNumber) {
+    public void deleteAndCancelledPopUpMenu(int rowNumber) {
         removeButton = driver.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(3) form button:nth-child(4)"));
         removeButton.click();
         deleteButton = driver.findElement(By.xpath("//*[@id=\"6\"]/div/div/div[3]/button[1]"));
         cancelButton = driver.findElement(By.xpath("//*[@id=\"6\"]/div/div/div[3]/button[2]"));
+    }
+
+    public HospitalListPage removeButton(int rowNumber) {
+        deleteAndCancelledPopUpMenu(rowNumber);
         deleteButton.click();
+        return new HospitalListPage(driver);
+    }
+
+    public HospitalListPage cancelledRemoveButton(int rowNumber) {
+        deleteAndCancelledPopUpMenu(rowNumber);
+        cancelButton.click();
         return new HospitalListPage(driver);
     }
 
