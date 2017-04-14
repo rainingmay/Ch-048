@@ -64,7 +64,7 @@ public class AllUsersPage extends PageObject {
     private WebElement firstPageButto;
 
     @FindBy(id = "email")
-    private WebElement sortByEmailButton;
+    public WebElement sortByEmailButton;
 
     @FindBy(id = "detail.firstName")
     private WebElement sortByFirsNamButton;
@@ -92,6 +92,10 @@ public class AllUsersPage extends PageObject {
 
 
     private WebElement editButton;
+
+    public WebElement deleteWindow;
+
+    private WebElement deleteButton;
 
 
 
@@ -237,5 +241,32 @@ public class AllUsersPage extends PageObject {
         //dropdown.selectByVisibleText(text);
         //if (dropdown.getAllSelectedOptions().size() != 0) dropdown.deselectAll();
         dropdown.selectByValue(text);
+    }
+
+    public AllUsersPage toNextPage() {
+            if (!nextPageButton.equals(null)) {
+                nextPageButton.click();
+                return new AllUsersPage(driver);
+            }
+            return null;
+    }
+
+    public AllUsersPage deleteUser(int rowNumber) {
+        if (tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")")).isDisplayed()) {
+            WebElement tableRow = tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")"));
+            deleteButton = tableRow.findElement(By.id("deleteUser"));
+            deleteButton.click();
+            BrowserWrapper.sleep(3);
+            deleteWindow = driver.findElement(By.className("modal-content"));
+            ((JavascriptExecutor)driver).executeScript("arguments[0].click();" , driver.findElement(By.id("deleteButton")));
+            BrowserWrapper.sleep(2);
+            return new AllUsersPage(driver);
+        }
+        return null;
+    }
+
+    public AllUsersPage clickSortByEmail() {
+        sortByEmailButton.click();
+        return new AllUsersPage(driver);
     }
 }

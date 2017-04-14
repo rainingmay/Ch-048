@@ -1,5 +1,6 @@
 package utils;
 
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.*;
 
@@ -43,6 +44,9 @@ public class BaseTest {
             //BrowserWrapper.browserClose(driver);
         }catch (InterruptedException e){
             e.printStackTrace();
+        } catch (TimeoutException e){
+            e.printStackTrace();
+            System.out.println("failed");
         }
 
 
