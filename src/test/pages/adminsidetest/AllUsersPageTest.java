@@ -1,27 +1,25 @@
 package pages.adminsidetest;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotVisibleException;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.admin.AllUsersPage;
+import sun.plugin.services.BrowserService;
 import utils.BaseNavigation;
 import utils.BaseTest;
 import utils.BrowserWrapper;
 import utils.databaseutil.UserDAO;
 
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 /**
  * Created by Evgen on 10.04.2017.
  */
 public class AllUsersPageTest extends BaseTest {
 
-    @Test
-    @Parameters({"login", "password"})
+    @Test(dataProvider = "loginData")
     public void enableUsersViewTest(String login, String password) {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
@@ -36,8 +34,7 @@ public class AllUsersPageTest extends BaseTest {
     }
 
 
-    @Test
-    @Parameters({"login", "password"})
+    @Test(dataProvider = "loginData")
     public void disableUsersViewTest(String login, String password) {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
@@ -52,9 +49,7 @@ public class AllUsersPageTest extends BaseTest {
         }
     }
 
-
-    @Test
-    @Parameters({"login", "password"})
+    @Test(dataProvider = "loginData")
     public void viewWindowTest(String login, String password) {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
@@ -71,8 +66,7 @@ public class AllUsersPageTest extends BaseTest {
     }
 
 
-    @Test
-    @Parameters({"login", "password", "role"})
+    @Test(dataProvider = "loginDataAndRole")
     public void changeRoleTest(String login, String password, String role) {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
@@ -89,8 +83,7 @@ public class AllUsersPageTest extends BaseTest {
     }
 
 
-    @Test
-    @Parameters({"login", "password", "count"})
+    @Test(dataProvider = "loginDataAndCount")
     public void changeCountOfUsersOnPageTest(String login, String password, String count) {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
@@ -105,8 +98,7 @@ public class AllUsersPageTest extends BaseTest {
     }
 
 
-    @Test
-    @Parameters({"login", "password", "role"})
+    @Test(dataProvider = "loginDataAndRole")
     public void searchByRoleTest(String login, String password, String role) {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
@@ -122,12 +114,11 @@ public class AllUsersPageTest extends BaseTest {
     }
 
 
-    @Test
-    @Parameters({"login", "password", "role", "fieldForSearch", "valueOfField", "count"})
-    public void searchTest(String login, String password, String role, String fieldForSearch, String valueOfField, String count) {
+    @Test(dataProvider = "searchParams")
+    public void searchTest(String login, String password, String role, String valueOfField, String count) {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
-            allUsersPage = allUsersPage.search(Integer.parseInt(count), role, fieldForSearch, valueOfField);
+            allUsersPage = allUsersPage.search(Integer.parseInt(count), role, "firstName", valueOfField);
             BrowserWrapper.sleep(3);
             int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
             List<String> expected = new LinkedList<>();
@@ -145,6 +136,92 @@ public class AllUsersPageTest extends BaseTest {
     }
 
 
+    @Test(dataProvider = "loginData")
+    public void nextPageButtonTest(String login, String password) {
+        try {
+            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
+            AllUsersPage allUsersPage1 = allUsersPage.toNextPage();
+            Assert.assertNotEquals(allUsersPage, allUsersPage1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @Test(dataProvider = "loginData")
+    public void deleteUsersTest(String login, String password) {
+        try {
+            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
+            BrowserWrapper.sleep(2);
+            String actual = allUsersPage.getUserDataFromTableRow(3).get(0);
+            allUsersPage = allUsersPage.deleteUser(3);
+            String expected = allUsersPage.getUserDataFromTableRow(3).get(0);
+            Assert.assertNotEquals(actual, expected);
+        }   catch (InterruptedException e) {
+            e.printStackTrace();
+        }   catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @Test(dataProvider = "dataForSortTest")
+    public void sortByEmailTest(String login, String password, String role) {
+        try {
+            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
+            allUsersPage.changeRole(role);
+            allUsersPage.searchButton.click();
+            BrowserWrapper.sleep(2);
+            allUsersPage = allUsersPage.clickSortByEmail();
+            BrowserWrapper.sleep(3);
+            int actual = allUsersPage.getUserDataFromTableRow(1).get(0).compareToIgnoreCase
+                    (allUsersPage.getUserDataFromTableRow(2).get(0));
+            Assert.assertEquals(actual < 0, true);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }   catch (NoSuchElementException e) {
+            Assert.assertEquals(true, false);
+        }
+    }
+
+
+
+    @DataProvider
+    public Object[][] loginData() {
+        return new Object[][] {
+                {"admin@hospitals.ua", "1111"}
+        };
+    }
+
+    @DataProvider
+    public Object[][] loginDataAndRole() {
+        return new Object[][] {
+                {"admin@hospitals.ua", "1111", "MANAGER"},
+                {"admin@hospitals.ua", "1111", "PATIENT"}
+        };
+    }
+
+    @DataProvider
+    public Object[][] dataForSortTest() {
+        return new Object[][]{
+                {"admin@hospitals.ua", "1111", "\"\""},
+                {"admin@hospitals.ua", "1111", "PATIENT"}
+        };
+    }
+
+    @DataProvider
+    public Object[][] loginDataAndCount() {
+        return new Object[][] {
+                {"admin@hospitals.ua", "1111", "20"}
+        };
+    }
+
+    @DataProvider
+    public Object[][] searchParams() {
+        return new Object[][] {
+                {"admin@hospitals.ua", "1111", "MANAGER", "a", "20"}
+        };
+    }
 
 
     public int randomNumber(int max) {
@@ -152,12 +229,4 @@ public class AllUsersPageTest extends BaseTest {
         return random.nextInt(max-1)+1;
     }
 
-
-    public boolean toNextPage(AllUsersPage allUsersPage) {
-        if (driver.findElements(By.cssSelector("a[aria-label='Next']")).size() == 0) return false;
-        else {
-            allUsersPage.nextPageButton.click();
-            return true;
-        }
-    }
 }

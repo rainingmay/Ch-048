@@ -19,7 +19,8 @@ public class NotLogInUserHeader extends BaseHeader {
 
     public LoginPage loginButton(){
         try {
-            BrowserWrapper.waitUntilElementClickable(login);
+            BrowserWrapper.sleep(1);
+            //BrowserWrapper.waitUntilElementClickable(login);
             login.click();
         }catch (Exception e){
             e.printStackTrace();
