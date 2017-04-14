@@ -68,6 +68,16 @@ public class UserDAO {
         return null;
     }
 
+    public static boolean deleteAllEvents(){
+        boolean result = false;
+        try {
+            Statement statement = DatabaseConnection.connectToDatabase().createStatement();
+            result = statement.execute("DELETE FROM events");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
 
     public static boolean getStatusByEmail(String email) {
