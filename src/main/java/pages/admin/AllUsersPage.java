@@ -14,10 +14,15 @@ import utils.BrowserWrapper;
 import java.util.LinkedList;
 import java.util.List;
 
+
 /**
  * Created by Evgen on 06.04.2017.
  */
+
+
+
 public class AllUsersPage extends PageObject {
+
 
     public AdminHeader header;
 

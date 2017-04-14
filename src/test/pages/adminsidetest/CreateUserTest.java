@@ -1,59 +1,81 @@
 
-package pages.AdminSideTest;
+package pages.adminSideTest;
 
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.admin.AddUserPage;
 import pages.admin.AllUsersPage;
 import utils.BaseNavigation;
 import utils.BaseTest;
-import org.testng.annotations.Parameters;
-
-import java.sql.Driver;
+import utils.BrowserWrapper;
 
 public class CreateUserTest extends BaseTest {
 
-    //class="success text-center"
-    // text xxcxzczxc@mail.ru successfully registered!
-    // label id password-error
-    // label id  email-error
-    // label id userRoles-error
+
+
 
 
     public static final String NEWUSERLOGIN = "testadmin989@gmail.com.ua";
     public static final String NEWUSERPASSWORD = "Q12345w";
     public static final String NEWUSERROLE = "ADMIN";
 
+    @BeforeMethod
+    private void beforeMethod() throws InterruptedException {
+        BaseNavigation.loginAsAdmin(driver, ADMIN_LOGIN, ADMIN_PASSWORD);
+
+    }
 
 
+
+@Test
+    public void isElementsPresentAddUserTest() throws Exception{
+       // BaseNavigation.loginAsAdmin(driver, ADMIN_LOGIN, ADMIN_PASSWORD);
+        AllUsersPage allUsersPage = new AllUsersPage(driver);
+        BrowserWrapper.waitUntilElementClickable((WebElement) By.id("searchButton"));
+
+        AddUserPage addUserPage = new AddUserPage(driver);
+        addUserPage = addUserPage.header.goToAddUserPage();
+        try{
+            BrowserWrapper.waitForPage(driver);
+            addUserPage.isPageReady();
+        }catch (Exception e){
+
+            throw new AssertionError(e.getMessage());
+        }
+        Assert.assertTrue(addUserPage.isPageReady());
+
+    }
 
     @Test (priority = 1)
     public void successfulBaseAddNewUserTest() throws Exception {
-        BaseNavigation.loginAsAdmin(driver, ADMIN_LOGIN, ADMIN_PASSWORD);
+       // BaseNavigation.loginAsAdmin(driver, ADMIN_LOGIN, ADMIN_PASSWORD);
         AllUsersPage allUsersPage = new AllUsersPage(driver);
         AddUserPage addUserPage = new AddUserPage(driver);
         addUserPage.addNewUser(NEWUSERLOGIN, NEWUSERPASSWORD, NEWUSERROLE);
 
-        String realCreatedLableText = allUsersPage.createdLabel.getText();
+        String actualCreatedLableText = allUsersPage.createdLabel.getText();
         String expectedCreatedLabelText = NEWUSERLOGIN + " successfully registered!";
 
-        Assert.assertEquals(realCreatedLableText,expectedCreatedLabelText);
+        Assert.assertEquals(actualCreatedLableText,expectedCreatedLabelText);
 
     }
 
-    @Test (priority = 2)
+    @Test
     public void noRoleChangedAddNewUserTest() throws Exception {
-        BaseNavigation.loginAsAdmin(driver, ADMIN_LOGIN, ADMIN_PASSWORD);
+      //  BaseNavigation.loginAsAdmin(driver, ADMIN_LOGIN, ADMIN_PASSWORD);
         AllUsersPage allUsersPage = new AllUsersPage(driver);
         AddUserPage addUserPage = new AddUserPage(driver);
         addUserPage.addNewUserWithotRole(NEWUSERLOGIN, NEWUSERPASSWORD);
 
-        String realErrorRolesLabelText = addUserPage.userRolesErrorLabel.getText();
+        String actualErrorRolesLabelText = addUserPage.userRolesErrorLabel.getText();
         String expectedErrorRolesLabelText = "";
 
-        Assert.assertNotEquals(realErrorRolesLabelText,expectedErrorRolesLabelText);
+        Assert.assertNotEquals(actualErrorRolesLabelText,expectedErrorRolesLabelText);
 
 
     }
@@ -96,29 +118,29 @@ public class CreateUserTest extends BaseTest {
 
     @Test(dataProvider = "validInformation")
     public void validInfoAddNewUserTest(String addUserName, String addUserPassword) throws Exception {
-        BaseNavigation.loginAsAdmin(driver, ADMIN_LOGIN, ADMIN_PASSWORD);
+      //  BaseNavigation.loginAsAdmin(driver, ADMIN_LOGIN, ADMIN_PASSWORD);
         AllUsersPage allUsersPage = new AllUsersPage(driver);
         AddUserPage addUserPage = new AddUserPage(driver);
         addUserPage.addNewUser(addUserName, addUserPassword, NEWUSERROLE);
 
-        String realCreatedLabelText = allUsersPage.createdLabel.getText();
+        String actualCreatedLabelText = allUsersPage.createdLabel.getText();
         String expectedCreatedLabelText = addUserName + " successfully registered!";
 
-        Assert.assertEquals(realCreatedLabelText,expectedCreatedLabelText);
+        Assert.assertEquals(actualCreatedLabelText,expectedCreatedLabelText);
 
     }
 
     @Test(dataProvider = "notValidEmails")
     public void notValidEmailsAddNewUserTest(String addUserName, String addUserPassword) throws Exception {
-        BaseNavigation.loginAsAdmin(driver, ADMIN_LOGIN, ADMIN_PASSWORD);
+      //  BaseNavigation.loginAsAdmin(driver, ADMIN_LOGIN, ADMIN_PASSWORD);
         AllUsersPage allUsersPage = new AllUsersPage(driver);
         AddUserPage addUserPage = new AddUserPage(driver);
         addUserPage.addNewUser(addUserName, addUserPassword, NEWUSERROLE);
 
-        String realEmaiErrorLabelText = addUserPage.emailErrorLabel.getText() ;
+        String actualEmaiErrorLabelText = addUserPage.emailErrorLabel.getText() ;
         String expectedEmailErrorLabelText ="";
 
-        Assert.assertNotEquals(realEmaiErrorLabelText,expectedEmailErrorLabelText);
+        Assert.assertNotEquals(actualEmaiErrorLabelText,expectedEmailErrorLabelText);
 
 
 
@@ -127,15 +149,15 @@ public class CreateUserTest extends BaseTest {
 
     @Test(dataProvider = "notValidPasswords")
     public void notValidPasswordsAddNewUserTest(String addUserName, String addUserPassword) throws Exception {
-        BaseNavigation.loginAsAdmin(driver, ADMIN_LOGIN, ADMIN_PASSWORD);
+     //   BaseNavigation.loginAsAdmin(driver, ADMIN_LOGIN, ADMIN_PASSWORD);
         AllUsersPage allUsersPage = new AllUsersPage(driver);
         AddUserPage addUserPage = new AddUserPage(driver);
         addUserPage.addNewUser(addUserName, addUserPassword, NEWUSERROLE);
 
         String expectedPasswordErrorLabelText = "";
-        String realPasswordErrorLabelText = addUserPage.emailErrorLabel.getText() ;
+        String actualPasswordErrorLabelText = addUserPage.emailErrorLabel.getText() ;
 
-        Assert.assertNotEquals(expectedPasswordErrorLabelText,realPasswordErrorLabelText);
+        Assert.assertNotEquals(expectedPasswordErrorLabelText,actualPasswordErrorLabelText);
     }
 
 

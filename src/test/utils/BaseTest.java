@@ -32,10 +32,7 @@ public class BaseTest {
 
     }
 
-//    @BeforeMethod
-//    private void beforeMethod(){
-//        this.driver.get("https://localhost:8443/HospitalSeeker/");
-//    }
+
 
     @AfterMethod
     public void afterMethod(){
