@@ -47,9 +47,9 @@ public class BaseTest {
 
 
     }
+
     @AfterClass
     public void after() {
             BrowserWrapper.browserClose(this.driver);
-
     }
 }
