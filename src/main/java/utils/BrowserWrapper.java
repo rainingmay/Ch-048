@@ -153,4 +153,25 @@ public class BrowserWrapper {
     public static void waitForPage(WebDriver driver){
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
     }
+
+    public static void refreshPage(WebDriver driver){
+        driver.navigate().refresh();
+    }
+
+    public static boolean isAlertPresent(WebDriver driver)
+    {
+        try
+        {
+            driver.switchTo().alert();
+            return true;
+        }
+        catch (NoAlertPresentException Ex)
+        {
+            return false;
+        }
+    }
+    public static void conformAlert(WebDriver driver){
+        Alert alert = driver.switchTo().alert();
+        alert.dismiss();
+    }
 }

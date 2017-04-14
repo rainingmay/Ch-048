@@ -20,19 +20,6 @@ public class BaseNavigation {
         LoginPage loginPage = hospitalSeekerHomePage.notLogInUserHeader.loginButton();
         BrowserWrapper.implicitWait(driver);
         loginPage.authorization(email, password);
-
-    }
-
-
-    public static void logout1(WebDriver driver) throws InterruptedException {
-        BrowserWrapper.waitUntilElementClickable(driver.findElement(By.cssSelector("ul.my-navbar>li:nth-last-child(3)")));
-        driver.findElement(By.cssSelector("ul.my-navbar>li:nth-last-child(3)")).click();
-        BrowserWrapper.implicitWait(driver);
-
-        BrowserWrapper.waitUntilElementClickable( driver.findElement(By.cssSelector("ul.my-navbar>li:nth-last-child(3) li:last-child a")));
-        driver.findElement(By.cssSelector("ul.my-navbar>li:nth-last-child(3) li:last-child a")).click();
-        BrowserWrapper.waitForPage(driver);
-
     }
 
 
