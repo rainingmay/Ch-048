@@ -63,7 +63,8 @@ public class AddHospitalTest extends BaseTest {
         addNewHospitalPage.header.goToAddNewHospitalPage();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(ADD_HOSPITAL_PAGE_XPATH_IDENTIFICATION)));
         addNewHospitalPage.addNewHospital("вул. Березовська, 14, смт Глибока, Чернівецька область, Україна", "Лікарня №2", "");
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(ADD_HOSPITAL_PAGE_XPATH_IDENTIFICATION)));
+        //wait.until(ExpectedConditions.elementToBeClickable(By.xpath(ADD_HOSPITAL_PAGE_XPATH_IDENTIFICATION)));
+        BrowserWrapper.sleep(3);
         hospitalListPage.header.goToAllHospitalsPage();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(ALL_HOSPITALS_PAGE_XPATH_IDENTIFICATION)));
         int hospitalsCountOfRowAfterAdding = hospitalListPage.getCountOfHospitalsInTable();
