@@ -1,16 +1,14 @@
 package pages.manager;
 
 
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import pages.allUsers.PageObject;
 import pages.headers.headersByRole.ManagerHeader;
 import utils.BaseNavigation;
 import utils.BrowserWrapper;
-import org.openqa.selenium.WebDriverException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -74,14 +72,12 @@ public class SchedulerPage extends PageObject {
     @FindBy(css = "div.dhx_cal_next_button")
     private WebElement nextMonthButton;
 
-    @FindAll({
-            @FindBy(css = "div.dhx_scale_holder"),
-            @FindBy(css = "div.dhx_scale_holder_now")
-    })
-    private List<WebElement> tableColomns;
+    @FindAll({@FindBy(css = "div.dhx_scale_holder"),
+              @FindBy(css = "div.dhx_scale_holder_now")})
+    private List<WebElement> tableColumn;
 
     @FindAll(@FindBy(css = "div.dhx_scale_ignore"))
-    private List<WebElement> tableIgnoredColumn;
+    private List<WebElement> tableIgnoredColumns;
 
     @FindAll(@FindBy(className = "dhx_scale_hour"))
     private List<WebElement> tabelRows;
@@ -110,6 +106,9 @@ public class SchedulerPage extends PageObject {
     @FindBy(css = "div.dhx_title")
     private WebElement eventTitle;
 
+    @FindBy(css = "div.icon_delete")
+    private WebElement eventDelete;
+
     @FindBy(css = "div.dhx_cal_ltext")
     private WebElement detailedEditorField;
 
@@ -125,6 +124,17 @@ public class SchedulerPage extends PageObject {
     @FindBy(css = "div.dhx_scale_hour:last-child")
     public WebElement endHour;
 
+    @FindBy(xpath = "/html/body/div[3]/div[2]/div[1]/div")
+    public WebElement eventDeleteConfirmation;
+
+    public WebElement getColumn(int i){
+        if(i< tableColumn.size()-tableIgnoredColumns.size()) {
+            WebElement element = driver.findElement(By.cssSelector("div.dhx_scale_holder:nth-child(" + i + ")"));
+            return element;
+        }
+        return null;
+    }
+
 
     public void nextMonthButtonClick() throws InterruptedException {
         BrowserWrapper.implicitWait(driver);
@@ -132,20 +142,33 @@ public class SchedulerPage extends PageObject {
     }
     public void setAppointment(String text, int column) throws InterruptedException {
         nextMonthButtonClick();
-        WebElement col  = tableColomns.get(column+1);
-        BrowserWrapper.waitUntilElementClickable(col);
-        BaseNavigation.doubleClick(driver,col);
+
+        BaseNavigation.doubleClick(driver,getColumn(column));
         BrowserWrapper.implicitWait(driver);
         eventInput.sendKeys(text);
         BrowserWrapper.waitUntilElementClickable(saveButton);
         saveEvent.click();
+
+    }
+
+    public void callEventContext(){
+        events.get(0).findElement(By.cssSelector("div.dhx_title")).click();
+    }
+    public void deleteEventButtonClick(){
+        eventDelete.click();
+        BrowserWrapper.waitUntilElementClickable(eventDeleteConfirmation);
+        eventDeleteConfirmation.click();
+    }
+
+    public void editEventText(String text){
+        editEvent.click();
+        eventInput.sendKeys(text);
+        saveEvent.click();
     }
 
 
-
     public int getDaysNumber(){
-
-        return tableColomns.size() - tableIgnoredColumn.size() - 1;
+        return tableColumn.size() - tableIgnoredColumns.size() - 1;
     }
 
     public String getBeginningHour(){
@@ -158,9 +181,15 @@ public class SchedulerPage extends PageObject {
 
 
     public boolean checkDefaultConditionScheduler(){
-        return  beginningHour.getText().equals(DEFAULT_BEGINNING_HOUR)
-                && endHour.getText().endsWith(DEFAULT_ENDING_HOUR)
-                && getDaysNumber()== DEFAULT_NUMBER_OF_DAYS;
+        boolean result = false;
+        try {
+            result = beginningHour.getText().equals(DEFAULT_BEGINNING_HOUR)
+                    && endHour.getText().endsWith(DEFAULT_ENDING_HOUR)
+                    && getDaysNumber() == DEFAULT_NUMBER_OF_DAYS;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
     }
 
     public void setDayDuration(String begin, String end){
@@ -296,7 +325,7 @@ public class SchedulerPage extends PageObject {
     }
 
     public void saveButtonClick(){
-        BrowserWrapper.waitUntilElementClickable(saveButton);
+        //BrowserWrapper.waitUntilElementClickable(saveButton);
         saveButton.click();
     }
 

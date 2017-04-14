@@ -25,7 +25,7 @@ public class BaseTest {
 
     protected WebDriver driver;
 
-    @BeforeMethod
+    @BeforeClass
     public void before() {
         this.driver = BrowserWrapper.browserInitialization();
 
@@ -40,7 +40,7 @@ public class BaseTest {
     public void afterMethod(){
         try {
             BaseNavigation.logout(this.driver);
-            BrowserWrapper.browserClose(driver);
+            //BrowserWrapper.browserClose(driver);
         }catch (InterruptedException e){
             e.printStackTrace();
         }
