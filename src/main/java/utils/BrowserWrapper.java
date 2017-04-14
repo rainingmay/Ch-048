@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class BrowserWrapper {
 
-    private static final String FIREFOX_PROFIE_NAME = "default";
+    private static final String FIREFOX_PROFILE_NAME = "default";
     private static final String WEBDRIVER_NAME = "webdriver.gecko.driver";
     private static final String LINUX_WEBDRIVER_PATH = "src/main/resources/geckodriver";
     private static final String MACOS_WEBDRIVER_PATH = "src/main/resources/geckodriver";
@@ -29,7 +29,7 @@ public class BrowserWrapper {
     public static WebDriver browserInitialization() {
 
         ProfilesIni profile = new ProfilesIni();
-        FirefoxProfile ffProfile = profile.getProfile(FIREFOX_PROFIE_NAME);
+        FirefoxProfile ffProfile = profile.getProfile(FIREFOX_PROFILE_NAME);
         ffProfile.setAcceptUntrustedCertificates(true);
         ffProfile.setAssumeUntrustedCertificateIssuer(false);
         String osName = System.getProperty("os.name");

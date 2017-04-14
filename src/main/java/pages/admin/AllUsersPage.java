@@ -63,7 +63,7 @@ public class AllUsersPage extends PageObject {
     private WebElement firstPageButto;
 
     @FindBy(id = "email")
-    private WebElement sortByEmailButton;
+    public WebElement sortByEmailButton;
 
     @FindBy(id = "detail.firstName")
     private WebElement sortByFirsNamButton;
@@ -86,6 +86,10 @@ public class AllUsersPage extends PageObject {
     public WebElement nextPageButton;
 
     private WebElement editButton;
+
+    public WebElement deleteWindow;
+
+    private WebElement deleteButton;
 
     public AllUsersPage(WebDriver driver) {
         super(driver);
@@ -215,5 +219,32 @@ public class AllUsersPage extends PageObject {
     public static void selectDropdownCount(WebElement element, String text) {
         org.openqa.selenium.support.ui.Select dropdown = new org.openqa.selenium.support.ui.Select(element);
         dropdown.selectByValue(text);
+    }
+
+    public AllUsersPage toNextPage() {
+            if (!nextPageButton.equals(null)) {
+                nextPageButton.click();
+                return new AllUsersPage(driver);
+            }
+            return null;
+    }
+
+    public AllUsersPage deleteUser(int rowNumber) {
+        if (tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")")).isDisplayed()) {
+            WebElement tableRow = tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")"));
+            deleteButton = tableRow.findElement(By.id("deleteUser"));
+            deleteButton.click();
+            BrowserWrapper.sleep(3);
+            deleteWindow = driver.findElement(By.className("modal-content"));
+            ((JavascriptExecutor)driver).executeScript("arguments[0].click();" , driver.findElement(By.id("deleteButton")));
+            BrowserWrapper.sleep(2);
+            return new AllUsersPage(driver);
+        }
+        return null;
+    }
+
+    public AllUsersPage clickSortByEmail() {
+        sortByEmailButton.click();
+        return new AllUsersPage(driver);
     }
 }
