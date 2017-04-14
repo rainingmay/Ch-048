@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class BrowserWrapper {
 
-    private static final String FIREFOX_PROFILE_NAME = "default";
+    private static final String FIREFOX_PROFILE_NAME = "myProfile";
     private static final String WEBDRIVER_NAME = "webdriver.gecko.driver";
     private static final String LINUX_WEBDRIVER_PATH = "src/main/resources/geckodriver";
     private static final String MACOS_WEBDRIVER_PATH = "src/main/resources/geckodriver";
@@ -91,6 +91,10 @@ public class BrowserWrapper {
 
     public static void waitUntilElementClickable(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    public static void waitUntilElementClickableByLocator(By by) {
+        wait.until(ExpectedConditions.elementToBeClickable(by));
     }
 
 
