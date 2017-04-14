@@ -238,5 +238,4 @@ public class AllUsersPage extends PageObject {
         //if (dropdown.getAllSelectedOptions().size() != 0) dropdown.deselectAll();
         dropdown.selectByValue(text);
     }
-
 }
