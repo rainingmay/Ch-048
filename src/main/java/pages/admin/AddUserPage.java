@@ -1,5 +1,6 @@
 package pages.admin;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -55,8 +56,83 @@ public class AddUserPage extends PageObject {
     @FindBy(id="password-error")
     private WebElement passwordErrorLabel;
 
+
     @FindBy(id = "userRoles-error")
     public WebElement userRolesErrorLabel;
+
+    private boolean checkEmailInput(){
+        return BrowserWrapper.isElementPresent(emailInput);
+    }
+
+    private boolean checkPasswordInput(){
+        return BrowserWrapper.isElementPresent(passwordInput);
+    }
+
+    private boolean checkConfirmPasswordInput(){
+        return BrowserWrapper.isElementPresent(confirmPasswordInput);
+    }
+
+    private boolean checkRoleLabel(){
+        return BrowserWrapper.isElementPresent(roleLabel);
+    }
+
+    private boolean checkUserRolesSelect(){
+        return BrowserWrapper.isElementPresent(userRolesSelect);
+    }
+
+    private boolean checkEnableButton(){
+        return BrowserWrapper.isElementPresent(enableButton);
+    }
+
+    private boolean checkNewUserButton(){
+        return BrowserWrapper.isElementPresent(newUserButton);
+    }
+
+    private boolean checkCancelButton(){
+        return BrowserWrapper.isElementPresent(cancelButton);
+    }
+
+    private boolean checkAddUserLabel(){
+        return BrowserWrapper.isElementPresent(addUserLabel);
+    }
+
+    public boolean isPageReady() throws Exception {
+
+        BrowserWrapper.waitUntilElementVisible(addUserLabel);
+        StringBuilder errors = new StringBuilder();
+        if(!checkAddUserLabel()){
+            errors.append("Add User Label\n");
+        }
+        if(!checkEmailInput()){
+            errors.append("Email Input\n");
+        }
+        if(!checkPasswordInput()){
+            errors.append("Password Input\n");
+        }
+        if(!checkConfirmPasswordInput()){
+            errors.append("Confirm Password Input\n");
+        }
+        if(!checkRoleLabel()){
+            errors.append("Roles Label\n");
+        }
+        if(!checkUserRolesSelect()){
+            errors.append("User Roles Selector\n");
+        }
+        if(!checkEnableButton()){
+            errors.append("Enable Button\n");
+        }
+        if(!checkNewUserButton()){
+            errors.append("New User Button\n");
+        }
+        if(!checkCancelButton()){
+            errors.append("Cancel Button\n");
+        }
+        if(!errors.toString().isEmpty()){
+            errors.append("are not present");
+            throw new NoSuchElementException(errors.toString());
+        }
+        return true;
+    }
 
     public AllUsersPage submitAdding() {
         newUserButton.click();
@@ -118,7 +194,6 @@ public class AddUserPage extends PageObject {
         submitAdding();
 
     }
-
 
 }
 
