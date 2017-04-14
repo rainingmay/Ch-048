@@ -4,13 +4,14 @@ package pages.managerScheduler;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.manager.HospitalsPage;
 import pages.manager.SchedulerPage;
 import utils.BaseNavigation;
 import utils.BaseTest;
 import utils.BrowserWrapper;
-
+import utils.databaseutil.UserDAO;
 
 
 public class SchedulerPageTest extends BaseTest{
@@ -21,6 +22,12 @@ public class SchedulerPageTest extends BaseTest{
     public static final int EXPECTED_WEEK_SIZE = 6;
     public static final String EXPECTED_BEGIN_AT_HOUR = "11 00";
     public static final String EXPECTED_END_AT_HOUR = "19 00";
+
+    @BeforeMethod
+    public void eventCleaner(){
+        boolean b = UserDAO.deleteAllEvents();
+        System.out.println(b);
+    }
 
     @Test
     public void testElementPresence() throws Exception{

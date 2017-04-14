@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.admin.AddNewHospitalPage;
+import pages.admin.AddUserPage;
 import pages.admin.AllUsersPage;
 import utils.BrowserWrapper;
 import pages.admin.HospitalListPage;
@@ -45,8 +46,6 @@ public class AdminHeader extends AuthorizedHeader {
     @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/ul/li[8]/a")
     private WebElement addDepartment;
 
-
-
     @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[5]/a")
     private WebElement profile;
 
@@ -62,11 +61,11 @@ public class AdminHeader extends AuthorizedHeader {
         return new AllUsersPage(driver);
     }
 
-    public AllUsersPage addUser() {
+    public AddUserPage goToAddUserPage() {
         actions.click();
-        BrowserWrapper.sleep(2);
-        allUsersIco.click();
-        return new AllUsersPage(driver);
+        BrowserWrapper.waitUntilElementClickable(addUserIco);
+        addUserIco.click();
+        return new AddUserPage(driver);
     }
 
     public HospitalListPage goToAllHospitalsPage() {
