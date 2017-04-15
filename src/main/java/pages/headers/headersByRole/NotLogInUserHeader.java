@@ -14,13 +14,12 @@ import utils.BrowserWrapper;
  */
 public class NotLogInUserHeader extends BaseHeader {
 
-    @FindBy(css = "ul.my-navbar li:nth-child(4)>a")
+    @FindBy(css = "a[href='/HospitalSeeker/login']")
     protected WebElement login;
 
     public LoginPage loginButton(){
         try {
-            BrowserWrapper.sleep(1);
-            //BrowserWrapper.waitUntilElementClickable(login);
+            BrowserWrapper.waitUntilElementVisible(login);
             login.click();
         }catch (Exception e){
             e.printStackTrace();

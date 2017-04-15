@@ -88,7 +88,10 @@ public class SchedulerPage extends PageObject {
     @FindAll(@FindBy(css = "div.dhx_cal_event"))
     private List<WebElement> events;
 
-    @FindBy(css= "div.dhx_cal_editor")
+//    @FindBy(css= "div.dhx_cal_editor")
+//    private WebElement eventInput;
+
+    @FindBy(xpath = "//textarea[contains(@class,'editor')]")
     private WebElement eventInput;
 
     @FindBy(css = "div.dhx_menu_icon.icon_save")
@@ -137,16 +140,15 @@ public class SchedulerPage extends PageObject {
 
 
     public void nextMonthButtonClick() throws InterruptedException {
-        BrowserWrapper.implicitWait(driver);
         nextMonthButton.click();
     }
     public void setAppointment(String text, int column) throws InterruptedException {
         nextMonthButtonClick();
 
         BaseNavigation.doubleClick(driver,getColumn(column));
-        BrowserWrapper.implicitWait(driver);
+        BrowserWrapper.waitUntilElementVisible(eventInput);
         eventInput.sendKeys(text);
-        BrowserWrapper.waitUntilElementClickable(saveButton);
+        BrowserWrapper.waitUntilElementVisible(saveButton);
         saveEvent.click();
 
     }
@@ -325,7 +327,7 @@ public class SchedulerPage extends PageObject {
     }
 
     public void saveButtonClick(){
-        //BrowserWrapper.waitUntilElementClickable(saveButton);
+        BrowserWrapper.waitUntilElementVisible(saveButton);
         saveButton.click();
     }
 

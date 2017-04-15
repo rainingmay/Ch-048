@@ -46,7 +46,8 @@ public class BrowserWrapper {
         }
         WebDriver driver = new FirefoxDriver(ffProfile);
         driver.get(BASE_URL);
-        wait = new WebDriverWait(driver,10);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        wait = new WebDriverWait(driver,30, 250);
         return driver;
     }
 
@@ -144,10 +145,7 @@ public class BrowserWrapper {
     }
 
 
-    public static void implicitWait(WebDriver driver){
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-    }
 
 
     public static void waitForPage(WebDriver driver){
@@ -162,7 +160,8 @@ public class BrowserWrapper {
     {
         try
         {
-            driver.switchTo().alert();
+            Alert alert = driver.switchTo().alert();
+            alert.dismiss();
             return true;
         }
         catch (NoAlertPresentException Ex)
@@ -171,6 +170,7 @@ public class BrowserWrapper {
         }
     }
     public static void conformAlert(WebDriver driver){
+        waitUntilAlertIsPresent();
         Alert alert = driver.switchTo().alert();
         alert.dismiss();
     }
