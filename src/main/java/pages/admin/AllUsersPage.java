@@ -93,6 +93,8 @@ public class AllUsersPage extends PageObject {
 
     private WebElement editButton;
 
+
+
     public WebElement deleteWindow;
 
     private WebElement deleteButton;

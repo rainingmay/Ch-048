@@ -38,7 +38,7 @@ public class AllUsersPageTest extends BaseTest {
     public void disableUsersViewTest(String login, String password) {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
-            BrowserWrapper.implicitWait(driver);
+            BrowserWrapper.sleep(3);
             AllUsersPage allUsersPage1 = allUsersPage.showDisableUsers();
             BrowserWrapper.sleep(3);
             int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
@@ -48,6 +48,7 @@ public class AllUsersPageTest extends BaseTest {
             e.printStackTrace();
         }
     }
+
 
     @Test(dataProvider = "loginData")
     public void viewWindowTest(String login, String password) {
@@ -153,9 +154,10 @@ public class AllUsersPageTest extends BaseTest {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
             BrowserWrapper.sleep(2);
-            String actual = allUsersPage.getUserDataFromTableRow(3).get(0);
+            int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
+            String actual = allUsersPage.getUserDataFromTableRow(rowNumber).get(0);
             allUsersPage = allUsersPage.deleteUser(3);
-            String expected = allUsersPage.getUserDataFromTableRow(3).get(0);
+            String expected = allUsersPage.getUserDataFromTableRow(rowNumber).get(0);
             Assert.assertNotEquals(actual, expected);
         }   catch (InterruptedException e) {
             e.printStackTrace();
@@ -183,6 +185,9 @@ public class AllUsersPageTest extends BaseTest {
             Assert.assertEquals(true, false);
         }
     }
+
+
+
 
 
 

@@ -32,16 +32,11 @@ public class BaseTest {
 
     }
 
-//    @BeforeMethod
-//    private void beforeMethod(){
-//        this.driver.get("https://localhost:8443/HospitalSeeker/");
-//    }
 
     @AfterMethod
     public void afterMethod(){
         try {
             BaseNavigation.logout(this.driver);
-            //BrowserWrapper.browserClose(driver);
         }catch (InterruptedException e){
             e.printStackTrace();
         } catch (TimeoutException e){

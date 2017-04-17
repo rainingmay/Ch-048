@@ -28,7 +28,7 @@ public class AddHospitalTest extends BaseTest {
         BaseNavigation.loginAsAdmin(driver, EMAIL, PASSWORD);
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(ADMIN_HOME_PAGE_XPATH_IDENTIFICATION)));
         HospitalListPage hospitalListPage = new HospitalListPage(driver);
-        hospitalListPage.header.allHospitalsPage();
+        //  hospitalListPage.header.allHospitalsPage();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(ALL_HOSPITALS_PAGE_XPATH_IDENTIFICATION)));
         int hospitalsCountOfRow = hospitalListPage.getCountOfHospitalsInTable();
         System.out.println("How much row in the table: " + hospitalsCountOfRow);
