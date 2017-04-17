@@ -35,8 +35,8 @@ public class BaseHeader extends PageObject {
     protected WebElement enLanguage;
 
 
-    @FindBy(className = "[ animate ]")
-    protected WebElement search;
+    @FindBy(css = ".hidden-xs")
+    protected WebElement searchButton;
 
     @FindBy(id = "select_hospital_search")
     protected WebElement hospitalSearchField;
@@ -76,6 +76,7 @@ public class BaseHeader extends PageObject {
     }*/
 
     public HospitalSearchResult findHospital(String hospitalName) {
+        searchButton.click();
         hospitalSearchField.clear();
         hospitalSearchField.sendKeys(hospitalName);
         hospitalSearchButton.click();

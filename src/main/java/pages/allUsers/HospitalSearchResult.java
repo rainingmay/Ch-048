@@ -22,7 +22,7 @@ public class HospitalSearchResult extends PageObject {
     @FindBy(id = "perpage")
     private WebElement numberOfHospitalsPerPage;
 
-    @FindBy(css = "[class='panel-heading']")
+    @FindBy(css = ".card.panel.panel-default.text-xs-right")
     private List<WebElement> hospitalNameAtList;
 
     @FindBy(css = "[class='about-img']")
