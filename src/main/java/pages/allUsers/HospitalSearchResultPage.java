@@ -8,11 +8,11 @@ import pages.headers.BaseHeader;
 import java.util.List;
 
 
-public class HospitalSearchResult extends PageObject {
+public class HospitalSearchResultPage extends PageObject {
     public BaseHeader header;
 
 
-    public HospitalSearchResult(WebDriver driver) {
+    public HospitalSearchResultPage(WebDriver driver) {
         super(driver);
     }
 

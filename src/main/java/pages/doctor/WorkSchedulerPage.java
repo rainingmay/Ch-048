@@ -8,11 +8,11 @@ import pages.allUsers.PageObject;
 import pages.headers.headersByRole.AdminHeader;
 import pages.headers.headersByRole.DoctorHeader;
 
-public class WorkScheduler extends PageObject {
+public class WorkSchedulerPage extends PageObject {
 
     public DoctorHeader header;
 
-    public WorkScheduler(WebDriver driver) {
+    public WorkSchedulerPage(WebDriver driver) {
         super(driver);
         this.header = new DoctorHeader(driver);
     }

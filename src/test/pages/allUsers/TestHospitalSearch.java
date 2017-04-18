@@ -1,14 +1,12 @@
 package pages.allUsers;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pages.allUsers.HospitalSearchResult;
 import pages.headers.BaseHeader;
 import utils.BaseTest;
-import utils.BrowserWrapper;
+
 import java.util.concurrent.TimeUnit;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.fail;
@@ -39,9 +37,9 @@ public class TestHospitalSearch extends BaseTest {
     @Test(dataProvider="SearchProvider")
     public void testFindHospital(String searchWord, int expected) throws Exception {
         BaseHeader header = new BaseHeader(driver);
-        HospitalSearchResult hospitalSearchResult = header.findHospital(searchWord);
+        HospitalSearchResultPage hospitalSearchResultPage = header.findHospital(searchWord);
         driver.get("https://localhost:8443/HospitalSeeker/" + urlHospitalSearch + searchWord);
-        assertEquals(hospitalSearchResult.countOfHospital(), expected);
+        assertEquals(hospitalSearchResultPage.countOfHospital(), expected);
     }
 
     @AfterClass(alwaysRun = true)
