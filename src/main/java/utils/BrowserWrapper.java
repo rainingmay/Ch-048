@@ -94,6 +94,10 @@ public class BrowserWrapper {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
+    public static void waitUntilElementClickableByLocator(By by) {
+        wait.until(ExpectedConditions.elementToBeClickable(by));
+    }
+
 
     public static void waitUntilElementSelected(WebElement element) {
         wait.until(ExpectedConditions.elementToBeSelected(element));

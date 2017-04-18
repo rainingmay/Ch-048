@@ -9,7 +9,7 @@ import pages.allUsers.PageObject;
 /**
  * Created by gregtar on 06.04.17.
  */
-public class Card extends PageObject {
+public class CardPage extends PageObject {
 
     @FindBy(id = "headingOne")
     private WebElement diagnosisLabel;
@@ -24,7 +24,7 @@ public class Card extends PageObject {
 
 
 
-    public Card(WebDriver driver) {
+    public CardPage(WebDriver driver) {
         super(driver);
     }
 }

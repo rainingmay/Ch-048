@@ -9,7 +9,7 @@ import pages.allUsers.PageObject;
 /**
  * Created by gregtar on 06.04.17.
  */
-public class Studies extends PageObject {
+public class StudiesPage extends PageObject {
 
     @FindBy(xpath = "/html/body/section/div/div/ul/li[1]/a")
     private WebElement resultOfStudiesTab;
@@ -20,7 +20,7 @@ public class Studies extends PageObject {
     @FindBy(xpath = "//*[@id=\"menu2\"]/div/div[2]/div/h3")
     private WebElement futureStudiesLabel;
 
-    public Studies(WebDriver driver) {
+    public StudiesPage(WebDriver driver) {
         super(driver);
     }
 }

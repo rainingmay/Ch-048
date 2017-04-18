@@ -3,9 +3,9 @@ package pages.headers;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.allUsers.HospitalSearchResult;
+import pages.allUsers.HospitalSearchResultPage;
 import pages.allUsers.HospitalSeekerHomePage;
-import pages.allUsers.MapSearch;
+import pages.allUsers.MapSearchPage;
 import pages.allUsers.PageObject;
 
 
@@ -35,8 +35,8 @@ public class BaseHeader extends PageObject {
     protected WebElement enLanguage;
 
 
-    @FindBy(className = "[ animate ]")
-    protected WebElement search;
+    @FindBy(css = ".hidden-xs")
+    protected WebElement searchButton;
 
     @FindBy(id = "select_hospital_search")
     protected WebElement hospitalSearchField;
@@ -60,9 +60,9 @@ public class BaseHeader extends PageObject {
         return new HospitalSeekerHomePage(driver);
     }
 
-    public MapSearch toMapOfHospitals() {
+    public MapSearchPage toMapOfHospitals() {
         nearestHospital.click();
-        return new MapSearch(driver);
+        return new MapSearchPage(driver);
     }
 
 
@@ -75,11 +75,12 @@ public class BaseHeader extends PageObject {
         return this;
     }*/
 
-    public HospitalSearchResult findHospital(String hospitalName) {
+    public HospitalSearchResultPage findHospital(String hospitalName) {
+        searchButton.click();
         hospitalSearchField.clear();
         hospitalSearchField.sendKeys(hospitalName);
         hospitalSearchButton.click();
-        return new HospitalSearchResult(driver);
+        return new HospitalSearchResultPage(driver);
     }
 
 }

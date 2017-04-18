@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
+import java.util.NoSuchElementException;
 import java.util.Properties;
 
 public class BaseTest {
@@ -26,10 +27,9 @@ public class BaseTest {
 
     protected WebDriver driver;
 
-    @BeforeClass
+    @BeforeMethod
     public void before() {
         this.driver = BrowserWrapper.browserInitialization();
-
     }
 
 
@@ -37,7 +37,7 @@ public class BaseTest {
     public void afterMethod(){
         try {
             BaseNavigation.logout(this.driver);
-            //BrowserWrapper.browserClose(driver);
+            BrowserWrapper.browserClose(this.driver);
         }catch (InterruptedException e){
             e.printStackTrace();
         } catch (TimeoutException e){
@@ -45,11 +45,10 @@ public class BaseTest {
             System.out.println("failed");
         }
 
-
     }
 
-    @AfterClass
+    /*@AfterClass
     public void after() {
             BrowserWrapper.browserClose(this.driver);
-    }
+    }*/
 }

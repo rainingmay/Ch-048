@@ -8,7 +8,7 @@ import pages.allUsers.PageObject;
 import pages.headers.headersByRole.AdminHeader;
 import pages.headers.headersByRole.DoctorHeader;
 
-public class CreateNewRecord extends PageObject {
+public class CreateNewRecordPage extends PageObject {
     public DoctorHeader header;
     @FindBy(className = "label[for=\"complaint\"]")
     private WebElement complaintLabel;
@@ -35,7 +35,7 @@ public class CreateNewRecord extends PageObject {
     private WebElement prescription;
 
 
-   public CreateNewRecord(WebDriver driver) {
+   public CreateNewRecordPage(WebDriver driver) {
         super(driver);
         this.header = new DoctorHeader(driver);
     }

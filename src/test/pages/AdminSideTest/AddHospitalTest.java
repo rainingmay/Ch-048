@@ -10,8 +10,6 @@ import pages.admin.HospitalListPage;
 import utils.BaseNavigation;
 import utils.BaseTest;
 
-import java.util.concurrent.TimeUnit;
-
 
 public class AddHospitalTest extends BaseTest {
 
@@ -24,13 +22,13 @@ public class AddHospitalTest extends BaseTest {
     public AddHospitalTest() {
     }
 
-    @Test(priority = 0)
-    public void addNewHospitalWithValidDataTest() throws Exception {
+    @Test
+    public void addHospitalTest() throws Exception {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         BaseNavigation.loginAsAdmin(driver, EMAIL, PASSWORD);
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(ADMIN_HOME_PAGE_XPATH_IDENTIFICATION)));
         HospitalListPage hospitalListPage = new HospitalListPage(driver);
-        hospitalListPage.header.goToAllHospitalsPage();
+        //  hospitalListPage.header.allHospitalsPage();
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(ALL_HOSPITALS_PAGE_XPATH_IDENTIFICATION)));
         int hospitalsCountOfRow = hospitalListPage.getCountOfHospitalsInTable();
         System.out.println("How much row in the table: " + hospitalsCountOfRow);
@@ -42,27 +40,6 @@ public class AddHospitalTest extends BaseTest {
         int hospitalsCountOfRowAfterAdding = hospitalListPage.getCountOfHospitalsInTable();
         System.out.println("How much row in the table after added new hospital: " + hospitalsCountOfRowAfterAdding);
         Assert.assertFalse(hospitalsCountOfRow == hospitalsCountOfRowAfterAdding);
-    }
-    
-    @Test(priority = 1)
-    public void addNewHospitalWithInvalidDataTest() throws Exception {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        BaseNavigation.loginAsAdmin(driver, EMAIL, PASSWORD);
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(ADMIN_HOME_PAGE_XPATH_IDENTIFICATION)));
-        HospitalListPage hospitalListPage = new HospitalListPage(driver);
-        hospitalListPage.header.goToAllHospitalsPage();
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(ALL_HOSPITALS_PAGE_XPATH_IDENTIFICATION)));
-        int hospitalsCountOfRow = hospitalListPage.getCountOfHospitalsInTable();
-        System.out.println("How much row in the table: " + hospitalsCountOfRow);
-        AddNewHospitalPage addNewHospitalPage = new AddNewHospitalPage(driver);
-        addNewHospitalPage.header.goToAddNewHospitalPage();
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(ADD_HOSPITAL_PAGE_XPATH_IDENTIFICATION)));
-        addNewHospitalPage.addNewHospital("вул. Березовська, 14, смт Глибока, Чернівецька область, Україна", "Лікарня №2", "");
-        //driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        hospitalListPage.header.goToAllHospitalsPage();
-        int hospitalsCountOfRowAfterAdding = hospitalListPage.getCountOfHospitalsInTable();
-        System.out.println("How much row in the table after added new hospital: " + hospitalsCountOfRowAfterAdding);
-        Assert.assertEquals(hospitalsCountOfRow, hospitalsCountOfRowAfterAdding);
     }
 
 }

@@ -7,9 +7,9 @@ import pages.headers.BaseHeader;
 /**
  * Created by Yana on 06.04.2017.
  */
-public class DoctorInfo extends PageObject{
+public class DoctorInfoPage extends PageObject{
     BaseHeader baseHeader;
-    public DoctorInfo(WebDriver driver) {
+    public DoctorInfoPage(WebDriver driver) {
         super(driver);
         baseHeader = new BaseHeader(driver);
     }
