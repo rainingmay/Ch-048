@@ -14,15 +14,10 @@ import utils.BrowserWrapper;
 import java.util.LinkedList;
 import java.util.List;
 
-
 /**
  * Created by Evgen on 06.04.2017.
  */
-
-
-
 public class AllUsersPage extends PageObject {
-
 
     public AdminHeader header;
 
@@ -69,7 +64,7 @@ public class AllUsersPage extends PageObject {
     private WebElement firstPageButto;
 
     @FindBy(id = "email")
-    private WebElement sortByEmailButton;
+    public WebElement sortByEmailButton;
 
     @FindBy(id = "detail.firstName")
     private WebElement sortByFirsNamButton;
@@ -100,6 +95,12 @@ public class AllUsersPage extends PageObject {
 
 
 
+    public WebElement deleteWindow;
+
+    private WebElement deleteButton;
+
+
+
     public AllUsersPage(WebDriver driver) {
 
         super(driver);
@@ -120,11 +121,13 @@ public class AllUsersPage extends PageObject {
 
     public AllUsersPage showEnableUsers() {
         enableButton.click();
+        BrowserWrapper.sleep(3);
         return new AllUsersPage(driver);
     }
 
     public AllUsersPage showDisableUsers() {
         ((JavascriptExecutor)driver).executeScript("arguments[0].click();" , disableButton);
+        BrowserWrapper.sleep(3);
         return new AllUsersPage(driver);
     }
 
@@ -224,6 +227,7 @@ public class AllUsersPage extends PageObject {
 
     public AllUsersPage changeRoleInEditWindow(int rowNumber, String role) {
         openEditWindow(rowNumber);
+        BrowserWrapper.sleep(3);
         selectDropdownRole(editWindow.findElement(By.id("userRoles")), role);
         BrowserWrapper.sleep(3);
         editWindow.findElement(By.cssSelector("input[value=\"Edit\"]")).click();
@@ -242,5 +246,45 @@ public class AllUsersPage extends PageObject {
         //dropdown.selectByVisibleText(text);
         //if (dropdown.getAllSelectedOptions().size() != 0) dropdown.deselectAll();
         dropdown.selectByValue(text);
+    }
+
+    public AllUsersPage toNextPage() {
+            if (!nextPageButton.equals(null)) {
+                nextPageButton.click();
+                return new AllUsersPage(driver);
+            }
+            return null;
+    }
+
+    public AllUsersPage deleteUser(int rowNumber) {
+        if (tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")")).isDisplayed()) {
+            WebElement tableRow = tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")"));
+            deleteButton = tableRow.findElement(By.id("deleteUser"));
+            deleteButton.click();
+            BrowserWrapper.sleep(3);
+            deleteWindow = driver.findElement(By.className("modal-content"));
+            ((JavascriptExecutor)driver).executeScript("arguments[0].click();" , driver.findElement(By.id("deleteButton")));
+            BrowserWrapper.sleep(2);
+            return new AllUsersPage(driver);
+        }
+        return null;
+    }
+
+    public AllUsersPage clickSortByEmail() {
+        sortByEmailButton.click();
+        return new AllUsersPage(driver);
+    }
+
+
+
+
+
+    public boolean equals(AllUsersPage allUsersPage) {
+        if (this.tableBody.equals(allUsersPage.tableBody)) return true;
+        return false;
+    }
+
+    public String getCurrentUrl() {
+        return driver.getCurrentUrl();
     }
 }

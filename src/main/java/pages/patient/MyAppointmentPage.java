@@ -8,7 +8,7 @@ import pages.allUsers.PageObject;
 /**
  * Created by gregtar on 06.04.17.
  */
-public class MyAppointment extends PageObject {
+public class MyAppointmentPage extends PageObject {
     @FindBy(id = "dhx_minical_icon")
     private WebElement calendarIcon;
 
@@ -43,7 +43,7 @@ public class MyAppointment extends PageObject {
     //
 
 
-    public MyAppointment(WebDriver driver) {
+    public MyAppointmentPage(WebDriver driver) {
         super(driver);
     }
 }

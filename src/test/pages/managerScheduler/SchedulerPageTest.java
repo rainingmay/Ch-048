@@ -1,10 +1,11 @@
 package pages.managerScheduler;
 
 
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.manager.HospitalsPage;
 import pages.manager.SchedulerPage;
@@ -22,34 +23,46 @@ public class SchedulerPageTest extends BaseTest{
     public static final int EXPECTED_WEEK_SIZE = 6;
     public static final String EXPECTED_BEGIN_AT_HOUR = "11 00";
     public static final String EXPECTED_END_AT_HOUR = "19 00";
+    public static final String TEST_APPOINTMENT_TEXT = "Test event";
+    public static final String EXPECTED_APPOINTMENT_TEXT = "Test event";
+    public static final String TEST_EDITABLE_APPOINTMENT_TEXT = "Another text";
+    public static final String EXPECTED_EDITABLE_APPOINTMENT_TEXT = "Another text";
+    private SchedulerPage schedulerPage;
 
     @BeforeMethod
-    public void eventCleaner(){
-        boolean b = UserDAO.deleteAllEvents();
-        System.out.println(b);
+    public void beforeMethod() throws InterruptedException {
+        UserDAO.deleteAllEvents();
+        BaseNavigation.loginAsManager(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
+        HospitalsPage hospitalsPage = new HospitalsPage(driver);
+        schedulerPage = hospitalsPage.scheduleButtonClick(1);
     }
+
+    @AfterMethod
+    public void afterMethod(){
+        try {
+            BaseNavigation.logout(driver);
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        } catch (TimeoutException e){
+            e.printStackTrace();
+            System.out.println("failed");
+        }
+    }
+
 
     @Test
     public void testElementPresence() throws Exception{
-        BaseNavigation.loginAsManager(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
-        HospitalsPage hospitalsPage = new HospitalsPage(driver);
-        SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
         try{
             BrowserWrapper.waitForPage(driver);
             schedulerPage.isPageReady();
         }catch (Exception e){
-
             throw new AssertionError(e.getMessage());
         }
         Assert.assertTrue(schedulerPage.isPageReady());
-
     }
 
-    @Test(priority = 1)
+    @Test
     public void testDefaultSchedulerValues() throws Exception{
-        BaseNavigation.loginAsManager(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
-        HospitalsPage hospitalsPage = new HospitalsPage(driver);
-        SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
         BrowserWrapper.waitForPage(driver);
         try{
             schedulerPage.checkDefaultConditionScheduler();
@@ -60,109 +73,143 @@ public class SchedulerPageTest extends BaseTest{
     }
 
 
-    @Test(priority = 2)
+    @Test
     public void testWeekSize() throws Exception{
-        BaseNavigation.login(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
-        HospitalsPage hospitalsPage = new HospitalsPage(driver);
-        SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
         schedulerPage.workWeekSizeSelector(TEST_WEEK_SIZE);
         schedulerPage.saveButtonClick();
         Assert.assertEquals(schedulerPage.getDaysNumber(), EXPECTED_WEEK_SIZE);
     }
 
-    @Test(priority = 2)
+    @Test
     public void testWorkingDayDuration() throws Exception {
-        BaseNavigation.login(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
-        HospitalsPage hospitalsPage = new HospitalsPage(driver);
-        SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
         schedulerPage.setDayDuration(TEST_BEGIN_AT_HOUR, TEST_END_AT_HOUR);
         schedulerPage.saveButtonClick();
         Assert.assertTrue(schedulerPage.getBeginningHour().equals(EXPECTED_BEGIN_AT_HOUR) && schedulerPage.getEndingHour().equals(EXPECTED_END_AT_HOUR));
-
     }
 
 
 
-    @Test(priority = 6)
-    public void testEventCreation() throws Exception{
-        BaseNavigation.login(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
-        HospitalsPage hospitalsPage = new HospitalsPage(driver);
-        SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
-        try {
-            schedulerPage.setAppointment("Test", 3);
-            schedulerPage.saveButtonClick();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+    @Test(dataProvider = "eventCreation")
+    public void testEventCreation(String actualText, String expectedText) throws Exception{
+        schedulerPage.nextButtonClick();
+        schedulerPage.setAppointment(actualText);
+        schedulerPage.saveButtonClick();
         BaseNavigation.logout(driver);
-
-        BaseNavigation.login(driver, "manager.jh@hospitals.ua", "1111");
-        hospitalsPage = new HospitalsPage(driver);
+        HospitalsPage hospitalsPage =BaseNavigation.loginAsManager(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
         schedulerPage = hospitalsPage.scheduleButtonClick(1);
-        schedulerPage.nextMonthButtonClick();
-        Assert.assertTrue( schedulerPage.getEvents().size() > 0 && schedulerPage.getEvents().contains("Test"));
+        schedulerPage.nextButtonClick();
+        Assert.assertTrue( schedulerPage.getEvents().size() > 0 && schedulerPage.getEvents().contains(expectedText));
     }
 
-    @Test(priority = 3)
+    @Test
     public void testEventDeletion() throws Exception{
-        BaseNavigation.login(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
-        HospitalsPage hospitalsPage = new HospitalsPage(driver);
-        SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
-        try {
-            schedulerPage.setAppointment("Test", 3);
-            schedulerPage.saveButtonClick();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        schedulerPage.nextButtonClick();
+        schedulerPage.setAppointment(TEST_APPOINTMENT_TEXT);
+        schedulerPage.saveButtonClick();
         BrowserWrapper.refreshPage(driver);
-        schedulerPage.nextMonthButtonClick();
+        schedulerPage.nextButtonClick();
         schedulerPage.callEventContext();
         schedulerPage.deleteEventButtonClick();
         schedulerPage.saveButtonClick();
         BaseNavigation.logout(driver);
-        BaseNavigation.login(driver, "manager.jh@hospitals.ua", "1111");
-        hospitalsPage = new HospitalsPage(driver);
+        HospitalsPage hospitalsPage =BaseNavigation.loginAsManager(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
         schedulerPage = hospitalsPage.scheduleButtonClick(1);
-        schedulerPage.nextMonthButtonClick();
+        schedulerPage.nextButtonClick();
         Assert.assertEquals( schedulerPage.getEvents().size(), 0);
     }
 
-    @Test(priority = 4)
+    @Test
     public void testEventEdition() throws Exception{
-        BaseNavigation.login(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
-        HospitalsPage hospitalsPage = new HospitalsPage(driver);
-        SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
-        try {
-            schedulerPage.setAppointment("Test", 3);
-            schedulerPage.saveButtonClick();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        schedulerPage.nextButtonClick();
+        schedulerPage.setAppointment(TEST_APPOINTMENT_TEXT);
+        schedulerPage.saveButtonClick();
         BrowserWrapper.refreshPage(driver);
-        schedulerPage.nextMonthButtonClick();
+        schedulerPage.nextButtonClick();
         schedulerPage.callEventContext();
-        schedulerPage.editEventText("Another text");
+        schedulerPage.editEventText(TEST_EDITABLE_APPOINTMENT_TEXT);
         schedulerPage.saveButtonClick();
         BaseNavigation.logout(driver);
-        BaseNavigation.login(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
-        hospitalsPage = new HospitalsPage(driver);
+        HospitalsPage hospitalsPage =BaseNavigation.loginAsManager(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
         schedulerPage = hospitalsPage.scheduleButtonClick(1);
-        schedulerPage.nextMonthButtonClick();
-        Assert.assertTrue( schedulerPage.getEvents().size() > 0 && schedulerPage.getEvents().contains("Another text"));
+        schedulerPage.nextButtonClick();
+        Assert.assertTrue( schedulerPage.getEvents().size() > 0 && schedulerPage.getEvents().contains(EXPECTED_EDITABLE_APPOINTMENT_TEXT));
+    }
+    @Test
+    public void testEventCancel()throws InterruptedException{
+        schedulerPage.nextButtonClick();
+        schedulerPage.inputEvent(TEST_APPOINTMENT_TEXT);
+        schedulerPage.cancelButtonClick();
+        schedulerPage.saveButtonClick();
+        BrowserWrapper.refreshPage(driver);
+        schedulerPage.nextButtonClick();
+        Assert.assertEquals( schedulerPage.getEvents().size(), 0);
+
     }
 
-    @Test(priority = 5)
-    public void testAlertIfNotSaved() throws Exception{
-        BaseNavigation.login(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
-        HospitalsPage hospitalsPage = new HospitalsPage(driver);
-        SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
-        try {
-            schedulerPage.setAppointment("Test", 3);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+    @Test(dataProvider = "eventCreation")
+    public void testCreateEventDayTab(String actualText, String expectedText) throws InterruptedException {
+        schedulerPage.dayTabButtonClick();
+        schedulerPage.nextDayClick();
+        schedulerPage.setAppointment(actualText);
+        schedulerPage.saveButtonClick();
+        BaseNavigation.logout(driver);
+        HospitalsPage hospitalsPage =BaseNavigation.loginAsManager(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
+        schedulerPage = hospitalsPage.scheduleButtonClick(1);
+        schedulerPage.dayTabButtonClick();
+        schedulerPage.nextDayClick();
+        Assert.assertTrue( schedulerPage.getEvents().size() > 0 && schedulerPage.getEvents().contains(expectedText));
+    }
+
+    public void testCreatEventMonthTab() throws InterruptedException{
+        schedulerPage.monthTabButtonClick();
+    }
+
+    //TODO still dont work
+   // @Test
+    public void testEventStretch() throws InterruptedException {
+        schedulerPage.nextButtonClick();
+        schedulerPage.setAppointment(TEST_APPOINTMENT_TEXT);
+        schedulerPage.saveButtonClick();
         BrowserWrapper.refreshPage(driver);
-        Assert.assertTrue(BrowserWrapper.isAlertPresent(driver));
+        schedulerPage.nextButtonClick();
+        schedulerPage.stretchEvent();
+        BrowserWrapper.sleep(10);
+
+    }
+
+    @Test
+    public void testMiniCalendar(){
+        schedulerPage.miniCalendarButtonClick();
+        Assert.assertTrue(schedulerPage.checkMiniCalendarVisibility());
+    }
+
+    @Test
+    public void testTodayButton() throws InterruptedException {
+        schedulerPage.nextButtonClick();
+        schedulerPage.nextButtonClick();
+        schedulerPage.nextButtonClick();
+        schedulerPage.todayButtonClick();
+        Assert.assertTrue(schedulerPage.checkTodayPresence());
+    }
+
+
+    @Test
+    public void testAlertIfNotSaved() throws Exception{
+        schedulerPage.nextButtonClick();
+        schedulerPage.setAppointment(TEST_APPOINTMENT_TEXT);
+        BrowserWrapper.refreshPage(driver);
+        boolean present = BrowserWrapper.isAlertPresent(driver);
         BrowserWrapper.conformAlert(driver);
+        schedulerPage.saveButtonClick();
+        Assert.assertTrue(present);
+    }
+
+    @DataProvider(name = "eventCreation")
+    public static Object[][] getData()
+    {
+        return  new Object[][]{
+                {"Test text", "Test text"},
+                {" ", ""},
+                {"Тестовий текст", "Тестовий текст"}};
     }
 }

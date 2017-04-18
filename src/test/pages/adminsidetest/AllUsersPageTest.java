@@ -1,6 +1,10 @@
 /*
 package pages.adminSideTest;
 
+<<<<<<< HEAD
+=======
+import org.openqa.selenium.TimeoutException;
+>>>>>>> origin/master
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.admin.AllUsersPage;
@@ -8,7 +12,6 @@ import utils.BaseNavigation;
 import utils.BaseTest;
 import utils.BrowserWrapper;
 import utils.databaseutil.UserDAO;
-
 
 import java.util.*;
 
@@ -19,11 +22,31 @@ import java.util.*;
 
 public class AllUsersPageTest extends BaseTest {
 
+    @BeforeMethod
+    public void before() {
+        this.driver = BrowserWrapper.browserInitialization();
+
+    }
+
+    @AfterMethod
+    public void after() {
+        try {
+            BaseNavigation.logout(this.driver);
+            BrowserWrapper.browserClose(this.driver);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void afterMethod(){}
+
+
+
+
     @Test(dataProvider = "loginData")
     public void enableUsersViewTest(String login, String password) {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
-            BrowserWrapper.implicitWait(driver);
             allUsersPage = allUsersPage.showEnableUsers();
             int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
             boolean actual = UserDAO.getStatusByEmail(allUsersPage.getUserDataFromTableRow(rowNumber).get(0));
@@ -38,9 +61,8 @@ public class AllUsersPageTest extends BaseTest {
     public void disableUsersViewTest(String login, String password) {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
-            BrowserWrapper.implicitWait(driver);
-            AllUsersPage allUsersPage1 = allUsersPage.showDisableUsers();
             BrowserWrapper.sleep(3);
+            AllUsersPage allUsersPage1 = allUsersPage.showDisableUsers();
             int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
             boolean actual = UserDAO.getStatusByEmail(allUsersPage1.getUserDataFromTableRow(rowNumber).get(0));
             Assert.assertEquals(actual, false);
@@ -48,6 +70,7 @@ public class AllUsersPageTest extends BaseTest {
             e.printStackTrace();
         }
     }
+
 
     @Test(dataProvider = "loginData")
     public void viewWindowTest(String login, String password) {
@@ -58,7 +81,6 @@ public class AllUsersPageTest extends BaseTest {
             List<String> allInfo = UserDAO.getUserFromDatabaseByEmail(actual.get(1));
             List<String> expected = new LinkedList<>();
             Collections.addAll(expected, new String[]{allInfo.get(0),allInfo.get(1), "true"});
-            BrowserWrapper.implicitWait(driver);
             Assert.assertEquals(actual, expected);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -70,7 +92,6 @@ public class AllUsersPageTest extends BaseTest {
     public void changeRoleTest(String login, String password, String role) {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
-            BrowserWrapper.implicitWait(driver);
             String expected = role;
             int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
             allUsersPage = allUsersPage.changeRoleInEditWindow(rowNumber, role);
@@ -87,7 +108,6 @@ public class AllUsersPageTest extends BaseTest {
     public void changeCountOfUsersOnPageTest(String login, String password, String count) {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
-            BrowserWrapper.implicitWait(driver);
             int expected = Integer.parseInt(count);
             allUsersPage = allUsersPage.changeCountOfUsersOnPage(expected);
             int actual = allUsersPage.getCountOfUsersInTable();
@@ -140,7 +160,12 @@ public class AllUsersPageTest extends BaseTest {
     public void nextPageButtonTest(String login, String password) {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
+<<<<<<< HEAD
          //   AllUsersPage allUsersPage1 = allUsersPage.toNextPage();
+=======
+            AllUsersPage allUsersPage1 = allUsersPage.toNextPage();
+            BrowserWrapper.sleep(3);
+>>>>>>> origin/master
             Assert.assertNotEquals(allUsersPage, allUsersPage1);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -153,10 +178,18 @@ public class AllUsersPageTest extends BaseTest {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
             BrowserWrapper.sleep(2);
+<<<<<<< HEAD
             String actual = allUsersPage.getUserDataFromTableRow(3).get(0);
           //  allUsersPage = allUsersPage.deleteUser(3);
             String expected = allUsersPage.getUserDataFromTableRow(3).get(0);
             Assert.assertNotEquals(actual, expected);
+=======
+            int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
+            String actual = allUsersPage.getCurrentUrl();
+            allUsersPage = allUsersPage.deleteUser(rowNumber);
+            String expected = allUsersPage.getCurrentUrl();
+            Assert.assertEquals(actual, expected);
+>>>>>>> origin/master
         }   catch (InterruptedException e) {
             e.printStackTrace();
         }   catch (Exception e) {
@@ -183,6 +216,9 @@ public class AllUsersPageTest extends BaseTest {
             Assert.assertEquals(true, false);
         }
     }
+
+
+
 
 
 

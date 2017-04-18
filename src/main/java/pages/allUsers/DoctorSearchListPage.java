@@ -9,12 +9,12 @@ import pages.headers.BaseHeader;
 /**
  * Created by Yana on 06.04.2017.
  */
-public class DoctorSearchList {
+public class DoctorSearchListPage {
 
     protected WebDriver driver;
     private BaseHeader header;
 
-    public DoctorSearchList(WebDriver driver) {
+    public DoctorSearchListPage(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -31,15 +31,15 @@ public class DoctorSearchList {
     private WebElement doctorPhotoAtList;
 
     //??
-    public DoctorInfo toDoctorInfoFromPhoto() {
+    public DoctorInfoPage toDoctorInfoFromPhoto() {
         doctorPhotoAtList.click();
-        return new DoctorInfo (driver);
+        return new DoctorInfoPage(driver);
     }
 
     //??
-    public DoctorInfo toDoctorInfoFromList() {
+    public DoctorInfoPage toDoctorInfoFromList() {
         doctorPhotoAtList.click();
-        return new DoctorInfo (driver);
+        return new DoctorInfoPage(driver);
     }
 
 //   driver.findElement(By.cssSelector("[class='panel-heading']")).size());

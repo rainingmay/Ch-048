@@ -1,6 +1,8 @@
 package utils;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import pages.admin.AllUsersPage;
 import pages.allUsers.HospitalSeekerHomePage;
 import pages.allUsers.PageObject;
@@ -37,16 +39,13 @@ public class BaseNavigation {
         js.executeScript(doubleClickJS, element);
     }
 
-    public String getPageTitle(WebDriver driver){
-        return driver.getTitle();
-    }
 
     public static AllUsersPage loginAsAdmin(WebDriver driver, String email, String password) throws InterruptedException {
         login(driver, email, password);
         return new AllUsersPage(driver);
     }
 
-    public static PageObject loginAsManager(WebDriver driver, String email, String password) throws InterruptedException {
+    public static HospitalsPage loginAsManager(WebDriver driver, String email, String password) throws InterruptedException {
         login(driver, email, password);
         return new HospitalsPage(driver);
     }

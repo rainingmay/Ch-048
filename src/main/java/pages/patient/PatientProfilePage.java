@@ -8,7 +8,7 @@ import pages.allUsers.PageObject;
 import pages.headers.headersByRole.PatientHeader;
 
 
-public class PatientProfile extends PageObject {
+public class PatientProfilePage extends PageObject {
 
     public PatientHeader patientHeader;
 
@@ -232,7 +232,7 @@ public class PatientProfile extends PageObject {
     )
     private WebElement submitChangesButton;
 
-    public PatientProfile(WebDriver driver) {
+    public PatientProfilePage(WebDriver driver) {
         super(driver);
     }
 

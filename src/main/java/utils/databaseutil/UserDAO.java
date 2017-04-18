@@ -68,15 +68,13 @@ public class UserDAO {
         return null;
     }
 
-    public static boolean deleteAllEvents(){
-        boolean result = false;
+    public static void deleteAllEvents(){
         try {
             Statement statement = DatabaseConnection.connectToDatabase().createStatement();
-            result = statement.execute("DELETE FROM events");
+            statement.executeUpdate("TRUNCATE  events");
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return result;
     }
 
 

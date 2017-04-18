@@ -11,11 +11,11 @@ import pages.headers.headersByRole.AdminHeader;
 /**
  * Created by Evgen on 09.04.2017.
  */
-public class HospitalsManagers extends PageObject {
+public class HospitalsManagersPage extends PageObject {
 
     public AdminHeader header;
 
-    public HospitalsManagers(WebDriver driver) {
+    public HospitalsManagersPage(WebDriver driver) {
         super(driver);
         this.header = new AdminHeader(driver);
     }
