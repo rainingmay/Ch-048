@@ -1,5 +1,6 @@
 package pages.admin;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,6 +15,8 @@ import utils.BrowserWrapper;
  * Created by Evgen on 06.04.2017.
  */
 public class AddUserPage extends PageObject {
+
+    public static final String IDFORWAITING = "newUserSubmit";
 
     public AdminHeader header;
 
@@ -54,7 +57,7 @@ public class AddUserPage extends PageObject {
     public WebElement emailErrorLabel;
 
     @FindBy(id="password-error")
-    private WebElement passwordErrorLabel;
+    public WebElement passwordErrorLabel;
 
 
     @FindBy(id = "userRoles-error")
@@ -98,7 +101,7 @@ public class AddUserPage extends PageObject {
 
     public boolean isPageReady() throws Exception {
 
-        BrowserWrapper.waitUntilElementVisible(addUserLabel);
+        BrowserWrapper.waitUntilElementVisible(newUserButton);
         StringBuilder errors = new StringBuilder();
         if(!checkAddUserLabel()){
             errors.append("Add User Label\n");
@@ -125,6 +128,9 @@ public class AddUserPage extends PageObject {
             errors.append("New User Button\n");
         }
         if(!checkCancelButton()){
+            errors.append("Cancel Button\n");
+        }
+        if(!checkAddUserLabel()){
             errors.append("Cancel Button\n");
         }
         if(!errors.toString().isEmpty()){
@@ -171,9 +177,8 @@ public class AddUserPage extends PageObject {
 
 
     public void addNewUser(String email, String password, String role) throws InterruptedException {
-        BrowserWrapper.sleep(1);
-        driver.get("https://localhost:8443/HospitalSeeker/admin/newUser");
-        Thread.sleep(1000);
+        BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
+        //Thread.sleep(1000);
         enterEmail(email);
         enterPassword(password);
         confirmPassword(password);
@@ -184,9 +189,8 @@ public class AddUserPage extends PageObject {
     }
 
     public void addNewUserWithotRole(String email, String password) throws InterruptedException {
-        BrowserWrapper.sleep(1);
-        driver.get("https://localhost:8443/HospitalSeeker/admin/newUser");
-        Thread.sleep(1000);
+        BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
+        //BrowserWrapper.sleep(2);
         enterEmail(email);
         enterPassword(password);
         confirmPassword(password);

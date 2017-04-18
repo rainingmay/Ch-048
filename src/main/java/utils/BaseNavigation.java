@@ -18,7 +18,6 @@ public class BaseNavigation {
     public static void login(WebDriver driver, String email, String password) throws InterruptedException{
         HospitalSeekerHomePage hospitalSeekerHomePage = new HospitalSeekerHomePage(driver);
         LoginPage loginPage = hospitalSeekerHomePage.notLogInUserHeader.loginButton();
-        BrowserWrapper.implicitWait(driver);
         loginPage.authorization(email, password);
     }
 
@@ -27,7 +26,6 @@ public class BaseNavigation {
         AuthorizedHeader authorizedHeader = new AuthorizedHeader(driver);
         authorizedHeader.profileButtonClick();
         HospitalSeekerHomePage hospitalSeekerHomePage = authorizedHeader.logoutButtonClick();
-        BrowserWrapper.implicitWait(driver);
         return hospitalSeekerHomePage;
     }
 
@@ -57,5 +55,5 @@ public class BaseNavigation {
         return null;
     }
 
-     
+
 }

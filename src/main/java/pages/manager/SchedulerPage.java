@@ -137,14 +137,14 @@ public class SchedulerPage extends PageObject {
 
 
     public void nextMonthButtonClick() throws InterruptedException {
-        BrowserWrapper.implicitWait(driver);
+       // BrowserWrapper.implicitWait(driver);
         nextMonthButton.click();
     }
     public void setAppointment(String text, int column) throws InterruptedException {
         nextMonthButtonClick();
 
         BaseNavigation.doubleClick(driver,getColumn(column));
-        BrowserWrapper.implicitWait(driver);
+        //BrowserWrapper.implicitWait(driver);
         eventInput.sendKeys(text);
         BrowserWrapper.waitUntilElementClickable(saveButton);
         saveEvent.click();

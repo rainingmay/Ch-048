@@ -65,7 +65,6 @@ public class SchedulerPageTest extends BaseTest{
         BaseNavigation.login(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
         HospitalsPage hospitalsPage = new HospitalsPage(driver);
         SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
-        BrowserWrapper.implicitWait(driver);
         schedulerPage.workWeekSizeSelector(TEST_WEEK_SIZE);
         schedulerPage.saveButtonClick();
         Assert.assertEquals(schedulerPage.getDaysNumber(), EXPECTED_WEEK_SIZE);
@@ -76,7 +75,6 @@ public class SchedulerPageTest extends BaseTest{
         BaseNavigation.login(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
         HospitalsPage hospitalsPage = new HospitalsPage(driver);
         SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
-        BrowserWrapper.implicitWait(driver);
         schedulerPage.setDayDuration(TEST_BEGIN_AT_HOUR, TEST_END_AT_HOUR);
         schedulerPage.saveButtonClick();
         Assert.assertTrue(schedulerPage.getBeginningHour().equals(EXPECTED_BEGIN_AT_HOUR) && schedulerPage.getEndingHour().equals(EXPECTED_END_AT_HOUR));
@@ -90,7 +88,6 @@ public class SchedulerPageTest extends BaseTest{
         BaseNavigation.login(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
         HospitalsPage hospitalsPage = new HospitalsPage(driver);
         SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
-        BrowserWrapper.implicitWait(driver);
         try {
             schedulerPage.setAppointment("Test", 3);
             schedulerPage.saveButtonClick();
@@ -111,7 +108,6 @@ public class SchedulerPageTest extends BaseTest{
         BaseNavigation.login(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
         HospitalsPage hospitalsPage = new HospitalsPage(driver);
         SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
-        BrowserWrapper.implicitWait(driver);
         try {
             schedulerPage.setAppointment("Test", 3);
             schedulerPage.saveButtonClick();
@@ -136,7 +132,6 @@ public class SchedulerPageTest extends BaseTest{
         BaseNavigation.login(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
         HospitalsPage hospitalsPage = new HospitalsPage(driver);
         SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
-        BrowserWrapper.implicitWait(driver);
         try {
             schedulerPage.setAppointment("Test", 3);
             schedulerPage.saveButtonClick();
@@ -161,7 +156,6 @@ public class SchedulerPageTest extends BaseTest{
         BaseNavigation.login(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
         HospitalsPage hospitalsPage = new HospitalsPage(driver);
         SchedulerPage schedulerPage = hospitalsPage.scheduleButtonClick(1);
-        BrowserWrapper.implicitWait(driver);
         try {
             schedulerPage.setAppointment("Test", 3);
         }catch (Exception e){

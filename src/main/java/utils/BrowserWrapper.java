@@ -39,14 +39,15 @@ public class BrowserWrapper {
                 break;
             case "Windows 10":
                 System.setProperty(WEBDRIVER_NAME, WEBDRIVER_PATH);
-             break;
+                break;
             case "MacOS":
-                 System.setProperty(WEBDRIVER_NAME, MACOS_WEBDRIVER_PATH);
+                System.setProperty(WEBDRIVER_NAME, MACOS_WEBDRIVER_PATH);
                 break;
         }
         WebDriver driver = new FirefoxDriver(ffProfile);
         driver.get(BASE_URL);
-        wait = new WebDriverWait(driver,10);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        wait = new WebDriverWait(driver,30, 250);
         return driver;
     }
 
@@ -91,10 +92,6 @@ public class BrowserWrapper {
 
     public static void waitUntilElementClickable(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
-    }
-
-    public static void waitUntilElementClickableByLocator(By by) {
-        wait.until(ExpectedConditions.elementToBeClickable(by));
     }
 
 
@@ -148,10 +145,7 @@ public class BrowserWrapper {
     }
 
 
-    public static void implicitWait(WebDriver driver){
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-    }
 
 
     public static void waitForPage(WebDriver driver){
@@ -166,7 +160,8 @@ public class BrowserWrapper {
     {
         try
         {
-            driver.switchTo().alert();
+            Alert alert = driver.switchTo().alert();
+            alert.dismiss();
             return true;
         }
         catch (NoAlertPresentException Ex)
@@ -175,6 +170,7 @@ public class BrowserWrapper {
         }
     }
     public static void conformAlert(WebDriver driver){
+        waitUntilAlertIsPresent();
         Alert alert = driver.switchTo().alert();
         alert.dismiss();
     }
