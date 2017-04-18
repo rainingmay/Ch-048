@@ -121,11 +121,13 @@ public class AllUsersPage extends PageObject {
 
     public AllUsersPage showEnableUsers() {
         enableButton.click();
+        BrowserWrapper.sleep(3);
         return new AllUsersPage(driver);
     }
 
     public AllUsersPage showDisableUsers() {
         ((JavascriptExecutor)driver).executeScript("arguments[0].click();" , disableButton);
+        BrowserWrapper.sleep(3);
         return new AllUsersPage(driver);
     }
 
@@ -225,6 +227,7 @@ public class AllUsersPage extends PageObject {
 
     public AllUsersPage changeRoleInEditWindow(int rowNumber, String role) {
         openEditWindow(rowNumber);
+        BrowserWrapper.sleep(3);
         selectDropdownRole(editWindow.findElement(By.id("userRoles")), role);
         BrowserWrapper.sleep(3);
         editWindow.findElement(By.cssSelector("input[value=\"Edit\"]")).click();
@@ -270,5 +273,18 @@ public class AllUsersPage extends PageObject {
     public AllUsersPage clickSortByEmail() {
         sortByEmailButton.click();
         return new AllUsersPage(driver);
+    }
+
+
+
+
+
+    public boolean equals(AllUsersPage allUsersPage) {
+        if (this.tableBody.equals(allUsersPage.tableBody)) return true;
+        return false;
+    }
+
+    public String getCurrentUrl() {
+        return driver.getCurrentUrl();
     }
 }
