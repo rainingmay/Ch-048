@@ -1,9 +1,7 @@
 package utils;
 
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 
 public class BaseTest {
@@ -21,5 +19,17 @@ public class BaseTest {
     public static final String PATIENT_PASSWORD = "1111";
 
     protected WebDriver driver;
+
+    @BeforeClass
+    public void before() {
+        this.driver = BrowserWrapper.browserInitialization();
+    }
+
+
+    @AfterClass
+    public void after() {
+        BrowserWrapper.browserClose(this.driver);
+    }
+
 
 }
