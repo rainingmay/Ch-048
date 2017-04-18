@@ -160,22 +160,22 @@ public class SchedulerPageTest extends BaseTest{
         Assert.assertTrue( schedulerPage.getEvents().size() > 0 && schedulerPage.getEvents().contains(expectedText));
     }
 
-    public void testCreatEventMonthTab() throws InterruptedException{
+    @Test
+    public void testCreateEventMonthTab() throws InterruptedException{
         schedulerPage.monthTabButtonClick();
-    }
-
-    //TODO still dont work
-   // @Test
-    public void testEventStretch() throws InterruptedException {
         schedulerPage.nextButtonClick();
-        schedulerPage.setAppointment(TEST_APPOINTMENT_TEXT);
+        schedulerPage.createEventCalendar(TEST_APPOINTMENT_TEXT);
         schedulerPage.saveButtonClick();
-        BrowserWrapper.refreshPage(driver);
+        BaseNavigation.logout(driver);
+        HospitalsPage hospitalsPage =BaseNavigation.loginAsManager(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
+        schedulerPage = hospitalsPage.scheduleButtonClick(1);
+        schedulerPage.monthTabButtonClick();
         schedulerPage.nextButtonClick();
-        schedulerPage.stretchEvent();
-        BrowserWrapper.sleep(10);
+        System.out.println(schedulerPage.getEventsCalendar().size() > 0);
+        Assert.assertTrue( schedulerPage.getEventsCalendar().size() > 0 && schedulerPage.getEventsCalendar().get(0).contains(EXPECTED_APPOINTMENT_TEXT));
 
     }
+
 
     @Test
     public void testMiniCalendar(){
