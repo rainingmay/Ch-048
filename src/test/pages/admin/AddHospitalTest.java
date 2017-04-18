@@ -1,12 +1,10 @@
-package pages.adminsidetest;
+package pages.admin;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.admin.AddNewHospitalPage;
-import pages.admin.HospitalListPage;
 import utils.BaseNavigation;
 import utils.BaseTest;
 

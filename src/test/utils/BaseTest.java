@@ -22,29 +22,4 @@ public class BaseTest {
 
     protected WebDriver driver;
 
-    @BeforeClass
-    public void before() {
-        this.driver = BrowserWrapper.browserInitialization();
-
-    }
-
-
-    @AfterMethod
-    public void afterMethod(){
-        try {
-            BaseNavigation.logout(this.driver);
-        }catch (InterruptedException e){
-            e.printStackTrace();
-        } catch (TimeoutException e){
-            e.printStackTrace();
-            System.out.println("failed");
-        }
-
-
-    }
-
-    @AfterClass
-    public void after() {
-            BrowserWrapper.browserClose(this.driver);
-    }
 }

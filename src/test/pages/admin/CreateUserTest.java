@@ -1,17 +1,12 @@
 
-package pages.adminsidetest;
+package pages.admin;
 
 
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pages.admin.AddUserPage;
-import pages.admin.AllUsersPage;
 import utils.BaseNavigation;
 import utils.BaseTest;
-import org.testng.annotations.Parameters;
-
-import java.sql.Driver;
 
 public class CreateUserTest extends BaseTest {
 
