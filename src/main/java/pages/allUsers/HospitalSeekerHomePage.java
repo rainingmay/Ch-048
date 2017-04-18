@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.anonymous.LoginPage;
+import pages.headers.headersByRole.DoctorHeader;
 import pages.headers.headersByRole.NotLogInUserHeader;
 
 
@@ -14,7 +15,7 @@ public class HospitalSeekerHomePage extends PageObject {
 
     //Temporary field
     public NotLogInUserHeader notLogInUserHeader;
-
+    public DoctorHeader header;
 
 
     public LoginPage moveToLoginPage(){
@@ -46,4 +47,5 @@ public class HospitalSeekerHomePage extends PageObject {
         super(driver);
         notLogInUserHeader = new NotLogInUserHeader(driver);
     }
+
 }

@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import pages.allUsers.PageObject;
 import pages.headers.headersByRole.AdminHeader;
 import pages.headers.headersByRole.DoctorHeader;
+import utils.BrowserWrapper;
 
 public class PatientsCardPage extends PageObject {
     public DoctorHeader header;
@@ -14,8 +15,8 @@ public class PatientsCardPage extends PageObject {
     @FindBy(css = "a.btn.btn-info")
     private WebElement addNewRecord;
 
-    @FindBy (className = "alert alert-warning")
-    private WebElement allRecords;
+    @FindBy (xpath = "//*[@id=\"headingOne\"]")
+    private WebElement patientRecords;
 
     @FindBy (xpath = "//*[@id=\"headingOne\"]/h4/span[2]/a")
     private WebElement editRecord;
@@ -24,7 +25,9 @@ public class PatientsCardPage extends PageObject {
         super(driver);
         this.header = new DoctorHeader(driver);
     }
-
+    public boolean checkRecord(){
+        return BrowserWrapper.isElementPresent(patientRecords);
+    }
     public void addNewRecordButtonClick (){
         addNewRecord.click();
     }
