@@ -1,8 +1,8 @@
 package pages.adminsidetest;
 
+import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.admin.AllUsersPage;
 import utils.BaseNavigation;
 import utils.BaseTest;
@@ -15,6 +15,27 @@ import java.util.*;
  * Created by Evgen on 10.04.2017.
  */
 public class AllUsersPageTest extends BaseTest {
+
+    @BeforeMethod
+    public void before() {
+        this.driver = BrowserWrapper.browserInitialization();
+
+    }
+
+    @AfterMethod
+    public void after() {
+        try {
+            BaseNavigation.logout(this.driver);
+            BrowserWrapper.browserClose(this.driver);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void afterMethod(){}
+
+
+
 
     @Test(dataProvider = "loginData")
     public void enableUsersViewTest(String login, String password) {
