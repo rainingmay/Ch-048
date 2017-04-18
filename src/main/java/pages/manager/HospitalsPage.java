@@ -9,7 +9,6 @@ import pages.allUsers.PageObject;
 import pages.headers.headersByRole.ManagerHeader;
 import utils.BrowserWrapper;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -291,7 +290,7 @@ public class HospitalsPage extends PageObject {
     }
     public SchedulerPage scheduleButtonClick(int i) throws InterruptedException {
          WebElement element = driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #schedule"));
-        BrowserWrapper.waitUntilElementClickable(element);
+        BrowserWrapper.waitUntilElementVisible(element);
         element.click();
          return new SchedulerPage(driver);
     }

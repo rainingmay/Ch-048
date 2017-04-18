@@ -1,7 +1,11 @@
 package pages.manager;
 
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import pages.allUsers.PageObject;
@@ -11,7 +15,6 @@ import utils.BrowserWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
 public class SchedulerPage extends PageObject {
@@ -70,11 +73,18 @@ public class SchedulerPage extends PageObject {
     private WebElement previousMonthButton;
 
     @FindBy(css = "div.dhx_cal_next_button")
-    private WebElement nextMonthButton;
+    private WebElement nextButton;
 
     @FindAll({@FindBy(css = "div.dhx_scale_holder"),
               @FindBy(css = "div.dhx_scale_holder_now")})
-    private List<WebElement> tableColumn;
+    private List<WebElement> tableColumns;
+
+
+    @FindBy(css = "div.dhx_scale_holder_now")
+    private WebElement nowColumb;
+
+    @FindBy(css = "div.dhx_scale_holder")
+    private WebElement tableColumn;
 
     @FindAll(@FindBy(css = "div.dhx_scale_ignore"))
     private List<WebElement> tableIgnoredColumns;
@@ -130,20 +140,29 @@ public class SchedulerPage extends PageObject {
     @FindBy(xpath = "/html/body/div[3]/div[2]/div[1]/div")
     public WebElement eventDeleteConfirmation;
 
+    @FindBy(css = "div.dhx_event_resize")
+    public WebElement resizeButton;
+
     public WebElement getColumn(int i){
-        if(i< tableColumn.size()-tableIgnoredColumns.size()) {
+        if(i< tableColumns.size()-tableIgnoredColumns.size()) {
             WebElement element = driver.findElement(By.cssSelector("div.dhx_scale_holder:nth-child(" + i + ")"));
             return element;
         }
         return null;
     }
 
+   public void nextDayClick(){
+        while(driver.findElements(By.cssSelector("div.gray_section")).size()>0){
+            BrowserWrapper.waitUntilElementVisible(nextButton);
+            nextButton.click();
+        }
+   }
 
-    public void nextMonthButtonClick() throws InterruptedException {
-        nextMonthButton.click();
+    public void nextButtonClick() throws InterruptedException {
+       BrowserWrapper.waitUntilElementVisible(nextButton);
+        nextButton.click();
     }
     public void setAppointment(String text, int column) throws InterruptedException {
-        nextMonthButtonClick();
 
         BaseNavigation.doubleClick(driver,getColumn(column));
         BrowserWrapper.waitUntilElementVisible(eventInput);
@@ -151,6 +170,29 @@ public class SchedulerPage extends PageObject {
         BrowserWrapper.waitUntilElementVisible(saveButton);
         saveEvent.click();
 
+    }
+    public void setAppointment(String text)  {
+
+       inputEvent(text);
+       saveEventClick();
+    }
+
+    public boolean checkMiniCalendarVisibility(){
+       return BrowserWrapper.isElementPresent(driver.findElement(By.cssSelector("div.dhx_mini_calendar")));
+    }
+
+    public void inputEvent(String text) {
+        BaseNavigation.doubleClick(driver, tableColumn);
+        BrowserWrapper.waitUntilElementVisible(eventInput);
+        eventInput.sendKeys(text);
+    }
+
+
+
+
+    public void saveEventClick(){
+        BrowserWrapper.waitUntilElementVisible(saveButton);
+        saveEvent.click();
     }
 
     public void callEventContext(){
@@ -169,8 +211,17 @@ public class SchedulerPage extends PageObject {
     }
 
 
+    public void stretchEvent(){
+        Actions actions = new Actions(driver);
+        actions.clickAndHold(resizeButton).moveByOffset(0,-88).release().build();
+        actions.perform();
+
+    }
+
+
+
     public int getDaysNumber(){
-        return tableColumn.size() - tableIgnoredColumns.size() - 1;
+        return tableColumns.size() - tableIgnoredColumns.size() - 1;
     }
 
     public String getBeginningHour(){
@@ -228,7 +279,7 @@ public class SchedulerPage extends PageObject {
     }
 
     private boolean checkNextButton(){
-        return BrowserWrapper.isElementPresent(nextMonthButton);
+        return BrowserWrapper.isElementPresent(nextButton);
     }
 
     private boolean checkWeekSizeSelectorSelector(){
@@ -314,6 +365,10 @@ public class SchedulerPage extends PageObject {
     }
 
 
+    public void cancelButtonClick(){
+        BrowserWrapper.waitUntilElementVisible(cancelEvent);
+        cancelEvent.click();
+    }
     public void workDayBeginAtSelector(String value){
         BrowserWrapper.selectDropdown(workDayBeginAtSelector, value);
     }
@@ -332,6 +387,7 @@ public class SchedulerPage extends PageObject {
     }
 
     public void dayTabButtonClick(){
+        BrowserWrapper.waitUntilElementVisible(dayTabButton);
         dayTabButton.click();
     }
 
@@ -344,6 +400,7 @@ public class SchedulerPage extends PageObject {
     }
 
     public void miniCalendarButtonClick(){
+        BrowserWrapper.waitUntilElementVisible(miniCalendarButton);
         miniCalendarButton.click();
     }
 
@@ -355,6 +412,9 @@ public class SchedulerPage extends PageObject {
         previousMonthButton.click();
     }
 
+    public boolean checkTodayPresence(){
+       return BrowserWrapper.isElementPresent(nowColumb);
+    }
 
 
 

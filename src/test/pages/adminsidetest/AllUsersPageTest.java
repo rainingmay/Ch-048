@@ -1,16 +1,13 @@
 package pages.adminsidetest;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotVisibleException;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 import pages.admin.AllUsersPage;
-import sun.plugin.services.BrowserService;
 import utils.BaseNavigation;
 import utils.BaseTest;
 import utils.BrowserWrapper;
 import utils.databaseutil.UserDAO;
-
 
 import java.util.*;
 
@@ -23,7 +20,6 @@ public class AllUsersPageTest extends BaseTest {
     public void enableUsersViewTest(String login, String password) {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
-            BrowserWrapper.implicitWait(driver);
             allUsersPage = allUsersPage.showEnableUsers();
             int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
             boolean actual = UserDAO.getStatusByEmail(allUsersPage.getUserDataFromTableRow(rowNumber).get(0));
@@ -58,7 +54,6 @@ public class AllUsersPageTest extends BaseTest {
             List<String> allInfo = UserDAO.getUserFromDatabaseByEmail(actual.get(1));
             List<String> expected = new LinkedList<>();
             Collections.addAll(expected, new String[]{allInfo.get(0),allInfo.get(1), "true"});
-            BrowserWrapper.implicitWait(driver);
             Assert.assertEquals(actual, expected);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -70,7 +65,6 @@ public class AllUsersPageTest extends BaseTest {
     public void changeRoleTest(String login, String password, String role) {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
-            BrowserWrapper.implicitWait(driver);
             String expected = role;
             int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
             allUsersPage = allUsersPage.changeRoleInEditWindow(rowNumber, role);
@@ -87,7 +81,6 @@ public class AllUsersPageTest extends BaseTest {
     public void changeCountOfUsersOnPageTest(String login, String password, String count) {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
-            BrowserWrapper.implicitWait(driver);
             int expected = Integer.parseInt(count);
             allUsersPage = allUsersPage.changeCountOfUsersOnPage(expected);
             int actual = allUsersPage.getCountOfUsersInTable();
