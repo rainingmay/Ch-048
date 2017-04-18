@@ -1,19 +1,14 @@
 
-package pages.adminSideTest;
+package pages.admin;
 
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pages.admin.AddUserPage;
-import pages.admin.AllUsersPage;
-import pages.manager.HospitalsPage;
-import pages.manager.SchedulerPage;
 import utils.BaseNavigation;
 import utils.BaseTest;
 import utils.BrowserWrapper;
@@ -24,7 +19,7 @@ public class CreateUserTest extends BaseTest {
 
 
 
-    public static final String NEWUSERLOGIN = "testadmin182@gmail.com.ua";
+    public static final String NEWUSERLOGIN = "1testadmin182@gmail.com.ua";
     public static final String NEWUSERPASSWORD = "Q12345w";
     public static final String NEWUSERROLE = "ADMIN";
 
@@ -44,6 +39,7 @@ public class CreateUserTest extends BaseTest {
     public void isElementsPresentAddUserTest() throws Exception{
     BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
     AddUserPage addUserPage = new AddUserPage(driver);
+    BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
     addUserPage = addUserPage.header.goToAddUserPage();
         try{
             BrowserWrapper.waitForPage(driver);
@@ -57,7 +53,7 @@ public class CreateUserTest extends BaseTest {
     }
 
 
-    @Test (priority = 1)
+    @Test
     public void successfulAddNewUserTest() throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AllUsersPage allUsersPage = new AllUsersPage(driver);
@@ -91,10 +87,10 @@ public class CreateUserTest extends BaseTest {
     public static Object[][] emailDetails() {
 
         return new Object[][] {
-                { "testonemal@mail.ru", NEWUSERPASSWORD },
-                { "testtwomail@.com.ru", NEWUSERPASSWORD },
-                {"testthreemail@com.cv.ua", NEWUSERPASSWORD},
-                {"newonetest1l@is.low.pass.case",NEWUSERPASSWORD}
+                { "2t1estonemal@mail.ru", NEWUSERPASSWORD },
+                { "2t1esttwomail@com.ru", NEWUSERPASSWORD },
+                {"2t1estthreemail@com.cv.ua", NEWUSERPASSWORD},
+                {"2n1ewonetest1l@is.low.pass.case",NEWUSERPASSWORD}
         };
 
     }

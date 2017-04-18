@@ -103,9 +103,6 @@ public class AddUserPage extends PageObject {
 
         BrowserWrapper.waitUntilElementVisible(newUserButton);
         StringBuilder errors = new StringBuilder();
-        if(!checkAddUserLabel()){
-            errors.append("Add User Label\n");
-        }
         if(!checkEmailInput()){
             errors.append("Email Input\n");
         }
@@ -114,9 +111,6 @@ public class AddUserPage extends PageObject {
         }
         if(!checkConfirmPasswordInput()){
             errors.append("Confirm Password Input\n");
-        }
-        if(!checkRoleLabel()){
-            errors.append("Roles Label\n");
         }
         if(!checkUserRolesSelect()){
             errors.append("User Roles Selector\n");
@@ -128,9 +122,6 @@ public class AddUserPage extends PageObject {
             errors.append("New User Button\n");
         }
         if(!checkCancelButton()){
-            errors.append("Cancel Button\n");
-        }
-        if(!checkAddUserLabel()){
             errors.append("Cancel Button\n");
         }
         if(!errors.toString().isEmpty()){
