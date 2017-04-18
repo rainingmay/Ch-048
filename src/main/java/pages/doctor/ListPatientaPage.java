@@ -74,12 +74,13 @@ public class ListPatientaPage extends PageObject {
     @FindBy(partialLinkText = "a@gmail.com")
     private WebElement patienta;
 
-
     public void searchPatients(String value){
         searchTextField.clear();
         searchTextField.sendKeys(value);
         searchButtonClick();
     }
+
+
     public WebElement getEmailPatients(){
         return patientsf;
     }
@@ -121,6 +122,7 @@ public class ListPatientaPage extends PageObject {
     }
 
     public PatientsCardPage getPatientsCardClick(){
+        BrowserWrapper.waitUntilElementClickable(patienta);
         patientta.click();
 
         return new PatientsCardPage(driver);
@@ -132,8 +134,5 @@ public class ListPatientaPage extends PageObject {
         super(driver);
         this.header = new DoctorHeader(driver);
     }
-
-
-
 
 }

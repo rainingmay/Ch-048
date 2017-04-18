@@ -29,6 +29,7 @@ public class PatientsCardPage extends PageObject {
         return BrowserWrapper.isElementPresent(patientRecords);
     }
     public void addNewRecordButtonClick (){
+        BrowserWrapper.waitUntilElementClickable(addNewRecord);
         addNewRecord.click();
     }
     public void editButtonClick(){
