@@ -121,13 +121,13 @@ public class AllUsersPage extends PageObject {
 
     public AllUsersPage showEnableUsers() {
         enableButton.click();
-        BrowserWrapper.sleep(3);
+        BrowserWrapper.waitForPage(driver);
         return new AllUsersPage(driver);
     }
 
     public AllUsersPage showDisableUsers() {
         ((JavascriptExecutor)driver).executeScript("arguments[0].click();" , disableButton);
-        BrowserWrapper.sleep(3);
+        BrowserWrapper.waitForPage(driver);
         return new AllUsersPage(driver);
     }
 
@@ -141,6 +141,7 @@ public class AllUsersPage extends PageObject {
     public AllUsersPage changeRole(String role) {
         this.role.findElement(By.cssSelector("option[value=" + role + "]")).click();
         searchButton.click();
+        BrowserWrapper.sleep(3);
         return new AllUsersPage(driver);
     }
 
@@ -231,12 +232,12 @@ public class AllUsersPage extends PageObject {
         selectDropdownRole(editWindow.findElement(By.id("userRoles")), role);
         BrowserWrapper.sleep(3);
         editWindow.findElement(By.cssSelector("input[value=\"Edit\"]")).click();
+        BrowserWrapper.sleep(3);
         return new AllUsersPage(driver);
     }
 
     public static void selectDropdownRole(WebElement element, String text) {
         org.openqa.selenium.support.ui.Select dropdown = new org.openqa.selenium.support.ui.Select(element);
-        //dropdown.selectByVisibleText(text);
         if (dropdown.getAllSelectedOptions().size() != 0) dropdown.deselectAll();
         dropdown.selectByValue(text);
     }
