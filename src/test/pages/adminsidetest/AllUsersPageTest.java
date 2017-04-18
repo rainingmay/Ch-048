@@ -29,6 +29,8 @@ public class AllUsersPageTest extends BaseTest {
             BrowserWrapper.browserClose(this.driver);
         } catch (InterruptedException e) {
             e.printStackTrace();
+        } catch (TimeoutException e) {
+            BrowserWrapper.browserClose(this.driver);
         }
     }
 
