@@ -5,7 +5,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import pages.allUsers.PageObject;
@@ -131,6 +130,9 @@ public class SchedulerPage extends PageObject {
     @FindBy(css = "div.dhx_btn_set.dhx_right_btn_set.dhx_delete_btn_set")
     private WebElement deleteDetailedChanges;
 
+    @FindBy(css = "div.dhx_save_btn_set")
+    private WebElement saveDetailedChanges;
+
     @FindBy(css = "div.dhx_scale_hour:first-child")
     public WebElement beginningHour;
 
@@ -142,6 +144,13 @@ public class SchedulerPage extends PageObject {
 
     @FindBy(css = "div.dhx_event_resize")
     public WebElement resizeButton;
+
+
+    @FindAll(@FindBy(css = "div.dhx_cal_event_line_start"))
+    public List<WebElement> monthElements;
+
+    @FindBy(css = "div.dhx_month_body")
+    public WebElement monthElement;
 
     public WebElement getColumn(int i){
         if(i< tableColumns.size()-tableIgnoredColumns.size()) {
@@ -211,11 +220,11 @@ public class SchedulerPage extends PageObject {
     }
 
 
-    public void stretchEvent(){
-        Actions actions = new Actions(driver);
-        actions.clickAndHold(resizeButton).moveByOffset(0,-88).release().build();
-        actions.perform();
-
+    public void createEventCalendar(String text){
+        BaseNavigation.doubleClick(driver, monthElement);
+        BrowserWrapper.waitUntilElementVisible(detailedEditorField);
+        detailedEditorField.sendKeys(text);
+        saveDetailedChanges.click();
     }
 
 
@@ -344,6 +353,19 @@ public class SchedulerPage extends PageObject {
             throw new NoSuchElementException(errors.toString());
         }
         return true;
+    }
+
+    public List<String> getEventsCalendar(){
+        List<String> list = new ArrayList<>();
+
+        if(monthElements.size() == 0){
+            return list;
+        }
+        for(WebElement element : monthElements){
+            list.add(element.getText());
+        }
+
+        return list;
     }
 
     public List<String> getEvents(){
