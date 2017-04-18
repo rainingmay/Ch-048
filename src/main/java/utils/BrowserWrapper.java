@@ -149,7 +149,10 @@ public class BrowserWrapper {
     }
 
 
+    public static void implicitWait(WebDriver driver){
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
+    }
 
 
     public static void waitForPage(WebDriver driver){
@@ -164,7 +167,7 @@ public class BrowserWrapper {
     {
         try
         {
-           driver.switchTo().alert();
+            driver.switchTo().alert();
             return true;
         }
         catch (NoAlertPresentException Ex)
