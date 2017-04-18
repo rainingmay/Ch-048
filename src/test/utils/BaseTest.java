@@ -2,13 +2,9 @@ package utils;
 
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.*;
-
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
-import java.util.Properties;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
 
 public class BaseTest {
 
@@ -26,16 +22,4 @@ public class BaseTest {
 
     protected WebDriver driver;
 
-    @BeforeClass
-    public void before() {
-        this.driver = BrowserWrapper.browserInitialization();
-
-    }
-
-
-
-    @AfterClass
-    public void after() {
-            BrowserWrapper.browserClose(this.driver);
-    }
 }

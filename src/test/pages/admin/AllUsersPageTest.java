@@ -1,13 +1,7 @@
-/*
-package pages.adminSideTest;
+package pages.admin;
 
-<<<<<<< HEAD
-=======
-import org.openqa.selenium.TimeoutException;
->>>>>>> origin/master
 import org.testng.Assert;
 import org.testng.annotations.*;
-import pages.admin.AllUsersPage;
 import utils.BaseNavigation;
 import utils.BaseTest;
 import utils.BrowserWrapper;
@@ -15,11 +9,9 @@ import utils.databaseutil.UserDAO;
 
 import java.util.*;
 
-*/
 /**
  * Created by Evgen on 10.04.2017.
- *//*
-
+ */
 public class AllUsersPageTest extends BaseTest {
 
     @BeforeMethod
@@ -35,11 +27,10 @@ public class AllUsersPageTest extends BaseTest {
             BrowserWrapper.browserClose(this.driver);
         } catch (InterruptedException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            BrowserWrapper.browserClose(this.driver);
         }
     }
-
-    public void afterMethod(){}
-
 
 
 
@@ -47,6 +38,7 @@ public class AllUsersPageTest extends BaseTest {
     public void enableUsersViewTest(String login, String password) {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
+            BrowserWrapper.waitForPage(driver);
             allUsersPage = allUsersPage.showEnableUsers();
             int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
             boolean actual = UserDAO.getStatusByEmail(allUsersPage.getUserDataFromTableRow(rowNumber).get(0));
@@ -61,7 +53,7 @@ public class AllUsersPageTest extends BaseTest {
     public void disableUsersViewTest(String login, String password) {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
-            BrowserWrapper.sleep(3);
+            BrowserWrapper.waitForPage(driver);
             AllUsersPage allUsersPage1 = allUsersPage.showDisableUsers();
             int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
             boolean actual = UserDAO.getStatusByEmail(allUsersPage1.getUserDataFromTableRow(rowNumber).get(0));
@@ -76,6 +68,7 @@ public class AllUsersPageTest extends BaseTest {
     public void viewWindowTest(String login, String password) {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
+            BrowserWrapper.waitForPage(driver);
             int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
             List<String> actual = allUsersPage.getUserDataFromInfoWindow(rowNumber);
             List<String> allInfo = UserDAO.getUserFromDatabaseByEmail(actual.get(1));
@@ -92,10 +85,10 @@ public class AllUsersPageTest extends BaseTest {
     public void changeRoleTest(String login, String password, String role) {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
+            BrowserWrapper.waitForPage(driver);
             String expected = role;
-            int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
+            int rowNumber = 1;
             allUsersPage = allUsersPage.changeRoleInEditWindow(rowNumber, role);
-            BrowserWrapper.sleep(3);
             String actual = allUsersPage.getUserDataFromTableRow(rowNumber).get(3);
             Assert.assertEquals(actual, expected);
         } catch (InterruptedException e) {
@@ -108,6 +101,7 @@ public class AllUsersPageTest extends BaseTest {
     public void changeCountOfUsersOnPageTest(String login, String password, String count) {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
+            BrowserWrapper.waitForPage(driver);
             int expected = Integer.parseInt(count);
             allUsersPage = allUsersPage.changeCountOfUsersOnPage(expected);
             int actual = allUsersPage.getCountOfUsersInTable();
@@ -122,12 +116,13 @@ public class AllUsersPageTest extends BaseTest {
     public void searchByRoleTest(String login, String password, String role) {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
+            BrowserWrapper.waitForPage(driver);
             String expected = role;
             allUsersPage = allUsersPage.changeRole(expected);
-            BrowserWrapper.sleep(3);
+            BrowserWrapper.waitForPage(driver);
             int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
             String actual = allUsersPage.getUserDataFromTableRow(rowNumber).get(3);
-            Assert.(actual, expected);
+            Assert.assertEquals(actual, expected);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -138,8 +133,9 @@ public class AllUsersPageTest extends BaseTest {
     public void searchTest(String login, String password, String role, String valueOfField, String count) {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
+            BrowserWrapper.waitForPage(driver);
             allUsersPage = allUsersPage.search(Integer.parseInt(count), role, "firstName", valueOfField);
-            BrowserWrapper.sleep(3);
+            BrowserWrapper.waitForPage(driver);
             int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
             List<String> expected = new LinkedList<>();
             Collections.addAll(expected, new String[]{valueOfField, role});
@@ -156,16 +152,13 @@ public class AllUsersPageTest extends BaseTest {
     }
 
 
-   @Test(dataProvider = "loginData")
+    @Test(dataProvider = "loginData")
     public void nextPageButtonTest(String login, String password) {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
-<<<<<<< HEAD
-         //   AllUsersPage allUsersPage1 = allUsersPage.toNextPage();
-=======
+            BrowserWrapper.waitForPage(driver);
             AllUsersPage allUsersPage1 = allUsersPage.toNextPage();
-            BrowserWrapper.sleep(3);
->>>>>>> origin/master
+            BrowserWrapper.waitForPage(driver);
             Assert.assertNotEquals(allUsersPage, allUsersPage1);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -177,19 +170,12 @@ public class AllUsersPageTest extends BaseTest {
     public void deleteUsersTest(String login, String password) {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
-            BrowserWrapper.sleep(2);
-<<<<<<< HEAD
-            String actual = allUsersPage.getUserDataFromTableRow(3).get(0);
-          //  allUsersPage = allUsersPage.deleteUser(3);
-            String expected = allUsersPage.getUserDataFromTableRow(3).get(0);
-            Assert.assertNotEquals(actual, expected);
-=======
+            BrowserWrapper.waitForPage(driver);
             int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
             String actual = allUsersPage.getCurrentUrl();
             allUsersPage = allUsersPage.deleteUser(rowNumber);
             String expected = allUsersPage.getCurrentUrl();
             Assert.assertEquals(actual, expected);
->>>>>>> origin/master
         }   catch (InterruptedException e) {
             e.printStackTrace();
         }   catch (Exception e) {
@@ -202,11 +188,12 @@ public class AllUsersPageTest extends BaseTest {
     public void sortByEmailTest(String login, String password, String role) {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
+            BrowserWrapper.waitForPage(driver);
             allUsersPage.changeRole(role);
             allUsersPage.searchButton.click();
-            BrowserWrapper.sleep(2);
-          //  allUsersPage = allUsersPage.clickSortByEmail();
-            BrowserWrapper.sleep(3);
+            BrowserWrapper.waitForPage(driver);
+            allUsersPage = allUsersPage.clickSortByEmail();
+            BrowserWrapper.waitForPage(driver);
             int actual = allUsersPage.getUserDataFromTableRow(1).get(0).compareToIgnoreCase
                     (allUsersPage.getUserDataFromTableRow(2).get(0));
             Assert.assertEquals(actual < 0, true);
@@ -216,6 +203,7 @@ public class AllUsersPageTest extends BaseTest {
             Assert.assertEquals(true, false);
         }
     }
+
 
 
 
@@ -266,4 +254,3 @@ public class AllUsersPageTest extends BaseTest {
     }
 
 }
-*/
