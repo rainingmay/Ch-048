@@ -172,9 +172,6 @@ public class SchedulerPageTest extends BaseTest{
         schedulerPage.monthTabButtonClick();
         schedulerPage.nextButtonClick();
         System.out.println(schedulerPage.getEventsCalendar().size() > 0);
-        for (String s : schedulerPage.getEventsCalendar()){
-            System.out.println("str + " + s);
-        }
         Assert.assertTrue( schedulerPage.getEventsCalendar().size() > 0 && schedulerPage.getEventsCalendar().get(0).contains(EXPECTED_APPOINTMENT_TEXT));
 
     }
