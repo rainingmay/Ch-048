@@ -12,16 +12,21 @@ import pages.doctor.CreateNewRecordPage;
 import pages.doctor.ListPatientaPage;
 import pages.doctor.PatientsCardPage;
 import pages.headers.headersByRole.DoctorHeader;
-import pages.manager.HospitalsPage;
 import utils.BaseNavigation;
 import utils.BaseTest;
 import utils.BrowserWrapper;
+
 
 
 /**
  * Created by Natasha on 18.04.2017.
  */
 public class TestPatientRecord extends BaseTest {
+    @BeforeMethod
+    public void before() {
+        this.driver = BrowserWrapper.browserInitialization();
+
+    }
 
 
     @AfterMethod
@@ -40,12 +45,12 @@ public class TestPatientRecord extends BaseTest {
     @Test
 
      public void createNewRecord() throws Exception {
-        WebDriverWait wait = new WebDriverWait(driver, 5);
-        BaseNavigation.loginAsDoctor(driver, DOCTOR_LOGIN, DOCTOR_PASSWORD);
+       WebDriverWait wait = new WebDriverWait(driver, 5);
+       BaseNavigation.loginAsDoctor(driver, DOCTOR_LOGIN, DOCTOR_PASSWORD);
 
-       wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[1]/div/div/div")));
-       DoctorHeader doctorHeader = new DoctorHeader(driver);
-       doctorHeader.patientsButtonClick();
+      wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[1]/div/div/div")));
+      DoctorHeader doctorHeader = new DoctorHeader(driver);
+      doctorHeader.patientsButtonClick();
 
         ListPatientaPage listPatientaPage = new ListPatientaPage(driver);
         BrowserWrapper.sleep(3);
@@ -60,7 +65,7 @@ public class TestPatientRecord extends BaseTest {
 
         Assert.assertTrue(patientsCardPage.checkRecord());
     }
-   @Test
+  @Test
     public void checkPatientsSearch() throws Exception {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         BaseNavigation.loginAsDoctor(driver, DOCTOR_LOGIN, DOCTOR_PASSWORD);
@@ -117,7 +122,7 @@ public class TestPatientRecord extends BaseTest {
 
         String firstPatientAfterSort = listPatientaPage.getDataFromTable(1, 2);
 
-        Assert.assertEquals(firstPatientAfterSort, "patient.cd@hospitals.ua");
+        Assert.assertEquals(firstPatientAfterSort, "a@gmail.com");
     }
 
 

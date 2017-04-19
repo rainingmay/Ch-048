@@ -128,7 +128,7 @@ public class ListPatientaPage extends PageObject {
     }
 
     public PatientsCardPage getPatientsCardClick(){
-        BrowserWrapper.waitUntilElementClickable(patienta);
+        BrowserWrapper.waitUntilElementClickable(patientsf);
         patientta.click();
 
         return new PatientsCardPage(driver);
