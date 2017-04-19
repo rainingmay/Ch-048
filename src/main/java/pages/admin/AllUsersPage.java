@@ -141,7 +141,7 @@ public class AllUsersPage extends PageObject {
     public AllUsersPage changeRole(String role) {
         this.role.findElement(By.cssSelector("option[value=" + role + "]")).click();
         searchButton.click();
-        BrowserWrapper.sleep(3);
+        BrowserWrapper.waitForPage(driver);
         return new AllUsersPage(driver);
     }
 

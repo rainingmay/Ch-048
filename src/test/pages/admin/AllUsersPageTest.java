@@ -55,7 +55,7 @@ public class AllUsersPageTest extends BaseTest {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
             BrowserWrapper.waitForPage(driver);
             allUsersPage = allUsersPage.showDisableUsers();
-            BrowserWrapper.waitForPage(driver);
+            BrowserWrapper.sleep(2);
             int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
             boolean actual = UserDAO.getStatusByEmail(allUsersPage.getUserDataFromTableRow(rowNumber).get(0));
             Assert.assertEquals(actual, false);
@@ -120,7 +120,7 @@ public class AllUsersPageTest extends BaseTest {
             BrowserWrapper.waitForPage(driver);
             String expected = role;
             allUsersPage = allUsersPage.changeRole(expected);
-            BrowserWrapper.waitForPage(driver);
+            BrowserWrapper.sleep(2);
             int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
             String actual = allUsersPage.getUserDataFromTableRow(rowNumber).get(3);
             Assert.assertEquals(actual, expected);
@@ -136,7 +136,7 @@ public class AllUsersPageTest extends BaseTest {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
             BrowserWrapper.waitForPage(driver);
             allUsersPage = allUsersPage.search(Integer.parseInt(count), role, "firstName", valueOfField);
-            BrowserWrapper.waitForPage(driver);
+            BrowserWrapper.sleep(2);
             int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
             List<String> expected = new LinkedList<>();
             Collections.addAll(expected, new String[]{valueOfField, role});
