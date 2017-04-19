@@ -12,6 +12,7 @@ import utils.BrowserWrapper;
 
 
 
+
 public class AddHospitalTest extends BaseTest {
 
     private static final String EMAIL = "admin@hospitals.ua";
@@ -71,7 +72,7 @@ public class AddHospitalTest extends BaseTest {
 
             int hospitalCountOfRow = hospitalListPage.getCountOfHospitalsInTable();
             System.out.println("Hospital count of row: " + hospitalCountOfRow);
-            hospitalListPage = hospitalListPage.deleteHospital(11);
+            hospitalListPage = hospitalListPage.deleteHospital(hospitalCountOfRow - 1);
             BrowserWrapper.waitUntilElementClickableByLocator(By.xpath(ALL_HOSPITALS_PAGE_XPATH_IDENTIFICATION));
             int hospitalCountOfRowAfterDelete = hospitalListPage.getCountOfHospitalsInTable();
             System.out.println("Hospital count of row after delete: " + hospitalCountOfRowAfterDelete);
@@ -93,8 +94,9 @@ public class AddHospitalTest extends BaseTest {
             hospitalListPage.header.goToAllHospitalsPage();
             BrowserWrapper.waitUntilElementClickableByLocator(By.xpath(ALL_HOSPITALS_PAGE_XPATH_IDENTIFICATION));
 
+            int hospitalCountOfRow = hospitalListPage.getCountOfHospitalsInTable();
             String actual = hospitalListPage.getHospitalDataFromTableRow(15).toString();
-            hospitalListPage.editButton(15);
+            hospitalListPage.editButton(hospitalCountOfRow - 2);
             BrowserWrapper.waitUntilElementClickableByLocator(By.xpath(ADD_HOSPITAL_PAGE_XPATH_IDENTIFICATION));
 
             AddNewHospitalPage addNewHospitalPage = new AddNewHospitalPage(driver);
@@ -144,7 +146,6 @@ public class AddHospitalTest extends BaseTest {
     @DataProvider
     public static Object [] [] validHospitalAddress() {
         return new  Object [] [] {
-                {"Вулиця Руська, 207а, Чернівці, Чернівецька, Україна" , "Дитяча обласна поліклініка №1", ""},
                 {"Вул. Мусоргського, 8, Чернівці, Чернівецька, Україна", "МІСЬКА СТАНЦІЯ ШВИДКОЇ МЕДИЧНОЇ ДОПОМОГИ", ""}
         };
     }

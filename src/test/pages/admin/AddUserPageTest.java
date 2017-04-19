@@ -13,13 +13,16 @@ import utils.BaseNavigation;
 import utils.BaseTest;
 import utils.BrowserWrapper;
 
-public class CreateUserTest extends BaseTest {
+
+
+
+public class AddUserPageTest extends BaseTest {
 
 
 
 
 
-    public static final String NEWUSERLOGIN = "1testadmin182@gmail.com.ua";
+    public static final String NEWUSERLOGIN = "utestadmin182@gmail.com.ua";
     public static final String NEWUSERPASSWORD = "Q12345w";
     public static final String NEWUSERROLE = "ADMIN";
 
@@ -29,6 +32,7 @@ public class CreateUserTest extends BaseTest {
 
     @BeforeMethod
     private void beforeMethod() throws InterruptedException {
+      //  this.driver = BrowserWrapper.browserInitialization();
         BaseNavigation.loginAsAdmin(driver, ADMIN_LOGIN, ADMIN_PASSWORD);
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
     }
@@ -83,14 +87,29 @@ public class CreateUserTest extends BaseTest {
 
     }
 
+    @Test
+    public void noPasswordConfirmationAddNewUserTest() throws Exception {
+        BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
+        AddUserPage addUserPage = new AddUserPage(driver);
+        addUserPage = addUserPage.header.goToAddUserPage();
+        BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
+        addUserPage.addNewUserWithotPasswordConfirmation(NEWUSERLOGIN, NEWUSERPASSWORD);
+
+        String actualErrorPasswordConfirmationLabelText = addUserPage.confirmPasswordErrorLabel.getText();
+        String expectedErrorPasswordConfirmationText = "This field is required.";
+
+        Assert.assertEquals(actualErrorPasswordConfirmationLabelText,expectedErrorPasswordConfirmationText);
+
+    }
+
     @DataProvider(name = "validInformation")
     public static Object[][] emailDetails() {
 
         return new Object[][] {
-                { "2t1estonemal@mail.ru", NEWUSERPASSWORD },
-                { "2t1esttwomail@com.ru", NEWUSERPASSWORD },
-                {"2t1estthreemail@com.cv.ua", NEWUSERPASSWORD},
-                {"2n1ewonetest1l@is.low.pass.case",NEWUSERPASSWORD}
+                { "st1estonemal@mail.ru", NEWUSERPASSWORD },
+                { "st1esttwomail@com.ru", NEWUSERPASSWORD },
+                {"st1estthreemail@com.cv.ua", NEWUSERPASSWORD},
+                {"sn1ewonetest1l@is.low.pass.case",NEWUSERPASSWORD}
         };
 
     }
