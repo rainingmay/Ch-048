@@ -1,15 +1,17 @@
 package pages.doctor;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.allUsers.PageObject;
-import pages.headers.headersByRole.AdminHeader;
 import pages.headers.headersByRole.DoctorHeader;
+import utils.BrowserWrapper;
 
 public class ListPatientaPage extends PageObject {
     public DoctorHeader header;
-
+    WebDriverWait wait = new WebDriverWait(driver, 5);
     @FindBy(className = "label[for=\"usr\"]")
     private WebElement showPatientsLabel;
 
@@ -38,7 +40,7 @@ public class ListPatientaPage extends PageObject {
     private WebElement colomLastName;
 
     @FindBy(xpath = "/html/body/section/div/div/div[2]/table/thead/tr/th[2]/div[2]/a/i")
-    private WebElement sortPatients;
+    private WebElement sortEmailPatients;
 
     @FindBy(xpath = "/html/body/section/div/div/div[2]/table/thead/tr/th[3]/div[2]/a/i")
     private WebElement sortByFirstName;
@@ -56,25 +58,87 @@ public class ListPatientaPage extends PageObject {
     @FindBy (xpath = "/html/body/section/div/div/div[2]/table/tbody/tr[1]/td[4]")
     private WebElement firstRowLastName;
 
-    public void searchByFirstAndLastName(String value){
+    @FindBy(partialLinkText = "patient.ta@hospitals.ua")
+    private WebElement patientta;
+    @FindBy(partialLinkText = "patient.sf@hospitals.ua")
+    private WebElement patientsf;
+    @FindBy(partialLinkText = "patient.qm@hospitals.ua")
+    private WebElement patientqm;
+    @FindBy(partialLinkText = "patient.ow@hospitals.ua")
+    private WebElement patientow;
+    @FindBy(partialLinkText = "patient.in@hospitals.ua")
+    private WebElement patientin;
+    @FindBy(partialLinkText = "patient.cd@hospitals.ua")
+    private WebElement patientcd;
+    @FindBy(partialLinkText = "a@gmail.com")
+    private WebElement patienta;
+
+    public void searchPatients(String value){
         searchTextField.clear();
         searchTextField.sendKeys(value);
+        searchButtonClick();
+    }
+    public boolean checkResultSearch(){
+        return BrowserWrapper.isElementPresent(patientsf);
     }
 
+    public void sortByEmailButton(){
+        BrowserWrapper.waitUntilElementClickable(sortEmailPatients);
+        sortEmailPatients.click();
+    }
+
+    public WebElement getEmailPatients(){
+        return patientsf;
+    }
+
+    public void sortByFirstNameButton(){
+        BrowserWrapper.waitUntilElementClickable(sortByFirstName);
+        sortByFirstName.click();
+    }
+    public void sortByLastNameButton(){
+        BrowserWrapper.waitUntilElementClickable(sortByLastName);
+        sortByLastName.click();
+
+    }
+
+    public WebDriver getDriver(){
+        return driver;
+    }
+    public String getDataFromTable(int k, int l) {
+        int rowCount = getDriver().findElements(By.xpath("//table/tbody/tr")).size();
+        int colCount = getDriver().findElements(By.xpath("//table/tbody/tr[1]/td")).size();
+
+        String firstPart = "//table/tbody/tr[";
+        String secondPart = "]/td[";
+        String thirdPart = "]";
+
+        String finalXpath = firstPart + k + secondPart + l + thirdPart;
+        String tableData = getDriver().findElement(By.xpath(finalXpath)).getText();
+        return tableData;
+    }
+
+
+
     public void searchButtonClick(){
-       buttonSearch.click();
+        buttonSearch.click();
     }
 
     public void searchRefresh(){
         searchRefresh.click();
     }
 
-    public ListPatientaPage(WebDriver driver) {
-    super(driver);
-    this.header = new DoctorHeader(driver);
+    public PatientsCardPage getPatientsCardClick(){
+        BrowserWrapper.waitUntilElementClickable(patienta);
+        patientta.click();
+
+        return new PatientsCardPage(driver);
     }
 
 
 
+    public ListPatientaPage(WebDriver driver) {
+        super(driver);
+        this.header = new DoctorHeader(driver);
+    }
 
-   }
+}

@@ -9,7 +9,6 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import pages.allUsers.PageObject;
 import pages.headers.headersByRole.ManagerHeader;
-import utils.BaseNavigation;
 import utils.BrowserWrapper;
 
 import java.util.ArrayList;
@@ -152,6 +151,13 @@ public class SchedulerPage extends PageObject {
     @FindBy(css = "div.dhx_month_body")
     public WebElement monthElement;
 
+    @FindBy(css = "div.dhx_mini_calendar")
+    public WebElement calendarBody;
+
+    @FindBy(css = "div.gray_section")
+    public List<WebElement> notActiveRows;
+
+
     public WebElement getColumn(int i){
         if(i< tableColumns.size()-tableIgnoredColumns.size()) {
             WebElement element = driver.findElement(By.cssSelector("div.dhx_scale_holder:nth-child(" + i + ")"));
@@ -161,7 +167,7 @@ public class SchedulerPage extends PageObject {
     }
 
    public void nextDayClick(){
-        while(driver.findElements(By.cssSelector("div.gray_section")).size()>0){
+        while(notActiveRows.size()>0){
             BrowserWrapper.waitUntilElementVisible(nextButton);
             nextButton.click();
         }
@@ -173,7 +179,7 @@ public class SchedulerPage extends PageObject {
     }
     public void setAppointment(String text, int column) throws InterruptedException {
 
-        BaseNavigation.doubleClick(driver,getColumn(column));
+        BrowserWrapper.doubleClick(driver,getColumn(column));
         BrowserWrapper.waitUntilElementVisible(eventInput);
         eventInput.sendKeys(text);
         BrowserWrapper.waitUntilElementVisible(saveButton);
@@ -187,11 +193,11 @@ public class SchedulerPage extends PageObject {
     }
 
     public boolean checkMiniCalendarVisibility(){
-       return BrowserWrapper.isElementPresent(driver.findElement(By.cssSelector("div.dhx_mini_calendar")));
+       return BrowserWrapper.isElementPresent(calendarBody);
     }
 
     public void inputEvent(String text) {
-        BaseNavigation.doubleClick(driver, tableColumn);
+        BrowserWrapper.doubleClick(driver, tableColumn);
         BrowserWrapper.waitUntilElementVisible(eventInput);
         eventInput.sendKeys(text);
     }
@@ -221,7 +227,7 @@ public class SchedulerPage extends PageObject {
 
 
     public void createEventCalendar(String text){
-        BaseNavigation.doubleClick(driver, monthElement);
+        BrowserWrapper.doubleClick(driver, monthElement);
         BrowserWrapper.waitUntilElementVisible(detailedEditorField);
         detailedEditorField.sendKeys(text);
         saveDetailedChanges.click();
@@ -418,6 +424,7 @@ public class SchedulerPage extends PageObject {
     }
 
     public void monthTabButtonClick(){
+        BrowserWrapper.waitUntilElementVisible(monthTabButton);
         monthTabButton.click();
     }
 
