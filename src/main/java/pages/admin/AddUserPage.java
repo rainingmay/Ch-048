@@ -59,6 +59,9 @@ public class AddUserPage extends PageObject {
     @FindBy(id="password-error")
     public WebElement passwordErrorLabel;
 
+    @FindBy(id = "confirmPassword-error")
+    public WebElement confirmPasswordErrorLabel;
+
 
     @FindBy(id = "userRoles-error")
     public WebElement userRolesErrorLabel;
@@ -169,7 +172,6 @@ public class AddUserPage extends PageObject {
 
     public void addNewUser(String email, String password, String role) throws InterruptedException {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
-        //Thread.sleep(1000);
         enterEmail(email);
         enterPassword(password);
         confirmPassword(password);
@@ -181,10 +183,18 @@ public class AddUserPage extends PageObject {
 
     public void addNewUserWithotRole(String email, String password) throws InterruptedException {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
-        //BrowserWrapper.sleep(2);
         enterEmail(email);
         enterPassword(password);
         confirmPassword(password);
+        enableButtonClick();
+        submitAdding();
+
+    }
+
+    public void addNewUserWithotPasswordConfirmation(String email, String password) throws InterruptedException {
+        BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
+        enterEmail(email);
+        enterPassword(password);
         enableButtonClick();
         submitAdding();
 
