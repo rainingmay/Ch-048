@@ -54,9 +54,10 @@ public class AllUsersPageTest extends BaseTest {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
             BrowserWrapper.waitForPage(driver);
-            AllUsersPage allUsersPage1 = allUsersPage.showDisableUsers();
+            allUsersPage = allUsersPage.showDisableUsers();
+            BrowserWrapper.waitForPage(driver);
             int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
-            boolean actual = UserDAO.getStatusByEmail(allUsersPage1.getUserDataFromTableRow(rowNumber).get(0));
+            boolean actual = UserDAO.getStatusByEmail(allUsersPage.getUserDataFromTableRow(rowNumber).get(0));
             Assert.assertEquals(actual, false);
         } catch (InterruptedException e) {
             e.printStackTrace();

@@ -219,7 +219,7 @@ public class AllUsersPage extends PageObject {
             WebElement tableRow = tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")"));
             WebElement editButton = tableRow.findElement(By.id("ediUser"));
             editButton.click();
-            BrowserWrapper.sleep(1);
+            BrowserWrapper.sleep(3);
             editWindow = driver.findElement(By.id("detailForm"));
             return editWindow;
         }
