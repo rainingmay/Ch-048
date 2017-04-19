@@ -1,7 +1,9 @@
 package utils;
 
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 
 public class BaseTest {
@@ -20,6 +22,7 @@ public class BaseTest {
 
     protected WebDriver driver;
 
+
     @BeforeClass
     public void before() {
         this.driver = BrowserWrapper.browserInitialization();
@@ -31,5 +34,6 @@ public class BaseTest {
         BrowserWrapper.browserClose(this.driver);
     }
 
-
 }
+
+

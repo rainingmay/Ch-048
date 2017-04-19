@@ -141,7 +141,7 @@ public class AllUsersPage extends PageObject {
     public AllUsersPage changeRole(String role) {
         this.role.findElement(By.cssSelector("option[value=" + role + "]")).click();
         searchButton.click();
-        BrowserWrapper.sleep(3);
+        BrowserWrapper.waitForPage(driver);
         return new AllUsersPage(driver);
     }
 
@@ -219,7 +219,7 @@ public class AllUsersPage extends PageObject {
             WebElement tableRow = tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")"));
             WebElement editButton = tableRow.findElement(By.id("ediUser"));
             editButton.click();
-            BrowserWrapper.sleep(1);
+            BrowserWrapper.sleep(3);
             editWindow = driver.findElement(By.id("detailForm"));
             return editWindow;
         }
