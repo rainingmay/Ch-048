@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Yana on 06.04.2017.
  */
-public class DoctorSearchResult extends PageObject {
+public class DoctorSearchResult extends BasePage {
     private BaseHeader header;
 
     public DoctorSearchResult(WebDriver driver) {

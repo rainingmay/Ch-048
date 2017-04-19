@@ -1,7 +1,6 @@
 package pages.managerScheduler;
 
 
-import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -29,29 +28,22 @@ public class SchedulerPageTest extends BaseTest{
     public static final String EXPECTED_EDITABLE_APPOINTMENT_TEXT = "Another text";
     private SchedulerPage schedulerPage;
 
-    @BeforeMethod
-    public void beforeMethod() throws InterruptedException {
+    @BeforeMethod(alwaysRun = true)
+    public void beforeMethod()  {
         UserDAO.deleteAllEvents();
         BaseNavigation.loginAsManager(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
         HospitalsPage hospitalsPage = new HospitalsPage(driver);
         schedulerPage = hospitalsPage.scheduleButtonClick(1);
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void afterMethod(){
-        try {
             BaseNavigation.logout(driver);
-        }catch (InterruptedException e){
-            e.printStackTrace();
-        } catch (TimeoutException e){
-            e.printStackTrace();
-            System.out.println("failed");
-        }
     }
 
 
     @Test
-    public void testElementPresence() throws Exception{
+    public void testElementPresence() {
         try{
             BrowserWrapper.waitForPage(driver);
             schedulerPage.isPageReady();
@@ -62,7 +54,7 @@ public class SchedulerPageTest extends BaseTest{
     }
 
     @Test
-    public void testDefaultSchedulerValues() throws Exception{
+    public void testDefaultSchedulerValues(){
         BrowserWrapper.waitForPage(driver);
         try{
             schedulerPage.checkDefaultConditionScheduler();
@@ -74,14 +66,14 @@ public class SchedulerPageTest extends BaseTest{
 
 
     @Test
-    public void testWeekSize() throws Exception{
+    public void testWeekSize(){
         schedulerPage.workWeekSizeSelector(TEST_WEEK_SIZE);
         schedulerPage.saveButtonClick();
         Assert.assertEquals(schedulerPage.getDaysNumber(), EXPECTED_WEEK_SIZE);
     }
 
     @Test
-    public void testWorkingDayDuration() throws Exception {
+    public void testWorkingDayDuration(){
         schedulerPage.setDayDuration(TEST_BEGIN_AT_HOUR, TEST_END_AT_HOUR);
         schedulerPage.saveButtonClick();
         Assert.assertTrue(schedulerPage.getBeginningHour().equals(EXPECTED_BEGIN_AT_HOUR) && schedulerPage.getEndingHour().equals(EXPECTED_END_AT_HOUR));
@@ -90,7 +82,7 @@ public class SchedulerPageTest extends BaseTest{
 
 
     @Test(dataProvider = "eventCreation")
-    public void testEventCreation(String actualText, String expectedText) throws Exception{
+    public void testEventCreation(String actualText, String expectedText){
         schedulerPage.nextButtonClick();
         schedulerPage.setAppointment(actualText);
         schedulerPage.saveButtonClick();
@@ -102,7 +94,7 @@ public class SchedulerPageTest extends BaseTest{
     }
 
     @Test
-    public void testEventDeletion() throws Exception{
+    public void testEventDeletion(){
         schedulerPage.nextButtonClick();
         schedulerPage.setAppointment(TEST_APPOINTMENT_TEXT);
         schedulerPage.saveButtonClick();
@@ -119,7 +111,7 @@ public class SchedulerPageTest extends BaseTest{
     }
 
     @Test
-    public void testEventEdition() throws Exception{
+    public void testEventEdition(){
         schedulerPage.nextButtonClick();
         schedulerPage.setAppointment(TEST_APPOINTMENT_TEXT);
         schedulerPage.saveButtonClick();
@@ -135,7 +127,7 @@ public class SchedulerPageTest extends BaseTest{
         Assert.assertTrue( schedulerPage.getEvents().size() > 0 && schedulerPage.getEvents().contains(EXPECTED_EDITABLE_APPOINTMENT_TEXT));
     }
     @Test
-    public void testEventCancel()throws InterruptedException{
+    public void testEventCancel(){
         schedulerPage.nextButtonClick();
         schedulerPage.inputEvent(TEST_APPOINTMENT_TEXT);
         schedulerPage.cancelButtonClick();
@@ -147,7 +139,7 @@ public class SchedulerPageTest extends BaseTest{
     }
 
     @Test(dataProvider = "eventCreation")
-    public void testCreateEventDayTab(String actualText, String expectedText) throws InterruptedException {
+    public void testCreateEventDayTab(String actualText, String expectedText) {
         schedulerPage.dayTabButtonClick();
         schedulerPage.nextDayClick();
         schedulerPage.setAppointment(actualText);
@@ -161,7 +153,7 @@ public class SchedulerPageTest extends BaseTest{
     }
 
     @Test
-    public void testCreateEventMonthTab() throws InterruptedException{
+    public void testCreateEventMonthTab(){
         schedulerPage.monthTabButtonClick();
         schedulerPage.nextButtonClick();
         schedulerPage.createEventCalendar(TEST_APPOINTMENT_TEXT);
@@ -184,7 +176,7 @@ public class SchedulerPageTest extends BaseTest{
     }
 
     @Test
-    public void testTodayButton() throws InterruptedException {
+    public void testTodayButton(){
         schedulerPage.nextButtonClick();
         schedulerPage.nextButtonClick();
         schedulerPage.nextButtonClick();
@@ -194,7 +186,7 @@ public class SchedulerPageTest extends BaseTest{
 
 
     @Test
-    public void testAlertIfNotSaved() throws Exception{
+    public void testAlertIfNotSaved(){
         schedulerPage.nextButtonClick();
         schedulerPage.setAppointment(TEST_APPOINTMENT_TEXT);
         BrowserWrapper.refreshPage(driver);

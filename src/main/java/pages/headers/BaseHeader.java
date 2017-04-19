@@ -9,7 +9,7 @@ import pages.allUsers.*;
 /**
  * Created by Evgen on 05.04.2017.
  */
-public class BaseHeader extends PageObject {
+public class BaseHeader extends BasePage {
 
 
     @FindBy(className = "img-responsive logo")

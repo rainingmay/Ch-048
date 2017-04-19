@@ -5,13 +5,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
-import pages.allUsers.PageObject;
-import pages.headers.headersByRole.AdminHeader;
+import pages.allUsers.BasePage;
 import pages.headers.headersByRole.DoctorHeader;
 
 import java.util.List;
 
-public class WorkSchedulerPage extends PageObject {
+public class WorkSchedulerPage extends BasePage {
 
     public DoctorHeader header;
 

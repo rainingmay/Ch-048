@@ -5,11 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pages.allUsers.PageObject;
+import pages.allUsers.BasePage;
 import pages.headers.headersByRole.DoctorHeader;
 import utils.BrowserWrapper;
 
-public class ListPatientaPage extends PageObject {
+public class ListPatientaPage extends BasePage {
     public DoctorHeader header;
     WebDriverWait wait = new WebDriverWait(driver, 5);
     @FindBy(className = "label[for=\"usr\"]")

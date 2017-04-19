@@ -7,13 +7,13 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.allUsers.HospitalSeekerHomePage;
 import pages.doctor.CreateNewRecordPage;
 import pages.doctor.ListPatientaPage;
 import pages.doctor.PatientsCardPage;
 import pages.headers.headersByRole.DoctorHeader;
 import utils.BaseNavigation;
 import utils.BaseTest;
+import utils.BrowserInitializer;
 import utils.BrowserWrapper;
 
 
@@ -24,21 +24,15 @@ import utils.BrowserWrapper;
 public class TestPatientRecord extends BaseTest {
     @BeforeMethod
     public void before() {
-        this.driver = BrowserWrapper.browserInitialization();
+        this.driver = BrowserInitializer.browserInitialization();
 
     }
 
 
     @AfterMethod
     public void after() {
-        try {
-            BaseNavigation.logout(this.driver);
-            BrowserWrapper.browserClose(this.driver);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            BrowserWrapper.browserClose(this.driver);
-        }
+        BrowserInitializer.browserClose(this.driver);
+
     }
 
 

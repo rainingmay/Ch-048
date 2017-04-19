@@ -4,14 +4,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
-import pages.allUsers.PageObject;
+import pages.allUsers.BasePage;
 import pages.headers.headersByRole.ManagerHeader;
 
 
 /**
  * Created by radga on 06.04.2017.
  */
-public class AddNewDoctorPage extends PageObject {
+public class AddNewDoctorPage extends BasePage {
     public ManagerHeader managerHeader;
 
     @FindBy(className = "h1.text-center")

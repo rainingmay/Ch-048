@@ -3,11 +3,13 @@ package pages.admin;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import utils.BaseNavigation;
 import utils.BaseTest;
-import org.openqa.selenium.TimeoutException;
-import org.testng.annotations.*;
+import utils.BrowserInitializer;
 import utils.BrowserWrapper;
 
 
@@ -25,7 +27,7 @@ public class AddHospitalTest extends BaseTest {
 
     @BeforeMethod
     public void before() {
-        driver = BrowserWrapper.browserInitialization();
+        driver = BrowserInitializer.browserInitialization();
     }
 
 
@@ -174,11 +176,7 @@ public class AddHospitalTest extends BaseTest {
 
     @AfterMethod
     public void after() {
-        try {
-            BaseNavigation.logout(driver);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
 
+        BaseNavigation.logout(driver);
+    }
 }
