@@ -7,9 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import pages.allUsers.PageObject;
 import pages.headers.headersByRole.AdminHeader;
 import utils.BrowserWrapper;
-
-
-import java.util.LinkedList;
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HospitalListPage extends PageObject {
@@ -21,6 +20,9 @@ public class HospitalListPage extends PageObject {
         this.header = new AdminHeader(driver);
     }
 
+
+
+
     @FindBy(xpath = "/html/body/section/div/div/div/div[1]/div[1]/a[1]")
     private WebElement addNewHospitalButton;
 
@@ -30,14 +32,16 @@ public class HospitalListPage extends PageObject {
     @FindBy(css = "thead")
     private WebElement tableHead;
 
-    @FindBy(css = "table")
+    @FindBy(css = "tbody")
     private WebElement tableBody;
 
-    WebElement showOnMap;
-    WebElement editButton;
-    WebElement removeButton;
-    WebElement deleteButton;
-    WebElement cancelButton;
+    @FindBy(xpath = "//button[contains(text(),'Delete')]")
+    private WebElement deleteButtonInDeleteWindow;
+
+    private WebElement deleteModalSubmit;
+    private WebElement showOnMap;
+    private WebElement editButton;
+    private WebElement deleteButton;
 
     public boolean checkAddNewHospitalButton() {
         return BrowserWrapper.isElementPresent(addNewHospitalButton);
@@ -60,32 +64,33 @@ public class HospitalListPage extends PageObject {
     }
 
     public AddNewHospitalPage editButton(int rowNumber) {
-        editButton = tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(3) form a"));
-        editButton.click();
-        return new AddNewHospitalPage(driver);
+        if (tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")")).isDisplayed()) {
+            WebElement tableRow = tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")"));
+            editButton = tableRow.findElement(By.cssSelector("body > section > div > div > div > div.col-sm-8 > div.pre-scrollable.panel.panel-default > table > tbody > tr:nth-child(" + rowNumber + ") > td:nth-child(3) > form > a"));
+            editButton.click();
+            BrowserWrapper.waitUntilElementClickableByLocator(By.xpath("//*[@id=\"image-uploaded\"]"));
+            return new AddNewHospitalPage(driver);
+        }
+        return null;
     }
 
-    public void deleteAndCancelledPopUpMenu(int rowNumber) {
-        removeButton = driver.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(3) form button:nth-child(4)"));
-        removeButton.click();
-        deleteButton = driver.findElement(By.xpath("//*[@id=\"6\"]/div/div/div[3]/button[1]"));
-        cancelButton = driver.findElement(By.xpath("//*[@id=\"6\"]/div/div/div[3]/button[2]"));
-    }
-
-    public HospitalListPage removeButton(int rowNumber) {
-        deleteAndCancelledPopUpMenu(rowNumber);
-        deleteButton.click();
-        return new HospitalListPage(driver);
-    }
-
-    public HospitalListPage cancelledRemoveButton(int rowNumber) {
-        deleteAndCancelledPopUpMenu(rowNumber);
-        cancelButton.click();
-        return new HospitalListPage(driver);
+    public HospitalListPage deleteHospital(int rowNumber) throws AWTException {
+        if (tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")")).isDisplayed()) {
+            WebElement tableRow = tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")"));
+            deleteButton = tableRow.findElement(By.cssSelector("body > section > div > div > div > div.col-sm-8 > div.pre-scrollable.panel.panel-default > table > tbody > tr:nth-child(" + rowNumber + ") > td:nth-child(3) > form > button:nth-child(4)"));
+            deleteButton.click();
+            BrowserWrapper.sleep(1);
+            deleteModalSubmit = tableRow.findElement(By.cssSelector("body > section > div > div > div > div.col-sm-8 > div.pre-scrollable.panel.panel-default > table > tbody > tr:nth-child(" + rowNumber + ") > td:nth-child(3) > form div.modal-content div.modal-footer > button:nth-child(1)"));
+            deleteModalSubmit.click();
+            BrowserWrapper.sleep(5);
+            BrowserWrapper.waitUntilElementClickableByLocator(By.cssSelector("a.btn:nth-child(1)"));
+            return new HospitalListPage(driver);
+        }
+        return null;
     }
 
     public List<String> getHospitalDataFromTableRow(int rowNumber) {
-        List<String> result = new LinkedList<>();
+        List<String> result = new ArrayList<>();
         if (tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")")).isDisplayed()) {
             result.add(tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(1)")).getText());
             result.add(tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(2)")).getText());
