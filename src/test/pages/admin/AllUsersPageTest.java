@@ -194,7 +194,7 @@ public class AllUsersPageTest extends BaseTest {
             allUsersPage.searchButton.click();
             BrowserWrapper.sleep(2);
             allUsersPage = allUsersPage.clickSortByEmail();
-            BrowserWrapper.waitForPage(driver);
+            BrowserWrapper.sleep(2);
             int actual = allUsersPage.getUserDataFromTableRow(1).get(0).compareToIgnoreCase
                     (allUsersPage.getUserDataFromTableRow(2).get(0));
             Assert.assertEquals(actual < 0, true);
