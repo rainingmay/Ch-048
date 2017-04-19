@@ -61,7 +61,7 @@ public class AddHospitalTest extends BaseTest {
     }
 
     @Test(dataProvider = "loginDataForDeleteHospital")
-    public void deleteHospitalTest(String login, String password) throws Exception {
+    public void deleteHospitalTest(String login, String password, int hospitalCountForDelete) throws Exception {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
             BrowserWrapper.waitUntilElementClickableByLocator(By.cssSelector(ALL_USERS_PAGE_CSS_IDENTIFICATION));
@@ -72,7 +72,7 @@ public class AddHospitalTest extends BaseTest {
 
             int hospitalCountOfRow = hospitalListPage.getCountOfHospitalsInTable();
             System.out.println("Hospital count of row: " + hospitalCountOfRow);
-            hospitalListPage = hospitalListPage.deleteHospital(hospitalCountOfRow - 2);
+            hospitalListPage.deleteHospital(hospitalCountForDelete);
             BrowserWrapper.waitUntilElementClickableByLocator(By.xpath(ALL_HOSPITALS_PAGE_XPATH_IDENTIFICATION));
             int hospitalCountOfRowAfterDelete = hospitalListPage.getCountOfHospitalsInTable();
             System.out.println("Hospital count of row after delete: " + hospitalCountOfRowAfterDelete);
@@ -85,7 +85,7 @@ public class AddHospitalTest extends BaseTest {
     }
 
     @Test(dataProvider = "editHospitalBuildingAndStreet")
-    public void editHospitalTest(String building, String street) throws Exception {
+    public void editHospitalTest(String building, String street, int hospitalCountForEdit) throws Exception {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, EMAIL, PASSWORD);
             BrowserWrapper.waitUntilElementClickableByLocator(By.cssSelector(ALL_USERS_PAGE_CSS_IDENTIFICATION));
@@ -96,7 +96,7 @@ public class AddHospitalTest extends BaseTest {
 
             int hospitalCountOfRow = hospitalListPage.getCountOfHospitalsInTable();
             String actual = hospitalListPage.getHospitalDataFromTableRow(hospitalCountOfRow - 2).toString();
-            hospitalListPage.editButton(hospitalCountOfRow - 2);
+            hospitalListPage.editButton(hospitalCountForEdit);
             BrowserWrapper.waitUntilElementClickableByLocator(By.xpath(ADD_HOSPITAL_PAGE_XPATH_IDENTIFICATION));
 
             AddNewHospitalPage addNewHospitalPage = new AddNewHospitalPage(driver);
@@ -153,16 +153,15 @@ public class AddHospitalTest extends BaseTest {
     @DataProvider
     public Object [] [] loginDataForDeleteHospital() {
             return new Object [] [] {
-                    {"admin@hospitals.ua", "1111"}
+                    {"admin@hospitals.ua", "1111", 10}
             };
     }
 
     @DataProvider
     public Object [] [] editHospitalBuildingAndStreet() {
         return new Object[][] {
-                {"2", "Вулиця Руська"},
-                {"4", "Вулиця Лесі Українки"},
-                {"6", "Вулиця Українська"}
+                {"2", "Вулиця Руська", 8},
+                {"4", "Вулиця Лесі Українки", 9}
         };
     }
 
@@ -177,12 +176,8 @@ public class AddHospitalTest extends BaseTest {
     public void after() {
         try {
             BaseNavigation.logout(driver);
-            //BrowserWrapper.browserClose(this.driver);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        } catch (TimeoutException e) {
-            e.printStackTrace();
-            System.out.println("failed");
         }
     }
 
