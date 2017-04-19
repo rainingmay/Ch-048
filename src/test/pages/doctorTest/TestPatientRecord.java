@@ -60,7 +60,7 @@ public class TestPatientRecord extends BaseTest {
 
         Assert.assertTrue(patientsCardPage.checkRecord());
     }
-   /* @Test
+   @Test
     public void checkPatientsSearch() throws Exception {
         WebDriverWait wait = new WebDriverWait(driver, 10);
         BaseNavigation.loginAsDoctor(driver, DOCTOR_LOGIN, DOCTOR_PASSWORD);
@@ -70,8 +70,10 @@ public class TestPatientRecord extends BaseTest {
         ListPatientaPage listPatientaPage = new ListPatientaPage(driver);
         listPatientaPage.searchPatients("patient.sf@hospitals.ua");
         BrowserWrapper.sleep(2);
-        //Assert.assertFalse(listPatientaPage.checkResultSearch());
-    }*/
+
+        Assert.assertFalse(listPatientaPage.checkResultSearch());
+    }
+
     @Test
     public void testPatientsSortingByFirstName() throws Exception {
         WebDriverWait wait = new WebDriverWait(driver, 5);
@@ -102,4 +104,21 @@ public class TestPatientRecord extends BaseTest {
 
         Assert.assertEquals(firstPatientAfterSort, "Auginas");
     }
+    @Test
+    public void testPatientsSortingByEmail() throws Exception {
+        WebDriverWait wait = new WebDriverWait(driver, 5);
+        BaseNavigation.loginAsDoctor(driver, DOCTOR_LOGIN, DOCTOR_PASSWORD);
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[1]/div/div/div")));
+        DoctorHeader doctorHeader = new DoctorHeader(driver);
+        doctorHeader.patientsButtonClick();
+        ListPatientaPage listPatientaPage = new ListPatientaPage(driver);
+        listPatientaPage.sortByEmailButton();
+        BrowserWrapper.sleep(5);
+
+        String firstPatientAfterSort = listPatientaPage.getDataFromTable(1, 2);
+
+        Assert.assertEquals(firstPatientAfterSort, "patient.cd@hospitals.ua");
+    }
+
+
 }

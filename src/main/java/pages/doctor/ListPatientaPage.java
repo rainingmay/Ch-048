@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.allUsers.PageObject;
-import pages.headers.headersByRole.AdminHeader;
 import pages.headers.headersByRole.DoctorHeader;
 import utils.BrowserWrapper;
 
@@ -79,7 +78,14 @@ public class ListPatientaPage extends PageObject {
         searchTextField.sendKeys(value);
         searchButtonClick();
     }
+    public boolean checkResultSearch(){
+        return BrowserWrapper.isElementPresent(patientsf);
+    }
 
+    public void sortByEmailButton(){
+        BrowserWrapper.waitUntilElementClickable(sortEmailPatients);
+        sortEmailPatients.click();
+    }
 
     public WebElement getEmailPatients(){
         return patientsf;
