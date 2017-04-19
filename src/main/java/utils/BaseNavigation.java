@@ -6,6 +6,7 @@ import pages.allUsers.HospitalSeekerHomePage;
 import pages.allUsers.PageObject;
 import pages.anonymous.LoginPage;
 import pages.headers.headersByRole.AuthorizedHeader;
+import pages.headers.headersByRole.DoctorHeader;
 import pages.manager.HospitalsPage;
 
 
@@ -40,8 +41,9 @@ public class BaseNavigation {
         return new HospitalsPage(driver);
     }
 
-    public static PageObject loginAsDoctor(WebDriver driver, String email, String password) {
-        return null;
+    public static HospitalSeekerHomePage loginAsDoctor(WebDriver driver, String email, String password) throws InterruptedException {
+        login(driver, email, password);
+        return new HospitalSeekerHomePage(driver) ;
     }
 
 

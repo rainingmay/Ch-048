@@ -35,13 +35,13 @@ public class CreateNewRecordPage extends PageObject {
     private WebElement prescription;
 
 
-   public CreateNewRecordPage(WebDriver driver) {
+    public CreateNewRecordPage(WebDriver driver) {
         super(driver);
         this.header = new DoctorHeader(driver);
     }
 
     public void inputComplaint(String value){
-       complaint.sendKeys(value);
+        complaint.sendKeys(value);
     }
 
     public void inputResult(String value){
@@ -52,6 +52,15 @@ public class CreateNewRecordPage extends PageObject {
         prescription.sendKeys(value);
     }
 
+
+    public void inputRecord(String complaint, String result, String prescription ){
+        inputComplaint(complaint);
+        inputResult(result);
+        inputPrescription(prescription);
+        submitButtonClick();
+    }
+
+
     public PatientsCardPage backButtonClick (){
         backButton.click();
         return new PatientsCardPage(driver);
@@ -60,4 +69,5 @@ public class CreateNewRecordPage extends PageObject {
         submitButton.click();
         return new PatientsCardPage(driver);
     }
+
 }

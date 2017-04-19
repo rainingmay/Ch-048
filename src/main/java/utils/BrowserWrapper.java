@@ -43,6 +43,9 @@ public class BrowserWrapper {
             case "MacOS":
                  System.setProperty(WEBDRIVER_NAME, MACOS_WEBDRIVER_PATH);
                 break;
+            case "Windows 7":
+                System.setProperty(WEBDRIVER_NAME, WEBDRIVER_PATH);
+                break;
         }
         WebDriver driver = new FirefoxDriver(ffProfile);
         driver.get(BASE_URL);
