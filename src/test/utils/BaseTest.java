@@ -22,4 +22,18 @@ public class BaseTest {
 
     protected WebDriver driver;
 
+
+    @BeforeClass
+    public void before() {
+        this.driver = BrowserWrapper.browserInitialization();
+    }
+
+
+    @AfterClass
+    public void after() {
+        BrowserWrapper.browserClose(this.driver);
+    }
+
 }
+
+
