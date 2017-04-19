@@ -9,7 +9,7 @@ import java.util.List;
 
 
 public class HospitalSearchResultPage extends PageObject {
-    public BaseHeader header;
+ //   public BaseHeader header;
 
 
     public HospitalSearchResultPage(WebDriver driver) {
