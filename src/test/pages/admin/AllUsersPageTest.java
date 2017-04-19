@@ -192,7 +192,7 @@ public class AllUsersPageTest extends BaseTest {
             BrowserWrapper.waitForPage(driver);
             allUsersPage.changeRole(role);
             allUsersPage.searchButton.click();
-            BrowserWrapper.waitForPage(driver);
+            BrowserWrapper.sleep(2);
             allUsersPage = allUsersPage.clickSortByEmail();
             BrowserWrapper.waitForPage(driver);
             int actual = allUsersPage.getUserDataFromTableRow(1).get(0).compareToIgnoreCase
