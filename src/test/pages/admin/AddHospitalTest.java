@@ -72,7 +72,7 @@ public class AddHospitalTest extends BaseTest {
 
             int hospitalCountOfRow = hospitalListPage.getCountOfHospitalsInTable();
             System.out.println("Hospital count of row: " + hospitalCountOfRow);
-            hospitalListPage = hospitalListPage.deleteHospital(hospitalCountOfRow - 1);
+            hospitalListPage = hospitalListPage.deleteHospital(hospitalCountOfRow - 2);
             BrowserWrapper.waitUntilElementClickableByLocator(By.xpath(ALL_HOSPITALS_PAGE_XPATH_IDENTIFICATION));
             int hospitalCountOfRowAfterDelete = hospitalListPage.getCountOfHospitalsInTable();
             System.out.println("Hospital count of row after delete: " + hospitalCountOfRowAfterDelete);
@@ -95,7 +95,7 @@ public class AddHospitalTest extends BaseTest {
             BrowserWrapper.waitUntilElementClickableByLocator(By.xpath(ALL_HOSPITALS_PAGE_XPATH_IDENTIFICATION));
 
             int hospitalCountOfRow = hospitalListPage.getCountOfHospitalsInTable();
-            String actual = hospitalListPage.getHospitalDataFromTableRow(15).toString();
+            String actual = hospitalListPage.getHospitalDataFromTableRow(hospitalCountOfRow - 2).toString();
             hospitalListPage.editButton(hospitalCountOfRow - 2);
             BrowserWrapper.waitUntilElementClickableByLocator(By.xpath(ADD_HOSPITAL_PAGE_XPATH_IDENTIFICATION));
 
