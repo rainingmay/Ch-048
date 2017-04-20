@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import pages.allUsers.BasePage;
 import pages.headers.headersByRole.AdminHeader;
 import utils.BrowserWrapper;
+import utils.TableParser;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -18,6 +19,9 @@ import java.util.List;
 public class AllUsersPage extends BasePage {
 
     public AdminHeader header;
+
+    @FindBy(css = "table")
+    public WebElement table;
 
     @FindBy(id = "userPerPage")
     private WebElement usersPerPagePopUp;
@@ -91,8 +95,6 @@ public class AllUsersPage extends BasePage {
 
     private WebElement editButton;
 
-
-
     public WebElement deleteWindow;
 
     private WebElement deleteButton;
@@ -100,7 +102,6 @@ public class AllUsersPage extends BasePage {
 
 
     public AllUsersPage(WebDriver driver) {
-
         super(driver);
         this.header = new AdminHeader(driver);
     }
@@ -164,34 +165,17 @@ public class AllUsersPage extends BasePage {
     }
 
 
-
-    public List<String> getUserDataFromTableRow(int rowNumber) {
-        List<String> result = new LinkedList<>();
-        if (tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")")).isDisplayed()) {
-            result.add(tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(2)")).getText());
-            result.add(tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(3)")).getText());
-            result.add(tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(4)")).getText());
-            result.add(tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(5)")).getText());
-        }
-        return result;
-    }
-
-
-
     public List<String> getUserDataFromInfoWindow(int rowNumber) throws InterruptedException {
         List<String> result = new LinkedList<>();
-        if (tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")")).isDisplayed()) {
-            WebElement tableRow = tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")"));
-            WebElement infoButton = tableRow.findElement(By.id("viewUser"));
-            infoButton.click();
-            Thread.sleep(2000);
-            viewWindow = driver.findElement(By.className("modal-content"));
-            result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(1) td:last-child")).getText());
-            result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(2) td:last-child")).getText());
-            result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(4) td:last-child")).getText());
-            closeViewWindow();
-            Thread.sleep(2000);
-        }
+        WebElement infoButton = new TableParser(table).getButtonFromTableRow(rowNumber, "View");
+        infoButton.click();
+        Thread.sleep(2000);
+        viewWindow = driver.findElement(By.className("modal-content"));
+        result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(1) td:last-child")).getText());
+        result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(2) td:last-child")).getText());
+        result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(4) td:last-child")).getText());
+        closeViewWindow();
+        Thread.sleep(2000);
         return result;
     }
 
@@ -213,16 +197,13 @@ public class AllUsersPage extends BasePage {
 
 
     public WebElement openEditWindow(int rowNumber) {
-        if (tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")")).isDisplayed()) {
-            WebElement tableRow = tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")"));
-            WebElement editButton = tableRow.findElement(By.id("ediUser"));
-            editButton.click();
-            BrowserWrapper.sleep(3);
-            editWindow = driver.findElement(By.id("detailForm"));
-            return editWindow;
-        }
-        return null;
+        WebElement editButton = new TableParser(table).getButtonFromTableRow(rowNumber, "Edit");
+        editButton.click();
+        BrowserWrapper.sleep(3);
+        editWindow = driver.findElement(By.id("detailForm"));
+        return editWindow;
     }
+
 
     public AllUsersPage changeRoleInEditWindow(int rowNumber, String role) {
         openEditWindow(rowNumber);
@@ -240,10 +221,9 @@ public class AllUsersPage extends BasePage {
         dropdown.selectByValue(text);
     }
 
+
     public static void selectDropdownCount(WebElement element, String text) {
         org.openqa.selenium.support.ui.Select dropdown = new org.openqa.selenium.support.ui.Select(element);
-        //dropdown.selectByVisibleText(text);
-        //if (dropdown.getAllSelectedOptions().size() != 0) dropdown.deselectAll();
         dropdown.selectByValue(text);
     }
 
@@ -256,26 +236,19 @@ public class AllUsersPage extends BasePage {
     }
 
     public AllUsersPage deleteUser(int rowNumber) {
-        if (tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")")).isDisplayed()) {
-            WebElement tableRow = tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")"));
-            deleteButton = tableRow.findElement(By.id("deleteUser"));
-            deleteButton.click();
-            BrowserWrapper.sleep(3);
-            deleteWindow = driver.findElement(By.className("modal-content"));
-            ((JavascriptExecutor)driver).executeScript("arguments[0].click();" , driver.findElement(By.id("deleteButton")));
-            BrowserWrapper.sleep(2);
-            return new AllUsersPage(driver);
-        }
-        return null;
+        deleteButton = new TableParser(table).getButtonFromTableRow(rowNumber, "Delete");
+        deleteButton.click();
+        BrowserWrapper.sleep(3);
+        deleteWindow = driver.findElement(By.className("modal-content"));
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click();" , driver.findElement(By.id("deleteButton")));
+        BrowserWrapper.sleep(2);
+        return new AllUsersPage(driver);
     }
 
     public AllUsersPage clickSortByEmail() {
         sortByEmailButton.click();
         return new AllUsersPage(driver);
     }
-
-
-
 
 
     public boolean equals(AllUsersPage allUsersPage) {

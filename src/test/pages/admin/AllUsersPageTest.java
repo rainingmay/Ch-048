@@ -5,10 +5,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import utils.BaseNavigation;
-import utils.BaseTest;
-import utils.BrowserInitializer;
-import utils.BrowserWrapper;
+import utils.*;
 import utils.databaseutil.UserDAO;
 
 import java.util.*;
@@ -43,7 +40,8 @@ public class AllUsersPageTest extends BaseTest {
             BrowserWrapper.waitForPage(driver);
             allUsersPage = allUsersPage.showEnableUsers();
             int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
-            boolean actual = UserDAO.getStatusByEmail(allUsersPage.getUserDataFromTableRow(rowNumber).get(0));
+            //boolean actual = UserDAO.getStatusByEmail(allUsersPage.getUserDataFromTableRow(rowNumber).get(0));
+            boolean actual = UserDAO.getStatusByEmail(new TableParser(allUsersPage.table).getFieldFromTableRow(rowNumber, "@email"));
             Assert.assertEquals(actual, true);
 
 
@@ -57,7 +55,7 @@ public class AllUsersPageTest extends BaseTest {
             allUsersPage = allUsersPage.showDisableUsers();
             BrowserWrapper.sleep(2);
             int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
-            boolean actual = UserDAO.getStatusByEmail(allUsersPage.getUserDataFromTableRow(rowNumber).get(0));
+            boolean actual = UserDAO.getStatusByEmail(new TableParser(allUsersPage.table).getFieldFromTableRow(rowNumber, "@email"));
             Assert.assertEquals(actual, false);
     }
 
@@ -86,7 +84,7 @@ public class AllUsersPageTest extends BaseTest {
             String expected = role;
             int rowNumber = 1;
             allUsersPage = allUsersPage.changeRoleInEditWindow(rowNumber, role);
-            String actual = allUsersPage.getUserDataFromTableRow(rowNumber).get(3);
+            String actual = new TableParser(allUsersPage.table).getFieldFromTableRow(rowNumber, "role");
             Assert.assertEquals(actual, expected);
 
     }
@@ -112,7 +110,7 @@ public class AllUsersPageTest extends BaseTest {
             allUsersPage = allUsersPage.changeRole(expected);
             BrowserWrapper.sleep(2);
             int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
-            String actual = allUsersPage.getUserDataFromTableRow(rowNumber).get(3);
+            String actual = new TableParser(allUsersPage.table).getFieldFromTableRow(rowNumber, "role");
             Assert.assertEquals(actual, expected);
 
     }
@@ -128,11 +126,11 @@ public class AllUsersPageTest extends BaseTest {
             int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
             List<String> expected = new LinkedList<>();
             Collections.addAll(expected, new String[]{valueOfField, role});
-            List<String> allInfo = allUsersPage.getUserDataFromTableRow(rowNumber);
+            TableParser tableParser = new TableParser(allUsersPage.table);
             List<String> actual = new LinkedList<>();
-            if (allInfo.get(1).contains(valueOfField))actual.add(valueOfField);
+            if (tableParser.getFieldFromTableRow(rowNumber, "@email").contains(valueOfField))actual.add(valueOfField);
                 else actual.add("noSame");
-            actual.add(allInfo.get(3));
+            actual.add(tableParser.getFieldFromTableRow(rowNumber, "role"));
             Assert.assertEquals(actual, expected);
     }
 
@@ -174,8 +172,8 @@ public class AllUsersPageTest extends BaseTest {
             BrowserWrapper.sleep(2);
             allUsersPage = allUsersPage.clickSortByEmail();
             BrowserWrapper.sleep(2);
-            int actual = allUsersPage.getUserDataFromTableRow(1).get(0).compareToIgnoreCase
-                    (allUsersPage.getUserDataFromTableRow(2).get(0));
+            int actual = new TableParser(allUsersPage.table).getFieldFromTableRow(1, "@email").compareToIgnoreCase
+                    (new TableParser(allUsersPage.table).getFieldFromTableRow(2, "@email"));
             Assert.assertEquals(actual < 0, true);
         }   catch (NoSuchElementException e) {
             Assert.assertEquals(true, false);
