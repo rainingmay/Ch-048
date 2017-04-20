@@ -25,13 +25,13 @@ public class BaseTest {
 
     @BeforeClass
     public void before() throws InterruptedException {
-        this.driver = BrowserWrapper.browserInitialization();
+        this.driver = BrowserInitializer.browserInitialization();
     }
 
 
     @AfterClass
     public void after() {
-        BrowserWrapper.browserClose(this.driver);
+        //BrowserInitializer.browserClose(this.driver);
     }
 
 }

@@ -1,4 +1,3 @@
-
 package pages.admin;
 
 
@@ -217,7 +216,8 @@ public class AddUserPageTest extends BaseTest {
 
     @AfterMethod
     public void afterMethod(){
-            BaseNavigation.logout(this.driver);
+        driver.manage().deleteAllCookies();
+        BaseNavigation.logout(this.driver);
     }
 
 
