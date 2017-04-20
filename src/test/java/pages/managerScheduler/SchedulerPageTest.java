@@ -1,4 +1,4 @@
-package pages.managerScheduler;
+package java.pages.managerScheduler;
 
 
 import org.testng.Assert;
@@ -9,12 +9,13 @@ import org.testng.annotations.Test;
 import pages.manager.HospitalsPage;
 import pages.manager.SchedulerPage;
 import utils.BaseNavigation;
-import utils.BaseTest;
 import utils.BrowserWrapper;
 import utils.databaseutil.UserDAO;
 
+import java.utils.BaseTest;
 
-public class SchedulerPageTest extends BaseTest{
+
+public class SchedulerPageTest extends BaseTest {
 
     public static final String TEST_BEGIN_AT_HOUR = "11:00";
     public static final String TEST_END_AT_HOUR = "20:00";
