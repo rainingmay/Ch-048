@@ -1,4 +1,4 @@
-package java.utils;
+package utils;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;

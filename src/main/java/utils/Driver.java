@@ -51,7 +51,7 @@ public class Driver {
     }
 
     public static void close(){
-        driver.close();
+        driver.quit();
     }
 
 }

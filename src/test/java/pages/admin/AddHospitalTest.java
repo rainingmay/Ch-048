@@ -1,4 +1,4 @@
-package java.pages.admin;
+package pages.admin;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -11,10 +11,10 @@ import pages.admin.AddNewHospitalPage;
 import pages.admin.AllUsersPage;
 import pages.admin.HospitalListPage;
 import utils.BaseNavigation;
+import utils.BaseTest;
 import utils.BrowserWrapper;
 import utils.Driver;
 
-import java.utils.BaseTest;
 
 
 public class AddHospitalTest extends BaseTest {

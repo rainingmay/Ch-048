@@ -1,4 +1,4 @@
-package java.pages.admin;
+package pages.admin;
 
 
 import org.openqa.selenium.By;
@@ -10,10 +10,10 @@ import org.testng.annotations.Test;
 import pages.admin.AddUserPage;
 import pages.admin.AllUsersPage;
 import utils.BaseNavigation;
+import utils.BaseTest;
 import utils.BrowserWrapper;
 import utils.Driver;
 
-import java.utils.BaseTest;
 
 
 public class AddUserPageTest extends BaseTest {

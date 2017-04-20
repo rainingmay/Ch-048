@@ -1,11 +1,11 @@
-package java.pages.allUsers;
+package pages.allUsers;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.allUsers.DoctorSearchResult;
 import pages.headers.BaseHeader;
+import utils.BaseTest;
 
-import java.utils.BaseTest;
 
 import static org.testng.Assert.assertEquals;
 

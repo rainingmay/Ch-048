@@ -1,16 +1,14 @@
-package java.pages.admin;
+package pages.admin;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pages.admin.AllUsersPage;
 import utils.*;
 import utils.databaseutil.UserDAO;
 
 import java.util.*;
-import java.utils.BaseTest;
 
 /**
  * Created by Evgen on 10.04.2017.
