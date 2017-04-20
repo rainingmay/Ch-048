@@ -15,7 +15,7 @@ public class HospitalSeekerHomePage extends PageObject {
 
     //Temporary field
     public NotLogInUserHeader notLogInUserHeader;
-    public DoctorHeader header;
+    //public DoctorHeader header;
 
 
     public LoginPage moveToLoginPage(){

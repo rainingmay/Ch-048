@@ -24,7 +24,7 @@ public class BaseTest {
 
 
     @BeforeClass
-    public void before() throws InterruptedException {
+    public void before() {
         this.driver = BrowserWrapper.browserInitialization();
     }
 

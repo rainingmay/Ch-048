@@ -22,7 +22,7 @@ public class AddUserPageTest extends BaseTest {
 
 
 
-    public static final String NEWUSERLOGIN = "utestadmin182@gmail.com.ua";
+    public static final String NEWUSERLOGIN = "ut5estadmin182@gmail.com.ua";
     public static final String NEWUSERPASSWORD = "Q12345w";
     public static final String NEWUSERROLE = "ADMIN";
 
@@ -106,10 +106,10 @@ public class AddUserPageTest extends BaseTest {
     public static Object[][] emailDetails() {
 
         return new Object[][] {
-                { "st1estonemal@mail.ru", NEWUSERPASSWORD },
-                { "st1esttwomail@com.ru", NEWUSERPASSWORD },
-                {"st1estthreemail@com.cv.ua", NEWUSERPASSWORD},
-                {"sn1ewonetest1l@is.low.pass.case",NEWUSERPASSWORD}
+                { "st1esdteh45tonemal@mail.ru", NEWUSERPASSWORD },
+                { "st1ewersttwomail@com.ru", NEWUSERPASSWORD },
+                {"st1estthrdfgdeemail@com.cv.ua", NEWUSERPASSWORD},
+                {"sn1ewon2etest1l@is.low.pass.case",NEWUSERPASSWORD}
         };
 
     }

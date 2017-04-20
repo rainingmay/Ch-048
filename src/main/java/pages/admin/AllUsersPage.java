@@ -228,11 +228,11 @@ public class AllUsersPage extends PageObject {
 
     public AllUsersPage changeRoleInEditWindow(int rowNumber, String role) {
         openEditWindow(rowNumber);
-        BrowserWrapper.sleep(2);
+        BrowserWrapper.sleep(3);
         selectDropdownRole(editWindow.findElement(By.id("userRoles")), role);
-        BrowserWrapper.sleep(2);
+        BrowserWrapper.sleep(3);
         editWindow.findElement(By.cssSelector("input[value=\"Edit\"]")).click();
-        BrowserWrapper.sleep(2);
+        BrowserWrapper.sleep(3);
         return new AllUsersPage(driver);
     }
 
