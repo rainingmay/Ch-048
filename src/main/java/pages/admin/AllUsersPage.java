@@ -164,18 +164,22 @@ public class AllUsersPage extends BasePage {
     }
 
 
-    public List<String> getUserDataFromInfoWindow(int rowNumber) throws InterruptedException {
-        List<String> result = new LinkedList<>();
-        WebElement infoButton = new TableParser(table).getButtonFromTableRow(rowNumber, "View");
-        infoButton.click();
-        Thread.sleep(2000);
-        viewWindow = Driver.instance().findElement(By.className("modal-content"));
-        result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(1) td:last-child")).getText());
-        result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(2) td:last-child")).getText());
-        result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(4) td:last-child")).getText());
-        closeViewWindow();
-        Thread.sleep(2000);
-        return result;
+    public List<String> getUserDataFromInfoWindow(int rowNumber) {
+        try {
+            List<String> result = new LinkedList<>();
+            WebElement infoButton = new TableParser(table).getButtonFromTableRow(rowNumber, "View");
+            infoButton.click();
+            Thread.sleep(2000);
+            viewWindow = Driver.instance().findElement(By.className("modal-content"));
+            result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(1) td:last-child")).getText());
+            result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(2) td:last-child")).getText());
+            result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(4) td:last-child")).getText());
+            closeViewWindow();
+            Thread.sleep(2000);
+            return result;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }return null;
     }
 
 

@@ -1,13 +1,12 @@
-package pages.managerScheduler;
+package java.pages.managerScheduler;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.manager.HospitalsPage;
 import utils.BaseNavigation;
-import utils.BaseTest;
 
 import java.util.List;
-
+import java.utils.BaseTest;
 
 
 public class HospitalsPageTest extends BaseTest {

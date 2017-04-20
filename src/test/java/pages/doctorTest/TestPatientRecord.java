@@ -1,4 +1,4 @@
-package pages.doctorTest;
+package java.pages.doctorTest;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -12,9 +12,10 @@ import pages.doctor.ListPatientaPage;
 import pages.doctor.PatientsCardPage;
 import pages.headers.headersByRole.DoctorHeader;
 import utils.BaseNavigation;
-import utils.BaseTest;
 import utils.BrowserWrapper;
 import utils.Driver;
+
+import java.utils.BaseTest;
 
 
 /**

@@ -1,7 +1,8 @@
-package utils;
+package java.utils;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import utils.Driver;
 
 public class BaseTest {
 
