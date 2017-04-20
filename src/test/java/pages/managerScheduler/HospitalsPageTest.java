@@ -1,11 +1,10 @@
 package pages.managerScheduler;
 
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.Test;
 import pages.manager.HospitalsPage;
 import utils.BaseNavigation;
 import utils.BaseTest;
-
 
 import java.util.List;
 
@@ -21,8 +20,8 @@ public class HospitalsPageTest extends BaseTest {
 
     @Test
     public void testDoctorsPerPage() throws Exception {
-       BaseNavigation.login(driver, "manager.jh@hospitals.ua", "1111");
-        HospitalsPage hospitalsPage = new HospitalsPage(driver);
+       BaseNavigation.login("manager.jh@hospitals.ua", "1111");
+        HospitalsPage hospitalsPage = new HospitalsPage();
 
         hospitalsPage.selectDoctorPerPage("10");
 
@@ -32,8 +31,8 @@ public class HospitalsPageTest extends BaseTest {
 
     @Test
     public void testSpecializationSelector() throws Exception{
-        BaseNavigation.login(driver, "manager.jh@hospitals.ua", "1111");
-        HospitalsPage hospitalsPage = new HospitalsPage(driver);
+        BaseNavigation.login("manager.jh@hospitals.ua", "1111");
+        HospitalsPage hospitalsPage = new HospitalsPage();
         hospitalsPage.selectSpecialization("Neurologist");
         hospitalsPage.searchButtonClick();
         Thread.sleep(1000);

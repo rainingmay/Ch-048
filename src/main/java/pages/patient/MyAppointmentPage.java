@@ -1,6 +1,5 @@
 package pages.patient;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.allUsers.BasePage;
@@ -43,7 +42,6 @@ public class MyAppointmentPage extends BasePage {
     //
 
 
-    public MyAppointmentPage(WebDriver driver) {
-        super(driver);
+    public MyAppointmentPage() {
     }
 }

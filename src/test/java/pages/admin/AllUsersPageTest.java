@@ -17,17 +17,17 @@ public class AllUsersPageTest extends BaseTest {
 
     @BeforeMethod
     public void before() {
-        this.driver = BrowserInitializer.browserInitialization();
-
+        //Why you do this here?
+        Driver.initialization();
     }
 
     @AfterMethod
     public void after() {
         try {
-            BaseNavigation.logout(this.driver);
-            BrowserInitializer.browserClose(this.driver);
+            BaseNavigation.logout();
+            Driver.close();
         } catch (Exception e) {
-            BrowserInitializer.browserClose(this.driver);
+            Driver.close();
         }
     }
 
@@ -36,8 +36,8 @@ public class AllUsersPageTest extends BaseTest {
     @Test(dataProvider = "loginData")
     public void enableUsersViewTest(String login, String password) {
 
-            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
-            BrowserWrapper.waitForPage(driver);
+            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(login, password);
+            BrowserWrapper.waitForPage();
             allUsersPage = allUsersPage.showEnableUsers();
             int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
             //boolean actual = UserDAO.getStatusByEmail(allUsersPage.getUserDataFromTableRow(rowNumber).get(0));
@@ -50,8 +50,8 @@ public class AllUsersPageTest extends BaseTest {
 
     @Test(dataProvider = "loginData")
     public void disableUsersViewTest(String login, String password) {
-            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
-            BrowserWrapper.waitForPage(driver);
+            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(login, password);
+            BrowserWrapper.waitForPage();
             allUsersPage = allUsersPage.showDisableUsers();
             BrowserWrapper.sleep(2);
             int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
@@ -63,8 +63,8 @@ public class AllUsersPageTest extends BaseTest {
     @Test(dataProvider = "loginData")
     public void viewWindowTest(String login, String password) {
         try {
-            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
-            BrowserWrapper.waitForPage(driver);
+            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(login, password);
+            BrowserWrapper.waitForPage();
             int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
             List<String> actual = allUsersPage.getUserDataFromInfoWindow(rowNumber);
             List<String> allInfo = UserDAO.getUserFromDatabaseByEmail(actual.get(1));
@@ -79,8 +79,8 @@ public class AllUsersPageTest extends BaseTest {
 
     @Test(dataProvider = "loginDataAndRole")
     public void changeRoleTest(String login, String password, String role) {
-            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
-            BrowserWrapper.waitForPage(driver);
+            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(login, password);
+            BrowserWrapper.waitForPage();
             String expected = role;
             int rowNumber = 1;
             allUsersPage = allUsersPage.changeRoleInEditWindow(rowNumber, role);
@@ -92,8 +92,8 @@ public class AllUsersPageTest extends BaseTest {
 
     @Test(dataProvider = "loginDataAndCount")
     public void changeCountOfUsersOnPageTest(String login, String password, String count) {
-            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
-            BrowserWrapper.waitForPage(driver);
+            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(login, password);
+            BrowserWrapper.waitForPage();
             int expected = Integer.parseInt(count);
             allUsersPage = allUsersPage.changeCountOfUsersOnPage(expected);
             int actual = allUsersPage.getCountOfUsersInTable();
@@ -104,8 +104,8 @@ public class AllUsersPageTest extends BaseTest {
     @Test(dataProvider = "loginDataAndRole")
     public void searchByRoleTest(String login, String password, String role) {
 
-            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
-            BrowserWrapper.waitForPage(driver);
+            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(login, password);
+            BrowserWrapper.waitForPage();
             String expected = role;
             allUsersPage = allUsersPage.changeRole(expected);
             BrowserWrapper.sleep(2);
@@ -119,8 +119,8 @@ public class AllUsersPageTest extends BaseTest {
     @Test(dataProvider = "searchParams")
     public void searchTest(String login, String password, String role, String valueOfField, String count) {
 
-            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
-            BrowserWrapper.waitForPage(driver);
+            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(login, password);
+            BrowserWrapper.waitForPage();
             allUsersPage = allUsersPage.search(Integer.parseInt(count), role, "firstName", valueOfField);
             BrowserWrapper.sleep(2);
             int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
@@ -137,10 +137,10 @@ public class AllUsersPageTest extends BaseTest {
 
     @Test(dataProvider = "loginData")
     public void nextPageButtonTest(String login, String password) {
-            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
-            BrowserWrapper.waitForPage(driver);
+            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(login, password);
+            BrowserWrapper.waitForPage();
             AllUsersPage allUsersPage1 = allUsersPage.toNextPage();
-            BrowserWrapper.waitForPage(driver);
+            BrowserWrapper.waitForPage();
             Assert.assertNotEquals(allUsersPage, allUsersPage1);
     }
 
@@ -148,8 +148,8 @@ public class AllUsersPageTest extends BaseTest {
     @Test(dataProvider = "loginData")
     public void deleteUsersTest(String login, String password) {
         try {
-            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
-            BrowserWrapper.waitForPage(driver);
+            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(login, password);
+            BrowserWrapper.waitForPage();
             int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
             String actual = allUsersPage.getCurrentUrl();
             allUsersPage = allUsersPage.deleteUser(rowNumber);
@@ -165,8 +165,8 @@ public class AllUsersPageTest extends BaseTest {
     @Test(dataProvider = "dataForSortTest")
     public void sortByEmailTest(String login, String password, String role) {
         try {
-            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(driver, login, password);
-            BrowserWrapper.waitForPage(driver);
+            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(login, password);
+            BrowserWrapper.waitForPage();
             allUsersPage.changeRole(role);
             allUsersPage.searchButton.click();
             BrowserWrapper.sleep(2);

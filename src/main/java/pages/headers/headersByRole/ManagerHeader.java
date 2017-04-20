@@ -1,6 +1,5 @@
 package pages.headers.headersByRole;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.manager.AddNewDoctorPage;
@@ -13,9 +12,7 @@ import pages.manager.ModerationFeedBackPage;
  */
 public class ManagerHeader extends AuthorizedHeader {
 
-    public ManagerHeader(WebDriver driver) {
-        super(driver);
-    }
+
 
     @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/a")
     private WebElement actions;
@@ -39,25 +36,21 @@ public class ManagerHeader extends AuthorizedHeader {
     @FindBy(xpath = "//ul[@id='dropdawn']/li[2]/a/span)[2]")
     private WebElement logOut;
 
-    public void logOut() throws InterruptedException {
-        Thread.sleep(1000);
-        myProfile.click();
-        logOut.click();
-    }
+
 
     public AddNewDoctorPage addNewDoctorPage() {
         addDoctor.click();
-        return new AddNewDoctorPage(driver);
+        return new AddNewDoctorPage();
     }
 
     public HospitalsPage managePage() {
         hospitals.click();
-        return new HospitalsPage(driver);
+        return new HospitalsPage();
     }
 
     public ModerationFeedBackPage feedBackPage() {
         feedbacks.click();
-        return new ModerationFeedBackPage(driver);
+        return new ModerationFeedBackPage();
     }
 
 

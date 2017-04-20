@@ -1,7 +1,6 @@
 package pages.doctor;
 
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.allUsers.BasePage;
@@ -20,9 +19,8 @@ public class PatientsCardPage extends BasePage {
     @FindBy (xpath = "//*[@id=\"headingOne\"]/h4/span[2]/a")
     private WebElement editRecord;
 
-    public PatientsCardPage(WebDriver driver) {
-        super(driver);
-        this.header = new DoctorHeader(driver);
+    public PatientsCardPage() {
+        this.header = new DoctorHeader();
     }
     public boolean checkRecord(){
         return BrowserWrapper.isElementPresent(patientRecords);

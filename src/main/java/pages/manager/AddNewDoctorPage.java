@@ -1,6 +1,5 @@
 package pages.manager;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
@@ -137,8 +136,7 @@ public class AddNewDoctorPage extends BasePage {
     }
 
 
-    public AddNewDoctorPage(WebDriver driver){
-        super(driver);
-        managerHeader = new ManagerHeader(driver);
+    public AddNewDoctorPage(){
+        managerHeader = new ManagerHeader();
     }
 }

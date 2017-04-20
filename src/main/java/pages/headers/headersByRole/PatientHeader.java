@@ -1,6 +1,5 @@
 package pages.headers.headersByRole;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -10,9 +9,7 @@ import org.openqa.selenium.support.FindBy;
  */
 public class PatientHeader extends AuthorizedHeader {
 
-    public PatientHeader(WebDriver driver) {
-        super(driver);
-    }
+
 
     @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/a")
     private WebElement actions;

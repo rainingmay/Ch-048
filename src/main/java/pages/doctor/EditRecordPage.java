@@ -1,7 +1,6 @@
 package pages.doctor;
 
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.allUsers.BasePage;
@@ -24,9 +23,8 @@ public class EditRecordPage extends BasePage {
     @FindBy(css = "button.btn.btn-default")
     private WebElement submitButton;
 
-    public EditRecordPage(WebDriver driver) {
-        super(driver);
-        this.header =  new DoctorHeader(driver);
+    public EditRecordPage() {
+        this.header =  new DoctorHeader();
     }
 
     public void modifyComplaint(String value){
@@ -46,10 +44,10 @@ public class EditRecordPage extends BasePage {
 
      public PatientsCardPage backButtonClick (){
         backButton.click();
-        return new PatientsCardPage(driver);
+        return new PatientsCardPage();
     }
     public PatientsCardPage submitButtonClick(){
         submitButton.click();
-        return new PatientsCardPage(driver);
+        return new PatientsCardPage();
     }
 }

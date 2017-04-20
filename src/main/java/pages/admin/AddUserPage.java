@@ -2,7 +2,6 @@ package pages.admin;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
@@ -20,9 +19,8 @@ public class AddUserPage extends BasePage {
 
     public AdminHeader header;
 
-    public AddUserPage(WebDriver driver) {
-        super(driver);
-        this.header = new AdminHeader(driver);
+    public AddUserPage() {
+        this.header = new AdminHeader();
     }
 
 
@@ -136,12 +134,12 @@ public class AddUserPage extends BasePage {
 
     public AllUsersPage submitAdding() {
         newUserButton.click();
-        return new AllUsersPage(driver);
+        return new AllUsersPage();
     }
 
     public AllUsersPage cancelAdding() {
         cancelButton.click();
-        return new AllUsersPage(driver);
+        return new AllUsersPage();
     }
 
     public void enterEmail(String value) {

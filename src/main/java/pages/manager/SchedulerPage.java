@@ -3,13 +3,13 @@ package pages.manager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import pages.allUsers.BasePage;
 import pages.headers.headersByRole.ManagerHeader;
 import utils.BrowserWrapper;
+import utils.Driver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -160,7 +160,7 @@ public class SchedulerPage extends BasePage {
 
     public WebElement getColumn(int i){
         if(i< tableColumns.size()-tableIgnoredColumns.size()) {
-            WebElement element = driver.findElement(By.cssSelector("div.dhx_scale_holder:nth-child(" + i + ")"));
+            WebElement element = Driver.instance().findElement(By.cssSelector("div.dhx_scale_holder:nth-child(" + i + ")"));
             return element;
         }
         return null;
@@ -179,7 +179,7 @@ public class SchedulerPage extends BasePage {
     }
     public void setAppointment(String text, int column)  {
 
-        BrowserWrapper.doubleClick(driver,getColumn(column));
+        BrowserWrapper.doubleClick(getColumn(column));
         BrowserWrapper.waitUntilElementVisible(eventInput);
         eventInput.sendKeys(text);
         BrowserWrapper.waitUntilElementVisible(saveButton);
@@ -197,7 +197,7 @@ public class SchedulerPage extends BasePage {
     }
 
     public void inputEvent(String text) {
-        BrowserWrapper.doubleClick(driver, tableColumn);
+        BrowserWrapper.doubleClick(tableColumn);
         BrowserWrapper.waitUntilElementVisible(eventInput);
         eventInput.sendKeys(text);
     }
@@ -227,7 +227,7 @@ public class SchedulerPage extends BasePage {
 
 
     public void createEventCalendar(String text){
-        BrowserWrapper.doubleClick(driver, monthElement);
+        BrowserWrapper.doubleClick(monthElement);
         BrowserWrapper.waitUntilElementVisible(detailedEditorField);
         detailedEditorField.sendKeys(text);
         saveDetailedChanges.click();
@@ -447,8 +447,7 @@ public class SchedulerPage extends BasePage {
 
 
 
-    public SchedulerPage(WebDriver driver) {
-        super(driver);
-        managerHeader = new ManagerHeader(driver);
+    public SchedulerPage(){
+        managerHeader = new ManagerHeader();
     }
 }

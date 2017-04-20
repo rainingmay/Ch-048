@@ -31,21 +31,21 @@ public class SchedulerPageTest extends BaseTest{
     @BeforeMethod(alwaysRun = true)
     public void beforeMethod()  {
         UserDAO.deleteAllEvents();
-        BaseNavigation.loginAsManager(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
-        HospitalsPage hospitalsPage = new HospitalsPage(driver);
+        BaseNavigation.loginAsManager(MANAGER_LOGIN, MANAGER_PASSWORD);
+        HospitalsPage hospitalsPage = new HospitalsPage();
         schedulerPage = hospitalsPage.scheduleButtonClick(1);
     }
 
     @AfterMethod(alwaysRun = true)
     public void afterMethod(){
-            BaseNavigation.logout(driver);
+            BaseNavigation.logout();
     }
 
 
     @Test
     public void testElementPresence() {
         try{
-            BrowserWrapper.waitForPage(driver);
+            BrowserWrapper.waitForPage();
             schedulerPage.isPageReady();
         }catch (Exception e){
             throw new AssertionError(e.getMessage());
@@ -55,7 +55,7 @@ public class SchedulerPageTest extends BaseTest{
 
     @Test
     public void testDefaultSchedulerValues(){
-        BrowserWrapper.waitForPage(driver);
+        BrowserWrapper.waitForPage();
         try{
             schedulerPage.checkDefaultConditionScheduler();
         }catch (Exception e){
@@ -86,8 +86,8 @@ public class SchedulerPageTest extends BaseTest{
         schedulerPage.nextButtonClick();
         schedulerPage.setAppointment(actualText);
         schedulerPage.saveButtonClick();
-        BaseNavigation.logout(driver);
-        HospitalsPage hospitalsPage =BaseNavigation.loginAsManager(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
+        BaseNavigation.logout();
+        HospitalsPage hospitalsPage =BaseNavigation.loginAsManager( MANAGER_LOGIN, MANAGER_PASSWORD);
         schedulerPage = hospitalsPage.scheduleButtonClick(1);
         schedulerPage.nextButtonClick();
         Assert.assertTrue( schedulerPage.getEvents().size() > 0 && schedulerPage.getEvents().contains(expectedText));
@@ -98,13 +98,13 @@ public class SchedulerPageTest extends BaseTest{
         schedulerPage.nextButtonClick();
         schedulerPage.setAppointment(TEST_APPOINTMENT_TEXT);
         schedulerPage.saveButtonClick();
-        BrowserWrapper.refreshPage(driver);
+        BrowserWrapper.refreshPage();
         schedulerPage.nextButtonClick();
         schedulerPage.callEventContext();
         schedulerPage.deleteEventButtonClick();
         schedulerPage.saveButtonClick();
-        BaseNavigation.logout(driver);
-        HospitalsPage hospitalsPage =BaseNavigation.loginAsManager(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
+        BaseNavigation.logout();
+        HospitalsPage hospitalsPage =BaseNavigation.loginAsManager(MANAGER_LOGIN, MANAGER_PASSWORD);
         schedulerPage = hospitalsPage.scheduleButtonClick(1);
         schedulerPage.nextButtonClick();
         Assert.assertEquals( schedulerPage.getEvents().size(), 0);
@@ -115,13 +115,13 @@ public class SchedulerPageTest extends BaseTest{
         schedulerPage.nextButtonClick();
         schedulerPage.setAppointment(TEST_APPOINTMENT_TEXT);
         schedulerPage.saveButtonClick();
-        BrowserWrapper.refreshPage(driver);
+        BrowserWrapper.refreshPage();
         schedulerPage.nextButtonClick();
         schedulerPage.callEventContext();
         schedulerPage.editEventText(TEST_EDITABLE_APPOINTMENT_TEXT);
         schedulerPage.saveButtonClick();
-        BaseNavigation.logout(driver);
-        HospitalsPage hospitalsPage =BaseNavigation.loginAsManager(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
+        BaseNavigation.logout();
+        HospitalsPage hospitalsPage =BaseNavigation.loginAsManager(MANAGER_LOGIN, MANAGER_PASSWORD);
         schedulerPage = hospitalsPage.scheduleButtonClick(1);
         schedulerPage.nextButtonClick();
         Assert.assertTrue( schedulerPage.getEvents().size() > 0 && schedulerPage.getEvents().contains(EXPECTED_EDITABLE_APPOINTMENT_TEXT));
@@ -132,7 +132,7 @@ public class SchedulerPageTest extends BaseTest{
         schedulerPage.inputEvent(TEST_APPOINTMENT_TEXT);
         schedulerPage.cancelButtonClick();
         schedulerPage.saveButtonClick();
-        BrowserWrapper.refreshPage(driver);
+        BrowserWrapper.refreshPage();
         schedulerPage.nextButtonClick();
         Assert.assertEquals( schedulerPage.getEvents().size(), 0);
 
@@ -144,8 +144,8 @@ public class SchedulerPageTest extends BaseTest{
         schedulerPage.nextDayClick();
         schedulerPage.setAppointment(actualText);
         schedulerPage.saveButtonClick();
-        BaseNavigation.logout(driver);
-        HospitalsPage hospitalsPage =BaseNavigation.loginAsManager(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
+        BaseNavigation.logout();
+        HospitalsPage hospitalsPage =BaseNavigation.loginAsManager(MANAGER_LOGIN, MANAGER_PASSWORD);
         schedulerPage = hospitalsPage.scheduleButtonClick(1);
         schedulerPage.dayTabButtonClick();
         schedulerPage.nextDayClick();
@@ -158,8 +158,8 @@ public class SchedulerPageTest extends BaseTest{
         schedulerPage.nextButtonClick();
         schedulerPage.createEventCalendar(TEST_APPOINTMENT_TEXT);
         schedulerPage.saveButtonClick();
-        BaseNavigation.logout(driver);
-        HospitalsPage hospitalsPage =BaseNavigation.loginAsManager(driver, MANAGER_LOGIN, MANAGER_PASSWORD);
+        BaseNavigation.logout();
+        HospitalsPage hospitalsPage =BaseNavigation.loginAsManager(MANAGER_LOGIN, MANAGER_PASSWORD);
         schedulerPage = hospitalsPage.scheduleButtonClick(1);
         schedulerPage.monthTabButtonClick();
         schedulerPage.nextButtonClick();
@@ -189,9 +189,9 @@ public class SchedulerPageTest extends BaseTest{
     public void testAlertIfNotSaved(){
         schedulerPage.nextButtonClick();
         schedulerPage.setAppointment(TEST_APPOINTMENT_TEXT);
-        BrowserWrapper.refreshPage(driver);
-        boolean present = BrowserWrapper.isAlertPresent(driver);
-        BrowserWrapper.conformAlert(driver);
+        BrowserWrapper.refreshPage();
+        boolean present = BrowserWrapper.isAlertPresent();
+        BrowserWrapper.conformAlert();
         schedulerPage.saveButtonClick();
         Assert.assertTrue(present);
     }

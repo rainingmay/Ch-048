@@ -24,7 +24,7 @@ public class TestHospitalSearch extends BaseTest {
 
     @Test(dataProvider = "SearchProvider")
     public void testFindHospital(String searchWord, int expected) throws Exception {
-        BaseHeader header = new BaseHeader(driver);
+        BaseHeader header = new BaseHeader();
         HospitalSearchResultPage hospitalSearchResult = header.findHospital(searchWord);
         Thread.sleep(10000);
         assertEquals(hospitalSearchResult.countOfHospital(), expected);
@@ -32,7 +32,7 @@ public class TestHospitalSearch extends BaseTest {
 
     @Test
     public void testFindHospitalInputValidation() throws Exception {
-        BaseHeader header = new BaseHeader(driver);
+        BaseHeader header = new BaseHeader();
         header.fillHospitalInput("ho");
         assertEquals(header.getHospitalSearchError().getText(), "Please enter at least 3 symbols");
     }

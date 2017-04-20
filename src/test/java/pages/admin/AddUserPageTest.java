@@ -10,8 +10,7 @@ import org.testng.annotations.Test;
 import utils.BaseNavigation;
 import utils.BaseTest;
 import utils.BrowserWrapper;
-
-
+import utils.Driver;
 
 
 public class AddUserPageTest extends BaseTest {
@@ -31,7 +30,7 @@ public class AddUserPageTest extends BaseTest {
     @BeforeMethod
     private void beforeMethod() throws InterruptedException {
       //  this.driver = BrowserWrapper.browserInitialization();
-        BaseNavigation.loginAsAdmin(driver, ADMIN_LOGIN, ADMIN_PASSWORD);
+        BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
     }
 
@@ -40,11 +39,11 @@ public class AddUserPageTest extends BaseTest {
 @Test(groups = { "Functional" })
     public void isElementsPresentAddUserTest() throws Exception{
     BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
-    AddUserPage addUserPage = new AddUserPage(driver);
+    AddUserPage addUserPage = new AddUserPage();
     BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
     addUserPage = addUserPage.header.goToAddUserPage();
         try{
-            BrowserWrapper.waitForPage(driver);
+            BrowserWrapper.waitForPage();
             addUserPage.isPageReady();
         }catch (Exception e){
 
@@ -58,8 +57,8 @@ public class AddUserPageTest extends BaseTest {
     @Test(groups = { "Other" })
     public void successfulAddNewUserTest() throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
-        AllUsersPage allUsersPage = new AllUsersPage(driver);
-        AddUserPage addUserPage = new AddUserPage(driver);
+        AllUsersPage allUsersPage = new AllUsersPage();
+        AddUserPage addUserPage = new AddUserPage();
         addUserPage = addUserPage.header.goToAddUserPage();
         addUserPage.addNewUser(NEWUSERLOGIN, NEWUSERPASSWORD, NEWUSERROLE);
 
@@ -73,7 +72,7 @@ public class AddUserPageTest extends BaseTest {
     @Test(groups = { "Functional" })
     public void noRoleChangedAddNewUserTest() throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
-        AddUserPage addUserPage = new AddUserPage(driver);
+        AddUserPage addUserPage = new AddUserPage();
         addUserPage = addUserPage.header.goToAddUserPage();
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         addUserPage.addNewUserWithotRole(NEWUSERLOGIN, NEWUSERPASSWORD);
@@ -88,7 +87,7 @@ public class AddUserPageTest extends BaseTest {
     @Test(groups = { "Functional" })
     public void noPasswordConfirmationAddNewUserTest() throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
-        AddUserPage addUserPage = new AddUserPage(driver);
+        AddUserPage addUserPage = new AddUserPage();
         addUserPage = addUserPage.header.goToAddUserPage();
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         addUserPage.addNewUserWithotPasswordConfirmation(NEWUSERLOGIN, NEWUSERPASSWORD);
@@ -140,7 +139,7 @@ public class AddUserPageTest extends BaseTest {
     @Test(groups = { "Other" })
     public void noRequiredEmailTest() throws Exception{
        // BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
-        AddUserPage addUserPage = new AddUserPage(driver);
+        AddUserPage addUserPage = new AddUserPage();
         addUserPage = addUserPage.header.goToAddUserPage();
         addUserPage.addNewUser("", NEWUSERPASSWORD, NEWUSERROLE);
 
@@ -154,7 +153,7 @@ public class AddUserPageTest extends BaseTest {
     @Test
     public void noRequiredPasswordTest() throws Exception{
         // BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
-        AddUserPage addUserPage = new AddUserPage(driver);
+        AddUserPage addUserPage = new AddUserPage();
         addUserPage = addUserPage.header.goToAddUserPage();
         addUserPage.addNewUser(NEWUSERLOGIN, "", NEWUSERROLE);
 
@@ -168,8 +167,8 @@ public class AddUserPageTest extends BaseTest {
     @Test(dataProvider = "validInformation")
     public void validInfoAddNewUserTest(String addUserName, String addUserPassword) throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
-        AllUsersPage allUsersPage = new AllUsersPage(driver);
-        AddUserPage addUserPage = new AddUserPage(driver);
+        AllUsersPage allUsersPage = new AllUsersPage();
+        AddUserPage addUserPage = new AddUserPage();
         addUserPage = addUserPage.header.goToAddUserPage();
         addUserPage.addNewUser(addUserName, addUserPassword, NEWUSERROLE);
 
@@ -185,7 +184,7 @@ public class AddUserPageTest extends BaseTest {
     @Test(dataProvider = "notValidEmails")
     public void notValidEmailsAddNewUserTest(String addUserName, String addUserPassword) throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
-        AddUserPage addUserPage = new AddUserPage(driver);
+        AddUserPage addUserPage = new AddUserPage();
         addUserPage = addUserPage.header.goToAddUserPage();
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         addUserPage.addNewUser(addUserName, addUserPassword, NEWUSERROLE);
@@ -203,7 +202,7 @@ public class AddUserPageTest extends BaseTest {
     @Test(dataProvider = "notValidPasswords")
     public void notValidPasswordsAddNewUserTest(String addUserName, String addUserPassword) throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
-        AddUserPage addUserPage = new AddUserPage(driver);
+        AddUserPage addUserPage = new AddUserPage();
         addUserPage = addUserPage.header.goToAddUserPage();
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         addUserPage.addNewUser(addUserName, addUserPassword, NEWUSERROLE);
@@ -216,8 +215,8 @@ public class AddUserPageTest extends BaseTest {
 
     @AfterMethod
     public void afterMethod(){
-        driver.manage().deleteAllCookies();
-        BaseNavigation.logout(this.driver);
+        Driver.instance().manage().deleteAllCookies();
+        BaseNavigation.logout();
     }
 
 

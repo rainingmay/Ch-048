@@ -13,9 +13,8 @@ import pages.doctor.PatientsCardPage;
 import pages.headers.headersByRole.DoctorHeader;
 import utils.BaseNavigation;
 import utils.BaseTest;
-import utils.BrowserInitializer;
 import utils.BrowserWrapper;
-
+import utils.Driver;
 
 
 /**
@@ -24,14 +23,14 @@ import utils.BrowserWrapper;
 public class TestPatientRecord extends BaseTest {
     @BeforeMethod
     public void before() {
-        this.driver = BrowserInitializer.browserInitialization();
-
+        //Why do you do this here?
+        Driver.initialization();
     }
 
 
     @AfterMethod
     public void after() {
-        BrowserInitializer.browserClose(this.driver);
+        Driver.close();
 
     }
 
@@ -39,34 +38,34 @@ public class TestPatientRecord extends BaseTest {
     @Test
 
      public void createNewRecord() throws Exception {
-       WebDriverWait wait = new WebDriverWait(driver, 5);
-       BaseNavigation.loginAsDoctor(driver, DOCTOR_LOGIN, DOCTOR_PASSWORD);
+       WebDriverWait wait = new WebDriverWait(Driver.instance(),5);
+       BaseNavigation.loginAsDoctor(DOCTOR_LOGIN, DOCTOR_PASSWORD);
 
       wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[1]/div/div/div")));
-      DoctorHeader doctorHeader = new DoctorHeader(driver);
+      DoctorHeader doctorHeader = new DoctorHeader();
       doctorHeader.patientsButtonClick();
 
-        ListPatientaPage listPatientaPage = new ListPatientaPage(driver);
+        ListPatientaPage listPatientaPage = new ListPatientaPage();
         BrowserWrapper.sleep(3);
 
         listPatientaPage.getPatientsCardClick();
         BrowserWrapper.sleep(5);
 
-        PatientsCardPage patientsCardPage = new PatientsCardPage(driver);
+        PatientsCardPage patientsCardPage = new PatientsCardPage();
         patientsCardPage.addNewRecordButtonClick();
-        CreateNewRecordPage createNewRecord = new CreateNewRecordPage(driver);
+        CreateNewRecordPage createNewRecord = new CreateNewRecordPage();
         createNewRecord.inputRecord("New complaint", "New result", "New prescription");
 
         Assert.assertTrue(patientsCardPage.checkRecord());
     }
   @Test
     public void checkPatientsSearch() throws Exception {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        BaseNavigation.loginAsDoctor(driver, DOCTOR_LOGIN, DOCTOR_PASSWORD);
+        WebDriverWait wait = new WebDriverWait(Driver.instance(), 10);
+        BaseNavigation.loginAsDoctor(DOCTOR_LOGIN, DOCTOR_PASSWORD);
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[1]/div/div/div")));
-        DoctorHeader doctorHeader = new DoctorHeader(driver);
+        DoctorHeader doctorHeader = new DoctorHeader();
         doctorHeader.patientsButtonClick();
-        ListPatientaPage listPatientaPage = new ListPatientaPage(driver);
+        ListPatientaPage listPatientaPage = new ListPatientaPage();
         listPatientaPage.searchPatients("patient.sf@hospitals.ua");
         BrowserWrapper.sleep(2);
 
@@ -75,12 +74,12 @@ public class TestPatientRecord extends BaseTest {
 
     @Test
     public void testPatientsSortingByFirstName() throws Exception {
-        WebDriverWait wait = new WebDriverWait(driver, 5);
-        BaseNavigation.loginAsDoctor(driver, DOCTOR_LOGIN, DOCTOR_PASSWORD);
+        WebDriverWait wait = new WebDriverWait(Driver.instance(),5);
+        BaseNavigation.loginAsDoctor(DOCTOR_LOGIN, DOCTOR_PASSWORD);
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[1]/div/div/div")));
-        DoctorHeader doctorHeader = new DoctorHeader(driver);
+        DoctorHeader doctorHeader = new DoctorHeader();
         doctorHeader.patientsButtonClick();
-        ListPatientaPage listPatientaPage = new ListPatientaPage(driver);
+        ListPatientaPage listPatientaPage = new ListPatientaPage();
         listPatientaPage.sortByFirstNameButton();
         BrowserWrapper.sleep(5);
 
@@ -90,12 +89,12 @@ public class TestPatientRecord extends BaseTest {
     }
     @Test
     public void testPatientsSortingByLastName() throws Exception {
-        WebDriverWait wait = new WebDriverWait(driver, 5);
-        BaseNavigation.loginAsDoctor(driver, DOCTOR_LOGIN, DOCTOR_PASSWORD);
+        WebDriverWait wait = new WebDriverWait(Driver.instance(), 5);
+        BaseNavigation.loginAsDoctor(DOCTOR_LOGIN, DOCTOR_PASSWORD);
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[1]/div/div/div")));
-        DoctorHeader doctorHeader = new DoctorHeader(driver);
+        DoctorHeader doctorHeader = new DoctorHeader();
         doctorHeader.patientsButtonClick();
-        ListPatientaPage listPatientaPage = new ListPatientaPage(driver);
+        ListPatientaPage listPatientaPage = new ListPatientaPage();
         listPatientaPage.sortByLastNameButton();
         BrowserWrapper.sleep(5);
 
@@ -105,12 +104,12 @@ public class TestPatientRecord extends BaseTest {
     }
     @Test
     public void testPatientsSortingByEmail() throws Exception {
-        WebDriverWait wait = new WebDriverWait(driver, 5);
-        BaseNavigation.loginAsDoctor(driver, DOCTOR_LOGIN, DOCTOR_PASSWORD);
+        WebDriverWait wait = new WebDriverWait(Driver.instance(),5);
+        BaseNavigation.loginAsDoctor(DOCTOR_LOGIN, DOCTOR_PASSWORD);
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[1]/div/div/div")));
-        DoctorHeader doctorHeader = new DoctorHeader(driver);
+        DoctorHeader doctorHeader = new DoctorHeader();
         doctorHeader.patientsButtonClick();
-        ListPatientaPage listPatientaPage = new ListPatientaPage(driver);
+        ListPatientaPage listPatientaPage = new ListPatientaPage();
         listPatientaPage.sortByEmailButton();
         BrowserWrapper.sleep(5);
 

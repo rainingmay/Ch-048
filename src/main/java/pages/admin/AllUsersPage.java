@@ -2,12 +2,12 @@ package pages.admin;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.allUsers.BasePage;
 import pages.headers.headersByRole.AdminHeader;
 import utils.BrowserWrapper;
+import utils.Driver;
 import utils.TableParser;
 
 import java.util.LinkedList;
@@ -101,47 +101,46 @@ public class AllUsersPage extends BasePage {
 
 
 
-    public AllUsersPage(WebDriver driver) {
-        super(driver);
-        this.header = new AdminHeader(driver);
+    public AllUsersPage() {
+        this.header = new AdminHeader();
     }
 
 
-    public AllUsersPage getCreatedTableText(WebDriver driver){
+    public AllUsersPage getCreatedTableText(){
         createdLabel.getText();
-        return new AllUsersPage(driver);
+        return new AllUsersPage();
     }
 
 
     public AllUsersPage showAllUsers() {
-        ((JavascriptExecutor)driver).executeScript("arguments[0].click();" , enableButton);
-        return new AllUsersPage(driver);
+        ((JavascriptExecutor) Driver.instance()).executeScript("arguments[0].click();" , enableButton);
+        return new AllUsersPage();
     }
 
     public AllUsersPage showEnableUsers() {
         enableButton.click();
-        BrowserWrapper.waitForPage(driver);
-        return new AllUsersPage(driver);
+        BrowserWrapper.waitForPage();
+        return new AllUsersPage();
     }
 
     public AllUsersPage showDisableUsers() {
-        ((JavascriptExecutor)driver).executeScript("arguments[0].click();" , disableButton);
-        BrowserWrapper.waitForPage(driver);
-        return new AllUsersPage(driver);
+        ((JavascriptExecutor)Driver.instance()).executeScript("arguments[0].click();" , disableButton);
+        BrowserWrapper.waitForPage();
+        return new AllUsersPage();
     }
 
 
     public AllUsersPage changeCountOfUsersOnPage(int count) {
         selectDropdownCount(usersPerPagePopUp, String.valueOf(count));
         BrowserWrapper.sleep(3);
-        return new AllUsersPage(driver);
+        return new AllUsersPage();
     }
 
     public AllUsersPage changeRole(String role) {
         this.role.findElement(By.cssSelector("option[value=" + role + "]")).click();
         searchButton.click();
-        BrowserWrapper.waitForPage(driver);
-        return new AllUsersPage(driver);
+        BrowserWrapper.waitForPage();
+        return new AllUsersPage();
     }
 
 
@@ -161,7 +160,7 @@ public class AllUsersPage extends BasePage {
         changeSearchBy(field);
         sendKeysToSearchField(keys);
         searchButton.click();
-        return new AllUsersPage(driver);
+        return new AllUsersPage();
     }
 
 
@@ -170,7 +169,7 @@ public class AllUsersPage extends BasePage {
         WebElement infoButton = new TableParser(table).getButtonFromTableRow(rowNumber, "View");
         infoButton.click();
         Thread.sleep(2000);
-        viewWindow = driver.findElement(By.className("modal-content"));
+        viewWindow = Driver.instance().findElement(By.className("modal-content"));
         result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(1) td:last-child")).getText());
         result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(2) td:last-child")).getText());
         result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(4) td:last-child")).getText());
@@ -200,7 +199,7 @@ public class AllUsersPage extends BasePage {
         WebElement editButton = new TableParser(table).getButtonFromTableRow(rowNumber, "Edit");
         editButton.click();
         BrowserWrapper.sleep(3);
-        editWindow = driver.findElement(By.id("detailForm"));
+        editWindow = Driver.instance().findElement(By.id("detailForm"));
         return editWindow;
     }
 
@@ -212,7 +211,7 @@ public class AllUsersPage extends BasePage {
         BrowserWrapper.sleep(3);
         editWindow.findElement(By.cssSelector("input[value=\"Edit\"]")).click();
         BrowserWrapper.sleep(3);
-        return new AllUsersPage(driver);
+        return new AllUsersPage();
     }
 
     public static void selectDropdownRole(WebElement element, String text) {
@@ -230,7 +229,7 @@ public class AllUsersPage extends BasePage {
     public AllUsersPage toNextPage() {
             if (!nextPageButton.equals(null)) {
                 nextPageButton.click();
-                return new AllUsersPage(driver);
+                return new AllUsersPage();
             }
             return null;
     }
@@ -239,15 +238,15 @@ public class AllUsersPage extends BasePage {
         deleteButton = new TableParser(table).getButtonFromTableRow(rowNumber, "Delete");
         deleteButton.click();
         BrowserWrapper.sleep(3);
-        deleteWindow = driver.findElement(By.className("modal-content"));
-        ((JavascriptExecutor)driver).executeScript("arguments[0].click();" , driver.findElement(By.id("deleteButton")));
+        deleteWindow = Driver.instance().findElement(By.className("modal-content"));
+        ((JavascriptExecutor)Driver.instance()).executeScript("arguments[0].click();" , Driver.instance().findElement(By.id("deleteButton")));
         BrowserWrapper.sleep(2);
-        return new AllUsersPage(driver);
+        return new AllUsersPage();
     }
 
     public AllUsersPage clickSortByEmail() {
         sortByEmailButton.click();
-        return new AllUsersPage(driver);
+        return new AllUsersPage();
     }
 
 
@@ -257,6 +256,6 @@ public class AllUsersPage extends BasePage {
     }
 
     public String getCurrentUrl() {
-        return driver.getCurrentUrl();
+        return Driver.instance().getCurrentUrl();
     }
 }

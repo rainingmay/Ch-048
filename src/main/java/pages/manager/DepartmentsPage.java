@@ -1,11 +1,11 @@
 package pages.manager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.allUsers.BasePage;
 import pages.headers.headersByRole.ManagerHeader;
+import utils.Driver;
 
 
 /**
@@ -40,20 +40,19 @@ public class DepartmentsPage extends BasePage {
     private WebElement backToTopButton;
 
     public WebElement viewButton(int i) {
-        return driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child  a:first-child"));
+        return Driver.instance().findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child  a:first-child"));
     }
 
     public WebElement editButton(int i) {
-        return driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #ediDepartment"));
+        return Driver.instance().findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #ediDepartment"));
     }
     public WebElement scheduleButton(int i) {
-        return driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child a:last-child"));
+        return Driver.instance().findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child a:last-child"));
     }
 
 
 
-    public DepartmentsPage(WebDriver driver) {
-        super(driver);
-        managerHeader = new ManagerHeader(driver);
+    public DepartmentsPage() {
+        managerHeader = new ManagerHeader();
     }
 }

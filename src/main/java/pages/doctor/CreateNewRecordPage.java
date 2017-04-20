@@ -1,7 +1,6 @@
 package pages.doctor;
 
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.allUsers.BasePage;
@@ -34,9 +33,8 @@ public class CreateNewRecordPage extends BasePage {
     private WebElement prescription;
 
 
-    public CreateNewRecordPage(WebDriver driver) {
-        super(driver);
-        this.header = new DoctorHeader(driver);
+    public CreateNewRecordPage() {
+        this.header = new DoctorHeader();
     }
 
     public void inputComplaint(String value){
@@ -62,11 +60,11 @@ public class CreateNewRecordPage extends BasePage {
 
     public PatientsCardPage backButtonClick (){
         backButton.click();
-        return new PatientsCardPage(driver);
+        return new PatientsCardPage();
     }
     public PatientsCardPage submitButtonClick(){
         submitButton.click();
-        return new PatientsCardPage(driver);
+        return new PatientsCardPage();
     }
 
 }
