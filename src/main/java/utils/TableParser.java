@@ -50,11 +50,9 @@ public class TableParser {
     public WebElement getButtonFromTableRow(int rowNumber, String buttonName) {
         List<WebElement> webElements = getCellsFromTableRow(rowNumber);
         WebElement button = null;
-        for (WebElement button1 : webElements) {
-            if (!button1.findElement(By.cssSelector("span[title=" + buttonName + "] a")).equals(null)) {
-                button = button1;
-                break;
-            }
+        for (WebElement cell : webElements) {
+            if (cell.findElements(By.cssSelector("span[title=\"" + buttonName + "\"]")).size() > 0)
+                button = cell.findElement(By.cssSelector("span[title=\"" + buttonName + "\"]"));
         }
         return button;
     }
