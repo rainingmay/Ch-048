@@ -3,7 +3,6 @@ package pages.admin;
 
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -218,17 +217,7 @@ public class AddUserPageTest extends BaseTest {
 
     @AfterMethod
     public void afterMethod(){
-        try {
             BaseNavigation.logout(this.driver);
-            //BrowserWrapper.browserClose(driver);
-        }catch (InterruptedException e){
-            e.printStackTrace();
-        } catch (TimeoutException e){
-            e.printStackTrace();
-            System.out.println("failed");
-        }
-
-
     }
 
 

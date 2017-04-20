@@ -3,10 +3,8 @@ package utils;
 import org.openqa.selenium.WebDriver;
 import pages.admin.AllUsersPage;
 import pages.allUsers.HospitalSeekerHomePage;
-import pages.allUsers.PageObject;
 import pages.anonymous.LoginPage;
 import pages.headers.headersByRole.AuthorizedHeader;
-import pages.headers.headersByRole.DoctorHeader;
 import pages.manager.HospitalsPage;
 
 
@@ -16,14 +14,14 @@ import pages.manager.HospitalsPage;
 public class BaseNavigation {
 
 
-    public static void login(WebDriver driver, String email, String password) throws InterruptedException{
+    public static void login(WebDriver driver, String email, String password) {
         HospitalSeekerHomePage hospitalSeekerHomePage = new HospitalSeekerHomePage(driver);
-        LoginPage loginPage = hospitalSeekerHomePage.notLogInUserHeader.loginButton();
+        LoginPage loginPage = hospitalSeekerHomePage.notAuthorizedHeader.loginButton();
         loginPage.authorization(email, password);
     }
 
 
-    public static HospitalSeekerHomePage logout(WebDriver driver) throws InterruptedException{
+    public static HospitalSeekerHomePage logout(WebDriver driver) {
         AuthorizedHeader authorizedHeader = new AuthorizedHeader(driver);
         authorizedHeader.profileButtonClick();
         HospitalSeekerHomePage hospitalSeekerHomePage = authorizedHeader.logoutButtonClick();
@@ -31,17 +29,17 @@ public class BaseNavigation {
     }
 
 
-    public static AllUsersPage loginAsAdmin(WebDriver driver, String email, String password) throws InterruptedException {
+    public static AllUsersPage loginAsAdmin(WebDriver driver, String email, String password) {
         login(driver, email, password);
         return new AllUsersPage(driver);
     }
 
-    public static HospitalsPage loginAsManager(WebDriver driver, String email, String password) throws InterruptedException {
+    public static HospitalsPage loginAsManager(WebDriver driver, String email, String password)  {
         login(driver, email, password);
         return new HospitalsPage(driver);
     }
 
-    public static HospitalSeekerHomePage loginAsDoctor(WebDriver driver, String email, String password) throws InterruptedException {
+    public static HospitalSeekerHomePage loginAsDoctor(WebDriver driver, String email, String password)  {
         login(driver, email, password);
         return new HospitalSeekerHomePage(driver) ;
     }

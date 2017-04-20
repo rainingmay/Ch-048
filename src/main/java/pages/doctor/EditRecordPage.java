@@ -4,11 +4,10 @@ package pages.doctor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.allUsers.PageObject;
-import pages.headers.headersByRole.AdminHeader;
+import pages.allUsers.BasePage;
 import pages.headers.headersByRole.DoctorHeader;
 
-public class EditRecordPage extends PageObject {
+public class EditRecordPage extends BasePage {
     public DoctorHeader header;
     @FindBy (id = "complaint")
     private WebElement complaintTextField;

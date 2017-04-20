@@ -3,11 +3,11 @@ package pages.admin;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.allUsers.PageObject;
+import pages.allUsers.BasePage;
 import pages.headers.headersByRole.AdminHeader;
 
 
-public class CheckGooglePOIPage extends PageObject {
+public class CheckGooglePOIPage extends BasePage {
     public AdminHeader header;
 
     public CheckGooglePOIPage(WebDriver driver) {
