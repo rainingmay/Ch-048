@@ -5,10 +5,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import utils.BaseNavigation;
-import utils.BaseTest;
-import utils.BrowserInitializer;
-import utils.BrowserWrapper;
+import utils.*;
 import utils.databaseutil.UserDAO;
 
 import java.util.*;
@@ -43,7 +40,8 @@ public class AllUsersPageTest extends BaseTest {
             BrowserWrapper.waitForPage(driver);
             allUsersPage = allUsersPage.showEnableUsers();
             int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
-            boolean actual = UserDAO.getStatusByEmail(allUsersPage.getUserDataFromTableRow(rowNumber).get(0));
+            //boolean actual = UserDAO.getStatusByEmail(allUsersPage.getUserDataFromTableRow(rowNumber).get(0));
+            boolean actual = UserDAO.getStatusByEmail(new TableParser(allUsersPage.table).getFieldFromTableRow(rowNumber, "@email"));
             Assert.assertEquals(actual, true);
 
 
@@ -57,7 +55,7 @@ public class AllUsersPageTest extends BaseTest {
             allUsersPage = allUsersPage.showDisableUsers();
             BrowserWrapper.sleep(2);
             int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
-            boolean actual = UserDAO.getStatusByEmail(allUsersPage.getUserDataFromTableRow(rowNumber).get(0));
+            boolean actual = UserDAO.getStatusByEmail(new TableParser(allUsersPage.table).getFieldFromTableRow(rowNumber, "@email"));
             Assert.assertEquals(actual, false);
     }
 

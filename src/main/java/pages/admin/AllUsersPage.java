@@ -19,6 +19,9 @@ public class AllUsersPage extends BasePage {
 
     public AdminHeader header;
 
+    @FindBy(css = "table")
+    public WebElement table;
+
     @FindBy(id = "userPerPage")
     private WebElement usersPerPagePopUp;
 
