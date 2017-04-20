@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
-import pages.allUsers.PageObject;
+import pages.allUsers.BasePage;
 import pages.headers.headersByRole.ManagerHeader;
 import utils.BrowserWrapper;
 
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class HospitalsPage extends PageObject {
+public class HospitalsPage extends BasePage {
 
     public ManagerHeader managerHeader;
     @FindBy(className = "h1.text-center")
@@ -288,7 +288,7 @@ public class HospitalsPage extends PageObject {
     public void editButtonClick(int i) {
         driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #ediUser")).click();
     }
-    public SchedulerPage scheduleButtonClick(int i) throws InterruptedException {
+    public SchedulerPage scheduleButtonClick(int i) {
          WebElement element = driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #schedule"));
         BrowserWrapper.waitUntilElementVisible(element);
         element.click();

@@ -5,21 +5,21 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.anonymous.LoginPage;
 import pages.headers.headersByRole.DoctorHeader;
-import pages.headers.headersByRole.NotLogInUserHeader;
+import pages.headers.headersByRole.NotAuthorizedHeader;
 
 
 /**
  * Created by Evgen on 05.04.2017.
  */
-public class HospitalSeekerHomePage extends PageObject {
+public class HospitalSeekerHomePage extends BasePage {
 
     //Temporary field
-    public NotLogInUserHeader notLogInUserHeader;
+    public NotAuthorizedHeader notAuthorizedHeader;
     public DoctorHeader header;
 
 
     public LoginPage moveToLoginPage(){
-        notLogInUserHeader.loginButton();
+        notAuthorizedHeader.loginButton();
         return new LoginPage(driver);
     }
 
@@ -45,7 +45,7 @@ public class HospitalSeekerHomePage extends PageObject {
 
     public HospitalSeekerHomePage(WebDriver driver) {
         super(driver);
-        notLogInUserHeader = new NotLogInUserHeader(driver);
+        notAuthorizedHeader = new NotAuthorizedHeader(driver);
     }
 
 }

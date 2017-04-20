@@ -4,11 +4,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
-import pages.allUsers.PageObject;
+import pages.allUsers.BasePage;
 import pages.headers.headersByRole.PatientHeader;
 
 
-public class PatientProfilePage extends PageObject {
+public class PatientProfilePage extends BasePage {
 
     public PatientHeader patientHeader;
 

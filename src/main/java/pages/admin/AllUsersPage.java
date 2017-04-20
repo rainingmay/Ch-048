@@ -1,15 +1,13 @@
 package pages.admin;
 
-import org.apache.bcel.generic.Select;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.allUsers.PageObject;
+import pages.allUsers.BasePage;
 import pages.headers.headersByRole.AdminHeader;
 import utils.BrowserWrapper;
-
 
 import java.util.LinkedList;
 import java.util.List;
@@ -17,7 +15,7 @@ import java.util.List;
 /**
  * Created by Evgen on 06.04.2017.
  */
-public class AllUsersPage extends PageObject {
+public class AllUsersPage extends BasePage {
 
     public AdminHeader header;
 
@@ -228,11 +226,11 @@ public class AllUsersPage extends PageObject {
 
     public AllUsersPage changeRoleInEditWindow(int rowNumber, String role) {
         openEditWindow(rowNumber);
-        BrowserWrapper.sleep(2);
+        BrowserWrapper.sleep(3);
         selectDropdownRole(editWindow.findElement(By.id("userRoles")), role);
-        BrowserWrapper.sleep(2);
+        BrowserWrapper.sleep(3);
         editWindow.findElement(By.cssSelector("input[value=\"Edit\"]")).click();
-        BrowserWrapper.sleep(2);
+        BrowserWrapper.sleep(3);
         return new AllUsersPage(driver);
     }
 

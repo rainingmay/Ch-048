@@ -1,10 +1,9 @@
 package pages.anonymous;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.allUsers.PageObject;
+import pages.allUsers.BasePage;
 import pages.headers.BaseHeader;
 import utils.BrowserWrapper;
 
@@ -12,7 +11,7 @@ import utils.BrowserWrapper;
 /**
  * Created by ytomktc on 07.04.2017.
  */
-public class LoginPage extends PageObject {
+public class LoginPage extends BasePage {
     public BaseHeader baseHeader;
     @FindBy(xpath = "//*[@id=\"loginForm\"]/fieldset/h2")
     private WebElement loginText;
