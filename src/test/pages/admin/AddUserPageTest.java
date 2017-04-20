@@ -39,7 +39,7 @@ public class AddUserPageTest extends BaseTest {
 
 
 
-@Test
+@Test(groups = { "Functional" })
     public void isElementsPresentAddUserTest() throws Exception{
     BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
     AddUserPage addUserPage = new AddUserPage(driver);
@@ -57,7 +57,7 @@ public class AddUserPageTest extends BaseTest {
     }
 
 
-    @Test
+    @Test(groups = { "Other" })
     public void successfulAddNewUserTest() throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AllUsersPage allUsersPage = new AllUsersPage(driver);
@@ -72,7 +72,7 @@ public class AddUserPageTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(groups = { "Functional" })
     public void noRoleChangedAddNewUserTest() throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage(driver);
@@ -87,7 +87,7 @@ public class AddUserPageTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(groups = { "Functional" })
     public void noPasswordConfirmationAddNewUserTest() throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage(driver);
@@ -139,7 +139,7 @@ public class AddUserPageTest extends BaseTest {
     }
 
 
-    @Test
+    @Test(groups = { "Other" })
     public void noRequiredEmailTest() throws Exception{
        // BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage(driver);
