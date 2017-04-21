@@ -1,6 +1,5 @@
 package pages.patient;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.allUsers.BasePage;
@@ -20,7 +19,6 @@ public class StudiesPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"menu2\"]/div/div[2]/div/h3")
     private WebElement futureStudiesLabel;
 
-    public StudiesPage(WebDriver driver) {
-        super(driver);
+    public StudiesPage() {
     }
 }

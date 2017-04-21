@@ -1,6 +1,5 @@
 package pages.anonymous;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.allUsers.BasePage;
@@ -58,8 +57,7 @@ public class LoginPage extends BasePage {
     }
 
 
-    public LoginPage(WebDriver driver) {
-        super(driver);
-        baseHeader = new BaseHeader(driver);
+    public LoginPage() {
+        baseHeader = new BaseHeader();
     }
 }

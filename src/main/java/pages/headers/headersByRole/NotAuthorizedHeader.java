@@ -1,6 +1,5 @@
 package pages.headers.headersByRole;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.anonymous.LoginPage;
@@ -23,11 +22,9 @@ public class NotAuthorizedHeader extends BaseHeader {
         }catch (Exception e){
             e.printStackTrace();
         }
-        return new LoginPage(driver);
+        return new LoginPage();
     }
 
-    public NotAuthorizedHeader(WebDriver driver) {
-        super(driver);
-    }
+
 
 }

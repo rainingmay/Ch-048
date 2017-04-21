@@ -1,6 +1,5 @@
 package pages.allUsers;
 
-import org.openqa.selenium.WebDriver;
 import pages.headers.BaseHeader;
 
 
@@ -9,8 +8,7 @@ import pages.headers.BaseHeader;
  */
 public class DoctorInfoPage extends BasePage {
     BaseHeader baseHeader;
-    public DoctorInfoPage(WebDriver driver) {
-        super(driver);
-        baseHeader = new BaseHeader(driver);
+    public DoctorInfoPage() {
+        baseHeader = new BaseHeader();
     }
 }

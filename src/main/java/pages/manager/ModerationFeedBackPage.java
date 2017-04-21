@@ -72,8 +72,7 @@ public class ModerationFeedBackPage extends BasePage {
     @FindBy(xpath = "/html/body/section/a")
     private WebElement backToTopButton;
 
-    public ModerationFeedBackPage(WebDriver driver){
-        super(driver);
-        managerHeader = new ManagerHeader(driver);
+    public ModerationFeedBackPage(){
+        managerHeader = new ManagerHeader();
     }
 }

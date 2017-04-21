@@ -1,8 +1,8 @@
 package utils;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import utils.Driver;
 
 public class BaseTest {
 
@@ -18,18 +18,16 @@ public class BaseTest {
     public static final String PATIENT_LOGIN = "patient.cd@hospitals.ua";
     public static final String PATIENT_PASSWORD = "1111";
 
-    protected WebDriver driver;
 
-
-    @BeforeClass(alwaysRun = true)
-    public void before()  {
-        this.driver = BrowserInitializer.browserInitialization();
+    @BeforeClass
+    public void before(){
+        Driver.initialization();
     }
 
 
-    @AfterClass(alwaysRun = true)
+    @AfterClass
     public void after() {
-        BrowserInitializer.browserClose(this.driver);
+        Driver.close();
     }
 
 }

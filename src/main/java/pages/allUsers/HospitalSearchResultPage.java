@@ -8,11 +8,10 @@ import java.util.List;
 
 
 public class HospitalSearchResultPage extends BasePage {
- //   public BaseHeader header;
+//    public BaseHeader header;
 
 
-    public HospitalSearchResultPage(WebDriver driver) {
-        super(driver);
+    public HospitalSearchResultPage() {
     }
 
     @FindBy(css = "[class='filter-col'])")

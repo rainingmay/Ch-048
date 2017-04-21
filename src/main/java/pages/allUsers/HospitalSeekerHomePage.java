@@ -1,6 +1,5 @@
 package pages.allUsers;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.anonymous.LoginPage;
@@ -20,7 +19,7 @@ public class HospitalSeekerHomePage extends BasePage {
 
     public LoginPage moveToLoginPage(){
         notAuthorizedHeader.loginButton();
-        return new LoginPage(driver);
+        return new LoginPage();
     }
 
 
@@ -43,9 +42,8 @@ public class HospitalSeekerHomePage extends BasePage {
     private WebElement image;
 
 
-    public HospitalSeekerHomePage(WebDriver driver) {
-        super(driver);
-        notAuthorizedHeader = new NotAuthorizedHeader(driver);
+    public HospitalSeekerHomePage() {
+        notAuthorizedHeader = new NotAuthorizedHeader();
     }
 
 }

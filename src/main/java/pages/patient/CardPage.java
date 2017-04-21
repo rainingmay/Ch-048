@@ -1,6 +1,5 @@
 package pages.patient;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.allUsers.BasePage;
@@ -24,7 +23,6 @@ public class CardPage extends BasePage {
 
 
 
-    public CardPage(WebDriver driver) {
-        super(driver);
+    public CardPage() {
     }
 }

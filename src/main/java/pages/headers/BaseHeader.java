@@ -1,6 +1,5 @@
 package pages.headers;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.allUsers.*;
@@ -51,9 +50,6 @@ public class BaseHeader extends BasePage {
     @FindBy(id = "select_doctor_search_button")
     protected WebElement doctorSearchButton;
 
-    public BaseHeader(WebDriver driver) {
-        super(driver);
-    }
 
     public WebElement getDoctorSearchError() {
         return doctorSearchError;
@@ -65,12 +61,12 @@ public class BaseHeader extends BasePage {
 
     public HospitalSeekerHomePage toHomePage() {
         home.click();
-        return new HospitalSeekerHomePage(driver);
+        return new HospitalSeekerHomePage();
     }
 
     public MapSearchPage toMapOfHospitals() {
         nearestHospital.click();
-        return new MapSearchPage(driver);
+        return new MapSearchPage();
     }
 
 
@@ -86,7 +82,7 @@ public class BaseHeader extends BasePage {
     public HospitalSearchResultPage findHospital(String hospitalName) {
         fillHospitalInput(hospitalName);
         hospitalSearchButton.click();
-        return new HospitalSearchResultPage(driver);
+        return new HospitalSearchResultPage();
     }
 
     public void fillHospitalInput(String hospitalName) {
@@ -98,7 +94,7 @@ public class BaseHeader extends BasePage {
     public DoctorSearchResult findDoctor(String doctorName) {
         fillDoctorInput(doctorName);
         doctorSearchButton.click();
-        return new DoctorSearchResult(driver);
+        return new DoctorSearchResult();
     }
 
     public void fillDoctorInput(String doctorName) {

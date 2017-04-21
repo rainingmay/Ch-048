@@ -1,13 +1,13 @@
 package pages.manager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import pages.allUsers.BasePage;
 import pages.headers.headersByRole.ManagerHeader;
 import utils.BrowserWrapper;
+import utils.Driver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -203,17 +203,17 @@ public class HospitalsPage extends BasePage {
 
     public DepartmentsPage labaratoryButtonClick(){
         labaratoryButton.click();
-        return new DepartmentsPage(driver);
+        return new DepartmentsPage();
     }
 
     public DepartmentsPage departmentsButtonClick(){
         departmentButton.click();
-        return new DepartmentsPage(driver);
+        return new DepartmentsPage();
     }
 
     public AddNewDoctorPage addNewDoctorButtonClick(){
         newDoctorButton.click();
-        return new AddNewDoctorPage(driver);
+        return new AddNewDoctorPage();
     }
 
     public void sortByEmailButtonClick(){
@@ -239,7 +239,7 @@ public class HospitalsPage extends BasePage {
     public String getValue(String row, String colName){
         String td = tdFinder(colName);
 
-       return driver.findElement(By.cssSelector("tbody tr:nth-child(" + row + ") td:nth-child(" + td + ")")).getText();
+       return Driver.instance().findElement(By.cssSelector("tbody tr:nth-child(" + row + ") td:nth-child(" + td + ")")).getText();
     }
 
     public String tdFinder(String colName){
@@ -271,7 +271,7 @@ public class HospitalsPage extends BasePage {
         String td = tdFinder(colName);
         ArrayList<String> list = new ArrayList<>();
 
-        for( WebElement webElement : driver.findElements(By.cssSelector("tbody tr td:nth-child("+ td +")"))){
+        for( WebElement webElement : Driver.instance().findElements(By.cssSelector("tbody tr td:nth-child("+ td +")"))){
             list.add(webElement.getText());
         }
         return list;
@@ -282,27 +282,26 @@ public class HospitalsPage extends BasePage {
     }
 
     public void viewButtonClick(int i) {
-        driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #viewUser")).click();
+        Driver.instance().findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #viewUser")).click();
     }
 
     public void editButtonClick(int i) {
-        driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #ediUser")).click();
+        Driver.instance().findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #ediUser")).click();
     }
     public SchedulerPage scheduleButtonClick(int i) {
-         WebElement element = driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #schedule"));
+         WebElement element = Driver.instance().findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #schedule"));
         BrowserWrapper.waitUntilElementVisible(element);
         element.click();
-         return new SchedulerPage(driver);
+         return new SchedulerPage();
     }
 
     public void deleteButtonClick(int i) {
-        driver.findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #deleteDoctor")).click();
+        Driver.instance().findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #deleteDoctor")).click();
     }
 
 
 
-    public HospitalsPage(WebDriver driver) {
-        super(driver);
-        managerHeader = new ManagerHeader(driver);
+    public HospitalsPage() {
+        managerHeader = new ManagerHeader();
     }
 }
