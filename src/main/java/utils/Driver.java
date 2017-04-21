@@ -21,6 +21,7 @@ public class Driver {
 
     private static WebDriver driver;
 
+
     public static void initialization(){
         ProfilesIni profile = new ProfilesIni();
         FirefoxProfile ffProfile = profile.getProfile(FIREFOX_PROFILE_NAME);
