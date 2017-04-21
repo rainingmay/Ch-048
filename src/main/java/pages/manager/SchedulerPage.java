@@ -22,7 +22,7 @@ public class SchedulerPage extends BasePage {
     private static final String DEFAULT_ENDING_HOUR = "23 00";
 
     public ManagerHeader managerHeader;
-    @FindBy(xpath = "/html/body/section/div/div/div[3]/div/form/div[2]/p")
+    @FindBy(css = "div.pull-left")
     private WebElement doctorNameLabel;
 
     @FindBy(css = "label[for=\"workWeekSize\"]")
@@ -96,10 +96,7 @@ public class SchedulerPage extends BasePage {
     @FindAll(@FindBy(css = "div.dhx_cal_event"))
     private List<WebElement> events;
 
-//    @FindBy(css= "div.dhx_cal_editor")
-//    private WebElement eventInput;
-
-    @FindBy(xpath = "//textarea[contains(@class,'editor')]")
+    @FindBy(css = "textarea.dhx_cal_editor")
     private WebElement eventInput;
 
     @FindBy(css = "div.dhx_menu_icon.icon_save")
@@ -138,7 +135,7 @@ public class SchedulerPage extends BasePage {
     @FindBy(css = "div.dhx_scale_hour:last-child")
     public WebElement endHour;
 
-    @FindBy(xpath = "/html/body/div[3]/div[2]/div[1]/div")
+    @FindBy(css = "div.dhtmlx_ok_button")
     public WebElement eventDeleteConfirmation;
 
     @FindBy(css = "div.dhx_event_resize")
@@ -158,38 +155,25 @@ public class SchedulerPage extends BasePage {
     public List<WebElement> notActiveRows;
 
 
-    public WebElement getColumn(int i){
-        if(i< tableColumns.size()-tableIgnoredColumns.size()) {
-            WebElement element = Driver.instance().findElement(By.cssSelector("div.dhx_scale_holder:nth-child(" + i + ")"));
-            return element;
-        }
-        return null;
-    }
 
-   public void nextDayClick(){
+   public void nextButtonClick(){
         while(notActiveRows.size()>0){
             BrowserWrapper.waitUntilElementVisible(nextButton);
             nextButton.click();
         }
    }
 
-    public void nextButtonClick()  {
-       BrowserWrapper.waitUntilElementVisible(nextButton);
-        nextButton.click();
-    }
-    public void setAppointment(String text, int column)  {
-
-        BrowserWrapper.doubleClick(getColumn(column));
-        BrowserWrapper.waitUntilElementVisible(eventInput);
-        eventInput.sendKeys(text);
-        BrowserWrapper.waitUntilElementVisible(saveButton);
-        saveEvent.click();
-
-    }
-    public void setAppointment(String text)  {
-
+    public void createAppointment(String text)  {
+       nextButtonClick();
        inputEvent(text);
        saveEventClick();
+       saveButtonClick();
+    }
+    public void createAppointmentWithouSave(String text)  {
+        nextButtonClick();
+        inputEvent(text);
+        saveEventClick();
+
     }
 
     public boolean checkMiniCalendarVisibility(){
@@ -203,8 +187,6 @@ public class SchedulerPage extends BasePage {
     }
 
 
-
-
     public void saveEventClick(){
         BrowserWrapper.waitUntilElementVisible(saveButton);
         saveEvent.click();
@@ -214,15 +196,19 @@ public class SchedulerPage extends BasePage {
         events.get(0).findElement(By.cssSelector("div.dhx_title")).click();
     }
     public void deleteEventButtonClick(){
+        callEventContext();
         eventDelete.click();
         BrowserWrapper.waitUntilElementClickable(eventDeleteConfirmation);
         eventDeleteConfirmation.click();
+        saveButtonClick();
     }
 
     public void editEventText(String text){
+        callEventContext();
         editEvent.click();
         eventInput.sendKeys(text);
         saveEvent.click();
+        saveButtonClick();
     }
 
 
@@ -261,7 +247,7 @@ public class SchedulerPage extends BasePage {
     }
 
     public void setDayDuration(String begin, String end){
-        BrowserWrapper.waitUntilElementClickable(workDayBeginAtSelector);
+        BrowserWrapper.waitUntilElementVisible(workDayBeginAtSelector);
         BrowserWrapper.selectDropdown(workDayBeginAtSelector, begin);
         BrowserWrapper.waitUntilElementClickable(workDayEndAtSelector);
         BrowserWrapper.selectDropdown(workDayEndAtSelector, end);
@@ -396,6 +382,7 @@ public class SchedulerPage extends BasePage {
     public void cancelButtonClick(){
         BrowserWrapper.waitUntilElementVisible(cancelEvent);
         cancelEvent.click();
+        saveButtonClick();
     }
     public void workDayBeginAtSelector(String value){
         BrowserWrapper.selectDropdown(workDayBeginAtSelector, value);
