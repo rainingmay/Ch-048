@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class BrowserWrapper {
 
-    private static WebDriverWait wait = new WebDriverWait(Driver.instance(),20,250);
+    private static WebDriverWait wait = new WebDriverWait(Driver.instance(),25,250);
 
 
 
@@ -45,6 +45,10 @@ public class BrowserWrapper {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    public static void waitUntilElementLocated(By by) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+    }
+
 
     public static void waitUntilElementIsPresent(By locator) {
         wait.until(ExpectedConditions.presenceOfElementLocated(locator));
@@ -74,18 +78,18 @@ public class BrowserWrapper {
         Driver.instance().navigate().refresh();
     }
 
-    public static boolean isAlertPresent()
-    {
-        try
-        {
-            Driver.instance().switchTo().alert();
-            return true;
+    public static boolean isAlertPresent(){
+        boolean foundAlert;
+        WebDriverWait wait = new WebDriverWait(Driver.instance(), 2);
+        try {
+            wait.until(ExpectedConditions.alertIsPresent());
+            foundAlert = true;
+        } catch (TimeoutException e) {
+            foundAlert = false;
         }
-        catch (NoAlertPresentException Ex)
-        {
-            return false;
-        }
+        return foundAlert;
     }
+
     public static void conformAlert(){
         waitUntilAlertIsPresent();
         Alert alert = Driver.instance().switchTo().alert();
