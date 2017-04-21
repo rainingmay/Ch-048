@@ -19,9 +19,6 @@ import java.utils.BaseTest;
 public class AddUserPageTest extends BaseTest {
 
 
-
-
-
     public static final String NEWUSERLOGIN = "ut5estadmin182@gmail.com.ua";
     public static final String NEWUSERPASSWORD = "Q12345w";
     public static final String NEWUSERROLE = "ADMIN";
@@ -32,23 +29,22 @@ public class AddUserPageTest extends BaseTest {
 
     @BeforeMethod
     private void beforeMethod() throws InterruptedException {
-      //  this.driver = BrowserWrapper.browserInitialization();
+        //  this.driver = BrowserWrapper.browserInitialization();
         BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
     }
 
 
-
-@Test(groups = { "Functional" })
-    public void isElementsPresentAddUserTest() throws Exception{
-    BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
-    AddUserPage addUserPage = new AddUserPage();
-    BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
-    addUserPage = addUserPage.header.goToAddUserPage();
-        try{
+    @Test(groups = {"Functional"})
+    public void isElementsPresentAddUserTest() throws Exception {
+        BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
+        AddUserPage addUserPage = new AddUserPage();
+        BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
+        addUserPage = addUserPage.header.goToAddUserPage();
+        try {
             BrowserWrapper.waitForPage();
             addUserPage.isPageReady();
-        }catch (Exception e){
+        } catch (Exception e) {
 
             throw new AssertionError(e.getMessage());
         }
@@ -57,7 +53,7 @@ public class AddUserPageTest extends BaseTest {
     }
 
 
-    @Test(groups = { "Other" })
+    @Test(groups = {"Other"})
     public void successfulAddNewUserTest() throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AllUsersPage allUsersPage = new AllUsersPage();
@@ -66,13 +62,13 @@ public class AddUserPageTest extends BaseTest {
         addUserPage.addNewUser(NEWUSERLOGIN, NEWUSERPASSWORD, NEWUSERROLE);
 
         String actualCreatedLableText = allUsersPage.createdLabel.getText();
-        String expectedCreatedLabelText = NEWUSERLOGIN + SUCCEFULYCREATEDUSERTEXT ;  //" successfully registered!";
+        String expectedCreatedLabelText = NEWUSERLOGIN + SUCCEFULYCREATEDUSERTEXT;  //" successfully registered!";
 
-        Assert.assertEquals(actualCreatedLableText,expectedCreatedLabelText);
+        Assert.assertEquals(actualCreatedLableText, expectedCreatedLabelText);
 
     }
 
-    @Test(groups = { "Functional" })
+    @Test(groups = {"Functional"})
     public void noRoleChangedAddNewUserTest() throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage();
@@ -83,11 +79,11 @@ public class AddUserPageTest extends BaseTest {
         String actualErrorRolesLabelText = addUserPage.userRolesErrorLabel.getText();
         String expectedErrorRolesLabelText = "This field is required.";
 
-        Assert.assertEquals(actualErrorRolesLabelText,expectedErrorRolesLabelText);
+        Assert.assertEquals(actualErrorRolesLabelText, expectedErrorRolesLabelText);
 
     }
 
-    @Test(groups = { "Functional" })
+    @Test(groups = {"Functional"})
     public void noPasswordConfirmationAddNewUserTest() throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage();
@@ -98,35 +94,35 @@ public class AddUserPageTest extends BaseTest {
         String actualErrorPasswordConfirmationLabelText = addUserPage.confirmPasswordErrorLabel.getText();
         String expectedErrorPasswordConfirmationText = "This field is required.";
 
-        Assert.assertEquals(actualErrorPasswordConfirmationLabelText,expectedErrorPasswordConfirmationText);
+        Assert.assertEquals(actualErrorPasswordConfirmationLabelText, expectedErrorPasswordConfirmationText);
 
     }
 
     @DataProvider(name = "validInformation")
     public static Object[][] emailDetails() {
 
-        return new Object[][] {
-                { "st1esdteh45tonemal@mail.ru", NEWUSERPASSWORD },
-                { "st1ewersttwomail@com.ru", NEWUSERPASSWORD },
+        return new Object[][]{
+                {"st1esdteh45tonemal@mail.ru", NEWUSERPASSWORD},
+                {"st1ewersttwomail@com.ru", NEWUSERPASSWORD},
                 {"st1estthrdfgdeemail@com.cv.ua", NEWUSERPASSWORD},
-                {"sn1ewon2etest1l@is.low.pass.case",NEWUSERPASSWORD}
+                {"sn1ewon2etest1l@is.low.pass.case", NEWUSERPASSWORD}
         };
 
     }
 
-    @DataProvider(name="notValidEmails")
-    public static Object [] [] notValidEmailDetails() {
-        return  new Object[][] {
-                {"@gmail.com",NEWUSERPASSWORD },
-                {"sd@sdj",NEWUSERPASSWORD},
-                {"aa@sd.",NEWUSERPASSWORD},
-                {"skdjw@.c",NEWUSERPASSWORD},
+    @DataProvider(name = "notValidEmails")
+    public static Object[][] notValidEmailDetails() {
+        return new Object[][]{
+                {"@gmail.com", NEWUSERPASSWORD},
+                {"sd@sdj", NEWUSERPASSWORD},
+                {"aa@sd.", NEWUSERPASSWORD},
+                {"skdjw@.c", NEWUSERPASSWORD},
                 {"sd)@.com.ua", NEWUSERPASSWORD},
                 {"sdd@@com.ua", NEWUSERPASSWORD}
         };
     }
 
-    @DataProvider(name="notValidPasswords")
+    @DataProvider(name = "notValidPasswords")
     public static Object[][] notValidPasswordsDetails() {
         return new Object[][]{
                 {"bnm@mail.ru", "a"},
@@ -139,31 +135,31 @@ public class AddUserPageTest extends BaseTest {
     }
 
 
-    @Test(groups = { "Other" })
-    public void noRequiredEmailTest() throws Exception{
-       // BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
+    @Test(groups = {"Other"})
+    public void noRequiredEmailTest() throws Exception {
+        // BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage();
         addUserPage = addUserPage.header.goToAddUserPage();
         addUserPage.addNewUser("", NEWUSERPASSWORD, NEWUSERROLE);
 
         String expectedEmailErrorLabelText = "This field is required.";
-        String actualEmailErrorLabel = addUserPage.emailErrorLabel.getText() ;
+        String actualEmailErrorLabel = addUserPage.emailErrorLabel.getText();
 
-        Assert.assertEquals(expectedEmailErrorLabelText , actualEmailErrorLabel);
+        Assert.assertEquals(expectedEmailErrorLabelText, actualEmailErrorLabel);
         System.out.println("Email field is required but empty");
     }
 
     @Test
-    public void noRequiredPasswordTest() throws Exception{
+    public void noRequiredPasswordTest() throws Exception {
         // BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage();
         addUserPage = addUserPage.header.goToAddUserPage();
         addUserPage.addNewUser(NEWUSERLOGIN, "", NEWUSERROLE);
 
         String expectedPasswordErrorLabelText = "This field is required.";
-        String actualPasswordErrorLabel = addUserPage.passwordErrorLabel.getText() ;
+        String actualPasswordErrorLabel = addUserPage.passwordErrorLabel.getText();
 
-        Assert.assertEquals(expectedPasswordErrorLabelText , actualPasswordErrorLabel);
+        Assert.assertEquals(expectedPasswordErrorLabelText, actualPasswordErrorLabel);
         System.out.println("Password field is required but empty");
     }
 
@@ -178,10 +174,9 @@ public class AddUserPageTest extends BaseTest {
         String actualCreatedLabelText = allUsersPage.createdLabel.getText();
         String expectedCreatedLabelText = addUserName + SUCCEFULYCREATEDUSERTEXT; //" successfully registered!";
 
-        Assert.assertEquals(actualCreatedLabelText,expectedCreatedLabelText);
+        Assert.assertEquals(actualCreatedLabelText, expectedCreatedLabelText);
 
     }
-
 
 
     @Test(dataProvider = "notValidEmails")
@@ -192,12 +187,10 @@ public class AddUserPageTest extends BaseTest {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         addUserPage.addNewUser(addUserName, addUserPassword, NEWUSERROLE);
 
-        String actualEmaiErrorLabelText = addUserPage.emailErrorLabel.getText() ;
-        String expectedEmailErrorLabelText ="";
+        String actualEmaiErrorLabelText = addUserPage.emailErrorLabel.getText();
+        String expectedEmailErrorLabelText = "";
 
-        Assert.assertNotEquals(actualEmaiErrorLabelText,expectedEmailErrorLabelText);
-
-
+        Assert.assertNotEquals(actualEmaiErrorLabelText, expectedEmailErrorLabelText);
 
 
     }
@@ -211,24 +204,16 @@ public class AddUserPageTest extends BaseTest {
         addUserPage.addNewUser(addUserName, addUserPassword, NEWUSERROLE);
 
         String expectedPasswordErrorLabelText = "";
-        String actualPasswordErrorLabelText = addUserPage.passwordErrorLabel.getText() ;
+        String actualPasswordErrorLabelText = addUserPage.passwordErrorLabel.getText();
 
-        Assert.assertNotEquals(expectedPasswordErrorLabelText,actualPasswordErrorLabelText);
+        Assert.assertNotEquals(expectedPasswordErrorLabelText, actualPasswordErrorLabelText);
     }
 
     @AfterMethod
-    public void afterMethod(){
+    public void afterMethod() {
         Driver.instance().manage().deleteAllCookies();
         BaseNavigation.logout();
     }
-
-
-
-
-
-
-
-
 
 
 }

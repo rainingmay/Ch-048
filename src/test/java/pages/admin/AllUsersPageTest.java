@@ -19,8 +19,6 @@ public class AllUsersPageTest extends BaseTest {
 
     @BeforeMethod
     public void before() {
-        //Why you do this here?
-        //WhatEver?
         Driver.initialization();
     }
 
