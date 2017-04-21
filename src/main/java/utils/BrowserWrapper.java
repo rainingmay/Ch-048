@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class BrowserWrapper {
 
-    private static WebDriverWait wait = new WebDriverWait(Driver.instance(),20,250);
+    private static WebDriverWait wait = new WebDriverWait(Driver.instance(),10,250);
 
 
 

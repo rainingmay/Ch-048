@@ -151,7 +151,7 @@ public class AddUserPageTest extends BaseTest {
 
     @Test
     public void noRequiredPasswordTest() throws Exception {
-        // BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
+        BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage();
         addUserPage = addUserPage.header.goToAddUserPage();
         addUserPage.addNewUser(NEWUSERLOGIN, "", NEWUSERROLE);
@@ -181,7 +181,7 @@ public class AddUserPageTest extends BaseTest {
 
     @Test(dataProvider = "notValidEmails")
     public void notValidEmailsAddNewUserTest(String addUserName, String addUserPassword) throws Exception {
-        BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
+       // BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage();
         addUserPage = addUserPage.header.goToAddUserPage();
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
