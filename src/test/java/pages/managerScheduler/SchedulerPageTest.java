@@ -84,9 +84,8 @@ public class SchedulerPageTest extends BaseTest {
 
     @Test(dataProvider = "eventCreation")
     public void testEventCreation(String actualText, String expectedText){
-        schedulerPage.nextButtonClick();
-        schedulerPage.setAppointment(actualText);
-        schedulerPage.saveButtonClick();
+
+        schedulerPage.createAppointment(actualText);
         BaseNavigation.logout();
         HospitalsPage hospitalsPage =BaseNavigation.loginAsManager( MANAGER_LOGIN, MANAGER_PASSWORD);
         schedulerPage = hospitalsPage.scheduleButtonClick(1);
@@ -96,14 +95,10 @@ public class SchedulerPageTest extends BaseTest {
 
     @Test
     public void testEventDeletion(){
-        schedulerPage.nextButtonClick();
-        schedulerPage.setAppointment(TEST_APPOINTMENT_TEXT);
-        schedulerPage.saveButtonClick();
+        schedulerPage.createAppointment(TEST_APPOINTMENT_TEXT);
         BrowserWrapper.refreshPage();
         schedulerPage.nextButtonClick();
-        schedulerPage.callEventContext();
         schedulerPage.deleteEventButtonClick();
-        schedulerPage.saveButtonClick();
         BaseNavigation.logout();
         HospitalsPage hospitalsPage =BaseNavigation.loginAsManager(MANAGER_LOGIN, MANAGER_PASSWORD);
         schedulerPage = hospitalsPage.scheduleButtonClick(1);
@@ -113,14 +108,10 @@ public class SchedulerPageTest extends BaseTest {
 
     @Test
     public void testEventEdition(){
-        schedulerPage.nextButtonClick();
-        schedulerPage.setAppointment(TEST_APPOINTMENT_TEXT);
-        schedulerPage.saveButtonClick();
+        schedulerPage.createAppointment(TEST_APPOINTMENT_TEXT);
         BrowserWrapper.refreshPage();
         schedulerPage.nextButtonClick();
-        schedulerPage.callEventContext();
         schedulerPage.editEventText(TEST_EDITABLE_APPOINTMENT_TEXT);
-        schedulerPage.saveButtonClick();
         BaseNavigation.logout();
         HospitalsPage hospitalsPage =BaseNavigation.loginAsManager(MANAGER_LOGIN, MANAGER_PASSWORD);
         schedulerPage = hospitalsPage.scheduleButtonClick(1);
@@ -129,10 +120,8 @@ public class SchedulerPageTest extends BaseTest {
     }
     @Test
     public void testEventCancel(){
-        schedulerPage.nextButtonClick();
         schedulerPage.inputEvent(TEST_APPOINTMENT_TEXT);
         schedulerPage.cancelButtonClick();
-        schedulerPage.saveButtonClick();
         BrowserWrapper.refreshPage();
         schedulerPage.nextButtonClick();
         Assert.assertEquals( schedulerPage.getEvents().size(), 0);
@@ -142,23 +131,19 @@ public class SchedulerPageTest extends BaseTest {
     @Test(dataProvider = "eventCreation")
     public void testCreateEventDayTab(String actualText, String expectedText) {
         schedulerPage.dayTabButtonClick();
-        schedulerPage.nextDayClick();
-        schedulerPage.setAppointment(actualText);
-        schedulerPage.saveButtonClick();
+        schedulerPage.createAppointment(actualText);
         BaseNavigation.logout();
         HospitalsPage hospitalsPage =BaseNavigation.loginAsManager(MANAGER_LOGIN, MANAGER_PASSWORD);
         schedulerPage = hospitalsPage.scheduleButtonClick(1);
         schedulerPage.dayTabButtonClick();
-        schedulerPage.nextDayClick();
+        schedulerPage.nextButtonClick();
         Assert.assertTrue( schedulerPage.getEvents().size() > 0 && schedulerPage.getEvents().contains(expectedText));
     }
 
     @Test
     public void testCreateEventMonthTab(){
         schedulerPage.monthTabButtonClick();
-        schedulerPage.nextButtonClick();
         schedulerPage.createEventCalendar(TEST_APPOINTMENT_TEXT);
-        schedulerPage.saveButtonClick();
         BaseNavigation.logout();
         HospitalsPage hospitalsPage =BaseNavigation.loginAsManager(MANAGER_LOGIN, MANAGER_PASSWORD);
         schedulerPage = hospitalsPage.scheduleButtonClick(1);
@@ -189,7 +174,7 @@ public class SchedulerPageTest extends BaseTest {
     @Test
     public void testAlertIfNotSaved(){
         schedulerPage.nextButtonClick();
-        schedulerPage.setAppointment(TEST_APPOINTMENT_TEXT);
+        schedulerPage.createAppointmentWithouSave(TEST_APPOINTMENT_TEXT);
         BrowserWrapper.refreshPage();
         boolean present = BrowserWrapper.isAlertPresent();
         BrowserWrapper.conformAlert();
