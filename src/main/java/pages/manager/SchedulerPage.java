@@ -9,7 +9,6 @@ import org.openqa.selenium.support.FindBy;
 import pages.allUsers.BasePage;
 import pages.headers.headersByRole.ManagerHeader;
 import utils.BrowserWrapper;
-import utils.Driver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +78,7 @@ public class SchedulerPage extends BasePage {
 
 
     @FindBy(css = "div.dhx_scale_holder_now")
-    private WebElement nowColumb;
+    private WebElement nowColumn;
 
     @FindBy(css = "div.dhx_scale_holder")
     private WebElement tableColumn;
@@ -87,8 +86,8 @@ public class SchedulerPage extends BasePage {
     @FindAll(@FindBy(css = "div.dhx_scale_ignore"))
     private List<WebElement> tableIgnoredColumns;
 
-    @FindAll(@FindBy(className = "dhx_scale_hour"))
-    private List<WebElement> tabelRows;
+    @FindAll(@FindBy(className = "div.dhx_scale_hour"))
+    private List<WebElement> tableRows;
 
     @FindAll(@FindBy(css = "div.dhx_body"))
     private List<WebElement> eventBodys;
@@ -169,7 +168,7 @@ public class SchedulerPage extends BasePage {
        saveEventClick();
        saveButtonClick();
     }
-    public void createAppointmentWithouSave(String text)  {
+    public void createAppointmentWithoutSave(String text)  {
         nextButtonClick();
         inputEvent(text);
         saveEventClick();
@@ -213,10 +212,12 @@ public class SchedulerPage extends BasePage {
 
 
     public void createEventCalendar(String text){
+        nextButtonClick();
         BrowserWrapper.doubleClick(monthElement);
         BrowserWrapper.waitUntilElementVisible(detailedEditorField);
         detailedEditorField.sendKeys(text);
         saveDetailedChanges.click();
+        saveButtonClick();
     }
 
 
@@ -402,7 +403,7 @@ public class SchedulerPage extends BasePage {
     }
 
     public void dayTabButtonClick(){
-        BrowserWrapper.waitUntilElementVisible(dayTabButton);
+        BrowserWrapper.waitUntilElementClickable(dayTabButton);
         dayTabButton.click();
     }
 
@@ -429,7 +430,7 @@ public class SchedulerPage extends BasePage {
     }
 
     public boolean checkTodayPresence(){
-       return BrowserWrapper.isElementPresent(nowColumb);
+       return BrowserWrapper.isElementPresent(nowColumn);
     }
 
 
