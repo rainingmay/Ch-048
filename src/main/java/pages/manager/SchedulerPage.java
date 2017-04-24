@@ -180,7 +180,7 @@ public class SchedulerPage extends BasePage {
     }
 
     public void inputEvent(String text) {
-        BrowserWrapper.doubleClick(tableColumn);
+        BrowserWrapper.doubleClickJs(tableColumn);
         BrowserWrapper.waitUntilElementVisible(eventInput);
         eventInput.sendKeys(text);
     }
@@ -213,7 +213,7 @@ public class SchedulerPage extends BasePage {
 
     public void createEventCalendar(String text){
         nextButtonClick();
-        BrowserWrapper.doubleClick(monthElement);
+        BrowserWrapper.doubleClickJs(monthElement);
         BrowserWrapper.waitUntilElementVisible(detailedEditorField);
         detailedEditorField.sendKeys(text);
         saveDetailedChanges.click();

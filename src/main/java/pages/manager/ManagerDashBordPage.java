@@ -1,9 +1,9 @@
 package pages.manager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
 import pages.allUsers.BasePage;
 import pages.headers.headersByRole.ManagerHeader;
 import utils.BrowserWrapper;
@@ -98,9 +98,9 @@ public class ManagerDashBordPage extends BasePage {
     //popUpForms
 
     @FindBy(xpath = "//*[@id=\"detailForm\"]/h1")
-    private WebElement formInformationAboutDoctorLabel;
+    private WebElement formMainTextLabel;
 
-    @FindBy(id="firstName")
+        @FindBy(css="#detailForm #firstName")
     private WebElement formFirstNameInput;
 
     @FindBy(id="lastName")
@@ -170,9 +170,15 @@ public class ManagerDashBordPage extends BasePage {
     @FindBy(tagName = "tbody")
     private WebElement tableBody;
 
+    @FindBy(css = "div#deleteDoctorModal h3")
+    public WebElement deleteHeader;
+
+    public String information = "INFORMATION ABOUT DOCTOR";
+    public String edit = "EDIT DOCTOR";
     public void selectDoctorPerPage(String value) {
         BrowserWrapper.selectDropdown(doctorPerPageSelector, value);
     }
+
     public void selectSpecialization(String value) {
         BrowserWrapper.selectDropdown(specializationSelector, value);
     }
@@ -187,13 +193,13 @@ public class ManagerDashBordPage extends BasePage {
     }
 
     public void searchButtonClick(){
+        BrowserWrapper.waitUntilElementVisible(searchButton);
         searchButton.click();
-        BrowserWrapper.sleep(1);
+
     }
 
     public void clearButtonClick(){
-        clearButton.click();
-        BrowserWrapper.sleep(1);
+       BrowserWrapper.clickWithStaleException(clearButton);
     }
 
     public DepartmentsPage labaratoryButtonClick(){
@@ -212,23 +218,64 @@ public class ManagerDashBordPage extends BasePage {
     }
 
     public void sortByEmailButtonClick(){
+        BrowserWrapper.waitUntilElementVisible(sortByEmailButton);
         sortByEmailButton.click();
+      //  BrowserWrapper.sleep(1);
     }
 
     public void sortByFirstNameButtonClick(){
+        BrowserWrapper.waitUntilElementVisible(sortByFirstNameButton);
         sortByFirstNameButton.click();
+      //  BrowserWrapper.sleep(1);
     }
 
     public void sortByLastNameButtonClick(){
+        BrowserWrapper.waitUntilElementVisible(sortByLastNameButton);
         sortByLastNameButton.click();
+    //    BrowserWrapper.sleep(1);
     }
 
     public void sortBySpecializationButtonClick(){
+        BrowserWrapper.waitUntilElementVisible(sortBySpecializationButton);
+
         sortBySpecializationButton.click();
+     //   BrowserWrapper.sleep(1);
     }
 
     public void sortByCategoryButtonClick(){
+        BrowserWrapper.waitUntilElementVisible(sortByCategoryButton);
         sortByCategoryButton.click();
+     //   BrowserWrapper.sleep(1);
+    }
+
+    public void sortByEmailDoubleButtonClick(){
+        BrowserWrapper.waitUntilElementVisible(sortByEmailButton);
+        BrowserWrapper.tripleClick(sortByEmailButton);
+        BrowserWrapper.sleep(1);
+    }
+
+    public void sortByFirstNameDoubleButtonClick(){
+        BrowserWrapper.waitUntilElementVisible(sortByFirstNameButton);
+        BrowserWrapper.tripleClick(sortByFirstNameButton);
+        BrowserWrapper.sleep(1);
+    }
+
+    public void sortByLastNameDoubleButtonClick(){
+        BrowserWrapper.waitUntilElementVisible(sortByLastNameButton);
+        BrowserWrapper.tripleClick(sortByLastNameButton);
+        BrowserWrapper.sleep(1);
+    }
+
+    public void sortBySpecializationDoubleButtonClick(){
+        BrowserWrapper.waitUntilElementVisible(sortBySpecializationButton);
+        BrowserWrapper.tripleClick(sortBySpecializationButton);
+        BrowserWrapper.sleep(1);
+    }
+
+    public void sortByCategoryDoubleButtonClick(){
+        BrowserWrapper.waitUntilElementVisible(sortByCategoryButton);
+        BrowserWrapper.tripleClick(sortByCategoryButton);
+        BrowserWrapper.sleep(1);
     }
 
     public String getValue(String row, String colName){
@@ -266,23 +313,87 @@ public class ManagerDashBordPage extends BasePage {
         String td = tdFinder(colName);
         ArrayList<String> list = new ArrayList<>();
 
-        for( WebElement webElement : Driver.instance().findElements(By.cssSelector("tbody tr td:nth-child("+ td +")"))){
-            list.add(webElement.getText());
+        String text = null;
+        List<WebElement> elements = Driver.instance().findElements(By.cssSelector("tbody tr td:nth-child("+ td +")"));
+
+        for( WebElement webElement : elements){
+            for(int i = 0; i < 5; i++) {
+                try {
+                    text = webElement.getText();
+                    break;
+                } catch (StaleElementReferenceException e) {
+                }
+            }
+            if(text!=null) {
+                list.add(text);
+            }
         }
         return list;
     }
 
+
+    public boolean isDeleteConfirmationPresent(){
+        return BrowserWrapper.isElementPresent(deleteHeader);
+    }
+
+
+    public String getTestStale(WebElement element){
+        String st = null;
+        for (int i = 0 ; i<5; i++) {
+            try {
+                st = element.getText();
+                break;
+            }catch (StaleElementReferenceException e) {
+            }
+        }
+        return st;
+    }
+
+    public boolean checkTitleDetails(){
+        return getTestStale(formMainTextLabel).equals(information);
+    }
+
+    public boolean checkTitleEdit(){
+        return getTestStale(formMainTextLabel).equals(edit);
+    }
+
+    public String getDetailedName(){
+        BrowserWrapper.waitUntilElementVisible(formFirstNameInput);
+        return formFirstNameInput.getAttribute("value");
+    }
+
     public int getNumberOfRows(){
-        return tableBody.findElements(By.tagName("tr")).size();
+        int number = 0;
+        for(int i = 0; i<5; i++){
+
+            try{
+                number = tableBody.findElements(By.tagName("tr")).size();
+                break;
+            }catch (StaleElementReferenceException e){
+            }
+        }
+        return number;
     }
 
-    public void viewButtonClick(int i) {
-        Driver.instance().findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #viewUser")).click();
+    public void viewButtonClick(String name) {
+        List<WebElement> tableRows= Driver.instance().findElements(By.tagName("tr"));
+        for (WebElement element : tableRows){
+            if(element.getText().contains(name)){
+                element.findElement(By.id("viewUser")).click();
+            }
+        }
     }
 
-    public void editButtonClick(int i) {
-        Driver.instance().findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #ediUser")).click();
+    public void editButtonClick(String name) {
+        List<WebElement> tableRows= Driver.instance().findElements(By.tagName("tr"));
+        for (WebElement element : tableRows){
+            if(element.getText().contains(name)){
+                element.findElement(By.id("ediUser")).click();
+            }
+        }
     }
+
+
     public SchedulerPage scheduleButtonClick(String name) {
         List<WebElement> tableRows= Driver.instance().findElements(By.tagName("tr"));
         for (WebElement element : tableRows){
@@ -295,9 +406,15 @@ public class ManagerDashBordPage extends BasePage {
          return new SchedulerPage();
     }
 
-    public void deleteButtonClick(int i) {
-        Driver.instance().findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #deleteDoctor")).click();
+    public void deleteButtonClick(String name) {
+        List<WebElement> tableRows= Driver.instance().findElements(By.tagName("tr"));
+        for (WebElement element : tableRows){
+            if(element.getText().contains(name)){
+                element.findElement(By.id("deleteDoctor")).click();
+            }
+        }
     }
+
 
 
 
