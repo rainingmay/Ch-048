@@ -2,13 +2,16 @@ package pages.headers;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import pages.allUsers.*;
+import utils.Driver;
 
 
 /**
  * Created by Evgen on 05.04.2017.
  */
 public class BaseHeader extends BasePage {
+
 
 
     @FindBy(className = "img-responsive logo")

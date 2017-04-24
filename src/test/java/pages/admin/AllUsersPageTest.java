@@ -1,10 +1,20 @@
 package pages.admin;
 
 
+import org.dbunit.IDatabaseTester;
+import org.dbunit.JdbcDatabaseTester;
+import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.xml.FlatXmlDataSet;
+import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
+import org.dbunit.operation.DatabaseOperation;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import utils.*;
 import utils.databaseutil.UserDAO;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.*;
 
 /**
@@ -12,19 +22,54 @@ import java.util.*;
  */
 public class AllUsersPageTest extends BaseTest {
 
-    @BeforeMethod
+    final String driverClass = "org.postgresql.Driver";
+    final String databaseUrl = "jdbc:postgresql://localhost:5432/hospital";
+    final String username = "postgres";
+    final String password = "postgres";
+
+    IDatabaseTester databaseTester;
+    IDataSet dataSet ;
+
+
+
+    @BeforeTest
     public void before() throws Exception {
-        Driver.initialization();
+
+        FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
+
+        dataSet = builder.build(new File("hospitalDataSet.xml"));
+        databaseTester = new JdbcDatabaseTester(driverClass, databaseUrl, username, password);
+        databaseTester.setDataSet(dataSet);
+        databaseTester.setSetUpOperation(DatabaseOperation.NONE);
+        databaseTester.setTearDownOperation(DatabaseOperation.CLEAN_INSERT);
+
+    }
+
+    @BeforeMethod
+    public void beforeMethod() {
+        try {
+            databaseTester.onSetup();
+            Driver.initialization();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @AfterMethod
     public void after() {
         try {
+            databaseTester.onTearDown();
             BaseNavigation.logout();
             Driver.close();
         } catch (Exception e) {
+            e.printStackTrace();
             Driver.close();
         }
+    }
+
+    @Test
+    public void test() {
+        Assert.assertEquals(true, true);
     }
 
 

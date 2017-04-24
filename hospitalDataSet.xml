@@ -1,0 +1,1844 @@
+<?xml version="1.0" ?>
+    <dataset>
+        <hospital>
+            <admintokenconfig>
+
+                <row>
+                    <id>1</id>
+                    <token>RESET_PASSWORD_TOKEN_EXPIRATION</token>
+                    <value>25</value>
+                </row>
+
+                <row>
+                    <id>2</id>
+                    <token>VERIFICATION_TOKEN_EXPIRATION</token>
+                    <value>36</value>
+                </row>
+
+                <row>
+                    <id>3</id>
+                    <token>REMEMBER_ME_TOKEN_EXPIRATION</token>
+                    <value>48</value>
+                </row>
+
+                <row>
+                    <id>4</id>
+                    <token>FILE_MAX_SIZE</token>
+                    <value>204800</value>
+                </row>
+
+            </admintokenconfig>
+
+            <appointment>
+
+            </appointment>
+
+            <carditem>
+
+                <row>
+                    <id>1000</id>
+                    <complaint>qwerhj</complaint>
+                    <date>2017-03-29T11:51:00.343</date>
+                    <prescription>sdfghj</prescription>
+                    <result>ertfgh</result>
+                    <patientcard_id>4</patientcard_id>
+                    <doctorinfo_id>3</doctorinfo_id>
+                </row>
+
+            </carditem>
+
+            <department>
+
+                <row>
+                    <id>1</id>
+                    <hospitals_id>1</hospitals_id>
+                    <name_id>1</name_id>
+                </row>
+
+                <row>
+                    <id>2</id>
+                    <hospitals_id>1</hospitals_id>
+                    <name_id>2</name_id>
+                </row>
+
+                <row>
+                    <id>3</id>
+                    <hospitals_id>1</hospitals_id>
+                    <name_id>3</name_id>
+                </row>
+
+                <row>
+                    <id>4</id>
+                    <hospitals_id>2</hospitals_id>
+                    <name_id>1</name_id>
+                </row>
+
+                <row>
+                    <id>5</id>
+                    <hospitals_id>2</hospitals_id>
+                    <name_id>2</name_id>
+                </row>
+
+                <row>
+                    <id>6</id>
+                    <hospitals_id>5</hospitals_id>
+                    <name_id>3</name_id>
+                </row>
+
+                <row>
+                    <id>7</id>
+                    <hospitals_id>3</hospitals_id>
+                    <name_id>1</name_id>
+                </row>
+
+                <row>
+                    <id>8</id>
+                    <hospitals_id>3</hospitals_id>
+                    <name_id>2</name_id>
+                </row>
+
+                <row>
+                    <id>47</id>
+                    <description></description>
+                    <hospitals_id>3</hospitals_id>
+                    <name_id>3</name_id>
+                </row>
+
+                <row>
+                    <id>56</id>
+                    <description>sdfsdfsdfdf</description>
+                    <hospitals_id>2</hospitals_id>
+                    <name_id>4</name_id>
+                </row>
+
+            </department>
+
+            <department_doctorinfo>
+
+                <row>
+                    <departments_id>1</departments_id>
+                    <doctors_id>1</doctors_id>
+                </row>
+
+                <row>
+                    <departments_id>1</departments_id>
+                    <doctors_id>2</doctors_id>
+                </row>
+
+                <row>
+                    <departments_id>2</departments_id>
+                    <doctors_id>3</doctors_id>
+                </row>
+
+                <row>
+                    <departments_id>2</departments_id>
+                    <doctors_id>4</doctors_id>
+                </row>
+
+                <row>
+                    <departments_id>3</departments_id>
+                    <doctors_id>5</doctors_id>
+                </row>
+
+                <row>
+                    <departments_id>4</departments_id>
+                    <doctors_id>6</doctors_id>
+                </row>
+
+                <row>
+                    <departments_id>5</departments_id>
+                    <doctors_id>7</doctors_id>
+                </row>
+
+                <row>
+                    <departments_id>6</departments_id>
+                    <doctors_id>8</doctors_id>
+                </row>
+
+                <row>
+                    <departments_id>7</departments_id>
+                    <doctors_id>9</doctors_id>
+                </row>
+
+                <row>
+                    <departments_id>8</departments_id>
+                    <doctors_id>10</doctors_id>
+                </row>
+
+            </department_doctorinfo>
+
+            <departmentname>
+
+                <row>
+                    <id>1</id>
+                    <en>Therapistician</en>
+                    <ua>Терапевтичне</ua>
+                    <imagepath>service1.png</imagepath>
+                </row>
+
+                <row>
+                    <id>2</id>
+                    <en>Diagnostician</en>
+                    <ua>Діагностичне</ua>
+                    <imagepath>service2.png</imagepath>
+                </row>
+
+                <row>
+                    <id>3</id>
+                    <en>Oncologian</en>
+                    <ua>Онкологічне</ua>
+                    <imagepath>service3.png</imagepath>
+                </row>
+
+                <row>
+                    <id>4</id>
+                    <en>Infectician</en>
+                    <ua>Інфекційне</ua>
+                    <imagepath>service4.png</imagepath>
+                </row>
+
+            </departmentname>
+
+            <diagnosispanel>
+
+                <row>
+                    <id>1</id>
+                    <laboratory_id>1</laboratory_id>
+                </row>
+
+                <row>
+                    <id>2</id>
+                    <laboratory_id>1</laboratory_id>
+                </row>
+
+                <row>
+                    <id>3</id>
+                    <laboratory_id>1</laboratory_id>
+                </row>
+
+            </diagnosispanel>
+
+            <diagnosispanel_test>
+
+            </diagnosispanel_test>
+
+            <diagnosispanellocalization>
+
+                <row>
+                    <id>1</id>
+                    <name>Hormonal panel</name>
+                    <diagnosispanel_id>1</diagnosispanel_id>
+                    <language_id>1</language_id>
+                </row>
+
+                <row>
+                    <id>2</id>
+                    <name>Гормональна панель</name>
+                    <diagnosispanel_id>1</diagnosispanel_id>
+                    <language_id>2</language_id>
+                </row>
+
+                <row>
+                    <id>3</id>
+                    <name>Infectious panel</name>
+                    <diagnosispanel_id>2</diagnosispanel_id>
+                    <language_id>1</language_id>
+                </row>
+
+                <row>
+                    <id>4</id>
+                    <name>Інфекційна панель</name>
+                    <diagnosispanel_id>2</diagnosispanel_id>
+                    <language_id>2</language_id>
+                </row>
+
+                <row>
+                    <id>5</id>
+                    <name>Non-invasive method of assessing liver panel</name>
+                    <diagnosispanel_id>3</diagnosispanel_id>
+                    <language_id>1</language_id>
+                </row>
+
+                <row>
+                    <id>6</id>
+                    <name>Панель неінвазивних методів оцінки стану печінки</name>
+                    <diagnosispanel_id>3</diagnosispanel_id>
+                    <language_id>2</language_id>
+                </row>
+
+            </diagnosispanellocalization>
+
+            <doctorinfo>
+
+                <row>
+                    <id>1</id>
+                    <specialization>THERAPIST</specialization>
+                    <userdetails_id>6</userdetails_id>
+                    <category>INTERN</category>
+                </row>
+
+                <row>
+                    <id>4</id>
+                    <specialization>PEDIATRICIAN</specialization>
+                    <userdetails_id>9</userdetails_id>
+                    <category>INTERN</category>
+                </row>
+
+                <row>
+                    <id>5</id>
+                    <specialization>ONCOLOGIST</specialization>
+                    <userdetails_id>10</userdetails_id>
+                    <category>JUNIOR</category>
+                </row>
+
+                <row>
+                    <id>2</id>
+                    <specialization>GYNECOLOGIST</specialization>
+                    <userdetails_id>7</userdetails_id>
+                    <category>JUNIOR</category>
+                </row>
+
+                <row>
+                    <id>3</id>
+                    <specialization>ENDOCRINOLOGIST</specialization>
+                    <userdetails_id>8</userdetails_id>
+                    <category>SPECIALIST</category>
+                </row>
+
+                <row>
+                    <id>7</id>
+                    <specialization>NEUROLOGIST</specialization>
+                    <userdetails_id>12</userdetails_id>
+                    <category>INTERN</category>
+                </row>
+
+                <row>
+                    <id>9</id>
+                    <specialization>THERAPIST</specialization>
+                    <userdetails_id>14</userdetails_id>
+                    <category>JUNIOR</category>
+                </row>
+
+                <row>
+                    <id>8</id>
+                    <specialization>NEUROLOGIST</specialization>
+                    <userdetails_id>13</userdetails_id>
+                    <category>SPECIALIST</category>
+                </row>
+
+                <row>
+                    <id>10</id>
+                    <specialization>ENDOCRINOLOGIST</specialization>
+                    <userdetails_id>15</userdetails_id>
+                    <category>INTERN</category>
+                </row>
+
+                <row>
+                    <id>11</id>
+                    <specialization>ONCOLOGIST</specialization>
+                    <userdetails_id>16</userdetails_id>
+                    <category>SPECIALIST</category>
+                </row>
+
+                <row>
+                    <id>16</id>
+                    <specialization>THERAPIST</specialization>
+                    <category>INTERN</category>
+                </row>
+
+                <row>
+                    <id>17</id>
+                    <specialization>THERAPIST</specialization>
+                    <category>INTERN</category>
+                </row>
+
+                <row>
+                    <id>18</id>
+                    <specialization>THERAPIST</specialization>
+                    <category>INTERN</category>
+                </row>
+
+                <row>
+                    <id>6</id>
+                    <specialization>DENTIST</specialization>
+                    <userdetails_id>11</userdetails_id>
+                    <category>SPECIALIST</category>
+                </row>
+
+            </doctorinfo>
+
+            <events>
+
+            </events>
+
+            <feedback>
+
+                <row>
+                    <id>1</id>
+                    <date>rO0ABXNyAA1qYXZhLnRpbWUuU2VylV2EuhsiSLIMAAB4cHcOBQAAB+AGCBcOFw3yjoB4</date>
+                    <message>xcvbg</message>
+                    <consumer_id>8</consumer_id>
+                    <producer_id>17</producer_id>
+                </row>
+
+            </feedback>
+
+            <feedbacks>
+
+                <row>
+                    <id>2</id>
+                    <date>2017-03-27T09:10:24.018</date>
+                    <message>Why Jr.?</message>
+                    <status>NEW</status>
+                    <consumer_id>5</consumer_id>
+                    <producer_id>57</producer_id>
+                </row>
+
+                <row>
+                    <id>3</id>
+                    <date>2017-03-29T10:23:13.726</date>
+                    <message>cool</message>
+                    <status>NEW</status>
+                    <consumer_id>2</consumer_id>
+                    <producer_id>6</producer_id>
+                </row>
+
+                <row>
+                    <id>4</id>
+                    <date>2017-04-03T09:26:41.307</date>
+                    <message>uuuy</message>
+                    <status>NEW</status>
+                    <consumer_id>7</consumer_id>
+                    <producer_id>7</producer_id>
+                </row>
+
+            </feedbacks>
+
+            <hospital>
+
+                <row>
+                    <id>3</id>
+                    <building>185В</building>
+                    <city>Chernivtsi</city>
+                    <country>Ukraine</country>
+                    <street>Ruska St</street>
+                    <description></description>
+                    <imagepath>Hospital_3.jpg</imagepath>
+                    <latitude>48.283664100000003</latitude>
+                    <longitude>25.973487500000033</longitude>
+                    <name>Angelholm</name>
+                </row>
+
+                <row>
+                    <id>4</id>
+                    <building>218</building>
+                    <city>Chernivtsi</city>
+                    <country>Ukraine</country>
+                    <street>Holovna St</street>
+                    <description></description>
+                    <imagepath>Hospital_4.jpg</imagepath>
+                    <latitude>48.255651399999998</latitude>
+                    <longitude>25.957666399999994</longitude>
+                    <name>Міська дитяча поліклініка №7</name>
+                </row>
+
+                <row>
+                    <id>5</id>
+                    <building>9Б</building>
+                    <city>Чернівці</city>
+                    <country>Украина</country>
+                    <street>вулиця Івасюка1</street>
+                    <description></description>
+                    <imagepath></imagepath>
+                    <latitude>48.260346899999988</latitude>
+                    <longitude>25.94705440000007</longitude>
+                    <name>ппппппппп</name>
+                </row>
+
+                <row>
+                    <id>6</id>
+                    <building>2</building>
+                    <city>Чернівці</city>
+                    <country>Украина</country>
+                    <street>вулиця Ольги Гузар</street>
+                    <description>ehreththt</description>
+                    <imagepath></imagepath>
+                    <latitude>48.275736999999999</latitude>
+                    <longitude>25.939919000000032</longitude>
+                    <name>zrhhrthrth</name>
+                </row>
+
+                <row>
+                    <id>8</id>
+                    <building>226Б</building>
+                    <city>Чернівці</city>
+                    <country>Украина</country>
+                    <street>вулиця Руська</street>
+                    <description></description>
+                    <imagepath>adda9a1b25329454.png</imagepath>
+                    <latitude>48.278616</latitude>
+                    <longitude>25.977360999999974</longitude>
+                    <name>newHospital</name>
+                </row>
+
+                <row>
+                    <id>10</id>
+                    <building>Прут</building>
+                    <city>Чернівецька область</city>
+                    <country>dsdsdsdsd</country>
+                    <street>Unnamed Road</street>
+                    <description></description>
+                    <imagepath>addab15283c51794.png</imagepath>
+                    <latitude>48.277405599999987</latitude>
+                    <longitude>26.04857149999998</longitude>
+                    <name>aaaaa</name>
+                </row>
+
+                <row>
+                    <id>1</id>
+                    <building>137</building>
+                    <city>Chernivtsi</city>
+                    <country>Ukraine</country>
+                    <street>Holovna St</street>
+                    <description>Description for hospital1</description>
+                    <imagepath>Hospital_1.jpg</imagepath>
+                    <latitude>48.279439400000001</latitude>
+                    <longitude>25.943196899999975</longitude>
+                    <name>Chernivtsi Regional Clinical Hospital</name>
+                </row>
+
+                <row>
+                    <id>2</id>
+                    <building>11</building>
+                    <city>Chernivtsi</city>
+                    <country>Ukraine</country>
+                    <street>Lesi Ukrainky St</street>
+                    <description>Description for hospital2</description>
+                    <imagepath>Hospital_2.jpg</imagepath>
+                    <latitude>48.290980500000003</latitude>
+                    <longitude>25.929598499999997</longitude>
+                    <name>Miska Poliklinika</name>
+                </row>
+
+                <row>
+                    <id>19</id>
+                    <building>8</building>
+                    <city>Чернівці</city>
+                    <country>Україна</country>
+                    <street>Вул. Мусоргського</street>
+                    <description></description>
+                    <imagepath></imagepath>
+                    <latitude>48.265307</latitude>
+                    <longitude>25.944325299999946</longitude>
+                    <name>МІСЬКА СТАНЦІЯ ШВИДКОЇ МЕДИЧНОЇ ДОПОМОГИ</name>
+                </row>
+
+            </hospital>
+
+            <hospital_users>
+
+                <row>
+                    <hospital_id>4</hospital_id>
+                    <managers_id>3</managers_id>
+                </row>
+
+                <row>
+                    <hospital_id>2</hospital_id>
+                    <managers_id>2</managers_id>
+                </row>
+
+                <row>
+                    <hospital_id>1</hospital_id>
+                    <managers_id>4</managers_id>
+                </row>
+
+                <row>
+                    <hospital_id>3</hospital_id>
+                    <managers_id>4</managers_id>
+                </row>
+
+            </hospital_users>
+
+            <laboratory>
+
+                <row>
+                    <id>1</id>
+                    <description>laboratory for hospital1</description>
+                    <hospital_id>1</hospital_id>
+                </row>
+
+            </laboratory>
+
+            <language>
+
+                <row>
+                    <id>1</id>
+                    <name>en</name>
+                </row>
+
+                <row>
+                    <id>2</id>
+                    <name>ua</name>
+                </row>
+
+            </language>
+
+            <password_reset_tokens>
+
+            </password_reset_tokens>
+
+            <patientcard>
+
+                <row>
+                    <id>3</id>
+                    <patientinfo_id>3</patientinfo_id>
+                </row>
+
+                <row>
+                    <id>4</id>
+                    <patientinfo_id>4</patientinfo_id>
+                </row>
+
+                <row>
+                    <id>5</id>
+                    <patientinfo_id>5</patientinfo_id>
+                </row>
+
+                <row>
+                    <id>6</id>
+                    <patientinfo_id>6</patientinfo_id>
+                </row>
+
+                <row>
+                    <id>7</id>
+                    <patientinfo_id>7</patientinfo_id>
+                </row>
+
+                <row>
+                    <id>8</id>
+                    <patientinfo_id>8</patientinfo_id>
+                </row>
+
+                <row>
+                    <id>9</id>
+                    <patientinfo_id>9</patientinfo_id>
+                </row>
+
+            </patientcard>
+
+            <patientinfo>
+
+                <row>
+                    <id>3</id>
+                    <patientcard_id>3</patientcard_id>
+                    <userdetail_id>31</userdetail_id>
+                </row>
+
+                <row>
+                    <id>4</id>
+                    <patientcard_id>4</patientcard_id>
+                    <userdetail_id>21</userdetail_id>
+                </row>
+
+                <row>
+                    <id>5</id>
+                    <patientcard_id>5</patientcard_id>
+                    <userdetail_id>25</userdetail_id>
+                </row>
+
+                <row>
+                    <id>6</id>
+                    <patientcard_id>6</patientcard_id>
+                    <userdetail_id>17</userdetail_id>
+                </row>
+
+                <row>
+                    <id>7</id>
+                    <patientcard_id>7</patientcard_id>
+                    <userdetail_id>18</userdetail_id>
+                </row>
+
+                <row>
+                    <id>8</id>
+                    <patientcard_id>8</patientcard_id>
+                    <userdetail_id>49</userdetail_id>
+                </row>
+
+                <row>
+                    <id>9</id>
+                    <patientcard_id>9</patientcard_id>
+                    <userdetail_id>30</userdetail_id>
+                </row>
+
+            </patientinfo>
+
+            <persistent_logins>
+
+                <row>
+                    <series>W6pYvNJS58EONcBz9XD/kw==</series>
+                    <last_used>2016-09-28T15:21:56.415</last_used>
+                    <token>77/kG83uGGksJojMttooZA==</token>
+                    <username>a@a.co</username>
+                </row>
+
+                <row>
+                    <series>J2rAgutXcGTJNd2UPVkX7w==</series>
+                    <last_used>2017-03-29T11:59:59.89</last_used>
+                    <token>qqT/G0L4IHm0vbC1J2814g==</token>
+                    <username>doctor.lc@hospitals.ua</username>
+                </row>
+
+            </persistent_logins>
+
+            <relativesInfo>
+
+            </relativesInfo>
+
+            <relativesinfo>
+
+            </relativesinfo>
+
+            <role>
+
+                <row>
+                    <id>1</id>
+                    <type>ADMIN</type>
+                </row>
+
+                <row>
+                    <id>2</id>
+                    <type>PATIENT</type>
+                </row>
+
+                <row>
+                    <id>3</id>
+                    <type>MANAGER</type>
+                </row>
+
+                <row>
+                    <id>4</id>
+                    <type>DOCTOR</type>
+                </row>
+
+            </role>
+
+            <role_users>
+
+                <row>
+                    <users_id>1</users_id>
+                    <role_id>1</role_id>
+                </row>
+
+                <row>
+                    <users_id>3</users_id>
+                    <role_id>3</role_id>
+                </row>
+
+                <row>
+                    <users_id>4</users_id>
+                    <role_id>3</role_id>
+                </row>
+
+                <row>
+                    <users_id>5</users_id>
+                    <role_id>3</role_id>
+                </row>
+
+                <row>
+                    <users_id>6</users_id>
+                    <role_id>4</role_id>
+                </row>
+
+                <row>
+                    <users_id>8</users_id>
+                    <role_id>4</role_id>
+                </row>
+
+                <row>
+                    <users_id>9</users_id>
+                    <role_id>4</role_id>
+                </row>
+
+                <row>
+                    <users_id>10</users_id>
+                    <role_id>4</role_id>
+                </row>
+
+                <row>
+                    <users_id>13</users_id>
+                    <role_id>4</role_id>
+                </row>
+
+                <row>
+                    <users_id>14</users_id>
+                    <role_id>4</role_id>
+                </row>
+
+                <row>
+                    <users_id>15</users_id>
+                    <role_id>4</role_id>
+                </row>
+
+                <row>
+                    <users_id>16</users_id>
+                    <role_id>4</role_id>
+                </row>
+
+                <row>
+                    <users_id>17</users_id>
+                    <role_id>2</role_id>
+                </row>
+
+                <row>
+                    <users_id>18</users_id>
+                    <role_id>2</role_id>
+                </row>
+
+                <row>
+                    <users_id>19</users_id>
+                    <role_id>2</role_id>
+                </row>
+
+                <row>
+                    <users_id>20</users_id>
+                    <role_id>2</role_id>
+                </row>
+
+                <row>
+                    <users_id>21</users_id>
+                    <role_id>2</role_id>
+                </row>
+
+                <row>
+                    <users_id>22</users_id>
+                    <role_id>2</role_id>
+                </row>
+
+                <row>
+                    <users_id>23</users_id>
+                    <role_id>2</role_id>
+                </row>
+
+                <row>
+                    <users_id>24</users_id>
+                    <role_id>2</role_id>
+                </row>
+
+                <row>
+                    <users_id>25</users_id>
+                    <role_id>2</role_id>
+                </row>
+
+                <row>
+                    <users_id>26</users_id>
+                    <role_id>2</role_id>
+                </row>
+
+                <row>
+                    <users_id>28</users_id>
+                    <role_id>2</role_id>
+                </row>
+
+                <row>
+                    <users_id>29</users_id>
+                    <role_id>2</role_id>
+                </row>
+
+                <row>
+                    <users_id>30</users_id>
+                    <role_id>2</role_id>
+                </row>
+
+                <row>
+                    <users_id>31</users_id>
+                    <role_id>2</role_id>
+                </row>
+
+                <row>
+                    <users_id>32</users_id>
+                    <role_id>4</role_id>
+                </row>
+
+                <row>
+                    <users_id>49</users_id>
+                    <role_id>2</role_id>
+                </row>
+
+                <row>
+                    <users_id>50</users_id>
+                    <role_id>2</role_id>
+                </row>
+
+                <row>
+                    <users_id>56</users_id>
+                    <role_id>2</role_id>
+                </row>
+
+                <row>
+                    <users_id>57</users_id>
+                    <role_id>2</role_id>
+                </row>
+
+                <row>
+                    <users_id>59</users_id>
+                    <role_id>2</role_id>
+                </row>
+
+                <row>
+                    <users_id>7</users_id>
+                    <role_id>2</role_id>
+                </row>
+
+                <row>
+                    <users_id>2</users_id>
+                    <role_id>3</role_id>
+                </row>
+
+                <row>
+                    <users_id>34</users_id>
+                    <role_id>2</role_id>
+                </row>
+
+                <row>
+                    <users_id>58</users_id>
+                    <role_id>1</role_id>
+                </row>
+
+                <row>
+                    <users_id>11</users_id>
+                    <role_id>3</role_id>
+                </row>
+
+                <row>
+                    <users_id>12</users_id>
+                    <role_id>2</role_id>
+                </row>
+
+                <row>
+                    <users_id>45</users_id>
+                    <role_id>2</role_id>
+                </row>
+
+            </role_users>
+
+            <scheduler>
+
+                <row>
+                    <id>50</id>
+                    <app_size>15</app_size>
+                    <day_end>18</day_end>
+                    <day_start>10</day_start>
+                    <week_size>5</week_size>
+                    <doctorinfo_id>3</doctorinfo_id>
+                </row>
+
+                <row>
+                    <id>53</id>
+                    <app_size>15</app_size>
+                    <day_end>24</day_end>
+                    <day_start>0</day_start>
+                    <week_size>5</week_size>
+                    <doctorinfo_id>7</doctorinfo_id>
+                </row>
+
+                <row>
+                    <id>54</id>
+                    <app_size>15</app_size>
+                    <day_end>24</day_end>
+                    <day_start>0</day_start>
+                    <week_size>5</week_size>
+                    <doctorinfo_id>6</doctorinfo_id>
+                </row>
+
+            </scheduler>
+
+            <test>
+
+                <row>
+                    <id>2</id>
+                    <name>Пакет №181 (Ендокринне здоров'я) (Тиреотропний гормон (ТТГ); Паратгормон (ПТГ); Глікований
+                        гемоглобін (HbA1c))
+                    </name>
+                    <diagnosispanel_id>1</diagnosispanel_id>
+                    <description>Тиреоглобулин — матрица для синтеза тиреоидных гормонов, представляет собой
+                        гликопротеид, состоящий из двух идентичных субъединиц с молекулярным весом по 330 кДа. Он
+                        синтезируется фолликулярными тироцитами и транспортируется в коллоид. В области апикально
+                    </description>
+                    <workschedule>7:00-16.00, &#x0d;
+                        ,&#x0d;
+                        7:00-15:00,&#x0d;
+                        7:00-16:00,&#x0d;
+                        7:00-15:00,&#x0d;
+                        8:00-12:00, ,
+                    </workschedule>
+                </row>
+
+                <row>
+                    <id>3</id>
+                    <name>Пакет №2 (Тиреоїдний: ТТГ, Т3 віл., Т4 віл.) (Тиреотропний гормон (ТТГ); Тироксин вільний (T4
+                        вільний); Трийодтиронин вільний (T3 вільний))
+                    </name>
+                    <diagnosispanel_id>1</diagnosispanel_id>
+                    <description>Рецидивирующий рост доброкачественных и злокачественных опухолей ЩЖ сопровождается
+                        повышением уровня ТГ у большинства больных. Следует учитывать, что увеличение концентрации ТГ в
+                        крови при раке щитовидной железы наблюдается лишь у трети больных.&#x0d;
+                        &#x0d;
+                        Эпител
+                    </description>
+                    <workschedule>7:00-16.00, &#x0d;
+                        ,&#x0d;
+                        7:00-15:00,&#x0d;
+                        7:00-16:00,&#x0d;
+                        7:00-15:00,&#x0d;
+                        8:00-12:00, ,
+                    </workschedule>
+                </row>
+
+                <row>
+                    <id>8</id>
+                    <name>Розрахунок ФіброМакса</name>
+                    <diagnosispanel_id>3</diagnosispanel_id>
+                    <description>Важным условием обеспечения качества лабораторного исследования крови является взятие
+                        материала натощак, в утреннее время (до 12:00).&#x0d;
+                        За 12 часов до исследования следует исключить прием алкоголя, курение, прием пищи, ограничить
+                        физическую активность.&#x0d;
+                        Ут
+                    </description>
+                    <workschedule>7:00-16.00, &#x0d;
+                        ,&#x0d;
+                        7:00-15:00,&#x0d;
+                        7:00-16:00,&#x0d;
+                        7:00-15:00,&#x0d;
+                        8:00-12:00, ,
+                    </workschedule>
+                </row>
+
+                <row>
+                    <id>5</id>
+                    <name>Пакет №131 (Первинний скринінг на гепатит В) (Вірус гепатиту B (HBV), HBsAg (австралійський
+                        антиген); Вірус гепатиту B (HBV), HBcorAg, антитіла сумарні)
+                    </name>
+                    <diagnosispanel_id>2</diagnosispanel_id>
+                    <description>HBsAg — это поверхностный антиген, известный как «австралийский антиген», появляется
+                        одним из первых уже в конце инкубационного периода (параллельно с выявлением ДНК вируса в крови)
+                        и на 2 недели раньше HBcor-IgM. Обнаруживается в крови в течение 4 — 7 не
+                    </description>
+                    <workschedule>7:00-16.00, &#x0d;
+                        ,&#x0d;
+                        7:00-15:00,&#x0d;
+                        7:00-16:00,&#x0d;
+                        7:00-15:00,&#x0d;
+                        8:00-12:00, ,
+                    </workschedule>
+                </row>
+
+                <row>
+                    <id>6</id>
+                    <name>Цитомегаловірус (CMV), антитіла IgG</name>
+                    <diagnosispanel_id>2</diagnosispanel_id>
+                    <description>Маркер острой стадии инфекционного процесса (первичного инфицирования или реактивации)&#x0d;
+                        Дифференциальная диагностика этиологии инфекционного процесса при: клинике синдрома
+                        мононуклеоза, лихорадке неясного генеза, пневмонии, гепатите, энцефалите, менингоэн
+                    </description>
+                    <workschedule>7:00-16.00, &#x0d;
+                        ,&#x0d;
+                        7:00-15:00,&#x0d;
+                        7:00-16:00,&#x0d;
+                        7:00-15:00,&#x0d;
+                        8:00-12:00, ,
+                    </workschedule>
+                </row>
+
+                <row>
+                    <id>4</id>
+                    <name>Пакет №131 (Первинний скринінг на гепатит В) (Вірус гепатиту B (HBV), HBsAg (австралійський
+                        антиген); Вірус гепатиту B (HBV), HBcorAg, антитіла сумарні
+                    </name>
+                    <diagnosispanel_id>2</diagnosispanel_id>
+                    <description>Референтные значения, R: &#x0d;
+                        R (коэффициент позитивности) - это оптическая плотность образца / критическую оптическую
+                        плотность. &#x0d;
+                        Вирус гепатита A (HAV), антитела IgM, Индекс: &#x0d;
+                        &lt; 1,0 - отрицательный результат =&gt; 1,0 - положительный результат &#x0d;
+                        Вирус гепат
+                    </description>
+                    <workschedule>7:00-16.00, &#x0d;
+                        ,&#x0d;
+                        7:00-15:00,&#x0d;
+                        7:00-16:00,&#x0d;
+                        7:00-15:00,&#x0d;
+                        8:00-12:00, ,
+                    </workschedule>
+                </row>
+
+                <row>
+                    <id>7</id>
+                    <name>Вірус Varicella Zoster (3 тип герпесу, VZV), антитіла IgA</name>
+                    <diagnosispanel_id>2</diagnosispanel_id>
+                    <description>Инфекции, вызванные вирусом простого герпеса 1 и 2 типа. Вирусы простого герпеса —
+                        наиболее известные представители герпесвирусов, так как вызывают поражения практически у каждого
+                        человека. Имеются две разновидности вируса простого герпеса — ВПГ-1 (лабиал
+                    </description>
+                    <workschedule>7:00-16.00, &#x0d;
+                        ,&#x0d;
+                        7:00-15:00,&#x0d;
+                        7:00-16:00,&#x0d;
+                        7:00-15:00,&#x0d;
+                        8:00-12:00, ,
+                    </workschedule>
+                </row>
+
+                <row>
+                    <id>1</id>
+                    <name>Пакет №1 (Тиреоїдний: ТТГ, Т4 віл., АМСт) (Тиреотропний гормон (ТТГ); Тироксин вільний (T4
+                        вільний); Антимікросомальні антитіла (АМС тиреоїдна))
+                    </name>
+                    <diagnosispanel_id>1</diagnosispanel_id>
+                    <description>Основной антиген микросомальной фракции тиреоцитов — тиреоидная пероксидаза.&#x0d;
+                        Микросомы расположены внутри эпителиальных клеток, окружающих тиреоидные фолликулы. При
+                        патологии они становятся антигенами, на них синтезируются антитела, которые повреждают кл
+                    </description>
+                    <workschedule>7:00-16.00, &#x0d;
+                        ,&#x0d;
+                        7:00-15:00,&#x0d;
+                        7:00-16:00,&#x0d;
+                        7:00-15:00,&#x0d;
+                        8:00-12:00, ,
+                    </workschedule>
+                </row>
+
+                <row>
+                    <id>9</id>
+                    <name>ФіброМакс (Холестерин; Глюкоза (сироватка); Білірубін загальний; γ-глутаматтрансфераза (ГГТ,
+                        GGT); Тригліцериди; Гаптоглобін; Аланінамінотрансфераза/PYP; Аполіпопротеїн А-1;
+                        α-2-макроглобулін; Аспартатамінотрансфераза/PYP; Неінвазивна оцінка ризику захвор
+                    </name>
+                    <diagnosispanel_id>3</diagnosispanel_id>
+                    <description>Непосредственное влияние в момент сдачи венозной крови на результаты биохимических
+                        анализов, входящих в данный тест, имеют гемолиз крови, острый гепатит, острое воспаление,
+                        внепеченочный холестаз, синдром Жильбера.&#x0d;
+                        Детям до 14 лет тест не выполняется
+                    </description>
+                    <workschedule>7:00-16.00, &#x0d;
+                        ,&#x0d;
+                        7:00-15:00,&#x0d;
+                        7:00-16:00,&#x0d;
+                        7:00-15:00,&#x0d;
+                        8:00-12:00, ,
+                    </workschedule>
+                </row>
+
+            </test>
+
+            <testresult>
+
+                <row>
+                    <id>126</id>
+                    <datetest>2016-11-24</datetest>
+                    <test_id>1</test_id>
+                </row>
+
+                <row>
+                    <id>127</id>
+                    <datetest>2016-11-29</datetest>
+                    <test_id>1</test_id>
+                </row>
+
+                <row>
+                    <id>128</id>
+                    <datetest>2016-11-23</datetest>
+                    <test_id>4</test_id>
+                </row>
+
+                <row>
+                    <id>138</id>
+                    <datetest>2016-11-22</datetest>
+                    <patientcard_id>7</patientcard_id>
+                    <test_id>7</test_id>
+                </row>
+
+                <row>
+                    <id>109</id>
+                    <datetest>2016-11-11</datetest>
+                    <result>Test Result Test Result Test Result Test Result Test Result Test Result Test Result Test
+                        Result Test Result Test Result Test Result Test Result Test Result Test Result Test Result Test
+                        Result Test Result Test Result Test Result Test Result Test Result Tes
+                    </result>
+                    <patientcard_id>7</patientcard_id>
+                    <test_id>2</test_id>
+                </row>
+
+                <row>
+                    <id>158</id>
+                    <datetest>2016-12-09</datetest>
+                    <patientcard_id>7</patientcard_id>
+                    <test_id>8</test_id>
+                </row>
+
+                <row>
+                    <id>159</id>
+                    <datetest>2016-11-28</datetest>
+                    <patientcard_id>7</patientcard_id>
+                    <test_id>2</test_id>
+                </row>
+
+                <row>
+                    <id>160</id>
+                    <datetest>2016-12-20</datetest>
+                    <patientcard_id>7</patientcard_id>
+                    <test_id>5</test_id>
+                </row>
+
+            </testresult>
+
+            <translator>
+
+            </translator>
+
+            <userdetail>
+
+                <row>
+                    <id>22</id>
+                    <firstname>Tim</firstname>
+                    <gender>MALE</gender>
+                    <lastname>Jonson</lastname>
+                    <user_id>22</user_id>
+                </row>
+
+                <row>
+                    <id>1</id>
+                    <firstname>Lars</firstname>
+                    <gender>MALE</gender>
+                    <lastname>Urlich</lastname>
+                    <user_id>1</user_id>
+                </row>
+
+                <row>
+                    <id>23</id>
+                    <firstname>Nicolas</firstname>
+                    <gender>MALE</gender>
+                    <lastname>Cage</lastname>
+                    <user_id>23</user_id>
+                </row>
+
+                <row>
+                    <id>3</id>
+                    <firstname>Kurt</firstname>
+                    <gender>MALE</gender>
+                    <lastname>Kobein</lastname>
+                    <user_id>3</user_id>
+                </row>
+
+                <row>
+                    <id>24</id>
+                    <firstname>Silvestr</firstname>
+                    <gender>MALE</gender>
+                    <lastname>Stalone</lastname>
+                    <user_id>24</user_id>
+                </row>
+
+                <row>
+                    <id>5</id>
+                    <firstname>James</firstname>
+                    <gender>MALE</gender>
+                    <lastname>Nusted</lastname>
+                    <user_id>5</user_id>
+                </row>
+
+                <row>
+                    <id>4</id>
+                    <firstname>Kirk</firstname>
+                    <gender>MALE</gender>
+                    <lastname>Hammet</lastname>
+                    <user_id>4</user_id>
+                </row>
+
+                <row>
+                    <id>6</id>
+                    <firstname>Gregory</firstname>
+                    <gender>MALE</gender>
+                    <imagepath>gh.jpg</imagepath>
+                    <lastname>House</lastname>
+                    <user_id>6</user_id>
+                </row>
+
+                <row>
+                    <id>26</id>
+                    <firstname>Rhene</firstname>
+                    <gender>MALE</gender>
+                    <lastname>Descartes</lastname>
+                    <user_id>26</user_id>
+                </row>
+
+                <row>
+                    <id>28</id>
+                    <firstname>Dante</firstname>
+                    <gender>MALE</gender>
+                    <lastname>Aligeri</lastname>
+                    <user_id>28</user_id>
+                </row>
+
+                <row>
+                    <id>10</id>
+                    <firstname>James</firstname>
+                    <gender>MALE</gender>
+                    <imagepath>jw.jpg</imagepath>
+                    <lastname>Wilson</lastname>
+                    <user_id>10</user_id>
+                </row>
+
+                <row>
+                    <id>29</id>
+                    <firstname>Grover</firstname>
+                    <gender>MALE</gender>
+                    <lastname>Cleveland</lastname>
+                    <user_id>29</user_id>
+                </row>
+
+                <row>
+                    <id>13</id>
+                    <firstname>Jhon</firstname>
+                    <gender>MALE</gender>
+                    <imagepath>jd.jpg</imagepath>
+                    <lastname>Dorian</lastname>
+                    <user_id>13</user_id>
+                </row>
+
+                <row>
+                    <id>14</id>
+                    <firstname>Jhared</firstname>
+                    <gender>MALE</gender>
+                    <imagepath>jl.jpg</imagepath>
+                    <lastname>Leto</lastname>
+                    <user_id>14</user_id>
+                </row>
+
+                <row>
+                    <id>30</id>
+                    <firstname>Oscar</firstname>
+                    <gender>MALE</gender>
+                    <lastname>Whield</lastname>
+                    <user_id>30</user_id>
+                </row>
+
+                <row>
+                    <id>16</id>
+                    <firstname>Marshal</firstname>
+                    <gender>MALE</gender>
+                    <imagepath>mm.jpg</imagepath>
+                    <lastname>Matters</lastname>
+                    <user_id>16</user_id>
+                </row>
+
+                <row>
+                    <id>15</id>
+                    <firstname>Mike</firstname>
+                    <gender>MALE</gender>
+                    <imagepath>ms.jpg</imagepath>
+                    <lastname>Shinoda</lastname>
+                    <user_id>15</user_id>
+                </row>
+
+                <row>
+                    <id>17</id>
+                    <firstname>Charles</firstname>
+                    <gender>MALE</gender>
+                    <lastname>Darvin</lastname>
+                    <user_id>17</user_id>
+                </row>
+
+                <row>
+                    <id>18</id>
+                    <firstname>Ilay</firstname>
+                    <gender>MALE</gender>
+                    <lastname>Nails</lastname>
+                    <user_id>18</user_id>
+                </row>
+
+                <row>
+                    <id>19</id>
+                    <firstname>Michael</firstname>
+                    <gender>MALE</gender>
+                    <lastname>Luter</lastname>
+                    <user_id>19</user_id>
+                </row>
+
+                <row>
+                    <id>20</id>
+                    <firstname>Richard</firstname>
+                    <gender>MALE</gender>
+                    <lastname>Rorshek</lastname>
+                    <user_id>20</user_id>
+                </row>
+
+                <row>
+                    <id>8</id>
+                    <firstname>Lisa</firstname>
+                    <gender>FEMALE</gender>
+                    <imagepath>lc.jpg</imagepath>
+                    <lastname>Cuddy</lastname>
+                    <user_id>8</user_id>
+                </row>
+
+                <row>
+                    <id>9</id>
+                    <firstname>Rhemy</firstname>
+                    <gender>FEMALE</gender>
+                    <imagepath>rh.jpg</imagepath>
+                    <lastname>Hadley</lastname>
+                    <user_id>9</user_id>
+                </row>
+
+                <row>
+                    <id>32</id>
+                    <address>Stokholm, abrakadabra 10, lenin prosp, stalin prov, jizni boli</address>
+                    <birthdate>rO0ABXNyAA1qYXZhLnRpbWUuU2VylV2EuhsiSLIMAAB4cHcHAwAAB+AFH3g=</birthdate>
+                    <firstname>Asdsdw</firstname>
+                    <gender>FEMALE</gender>
+                    <lastname>Dadesdfs</lastname>
+                    <phone>+38 (095) 435-7132</phone>
+                    <user_id>32</user_id>
+                </row>
+
+                <row>
+                    <id>31</id>
+                    <address>ds</address>
+                    <birthdate>rO0ABXNyAA1qYXZhLnRpbWUuU2VylV2EuhsiSLIMAAB4cHcHAwAAB+AJHHg=</birthdate>
+                    <firstname>Queen</firstname>
+                    <gender>FEMALE</gender>
+                    <imagepath></imagepath>
+                    <lastname>Marie</lastname>
+                    <phone>+38 (433) 333-3333</phone>
+                    <user_id>31</user_id>
+                </row>
+
+                <row>
+                    <id>21</id>
+                    <address>fffffffffffffff</address>
+                    <birthdate>rO0ABXNyAA1qYXZhLnRpbWUuU2VylV2EuhsiSLIMAAB4cHcHAwAAB+AJB3g=</birthdate>
+                    <firstname>Sam</firstname>
+                    <gender>MALE</gender>
+                    <imagepath></imagepath>
+                    <lastname>Ferdinand</lastname>
+                    <phone>+38 (222) 222-2222</phone>
+                    <user_id>21</user_id>
+                </row>
+
+                <row>
+                    <id>25</id>
+                    <address>qqqqqqqq</address>
+                    <birthdate>rO0ABXNyAA1qYXZhLnRpbWUuU2VylV2EuhsiSLIMAAB4cHcHAwAAB+AJBXg=</birthdate>
+                    <firstname>Thomas</firstname>
+                    <gender>MALE</gender>
+                    <imagepath></imagepath>
+                    <lastname>Auginas</lastname>
+                    <phone>+38 (222) 222-2222</phone>
+                    <user_id>25</user_id>
+                </row>
+
+                <row>
+                    <id>40</id>
+                    <user_id>49</user_id>
+                </row>
+
+                <row>
+                    <id>41</id>
+                    <user_id>50</user_id>
+                </row>
+
+                <row>
+                    <id>47</id>
+                    <user_id>56</user_id>
+                </row>
+
+                <row>
+                    <id>48</id>
+                    <user_id>57</user_id>
+                </row>
+
+                <row>
+                    <id>50</id>
+                    <user_id>59</user_id>
+                </row>
+
+                <row>
+                    <id>7</id>
+                    <firstname>Eric</firstname>
+                    <gender>MALE</gender>
+                    <imagepath>ef.jpg</imagepath>
+                    <lastname>Foreman</lastname>
+                    <user_id>7</user_id>
+                </row>
+
+                <row>
+                    <id>2</id>
+                    <firstname>James</firstname>
+                    <gender>MALE</gender>
+                    <lastname>Hatfield</lastname>
+                    <user_id>2</user_id>
+                </row>
+
+                <row>
+                    <id>34</id>
+                    <user_id>34</user_id>
+                </row>
+
+                <row>
+                    <id>49</id>
+                    <user_id>58</user_id>
+                </row>
+
+                <row>
+                    <id>11</id>
+                    <firstname>Chester</firstname>
+                    <gender>MALE</gender>
+                    <imagepath>cb.jpg</imagepath>
+                    <lastname>Benington</lastname>
+                    <user_id>11</user_id>
+                </row>
+
+                <row>
+                    <id>12</id>
+                    <firstname>Chris</firstname>
+                    <gender>MALE</gender>
+                    <imagepath>ct.jpg</imagepath>
+                    <lastname>Terk</lastname>
+                    <user_id>12</user_id>
+                </row>
+
+                <row>
+                    <id>36</id>
+                    <address>dddddd</address>
+                    <birthdate>rO0ABXNyAA1qYXZhLnRpbWUuU2VylV2EuhsiSLIMAAB4cHcHAwAAB+AJG3g=</birthdate>
+                    <firstname>Dadsf</firstname>
+                    <gender>MALE</gender>
+                    <imagepath></imagepath>
+                    <lastname>Basdf</lastname>
+                    <phone>+38 (222) 222-2222</phone>
+                </row>
+
+            </userdetail>
+
+            <users>
+
+                <row>
+                    <id>1</id>
+                    <email>admin@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$N3rWp7etmNY23Zf6kFNLV.D/sT0tSJ9jHRiS0xEgiCtI2L.OQbBqi</password>
+                    <userdetails_id>1</userdetails_id>
+                </row>
+
+                <row>
+                    <id>3</id>
+                    <email>manager.kk@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$Y8Ou0AQGW/6UuLB6d0cqhOGZXOVzfmH.0pJnWTYjEHPXjEICAqE9u</password>
+                    <userdetails_id>3</userdetails_id>
+                </row>
+
+                <row>
+                    <id>4</id>
+                    <email>manager.kh@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$2mZHnyUAbDsX8341uT1UT.fYNzey/q/TYtoOVQreYDrJsxP7v1N/K</password>
+                    <userdetails_id>4</userdetails_id>
+                </row>
+
+                <row>
+                    <id>5</id>
+                    <email>manager.jn@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$bP/ijok5uiAGC4UsSp/QIujdYXT5ixCwnKkndTYW.1ml3m349w0lS</password>
+                    <userdetails_id>5</userdetails_id>
+                </row>
+
+                <row>
+                    <id>6</id>
+                    <email>doctor.gh@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$FbRxp4PdXuFHK7kU8hemMezGFc.iGXH6Bs5z6gZCImhh8YM3ZJn2K</password>
+                    <userdetails_id>6</userdetails_id>
+                </row>
+
+                <row>
+                    <id>8</id>
+                    <email>doctor.lc@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$RjUyAGgaT0RW9wYXAJPGjuG1ooXdpBjI/4bQwmTbvMteimyiAjbum</password>
+                    <userdetails_id>8</userdetails_id>
+                </row>
+
+                <row>
+                    <id>9</id>
+                    <email>doctor.rh@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$jyvm38NWsC3WDklbGTxMRurM6SNULHlOSOFFqPGTGp2.c.UZTpxJC</password>
+                    <userdetails_id>9</userdetails_id>
+                </row>
+
+                <row>
+                    <id>10</id>
+                    <email>doctor.jw@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$18snRZ9iaK7iets6IN8XmOxTZiEebBCtUMLpY3/i72Nfk40iqbn2W</password>
+                    <userdetails_id>10</userdetails_id>
+                </row>
+
+                <row>
+                    <id>13</id>
+                    <email>doctor.jd@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$ZbbcxIGBQFE8IxcB4GI7BeDH/kmTvMmonbCL7z0aMDglrK.6U65aW</password>
+                    <userdetails_id>13</userdetails_id>
+                </row>
+
+                <row>
+                    <id>14</id>
+                    <email>doctor.jl@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$bhW4V1uVETEQ/YSC3yQPm.lGPavROHB/fmzBtW0k3ppdZlABoMiiO</password>
+                    <userdetails_id>14</userdetails_id>
+                </row>
+
+                <row>
+                    <id>15</id>
+                    <email>doctor.ms@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$Hazi7OuRrnnLd6gmNWLCpOYr6dksKORDM4Xl.hB3YXbE/wl6YgA46</password>
+                    <userdetails_id>15</userdetails_id>
+                </row>
+
+                <row>
+                    <id>16</id>
+                    <email>doctor.mm@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$xeVfrEqprRSHSqo8yb/AWutiqEkLlVaNmrsWUxy5kYF5ksFcW17Iu</password>
+                    <userdetails_id>16</userdetails_id>
+                </row>
+
+                <row>
+                    <id>17</id>
+                    <email>patient.cd@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$lH5Sg.gocRCIuO17BV1BW.sUjVvPTXA7UokUsWtt7ODSOuRNMVhGW</password>
+                    <userdetails_id>17</userdetails_id>
+                </row>
+
+                <row>
+                    <id>18</id>
+                    <email>patient.in@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$ZNCZEfFLA/TZFuhk3aL1b.2KraEr7mSLGk5hWp9KliuBY8B5quryq</password>
+                    <userdetails_id>18</userdetails_id>
+                </row>
+
+                <row>
+                    <id>19</id>
+                    <email>patient.ml@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$wtRRo7Q6O.wPv8E/7M4kMebWHgdFf0GZYotCj3nBUYR2HLxQFqPMm</password>
+                    <userdetails_id>19</userdetails_id>
+                </row>
+
+                <row>
+                    <id>20</id>
+                    <email>patient.rr@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$DLdRb91MrBBhNxEr5AYXrOuSn5LieZFSXrVE7RZWEbglkdfsvptsm</password>
+                    <userdetails_id>20</userdetails_id>
+                </row>
+
+                <row>
+                    <id>21</id>
+                    <email>patient.sf@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$4TW.tWhaI4xoSGPZhA4iseizzcRpQB/yNessm204M7o0qXgsdJYm.</password>
+                    <userdetails_id>21</userdetails_id>
+                </row>
+
+                <row>
+                    <id>22</id>
+                    <email>patient.tj@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$AqrcRbvJTENvc2bXHU0vReNy9vO1Bnz8cW2C5.ONPkTRCtG9jmgiC</password>
+                    <userdetails_id>22</userdetails_id>
+                </row>
+
+                <row>
+                    <id>23</id>
+                    <email>patient.nc@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$TyN8NQEj8Pl7JbABIK67lOxLCssjO2K.7Qu3xKpesbs9dqczDWENa</password>
+                    <userdetails_id>23</userdetails_id>
+                </row>
+
+                <row>
+                    <id>25</id>
+                    <email>patient.ta@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$2DEn8BQLvFy/.QPqJ1T9TOty5Hc4YVxABAz4HbWpJJDu0RajTc9VK</password>
+                    <userdetails_id>25</userdetails_id>
+                </row>
+
+                <row>
+                    <id>26</id>
+                    <email>patient.rd@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$oRca1dIpFtruJW41JR.YXeg2XHSZpldCIlJcx/.rTvdOjBtP2M2Zy</password>
+                    <userdetails_id>26</userdetails_id>
+                </row>
+
+                <row>
+                    <id>28</id>
+                    <email>patient.da@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$VJHmXNE7mA.RB/QpDhS3EuIlS6TAWOZO6HO3C0foMxR4TFwG6lQKe</password>
+                    <userdetails_id>28</userdetails_id>
+                </row>
+
+                <row>
+                    <id>29</id>
+                    <email>patient.gc@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$nacXREY6RA3cwDlkRkAwM.lZoYwOgXYrfL.Eb13gX74lfqRqRi/VG</password>
+                    <userdetails_id>29</userdetails_id>
+                </row>
+
+                <row>
+                    <id>30</id>
+                    <email>patient.ow@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$kGlMyGxVTCNltxtaxJPTweQKbZqzNzdqMIlDKxGPaMF704IyiJiRm</password>
+                    <userdetails_id>30</userdetails_id>
+                </row>
+
+                <row>
+                    <id>31</id>
+                    <email>patient.qm@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$HRcBNI0bChY15zEhKAErKOWdcQHoxaFSd4MdqPDhDpEVmD8Mw.FJO</password>
+                    <userdetails_id>31</userdetails_id>
+                </row>
+
+                <row>
+                    <id>32</id>
+                    <email>ilay888@yandex.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$j7Yu/kB1c/az2GChgZEj4eLerIFtiD66Z2e/BfZwagky0CXJquga2</password>
+                    <userdetails_id>32</userdetails_id>
+                </row>
+
+                <row>
+                    <id>24</id>
+                    <email>patient.ss@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$sjTOOUGvQ1qDZhRoPGYPYukYhQe6iTdF6/1xDqzBFVD2HHv5k2weS</password>
+                    <userdetails_id>24</userdetails_id>
+                </row>
+
+                <row>
+                    <id>49</id>
+                    <email>lesiakoval12@gmail.com</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$rwP1z3jY4oOe0Myrqt8At.vCnX7CQmaMsTjBJ5pedH8TMYHXFL7Pa</password>
+                    <userdetails_id>40</userdetails_id>
+                </row>
+
+                <row>
+                    <id>50</id>
+                    <email>julia.nedzelskaya@gmail.com</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$sgkKnflCMcVOqgZwZKw0lucwdUuCroII7EN1AQZonmbwzgJ3h6h6W</password>
+                    <userdetails_id>41</userdetails_id>
+                </row>
+
+                <row>
+                    <id>56</id>
+                    <email>julia.nedzelskaya1@gmail.com</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$DfrHvq2aWyNkyYWgdpvMJuazTMuFi8RMgmq6TokO/PdURWRe8wpYi</password>
+                    <userdetails_id>47</userdetails_id>
+                </row>
+
+                <row>
+                    <id>57</id>
+                    <email>dimakrylyuk@gmail.com</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$/mernx9jinZ.a2TRnzn4Me3s7Xjxluh2PkeGlHZimy74.b4TZeimS</password>
+                    <userdetails_id>48</userdetails_id>
+                </row>
+
+                <row>
+                    <id>59</id>
+                    <email>vgantyuk@gmail.com</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$PQ4oAKQ4NoQ62CO6haYoEuvGNYk1e1h1OAwypLeYbg7mQ7dGstpZS</password>
+                    <userdetails_id>50</userdetails_id>
+                </row>
+
+                <row>
+                    <id>7</id>
+                    <email>doctor.ef@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$Ah7jCL.GYHPWHXxQ4TPsJOok178L.SrKYIo5n3QmTy74LV1M0Clqi</password>
+                    <userdetails_id>7</userdetails_id>
+                </row>
+
+                <row>
+                    <id>2</id>
+                    <email>manager.jh@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$xEHQ5YGjKO0.CED2gkMBsOK7eR555Zo9XAkYKjGJTQcyxHgpAWV7e</password>
+                    <userdetails_id>2</userdetails_id>
+                </row>
+
+                <row>
+                    <id>34</id>
+                    <email>a@a.co</email>
+                    <enabled>false</enabled>
+                    <password>$2a$10$tPXfII2a8Pnp4ACKioOXQeZKmpCGV.PCwH3mLnp8I6IiNuvxCfjp2</password>
+                    <userdetails_id>34</userdetails_id>
+                </row>
+
+                <row>
+                    <id>58</id>
+                    <email>a@gmail.com</email>
+                    <enabled>false</enabled>
+                    <password>$2a$10$HDbO0fCgdARfKA.DTTs8aeFos3Xc8hAWUo7o6Tdf/RSa/Fn1chEd6</password>
+                    <userdetails_id>49</userdetails_id>
+                </row>
+
+                <row>
+                    <id>11</id>
+                    <email>doctor.cb@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$eNhH/O6Gb/Kzoxc7fZZJYOA9HQuYB6Pz4mrG/DJd35zHk0Nu7.32y</password>
+                    <userdetails_id>11</userdetails_id>
+                </row>
+
+                <row>
+                    <id>12</id>
+                    <email>doctor.ct@hospitals.ua</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$o3apAm429gfS2jRto.sHyOWAtQ..WgYC3HvThm3/8ZApV2gVqyTbO</password>
+                    <userdetails_id>12</userdetails_id>
+                </row>
+
+                <row>
+                    <id>45</id>
+                    <email>a@a.com</email>
+                    <enabled>true</enabled>
+                    <password>$2a$10$Pa.m/FUg8Mt6btTnDHgP6us93ZJs4rHiLxwgpTWwTI7UqzkSHl8cS</password>
+                    <userdetails_id>36</userdetails_id>
+                </row>
+
+            </users>
+
+            <verifications_tokens>
+
+            </verifications_tokens>
+
+
+        </hospital>
+    </dataset>
