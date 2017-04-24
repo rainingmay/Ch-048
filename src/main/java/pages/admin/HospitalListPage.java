@@ -21,8 +21,8 @@ public class HospitalListPage extends BasePage {
 
 
 
-
-    @FindBy(xpath = "/html/body/section/div/div/div/div[1]/div[1]/a[1]")
+    // xpath = "/html/body/section/div/div/div/div[1]/div[1]/a[1]"
+    @FindBy(css = "a[href='/HospitalSeeker/admin/map/new'")
     private WebElement addNewHospitalButton;
 
     @FindBy(xpath = "/html/body/section/div/div/div/div[1]/div[1]/a[2]")

@@ -24,9 +24,6 @@ public class BaseNavigation {
         AuthorizedHeader authorizedHeader = new AuthorizedHeader();
         authorizedHeader.profileButtonClick();
         HospitalSeekerHomePage hospitalSeekerHomePage = authorizedHeader.logoutButtonClick();
-        if(BrowserWrapper.isAlertPresent()){
-            BrowserWrapper.conformAlert();
-        }
         return hospitalSeekerHomePage;
     }
 
