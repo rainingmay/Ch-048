@@ -51,7 +51,7 @@ public class AddUserPageTest extends BaseTest {
         Assert.assertTrue(addUserPage.isPageReady());
 
     }
-
+//
 
     @Test(groups = {"Other"})
     public void successfulAddNewUserTest() throws Exception {
