@@ -1,6 +1,7 @@
 package pages.manager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.InvalidSelectorException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -76,19 +77,19 @@ public class ManagerDashBordPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"allDoctors\"]/thead/tr/th[4]/i")
     private WebElement lastName;
 
-    @FindBy(id="lastName")
+    @FindBy(id = "lastName")
     private WebElement sortByLastNameButton;
 
     @FindBy(xpath = "//*[@id=\"allDoctors\"]/thead/tr/th[5]/i")
     private WebElement specializtionLabel;
 
-    @FindBy(id="specialization")
+    @FindBy(id = "specialization")
     private WebElement sortBySpecializationButton;
 
     @FindBy(xpath = "//*[@id=\"allDoctors\"]/thead/tr/th[6]/i")
     private WebElement categoryLabel;
 
-    @FindBy(id="category")
+    @FindBy(id = "category")
     private WebElement sortByCategoryButton;
 
     @FindBy(xpath = "//*[@id=\"allDoctors\"]/thead/tr/th[7]/i")
@@ -177,14 +178,18 @@ public class ManagerDashBordPage extends BasePage {
     public String edit = "EDIT DOCTOR";
     public void selectDoctorPerPage(String value) {
         BrowserWrapper.selectDropdown(doctorPerPageSelector, value);
+
     }
 
     public void selectSpecialization(String value) {
         BrowserWrapper.selectDropdown(specializationSelector, value);
+
+
     }
 
     public void selectSearchBy(String value) {
         BrowserWrapper.selectDropdown(searchBySelector, value);
+
     }
 
     public void searchByText(String value){
@@ -195,11 +200,13 @@ public class ManagerDashBordPage extends BasePage {
     public void searchButtonClick(){
         BrowserWrapper.waitUntilElementVisible(searchButton);
         searchButton.click();
+        BrowserWrapper.sleep(3);
 
     }
 
     public void clearButtonClick(){
        BrowserWrapper.clickWithStaleException(clearButton);
+       BrowserWrapper.sleep(3);
     }
 
     public DepartmentsPage labaratoryButtonClick(){
@@ -237,7 +244,6 @@ public class ManagerDashBordPage extends BasePage {
 
     public void sortBySpecializationButtonClick(){
         BrowserWrapper.waitUntilElementVisible(sortBySpecializationButton);
-
         sortBySpecializationButton.click();
      //   BrowserWrapper.sleep(1);
     }
@@ -358,8 +364,15 @@ public class ManagerDashBordPage extends BasePage {
     }
 
     public String getDetailedName(){
-        BrowserWrapper.waitUntilElementVisible(formFirstNameInput);
-        return formFirstNameInput.getAttribute("value");
+        String text = null;
+        for(int i = 0; i<5; i++) {
+            try {
+                text = formFirstNameInput.getAttribute("value");
+                break;
+            }catch (StaleElementReferenceException e) {
+            }
+        }
+        return text;
     }
 
     public int getNumberOfRows(){
@@ -370,6 +383,8 @@ public class ManagerDashBordPage extends BasePage {
                 number = tableBody.findElements(By.tagName("tr")).size();
                 break;
             }catch (StaleElementReferenceException e){
+            }catch (InvalidSelectorException e){
+                break;
             }
         }
         return number;
