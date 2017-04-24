@@ -251,7 +251,7 @@ public class ManagerDashBordPage extends BasePage {
     public void sortByCategoryButtonClick(){
         BrowserWrapper.waitUntilElementVisible(sortByCategoryButton);
         sortByCategoryButton.click();
-     //   BrowserWrapper.sleep(1);
+        BrowserWrapper.sleep(1);
     }
 
     public void sortByEmailDoubleButtonClick(){
@@ -356,10 +356,12 @@ public class ManagerDashBordPage extends BasePage {
     }
 
     public boolean checkTitleDetails(){
+        System.out.println(getTestStale(formMainTextLabel));
         return getTestStale(formMainTextLabel).equals(information);
     }
 
     public boolean checkTitleEdit(){
+        System.out.println(getTestStale(formMainTextLabel));
         return getTestStale(formMainTextLabel).equals(edit);
     }
 
