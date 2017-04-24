@@ -35,7 +35,7 @@ public class AddUserPageTest extends BaseTest {
     }
 
 
-    @Test(groups = {"Functional"})
+    @Test(groups = {"unSucceffuly"})
     public void isElementsPresentAddUserTest() throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage();
@@ -51,9 +51,9 @@ public class AddUserPageTest extends BaseTest {
         Assert.assertTrue(addUserPage.isPageReady());
 
     }
-//
 
-    @Test(groups = {"Other"})
+
+    @Test(groups = {"Succefully"})
     public void successfulAddNewUserTest() throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AllUsersPage allUsersPage = new AllUsersPage();
@@ -68,7 +68,7 @@ public class AddUserPageTest extends BaseTest {
 
     }
 
-    @Test(groups = {"Functional"})
+    @Test(groups = {"unSuccefully"})
     public void noRoleChangedAddNewUserTest() throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage();
@@ -83,7 +83,7 @@ public class AddUserPageTest extends BaseTest {
 
     }
 
-    @Test(groups = {"Functional"})
+    @Test(groups = {"unSuccefully"})
     public void noPasswordConfirmationAddNewUserTest() throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage();
@@ -135,7 +135,7 @@ public class AddUserPageTest extends BaseTest {
     }
 
 
-    @Test(groups = {"Other"})
+    @Test(groups = {"unSuccefully"})
     public void noRequiredEmailTest() throws Exception {
         // BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage();
@@ -149,7 +149,7 @@ public class AddUserPageTest extends BaseTest {
         System.out.println("Email field is required but empty");
     }
 
-    @Test
+    @Test(groups = {"unSucceffully"})
     public void noRequiredPasswordTest() throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage();
@@ -163,7 +163,7 @@ public class AddUserPageTest extends BaseTest {
         System.out.println("Password field is required but empty");
     }
 
-    @Test(dataProvider = "validInformation")
+    @Test(dataProvider = "validInformation",groups = {"Succefully"})
     public void validInfoAddNewUserTest(String addUserName, String addUserPassword) throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AllUsersPage allUsersPage = new AllUsersPage();
@@ -179,7 +179,7 @@ public class AddUserPageTest extends BaseTest {
     }
 
 
-    @Test(dataProvider = "notValidEmails")
+    @Test(dataProvider = "notValidEmails", groups = {"unSuccefully"})
     public void notValidEmailsAddNewUserTest(String addUserName, String addUserPassword) throws Exception {
        // BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage();
@@ -195,7 +195,7 @@ public class AddUserPageTest extends BaseTest {
 
     }
 
-    @Test(dataProvider = "notValidPasswords")
+    @Test(dataProvider = "notValidPasswords", groups = {"unSuccefully"})
     public void notValidPasswordsAddNewUserTest(String addUserName, String addUserPassword) throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage();

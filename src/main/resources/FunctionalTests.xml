@@ -8,15 +8,15 @@
 
             <define name="All">
 
-                <include name="Functional"/>
+                <include name="Sucefully"/>
 
-                <include name="Other"/>
+                <include name="unSucefully"/>
 
             </define>
 
             <run>
 
-                <include name="Functional"/>
+                <include name="unSucefully"/>
 
             </run>
 
