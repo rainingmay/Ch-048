@@ -1,13 +1,10 @@
 package pages.admin;
 
+
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import utils.*;
 import utils.databaseutil.UserDAO;
-
 import java.util.*;
 
 /**
@@ -16,7 +13,7 @@ import java.util.*;
 public class AllUsersPageTest extends BaseTest {
 
     @BeforeMethod
-    public void before() {
+    public void before() throws Exception {
         Driver.initialization();
     }
 
@@ -122,9 +119,9 @@ public class AllUsersPageTest extends BaseTest {
     }
 
 
-    @Test(dataProvider = "loginData")
-    public void nextPageButtonTest(String login, String password) {
-        AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(login, password);
+    @Test
+    public void nextPageButtonTest() {
+        AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
         BrowserWrapper.waitForPage();
         AllUsersPage allUsersPage1 = allUsersPage.toNextPage();
         BrowserWrapper.waitForPage();

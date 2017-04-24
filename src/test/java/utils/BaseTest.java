@@ -1,8 +1,11 @@
 package utils;
 
+import org.dbunit.dataset.DataSetException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import utils.Driver;
+
+import java.io.IOException;
 
 public class BaseTest {
 
@@ -20,7 +23,7 @@ public class BaseTest {
 
 
     @BeforeClass
-    public void before(){
+    public void before() throws IOException, DataSetException, ClassNotFoundException, Exception {
         Driver.initialization();
     }
 
