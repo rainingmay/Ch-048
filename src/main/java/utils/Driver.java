@@ -7,6 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 
@@ -41,24 +42,23 @@ public class Driver {
     private static WebDriver driver;
 
     public static void initialization() {
-        System.out.println("Step 1");
+
 
         //Firefox options
-         ProfilesIni profile = new ProfilesIni();
+        ProfilesIni profile = new ProfilesIni();
         FirefoxProfile ffProfile = profile.getProfile(FIREFOX_PROFILE_NAME);
         ffProfile.setAcceptUntrustedCertificates(true);
         ffProfile.setAssumeUntrustedCertificateIssuer(false);
 
         //Chrome options
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--no-sandbox");
+        options.addArguments("--ignore-certificate-errors");
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
 
 
         Properties properties = new Properties();
         try {
-            System.out.println("Step 2");
             InputStream inputStream = Driver.class.getResourceAsStream("/driver.properties");
             properties.load(inputStream);
         } catch (IOException e) {
@@ -67,7 +67,13 @@ public class Driver {
 
 
         String browserType = properties.getProperty("browserType");
+        String driverType = properties.getProperty("driverType");
+        String driverPath = properties.getProperty("driverPath");
+
+
         System.out.println(browserType);
+
+
         switch (browserType) {
             case "firefox":
                 System.setProperty(FIREFOX_WEBDRIVER, WINDOWS_FIREFOX_WEBDRIVER_PATH);
@@ -95,7 +101,7 @@ public class Driver {
                 break;
 
             case "chromeMacOS":
-               // System.setProperty(CHROME_WEBDRIVER, UNIX_CHROME_WEBDRIVER_PATH);
+                System.setProperty(driverType, driverPath);
                 driver = new ChromeDriver(capabilities);
                 break;
 
