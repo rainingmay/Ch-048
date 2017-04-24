@@ -2,8 +2,11 @@ package utils;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
 
 import java.util.concurrent.TimeUnit;
 
@@ -42,9 +45,15 @@ public class Driver {
                 break;
         }
 
+
+
+
         driver = new FirefoxDriver(ffProfile);
+
         driver.get(BASE_URL);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+
+
 
     }
     public static WebDriver instance(){

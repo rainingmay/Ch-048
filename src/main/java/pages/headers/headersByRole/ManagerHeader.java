@@ -3,7 +3,7 @@ package pages.headers.headersByRole;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.manager.AddNewDoctorPage;
-import pages.manager.HospitalsPage;
+import pages.manager.ManagerDashBordPage;
 import pages.manager.ModerationFeedBackPage;
 
 
@@ -43,9 +43,9 @@ public class ManagerHeader extends AuthorizedHeader {
         return new AddNewDoctorPage();
     }
 
-    public HospitalsPage managePage() {
+    public ManagerDashBordPage managePage() {
         hospitals.click();
-        return new HospitalsPage();
+        return new ManagerDashBordPage();
     }
 
     public ModerationFeedBackPage feedBackPage() {

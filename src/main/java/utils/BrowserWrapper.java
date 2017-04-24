@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -15,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class BrowserWrapper {
 
-    private static WebDriverWait wait = new WebDriverWait(Driver.instance(),25,250);
+    private static WebDriverWait wait = new WebDriverWait(Driver.instance(),30,250);
 
 
 
@@ -43,6 +44,10 @@ public class BrowserWrapper {
         wait.until(ExpectedConditions.elementToBeClickable(by));
     }
 
+
+    public static void waitUntiElementsVisible(List<WebElement> list){
+        wait.until(ExpectedConditions.visibilityOfAllElements(list));
+    }
 
     public static void waitUntilElementVisible(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
