@@ -16,23 +16,21 @@ import utils.Driver;
 
 public class AddHospitalTest extends BaseTest {
 
-    private static final String EMAIL = "admin@hospitals.ua";
-    private static final String PASSWORD = "1111";
     private static final String ALL_HOSPITALS_PAGE_XPATH_IDENTIFICATION = "/html/body/section/div/div/div/div[1]/div[1]/a[1]";
     private static final String ADD_HOSPITAL_PAGE_XPATH_IDENTIFICATION = "//*[@id=\"image-uploaded\"]";
     private static final String ALL_USERS_PAGE_ID_IDENTIFICATION = "#searchButton";
 
 
-    @BeforeMethod(alwaysRun = true)
-    public void before() {
-        BaseNavigation.loginAsAdmin(EMAIL, PASSWORD);
+    @BeforeMethod
+    public void beforeMethod() {
+        BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
         BrowserWrapper.waitUntilElementIsPresent(By.id(ALL_USERS_PAGE_ID_IDENTIFICATION));
 
     }
 
 
     @Test(dataProvider = "validHospitalAddress")
-    public void addNewHospitalWithValidDataTest(String hospitalAddress, String hospitalName, String hospitalDescription) {
+    public void addNewHospitalWithValidDataTest(String hospitalAddress, String hospitalName, String hospitalDescription) throws Exception {
 
             BrowserWrapper.waitUntilElementClickableByLocator(By.id(ALL_USERS_PAGE_ID_IDENTIFICATION));
             HospitalListPage hospitalListPage = new HospitalListPage();
@@ -83,7 +81,7 @@ public class AddHospitalTest extends BaseTest {
     @Test(dataProvider = "editHospitalBuildingAndStreet")
     public void editHospitalTest(String building, String street, int hospitalCountForEdit) throws Exception {
         try {
-            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(EMAIL, PASSWORD);
+            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
             BrowserWrapper.waitUntilElementClickableByLocator(By.id(ALL_USERS_PAGE_ID_IDENTIFICATION));
 
             HospitalListPage hospitalListPage = new HospitalListPage();
@@ -113,11 +111,7 @@ public class AddHospitalTest extends BaseTest {
     @Test(dataProvider = "invalidHospitalAddress")
     public void addNewHospitalWithInvalidDataTest(String hospitalAddress, String hospitalName, String hospitalDescription) throws Exception {
 
-        WebDriverWait wait = new WebDriverWait(Driver.instance(), 10);
-
-        AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(EMAIL, PASSWORD);
         BrowserWrapper.waitUntilElementClickableByLocator(By.id(ALL_USERS_PAGE_ID_IDENTIFICATION));
-
         HospitalListPage hospitalListPage = new HospitalListPage();
         hospitalListPage.header.goToAllHospitalsPage();
         BrowserWrapper.waitUntilElementClickableByLocator(By.xpath(ALL_HOSPITALS_PAGE_XPATH_IDENTIFICATION));
@@ -169,8 +163,8 @@ public class AddHospitalTest extends BaseTest {
     }
 
     @AfterMethod
-    public void after() {
-
+    public void afterMethod() {
+        Driver.instance().manage().deleteAllCookies();
         BaseNavigation.logout();
     }
 }
