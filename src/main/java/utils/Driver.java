@@ -122,7 +122,7 @@ public class Driver {
 
 
         driver.get(BASE_URL);
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
 
