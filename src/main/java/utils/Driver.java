@@ -1,13 +1,19 @@
 package utils;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -16,46 +22,111 @@ import java.util.concurrent.TimeUnit;
 public class Driver {
 
     private static final String FIREFOX_PROFILE_NAME = "default";
-    private static final String WEBDRIVER_NAME = "webdriver.gecko.driver";
-    private static final String LINUX_WEBDRIVER_PATH = "src/main/resources/geckodriver";
-    private static final String MACOS_WEBDRIVER_PATH = "src/main/resources/geckodriver";
-    private static final String WEBDRIVER_PATH = "src/main/resources/geckodriver.exe";
+
+    private static final String FIREFOX_WEBDRIVER = "webdriver.gecko.driver";
+    private static final String CHROME_WEBDRIVER = "chromedriver";
+    private static final String WINDOWS_IE_WEBDRIVER = "MicrosoftWebDriver";
+
+
+    private static final String UNIX_FIREFOX_WEBDRIVER_PATH = "src/main/resources/geckodriver";
+    private static final String WINDOWS_FIREFOX_WEBDRIVER_PATH = "src/main/resources/geckodriver.exe";
+
+    private static final String UNIX_CHROME_WEBDRIVER_PATH = "src/main/resources/chromedriver";
+    private static final String WINDOWS_CHROME_WEBDRIVER_PATH = "src/main/resources/chromedriver.exe";
+
+    private static final String WINDOWS_IE_WEBDRIVER_PATH = "src/main/resources/MicrosoftWebDriver.exe";
+
+
     private static final String BASE_URL = "https://localhost:8443/HospitalSeeker/";
 
     private static WebDriver driver;
 
+    public static void initialization() {
 
-    public static void initialization(){
+
+        //Firefox options
         ProfilesIni profile = new ProfilesIni();
         FirefoxProfile ffProfile = profile.getProfile(FIREFOX_PROFILE_NAME);
         ffProfile.setAcceptUntrustedCertificates(true);
         ffProfile.setAssumeUntrustedCertificateIssuer(false);
-        String osName = System.getProperty("os.name");
 
-        switch (osName){
-            case "Linux":
-                System.setProperty(WEBDRIVER_NAME, LINUX_WEBDRIVER_PATH);
+        //Chrome options
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--ignore-certificate-errors");
+        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+
+
+        Properties properties = new Properties();
+        try {
+            InputStream inputStream = Driver.class.getResourceAsStream("/driver.properties");
+            properties.load(inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        String browserType = properties.getProperty("browserType");
+        String driverType = properties.getProperty("driverType");
+        String driverPath = properties.getProperty("driverPath");
+
+
+        System.out.println(browserType);
+
+
+        switch (browserType) {
+            case "firefox":
+                System.setProperty(FIREFOX_WEBDRIVER, WINDOWS_FIREFOX_WEBDRIVER_PATH);
+                driver = new FirefoxDriver(ffProfile);
                 break;
-            case "Windows 10":
-            case "Windows 7":
-                System.setProperty(WEBDRIVER_NAME, WEBDRIVER_PATH);
+
+            case "chrome":
+                System.setProperty(CHROME_WEBDRIVER, WINDOWS_CHROME_WEBDRIVER_PATH);
+                driver = new ChromeDriver(capabilities);
                 break;
-            case "MacOS":
-                System.setProperty(WEBDRIVER_NAME, MACOS_WEBDRIVER_PATH);
+
+            case "firefoxLinux":
+                System.setProperty(FIREFOX_WEBDRIVER, UNIX_FIREFOX_WEBDRIVER_PATH);
+                driver = new FirefoxDriver(ffProfile);
+                break;
+
+            case "firefoxMacOS":
+               // System.setProperty(FIREFOX_WEBDRIVER, UNIX_FIREFOX_WEBDRIVER_PATH);
+                driver = new FirefoxDriver(ffProfile);
+                break;
+
+            case "chromeLinux":
+                System.setProperty(CHROME_WEBDRIVER, UNIX_CHROME_WEBDRIVER_PATH);
+                driver = new ChromeDriver(capabilities);
+                break;
+
+            case "chromeMacOS":
+                System.setProperty(driverType, driverPath);
+                driver = new ChromeDriver(capabilities);
+                break;
+
+            case "internetExplorer":
+                System.setProperty(WINDOWS_IE_WEBDRIVER, WINDOWS_IE_WEBDRIVER_PATH);
+                driver = new InternetExplorerDriver();
+                break;
+
+            default:
+                System.out.println(browserType + " is invalid");
                 break;
         }
 
 
 
 
-        driver = new FirefoxDriver(ffProfile);
+        //driver = new FirefoxDriver(ffProfile);
+
 
         driver.get(BASE_URL);
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-
-
-
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
+
+
+
     public static WebDriver instance(){
         return driver;
     }
