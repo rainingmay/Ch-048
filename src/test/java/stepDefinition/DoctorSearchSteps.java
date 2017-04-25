@@ -45,7 +45,6 @@ public class DoctorSearchSteps  {
     @Then("^Show rows in table with doctors that match particular specialization$")
     public void show_rows_in_table_with_doctors_that_match_particular_specialization() throws Throwable {
         for(String string: managerDashBordPage.getColumn("specialization")){
-            System.out.println(string);
             if(!string.equals("Dentist")) {
                 throw new AssertionError("Displayed wrong list of doctors");
             }
@@ -67,7 +66,6 @@ public class DoctorSearchSteps  {
     @Then("^Show rows in table with doctors that matched typed email$")
     public void show_rows_in_table_with_doctors_that_matched_typed_email() throws Throwable {
         for(String string: managerDashBordPage.getColumn("email")){
-            System.out.println("email: " + string);
             if(!string.equals("doctor.cb@hospitals.ua")){
                 throw  new AssertionError("Displayed wrong list of doctors");
             }
@@ -88,7 +86,6 @@ public class DoctorSearchSteps  {
     @Then("^Show rows in table with doctors that match typed first name$")
     public void show_rows_in_table_with_doctors_that_match_typed_first_name() throws Throwable {
         for(String string: managerDashBordPage.getColumn("firstName")){
-            System.out.println("fname" + string);
             if(!string.equals("Chester")){
                 throw  new AssertionError("Displayed wrong list of doctors");
             }

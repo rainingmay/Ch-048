@@ -40,16 +40,13 @@ public class DoctorSortingSteps {
     @Then("^Doctors in table is sorted by their emails ascending$")
     public void doctors_in_table_is_sorted_by_their_emails_ascending() throws Throwable {
        List<String> emails = managerDashBordPage.getColumn("email");
-        System.out.println("emails asc:" + emails);
-        Assert.assertTrue(BrowserWrapper.isSorted(emails), "List not sorted by emails ascending");
+       Assert.assertTrue(BrowserWrapper.isSorted(emails), "List not sorted by emails ascending");
     }
 
     @Then("^Doctors in table is sorted by their email descending$")
     public void doctors_in_table_is_sorted_by_their_email_descending() throws Throwable {
         List<String> emails = managerDashBordPage.getColumn("email");
-        System.out.println("emal desc bef :" +emails);
         Collections.reverse(emails);
-        System.out.println("email desc aft :" + emails);
         Assert.assertTrue(BrowserWrapper.isSorted(emails), "List not sorted by emails descending");
     }
 

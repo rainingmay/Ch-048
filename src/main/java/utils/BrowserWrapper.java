@@ -124,9 +124,7 @@ public class BrowserWrapper {
       b = clickWithStaleException(element);
 
       c = clickWithStaleException(element);
-        System.out.print(a);
-        System.out.print(b);
-        System.out.println(c);
+
     }
 
 

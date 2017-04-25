@@ -228,25 +228,21 @@ public class ManagerDashBordPage implements PageInitializer{
     public void sortByEmailButtonClick(){
         BrowserWrapper.waitUntilElementVisible(sortByEmailButton);
         sortByEmailButton.click();
-      //  BrowserWrapper.sleep(1);
     }
 
     public void sortByFirstNameButtonClick(){
         BrowserWrapper.waitUntilElementVisible(sortByFirstNameButton);
         sortByFirstNameButton.click();
-      //  BrowserWrapper.sleep(1);
     }
 
     public void sortByLastNameButtonClick(){
         BrowserWrapper.waitUntilElementVisible(sortByLastNameButton);
         sortByLastNameButton.click();
-    //    BrowserWrapper.sleep(1);
     }
 
     public void sortBySpecializationButtonClick(){
         BrowserWrapper.waitUntilElementVisible(sortBySpecializationButton);
         sortBySpecializationButton.click();
-     //   BrowserWrapper.sleep(1);
     }
 
     public void sortByCategoryButtonClick(){
@@ -285,11 +281,6 @@ public class ManagerDashBordPage implements PageInitializer{
         BrowserWrapper.sleep(1);
     }
 
-    public String getValue(String row, String colName){
-        String td = tdFinder(colName);
-
-       return DriverInitializer.instance().findElement(By.cssSelector("tbody tr:nth-child(" + row + ") td:nth-child(" + td + ")")).getText();
-    }
 
     public String tdFinder(String colName){
         String td = null;
@@ -357,12 +348,10 @@ public class ManagerDashBordPage implements PageInitializer{
     }
 
     public boolean checkTitleDetails(){
-        System.out.println(getTestStale(formMainTextLabel));
         return getTestStale(formMainTextLabel).equals(information);
     }
 
     public boolean checkTitleEdit(){
-        System.out.println(getTestStale(formMainTextLabel));
         return getTestStale(formMainTextLabel).equals(edit);
     }
 
