@@ -1,13 +1,12 @@
 package utils;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.firefox.internal.ProfilesIni;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -19,7 +18,9 @@ public class BrowserWrapper {
     private static WebDriverWait wait = new WebDriverWait(Driver.instance(),30,250);
 
 
-
+    public static String getTitle(){
+        return Driver.instance().getTitle();
+    }
 
     public static boolean isElementPresent(WebElement webElement) {
         try {
@@ -111,9 +112,53 @@ public class BrowserWrapper {
                 LocatorFrom,xto,yto);
     }
 
-    public static void doubleClick(WebElement element){
+    public static void doubleClickJs(WebElement element){
         JavascriptExecutor js = (JavascriptExecutor)Driver.instance();
         String doubleClickJS = "if(document.createEvent){var evObj = document.createEvent('MouseEvents');evObj.initEvent('dblclick',true, false); arguments[0].dispatchEvent(evObj);} else if(document.createEventObject){ arguments[0].fireEvent('ondblclick');}window.stop();";
         js.executeScript(doubleClickJS, element);
     }
+    public static void tripleClick(WebElement element){
+      boolean a;
+      boolean b;
+      boolean c;
+      a = clickWithStaleException(element);
+
+      b = clickWithStaleException(element);
+
+      c = clickWithStaleException(element);
+        System.out.print(a);
+        System.out.print(b);
+        System.out.println(c);
+    }
+
+
+
+    public static boolean clickWithStaleException(WebElement element){
+        boolean result = false;
+        int attempts = 0;
+        while(attempts < 5) {
+            try {
+                element.click();
+                result = true;
+                break;
+            } catch(StaleElementReferenceException e) {
+            }
+            attempts++;
+        }
+        return result;
+    }
+
+
+    public static boolean isSorted(List<String> list){
+        String previous = ""; // empty string: guaranteed to be less than or equal to any other
+
+        for (final String current: list) {
+            if (current.compareTo(previous) < 0)
+                return false;
+            previous = current;
+        }
+
+        return true;
+    }
+
 }

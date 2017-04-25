@@ -3,15 +3,19 @@ package stepDefinition;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
+import cucumber.api.java.en.Given;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriverException;
+
 import utils.Driver;
 
 /**
  * Created by radgast on 22.04.17.
  */
 public class Hook {
+
+
     @Before
     public void setUp(){
         Driver.initialization();
@@ -31,7 +35,6 @@ public class Hook {
 
         }
         Driver.close();
-
     }
 
 }

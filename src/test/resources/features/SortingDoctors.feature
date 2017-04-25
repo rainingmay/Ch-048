@@ -1,30 +1,46 @@
-Feature: Searching doctors on a hospital page table
-Describe: Check ability of manager to search doctors on this page
+Feature: Sorting doctors in particular hospital table
+  As a manager i want to sort doctors according to my requirements
+  So I can push a button at the header of row and sort users
 
   Background:
-    Given the manager is on dashboard of particular hospital
+    Given the manager is on dashboard of particular hospital in order to sort
 
-  Scenario: Showing respective number of users
-    When Manager Select number doctors per page from selector
-    Then Number of doctors on page in table equals number
+  Scenario: Sorting by the email ascending
+    When Manager click on the email sorting button one time
+    Then Doctors in table is sorted by their emails ascending
 
-  Scenario: Doctors filtration by specialization
-    When Manager select specialization from selector
-    Then Show rows in talbe with doctors that match particular specialization
+  Scenario: Sorting by the email descending
+    When Manager click on the email sorting button two times
+    Then Doctors in table is sorted by their email descending
 
+  Scenario: Sorting by the first name ascending
+    When Manager click on the first name sorting button one time
+    Then Doctors in table is sorted by their first name ascending
 
-  Scenario: Searching users by email
-    When Manager chose email from search list
-    And Type email in text field
-    Then Show rows in table with doctors that matched typed email
+  Scenario: Sorting by the fist name descending
+    When Manager click on the first name sorting button two times
+    Then Doctors in table is sorted by their first name descending
 
-  Scenario: Searching users by first name
-    When Manager chose first name from search list
-    And Type name in text field
-    Then Show rows in table with doctors that match typed first name
+  Scenario: Sorting by the last name ascending
+    When Manager click on the last name sorting button one time
+    Then Doctors in table is sorted by their last name ascending
 
-  Scenario: Reset table to default
-    When Manager check default number of rows in table
-    And Then make simple find
-    And Then click on clear button
-    Then Show rows in the table in initial condition
+  Scenario: Sorting by the last name descending
+    When Manager click on the last name sorting button two times
+    Then Doctors in table is sorted by their last name descending
+
+  Scenario: Sorting by the specialization ascending
+    When Manager click on the specialization sorting button one time
+    Then Doctors in table is sorted by their specialization ascending
+
+  Scenario: Sorting by the specialization descending
+    When Manager click on the specialization sorting button two times
+    Then Doctors in table is sorted by their specialization descending
+
+  Scenario: Sorting by the category ascending
+    When Manager click on the category sorting button one time
+    Then Doctors in table is sorted by their category ascending
+
+  Scenario: Sorting by the category descending
+    When Manager click on the category sorting button two times
+    Then Doctors in table is sorted by their category descending
