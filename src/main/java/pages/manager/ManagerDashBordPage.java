@@ -1,9 +1,6 @@
 package pages.manager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.InvalidSelectorException;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import pages.PageInitializer;
 import pages.headers.headersByRole.ManagerHeader;
@@ -101,7 +98,7 @@ public class ManagerDashBordPage implements PageInitializer{
     @FindBy(xpath = "//*[@id=\"detailForm\"]/h1")
     private WebElement formMainTextLabel;
 
-        @FindBy(css="#detailForm #firstName")
+    @FindBy(css="#detailForm #firstName")
     private WebElement formFirstNameInput;
 
     @FindBy(id="lastName")
@@ -172,7 +169,11 @@ public class ManagerDashBordPage implements PageInitializer{
     private WebElement tableBody;
 
     @FindBy(css = "div#deleteDoctorModal h3")
-    public WebElement deleteHeader;
+    private WebElement deleteHeader;
+
+    @FindBy(id = "deleteButton")
+    private WebElement deleteConfirmButton;
+
 
     public String information = "INFORMATION ABOUT DOCTOR";
     public String edit = "EDIT DOCTOR";
@@ -433,8 +434,34 @@ public class ManagerDashBordPage implements PageInitializer{
     }
 
 
+    public void enterFullNameDetailedForm(String firstName, String lastName){
+        BrowserWrapper.waitUntilElementVisible(formFirstNameInput);
+        formFirstNameInput.clear();
+        formFirstNameInput.sendKeys(firstName);
+        BrowserWrapper.waitUntilElementVisible(formLastNameInput);
+        formLastNameInput.clear();
+        formLastNameInput.sendKeys(lastName);
+    }
 
+    public void enterEducation(String eduactaion){
+        BrowserWrapper.waitUntilElementVisible(formEducationInput);
+        formEducationInput.clear();
+        formEducationInput.sendKeys(eduactaion);
+    }
 
+    public void enterAddress(String address){
+        BrowserWrapper.waitUntilElementVisible(formAddressInput);
+        formAddressInput.clear();
+        formAddressInput.sendKeys(address);
+    }
+
+    public void submitEdition(){
+        formSaveButton.click();
+    }
+
+    public  void deleteSubmit(){
+        deleteConfirmButton.click();
+    }
     public ManagerDashBordPage() {
         managerHeader = new ManagerHeader();
         pageInitialization();

@@ -1,11 +1,15 @@
 package stepDefinition;
 
 import cucumber.api.java.en.*;
+import gherkin.lexer.Th;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import pages.manager.HospitalsPage;
 import pages.manager.ManagerDashBordPage;
 import utils.BaseNavigation;
 import utils.BrowserWrapper;
+
+import java.util.List;
 
 /**
  * Created by radgast on 24.04.17.
@@ -15,6 +19,11 @@ public class DoctorActionsSteps {
     public static final String MANAGER_LOGIN = "manager.jh@hospitals.ua";
     public static final String MANAGER_PASSWORD = "1111";
     public static final String DOCTOR_NAME = "Chester";
+    public static final String EDITED_DOCTOR_FIRST_NAME = "Johny";
+    public static final String EDITED_DOCTOR_LAST_NAME = "Sins";
+    public static final String EDITED_EDUCATION ="Cambridge";
+    public static final String EDITED_ADDRESS = "New York";
+
     ManagerDashBordPage managerDashBordPage;
 
     @Given("^the manager is on dashboard of particular hospital in order to interact with doctor$")
@@ -67,4 +76,30 @@ public class DoctorActionsSteps {
     public void name_of_doctor_in_details_form_should_match_with_name_from_table() throws Throwable {
         Assert.assertEquals(managerDashBordPage.getDetailedName(), DOCTOR_NAME, "Name in detailed form not match with table");
     }
+
+    @And("^Manager type different first name, second name, education and address$")
+    public void manager_type_different_first_name_second_name_education_and_address() throws Throwable{
+            managerDashBordPage.enterFullNameDetailedForm(EDITED_DOCTOR_FIRST_NAME,EDITED_DOCTOR_LAST_NAME);
+            managerDashBordPage.enterEducation(EDITED_EDUCATION);
+            managerDashBordPage.enterAddress(EDITED_ADDRESS);
+            managerDashBordPage.submitEdition();
+    }
+
+    @Then("^First name in table changed to proper name$")
+    public void first_name_in_table_changed_to_proper_name() throws Throwable{
+            List<String> list = managerDashBordPage.getCoulumn("name");
+            Assert.assertTrue(list.stream().anyMatch(e -> e.equals(EDITED_DOCTOR_FIRST_NAME)));
+    }
+
+    @And("^Confirm deletion$")
+    public void confirm_deletion(){
+            managerDashBordPage.deleteSubmit();
+    }
+
+    @Then("^Doctor shouldn't appear in the table$")
+    public void doctor_should_not_appear_in_the_table() throws Throwable{
+        List<String> list = managerDashBordPage.getCoulumn("name");
+        Assert.assertTrue(list.stream().noneMatch(e -> e.equals(DOCTOR_NAME)));
+    }
+
 }
