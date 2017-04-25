@@ -2,7 +2,7 @@ package pages.admin;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.allUsers.BasePage;
+import pages.PageInitializer;
 import pages.headers.headersByRole.AdminHeader;
 import utils.BrowserWrapper;
 
@@ -13,11 +13,12 @@ import java.awt.event.KeyEvent;
 /**
  * Created by Jeksonis on 06.04.2017.
  */
-public class AddNewHospitalPage extends BasePage {
+public class AddNewHospitalPage implements PageInitializer {
     public AdminHeader header;
 
     public AddNewHospitalPage(){
         this.header = new AdminHeader();
+        pageInitialization();
     }
 
     @FindBy(id = "image-uploaded")

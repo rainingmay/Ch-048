@@ -3,7 +3,7 @@ package pages.manager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.allUsers.BasePage;
+import pages.PageInitializer;
 import pages.headers.headersByRole.ManagerHeader;
 import utils.DriverInitializer;
 
@@ -11,7 +11,7 @@ import utils.DriverInitializer;
 /**
  * Created by ytomktc on 06.04.2017.
  */
-public class DepartmentsPage extends BasePage {
+public class DepartmentsPage implements PageInitializer {
 
     public ManagerHeader managerHeader;
     @FindBy(xpath = "/html/body/section/div/div/h1")
@@ -54,5 +54,7 @@ public class DepartmentsPage extends BasePage {
 
     public DepartmentsPage() {
         managerHeader = new ManagerHeader();
+        pageInitialization();
+
     }
 }

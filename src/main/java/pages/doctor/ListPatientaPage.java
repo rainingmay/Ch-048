@@ -4,12 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pages.allUsers.BasePage;
+import pages.PageInitializer;
 import pages.headers.headersByRole.DoctorHeader;
 import utils.BrowserWrapper;
 import utils.DriverInitializer;
 
-public class ListPatientaPage extends BasePage {
+public class ListPatientaPage implements PageInitializer {
     public DoctorHeader header;
     WebDriverWait wait = new WebDriverWait(DriverInitializer.instance(), 5);
     @FindBy(className = "label[for=\"usr\"]")
@@ -136,6 +136,7 @@ public class ListPatientaPage extends BasePage {
 
     public ListPatientaPage() {
         this.header = new DoctorHeader();
+        pageInitialization();
     }
 
 }

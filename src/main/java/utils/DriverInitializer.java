@@ -44,7 +44,6 @@ public class DriverInitializer {
 
     public static void initialization() {
 
-
         //Firefox options
         ProfilesIni profile = new ProfilesIni();
         FirefoxProfile ffProfile = profile.getProfile(FIREFOX_PROFILE_NAME);

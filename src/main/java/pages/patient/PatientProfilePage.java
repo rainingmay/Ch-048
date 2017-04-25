@@ -3,15 +3,16 @@ package pages.patient;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
-import pages.allUsers.BasePage;
+import pages.PageInitializer;
 import pages.headers.headersByRole.PatientHeader;
 
 
-public class PatientProfilePage extends BasePage {
+public class PatientProfilePage implements PageInitializer {
 
     public PatientHeader patientHeader;
 
-    private PatientHeader header;
+
+
     @FindBy(
             xpath = "//*[@id=\"image-div\"]/figure/a"
     )
@@ -231,6 +232,8 @@ public class PatientProfilePage extends BasePage {
     private WebElement submitChangesButton;
 
     public PatientProfilePage() {
+        this.patientHeader = new PatientHeader();
+        pageInitialization();
     }
 
 

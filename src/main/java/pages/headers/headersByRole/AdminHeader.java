@@ -2,6 +2,7 @@ package pages.headers.headersByRole;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pages.PageInitializer;
 import pages.admin.AddNewHospitalPage;
 import pages.admin.AddUserPage;
 import pages.admin.AllUsersPage;
@@ -12,8 +13,10 @@ import utils.BrowserWrapper;
 /**
  * Created by Evgen on 06.04.2017.
  */
-public class AdminHeader extends AuthorizedHeader {
-
+public class AdminHeader extends AuthorizedHeader implements PageInitializer {
+    public AdminHeader() {
+        pageInitialization();
+    }
 
     @FindBy(linkText = "Actions")
     private WebElement actions;

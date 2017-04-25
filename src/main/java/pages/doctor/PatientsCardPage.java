@@ -3,11 +3,11 @@ package pages.doctor;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.allUsers.BasePage;
+import pages.PageInitializer;
 import pages.headers.headersByRole.DoctorHeader;
 import utils.BrowserWrapper;
 
-public class PatientsCardPage extends BasePage {
+public class PatientsCardPage implements PageInitializer {
     public DoctorHeader header;
 
     @FindBy(css = "a.btn.btn-info")
@@ -31,5 +31,6 @@ public class PatientsCardPage extends BasePage {
     }
     public void editButtonClick(){
         editRecord.click();
+        pageInitialization();
     }
 }

@@ -2,6 +2,7 @@ package pages.headers.headersByRole;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pages.PageInitializer;
 import pages.allUsers.HospitalSeekerHomePage;
 import pages.headers.BaseHeader;
 import utils.BrowserWrapper;
@@ -9,7 +10,11 @@ import utils.BrowserWrapper;
 /**
  * Created by Evgen on 12.04.2017.
  */
-public class AuthorizedHeader extends BaseHeader{
+public class AuthorizedHeader extends BaseHeader implements PageInitializer {
+
+    public AuthorizedHeader() {
+        pageInitialization();
+    }
 
     @FindBy(css = "ul.my-navbar>li:nth-last-child(3)")
     protected WebElement profileButton;

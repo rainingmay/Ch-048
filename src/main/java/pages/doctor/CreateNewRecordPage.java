@@ -3,10 +3,10 @@ package pages.doctor;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.allUsers.BasePage;
+import pages.PageInitializer;
 import pages.headers.headersByRole.DoctorHeader;
 
-public class CreateNewRecordPage extends BasePage {
+public class CreateNewRecordPage implements PageInitializer {
     public DoctorHeader header;
     @FindBy(className = "label[for=\"complaint\"]")
     private WebElement complaintLabel;
@@ -35,6 +35,7 @@ public class CreateNewRecordPage extends BasePage {
 
     public CreateNewRecordPage() {
         this.header = new DoctorHeader();
+        pageInitialization();
     }
 
     public void inputComplaint(String value){

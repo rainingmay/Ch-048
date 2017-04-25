@@ -4,12 +4,12 @@ package pages.doctor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
-import pages.allUsers.BasePage;
+import pages.PageInitializer;
 import pages.headers.headersByRole.DoctorHeader;
 
 import java.util.List;
 
-public class WorkSchedulerPage extends BasePage {
+public class WorkSchedulerPage implements PageInitializer {
 
     public DoctorHeader header;
 
@@ -47,6 +47,7 @@ public class WorkSchedulerPage extends BasePage {
 
     public WorkSchedulerPage( ) {
         this.header = new DoctorHeader();
+        pageInitialization();
     }
     public void dayTabButtonClick (){
         dayTabButton.click();

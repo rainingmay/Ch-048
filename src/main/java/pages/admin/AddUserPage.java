@@ -5,7 +5,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
-import pages.allUsers.BasePage;
+import pages.PageInitializer;
 import pages.headers.headersByRole.AdminHeader;
 import utils.BrowserWrapper;
 
@@ -13,7 +13,7 @@ import utils.BrowserWrapper;
 /**
  * Created by Evgen on 06.04.2017.
  */
-public class AddUserPage extends BasePage {
+public class AddUserPage implements PageInitializer {
 
     public static final String IDFORWAITING = "newUserSubmit";
 
@@ -21,6 +21,7 @@ public class AddUserPage extends BasePage {
 
     public AddUserPage() {
         this.header = new AdminHeader();
+        pageInitialization();
     }
 
 

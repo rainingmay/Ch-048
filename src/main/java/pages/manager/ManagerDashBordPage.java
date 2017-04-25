@@ -5,7 +5,7 @@ import org.openqa.selenium.InvalidSelectorException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.allUsers.BasePage;
+import pages.PageInitializer;
 import pages.headers.headersByRole.ManagerHeader;
 import utils.BrowserWrapper;
 import utils.DriverInitializer;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ManagerDashBordPage extends BasePage {
+public class ManagerDashBordPage implements PageInitializer{
 
     public ManagerHeader managerHeader;
     @FindBy(className = "h1.text-center")
@@ -437,5 +437,6 @@ public class ManagerDashBordPage extends BasePage {
 
     public ManagerDashBordPage() {
         managerHeader = new ManagerHeader();
+        pageInitialization();
     }
 }
