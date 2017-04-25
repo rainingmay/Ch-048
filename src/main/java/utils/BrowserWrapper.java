@@ -159,4 +159,8 @@ public class BrowserWrapper {
         return true;
     }
 
+    public static void waitUntilElementNotStale(WebElement element){
+        wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(element)));
+    }
+
 }

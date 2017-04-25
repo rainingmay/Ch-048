@@ -34,6 +34,7 @@ public class Hook {
             }
 
         }
+
         DriverInitializer.close();
     }
 

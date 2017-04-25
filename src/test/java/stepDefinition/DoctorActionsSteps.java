@@ -1,8 +1,6 @@
 package stepDefinition;
 
 import cucumber.api.java.en.*;
-import gherkin.lexer.Th;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import pages.manager.HospitalsPage;
 import pages.manager.ManagerDashBordPage;
@@ -87,7 +85,7 @@ public class DoctorActionsSteps {
 
     @Then("^First name in table changed to proper name$")
     public void first_name_in_table_changed_to_proper_name() throws Throwable{
-            List<String> list = managerDashBordPage.getCoulumn("name");
+            List<String> list = managerDashBordPage.getColumn("firstName");
             Assert.assertTrue(list.stream().anyMatch(e -> e.equals(EDITED_DOCTOR_FIRST_NAME)));
     }
 
@@ -98,7 +96,7 @@ public class DoctorActionsSteps {
 
     @Then("^Doctor shouldn't appear in the table$")
     public void doctor_should_not_appear_in_the_table() throws Throwable{
-        List<String> list = managerDashBordPage.getCoulumn("name");
+        List<String> list = managerDashBordPage.getColumn("firstName");
         Assert.assertTrue(list.stream().noneMatch(e -> e.equals(DOCTOR_NAME)));
     }
 

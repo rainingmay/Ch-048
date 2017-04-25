@@ -101,7 +101,7 @@ public class ManagerDashBordPage implements PageInitializer{
     @FindBy(css="#detailForm #firstName")
     private WebElement formFirstNameInput;
 
-    @FindBy(id="lastName")
+    @FindBy(css = "input#lastName")
     private WebElement formLastNameInput;
 
     @FindBy(id="email")
@@ -297,10 +297,10 @@ public class ManagerDashBordPage implements PageInitializer{
             case "email":
                 td = "2";
                 break;
-            case "first name":
+            case "firstName":
                 td = "3";
                 break;
-            case "last name":
+            case "lastName":
                 td = "4";
                 break;
             case "specialization":
@@ -316,7 +316,7 @@ public class ManagerDashBordPage implements PageInitializer{
         return td;
     }
 
-    public List<String> getCoulumn(String colName){
+    public List<String> getColumn(String colName){
         String td = tdFinder(colName);
         ArrayList<String> list = new ArrayList<>();
 
@@ -435,32 +435,37 @@ public class ManagerDashBordPage implements PageInitializer{
 
 
     public void enterFullNameDetailedForm(String firstName, String lastName){
-        BrowserWrapper.waitUntilElementVisible(formFirstNameInput);
+
+        BrowserWrapper.waitUntilElementNotStale(formFirstNameInput);
         formFirstNameInput.clear();
         formFirstNameInput.sendKeys(firstName);
-        BrowserWrapper.waitUntilElementVisible(formLastNameInput);
+        BrowserWrapper.waitUntilElementNotStale(formLastNameInput);
         formLastNameInput.clear();
         formLastNameInput.sendKeys(lastName);
     }
 
     public void enterEducation(String eduactaion){
-        BrowserWrapper.waitUntilElementVisible(formEducationInput);
+        BrowserWrapper.waitUntilElementNotStale(formEducationInput);
         formEducationInput.clear();
         formEducationInput.sendKeys(eduactaion);
     }
 
     public void enterAddress(String address){
-        BrowserWrapper.waitUntilElementVisible(formAddressInput);
+        BrowserWrapper.waitUntilElementNotStale(formAddressInput);
         formAddressInput.clear();
         formAddressInput.sendKeys(address);
     }
 
     public void submitEdition(){
+        BrowserWrapper.waitUntilElementNotStale(formSaveButton);
+
         formSaveButton.click();
     }
 
     public  void deleteSubmit(){
+        BrowserWrapper.waitUntilElementNotStale(deleteConfirmButton);
         deleteConfirmButton.click();
+        BrowserWrapper.waitUntilElementVisible(hospitalName);
     }
     public ManagerDashBordPage() {
         managerHeader = new ManagerHeader();
