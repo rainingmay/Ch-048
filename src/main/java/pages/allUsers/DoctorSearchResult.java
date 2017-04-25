@@ -14,8 +14,8 @@ import java.util.List;
 public class DoctorSearchResult extends BasePage {
     private BaseHeader header;
 
-    public DoctorSearchResult(WebDriver driver) {
-        super(driver);
+    public DoctorSearchResult() {
+        header = new BaseHeader();
     }
 
     @FindBy(css = "[class='filter-col'])")

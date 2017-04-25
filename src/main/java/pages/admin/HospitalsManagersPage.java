@@ -1,11 +1,11 @@
 package pages.admin;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.allUsers.BasePage;
 import pages.headers.headersByRole.AdminHeader;
+import utils.Driver;
 
 
 /**
@@ -15,9 +15,8 @@ public class HospitalsManagersPage extends BasePage {
 
     public AdminHeader header;
 
-    public HospitalsManagersPage(WebDriver driver) {
-        super(driver);
-        this.header = new AdminHeader(driver);
+    public HospitalsManagersPage() {
+        this.header = new AdminHeader();
     }
 
     public AdminHeader adminHeader;
@@ -31,12 +30,12 @@ public class HospitalsManagersPage extends BasePage {
     private WebElement deleteManager;
 
     public void changeManager(int rowNumber, String name) {
-        selectManager = driver.findElement(By.xpath("tbody tr[" + rowNumber + "] td[3] select"));
+        selectManager = Driver.instance().findElement(By.xpath("tbody tr[" + rowNumber + "] td[3] select"));
         selectManager.findElement(By.linkText(name));
     }
 
     public void deleteManager(int rowNumber) {
-      deleteManager = driver.findElement(By.cssSelector("tbody tr[" + rowNumber + "] btn btn-danger"));
+      deleteManager = Driver.instance().findElement(By.cssSelector("tbody tr[" + rowNumber + "] btn btn-danger"));
       deleteManager.click();
     }
 }

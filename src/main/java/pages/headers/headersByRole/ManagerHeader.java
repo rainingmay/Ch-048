@@ -1,10 +1,9 @@
 package pages.headers.headersByRole;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.manager.AddNewDoctorPage;
-import pages.manager.HospitalsPage;
+import pages.manager.ManagerDashBordPage;
 import pages.manager.ModerationFeedBackPage;
 
 
@@ -13,9 +12,7 @@ import pages.manager.ModerationFeedBackPage;
  */
 public class ManagerHeader extends AuthorizedHeader {
 
-    public ManagerHeader(WebDriver driver) {
-        super(driver);
-    }
+
 
     @FindBy(linkText = "Actions")
     private WebElement actions;
@@ -32,17 +29,17 @@ public class ManagerHeader extends AuthorizedHeader {
 
     public AddNewDoctorPage addNewDoctorPage() {
         addDoctor.click();
-        return new AddNewDoctorPage(driver);
+        return new AddNewDoctorPage();
     }
 
-    public HospitalsPage managePage() {
+    public ManagerDashBordPage managePage() {
         hospitals.click();
-        return new HospitalsPage(driver);
+        return new ManagerDashBordPage();
     }
 
     public ModerationFeedBackPage feedBackPage() {
         feedbacks.click();
-        return new ModerationFeedBackPage(driver);
+        return new ModerationFeedBackPage();
     }
 
 

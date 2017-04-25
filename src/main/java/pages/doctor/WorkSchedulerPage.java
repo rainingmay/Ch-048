@@ -1,7 +1,6 @@
 package pages.doctor;
 
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
@@ -46,9 +45,8 @@ public class WorkSchedulerPage extends BasePage {
 
 
 
-    public WorkSchedulerPage(WebDriver driver) {
-        super(driver);
-        this.header = new DoctorHeader(driver);
+    public WorkSchedulerPage( ) {
+        this.header = new DoctorHeader();
     }
     public void dayTabButtonClick (){
         dayTabButton.click();

@@ -1,6 +1,5 @@
 package pages.patient;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
@@ -12,7 +11,6 @@ public class PatientProfilePage extends BasePage {
 
     public PatientHeader patientHeader;
 
-    private WebDriver driver;
     private PatientHeader header;
     @FindBy(
             xpath = "//*[@id=\"image-div\"]/figure/a"
@@ -232,8 +230,7 @@ public class PatientProfilePage extends BasePage {
     )
     private WebElement submitChangesButton;
 
-    public PatientProfilePage(WebDriver driver) {
-        super(driver);
+    public PatientProfilePage() {
     }
 
 

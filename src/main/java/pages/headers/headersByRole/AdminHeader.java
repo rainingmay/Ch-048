@@ -1,13 +1,12 @@
 package pages.headers.headersByRole;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.admin.AddNewHospitalPage;
 import pages.admin.AddUserPage;
 import pages.admin.AllUsersPage;
-import utils.BrowserWrapper;
 import pages.admin.HospitalListPage;
+import utils.BrowserWrapper;
 
 
 /**
@@ -15,9 +14,6 @@ import pages.admin.HospitalListPage;
  */
 public class AdminHeader extends AuthorizedHeader {
 
-    public AdminHeader(WebDriver driver) {
-        super(driver);
-    }
 
     @FindBy(linkText = "Actions")
     private WebElement actions;
@@ -49,25 +45,25 @@ public class AdminHeader extends AuthorizedHeader {
 
     public AllUsersPage allUsersPage () {
         allUsersIco.click();
-        return new AllUsersPage(driver);
+        return new AllUsersPage();
     }
 
     public AddUserPage goToAddUserPage() {
         actions.click();
         BrowserWrapper.waitUntilElementClickable(addUserIco);
         addUserIco.click();
-        return new AddUserPage(driver);
+        return new AddUserPage();
     }
 
     public HospitalListPage goToAllHospitalsPage() {
         actions.click();
         hospitalListIco.click();
-        return new HospitalListPage(driver);
+        return new HospitalListPage();
     }
 
     public AddNewHospitalPage goToAddNewHospitalPage() {
         actions.click();
         addHospitalIco.click();
-        return new AddNewHospitalPage(driver);
+        return new AddNewHospitalPage();
     }
 }

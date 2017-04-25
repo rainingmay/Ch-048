@@ -1,7 +1,6 @@
 package pages.admin;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.allUsers.BasePage;
@@ -16,9 +15,8 @@ public class HospitalListPage extends BasePage {
 
     public AdminHeader header;
 
-    public HospitalListPage(WebDriver driver) {
-        super(driver);
-        this.header = new AdminHeader(driver);
+    public HospitalListPage() {
+        this.header = new AdminHeader();
     }
 
 
@@ -50,18 +48,18 @@ public class HospitalListPage extends BasePage {
 
     public AddNewHospitalPage submitAddNewHospital() {
         addNewHospitalButton.click();
-        return new AddNewHospitalPage(driver);
+        return new AddNewHospitalPage();
     }
 
     public CheckGooglePOIPage submitCheckGooglePoi() {
         checkGooglePoiButton.click();
-        return new CheckGooglePOIPage(driver);
+        return new CheckGooglePOIPage();
     }
 
     public HospitalListPage showOnMapButton(int rowNumber) {
         showOnMap = tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ") td:nth-child(3) form button:nth-child(2)"));
         showOnMap.click();
-        return new HospitalListPage(driver);
+        return new HospitalListPage();
     }
 
     public AddNewHospitalPage editButton(int rowNumber) {
@@ -70,7 +68,7 @@ public class HospitalListPage extends BasePage {
             editButton = tableRow.findElement(By.cssSelector("body > section > div > div > div > div.col-sm-8 > div.pre-scrollable.panel.panel-default > table > tbody > tr:nth-child(" + rowNumber + ") > td:nth-child(3) > form > a"));
             editButton.click();
             BrowserWrapper.waitUntilElementClickableByLocator(By.xpath("//*[@id=\"image-uploaded\"]"));
-            return new AddNewHospitalPage(driver);
+            return new AddNewHospitalPage();
         }
         return null;
     }
@@ -85,7 +83,7 @@ public class HospitalListPage extends BasePage {
             deleteModalSubmit.click();
             BrowserWrapper.sleep(5);
             BrowserWrapper.waitUntilElementClickableByLocator(By.cssSelector("a.btn:nth-child(1)"));
-            return new HospitalListPage(driver);
+            return new HospitalListPage();
         }
         return null;
     }

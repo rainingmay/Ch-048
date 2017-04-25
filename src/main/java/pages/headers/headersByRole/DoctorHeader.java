@@ -1,10 +1,8 @@
 package pages.headers.headersByRole;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.doctor.ListPatientaPage;
-import pages.doctor.WorkSchedulerPage;
 import pages.doctor.WorkSchedulerPage;
 import utils.BrowserWrapper;
 
@@ -13,9 +11,6 @@ import utils.BrowserWrapper;
  */
 public class DoctorHeader extends AuthorizedHeader {
 
-    public DoctorHeader(WebDriver driver) {
-        super(driver);
-    }
 
     @FindBy(css = "a[href=\"/HospitalSeeker/patients\"]")
     private WebElement patients;
@@ -27,11 +22,11 @@ public class DoctorHeader extends AuthorizedHeader {
     public ListPatientaPage patientsButtonClick(){
         BrowserWrapper.waitUntilElementClickable(patients);
         patients.click();
-        return new ListPatientaPage(driver);
+        return new ListPatientaPage();
     }
     public WorkSchedulerPage scheduleButtonClick(){
         schedule.click();
-        return new WorkSchedulerPage(driver);
+        return new WorkSchedulerPage();
     }
 
 }
