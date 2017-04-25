@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import pages.allUsers.BasePage;
 import pages.headers.headersByRole.AdminHeader;
 import utils.BrowserWrapper;
-import utils.Driver;
+import utils.DriverInitializer;
 import utils.TableParser;
 
 import java.util.LinkedList;
@@ -113,7 +113,7 @@ public class AllUsersPage extends BasePage {
 
 
     public AllUsersPage showAllUsers() {
-        ((JavascriptExecutor) Driver.instance()).executeScript("arguments[0].click();" , enableButton);
+        ((JavascriptExecutor) DriverInitializer.instance()).executeScript("arguments[0].click();" , enableButton);
         return new AllUsersPage();
     }
 
@@ -124,7 +124,7 @@ public class AllUsersPage extends BasePage {
     }
 
     public AllUsersPage showDisableUsers() {
-        ((JavascriptExecutor)Driver.instance()).executeScript("arguments[0].click();" , disableButton);
+        ((JavascriptExecutor) DriverInitializer.instance()).executeScript("arguments[0].click();" , disableButton);
         BrowserWrapper.waitForPage();
         return new AllUsersPage();
     }
@@ -170,7 +170,7 @@ public class AllUsersPage extends BasePage {
             WebElement infoButton = new TableParser(table).getButtonFromTableRow(rowNumber, "View");
             infoButton.click();
             Thread.sleep(2000);
-            viewWindow = Driver.instance().findElement(By.className("modal-content"));
+            viewWindow = DriverInitializer.instance().findElement(By.className("modal-content"));
             result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(1) td:last-child")).getText());
             result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(2) td:last-child")).getText());
             result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(4) td:last-child")).getText());
@@ -203,7 +203,7 @@ public class AllUsersPage extends BasePage {
         WebElement editButton = new TableParser(table).getButtonFromTableRow(rowNumber, "Edit");
         editButton.click();
         BrowserWrapper.sleep(3);
-        editWindow = Driver.instance().findElement(By.id("detailForm"));
+        editWindow = DriverInitializer.instance().findElement(By.id("detailForm"));
         return editWindow;
     }
 
@@ -242,8 +242,8 @@ public class AllUsersPage extends BasePage {
         deleteButton = new TableParser(table).getButtonFromTableRow(rowNumber, "Delete");
         deleteButton.click();
         BrowserWrapper.sleep(3);
-        deleteWindow = Driver.instance().findElement(By.className("modal-content"));
-        ((JavascriptExecutor)Driver.instance()).executeScript("arguments[0].click();" , Driver.instance().findElement(By.id("deleteButton")));
+        deleteWindow = DriverInitializer.instance().findElement(By.className("modal-content"));
+        ((JavascriptExecutor) DriverInitializer.instance()).executeScript("arguments[0].click();" , DriverInitializer.instance().findElement(By.id("deleteButton")));
         BrowserWrapper.sleep(2);
         return new AllUsersPage();
     }
@@ -260,6 +260,6 @@ public class AllUsersPage extends BasePage {
     }
 
     public String getCurrentUrl() {
-        return Driver.instance().getCurrentUrl();
+        return DriverInitializer.instance().getCurrentUrl();
     }
 }

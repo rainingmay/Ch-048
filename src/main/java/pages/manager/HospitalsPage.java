@@ -4,11 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 import pages.allUsers.BasePage;
 import pages.headers.headersByRole.ManagerHeader;
 import utils.BrowserWrapper;
-import utils.Driver;
 
 import java.util.List;
 

@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import pages.allUsers.BasePage;
 import pages.headers.headersByRole.ManagerHeader;
 import utils.BrowserWrapper;
-import utils.Driver;
+import utils.DriverInitializer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -287,7 +287,7 @@ public class ManagerDashBordPage extends BasePage {
     public String getValue(String row, String colName){
         String td = tdFinder(colName);
 
-       return Driver.instance().findElement(By.cssSelector("tbody tr:nth-child(" + row + ") td:nth-child(" + td + ")")).getText();
+       return DriverInitializer.instance().findElement(By.cssSelector("tbody tr:nth-child(" + row + ") td:nth-child(" + td + ")")).getText();
     }
 
     public String tdFinder(String colName){
@@ -320,7 +320,7 @@ public class ManagerDashBordPage extends BasePage {
         ArrayList<String> list = new ArrayList<>();
 
         String text = null;
-        List<WebElement> elements = Driver.instance().findElements(By.cssSelector("tbody tr td:nth-child("+ td +")"));
+        List<WebElement> elements = DriverInitializer.instance().findElements(By.cssSelector("tbody tr td:nth-child("+ td +")"));
 
         for( WebElement webElement : elements){
             for(int i = 0; i < 5; i++) {
@@ -393,7 +393,7 @@ public class ManagerDashBordPage extends BasePage {
     }
 
     public void viewButtonClick(String name) {
-        List<WebElement> tableRows= Driver.instance().findElements(By.tagName("tr"));
+        List<WebElement> tableRows= DriverInitializer.instance().findElements(By.tagName("tr"));
         for (WebElement element : tableRows){
             if(element.getText().contains(name)){
                 element.findElement(By.id("viewUser")).click();
@@ -402,7 +402,7 @@ public class ManagerDashBordPage extends BasePage {
     }
 
     public void editButtonClick(String name) {
-        List<WebElement> tableRows= Driver.instance().findElements(By.tagName("tr"));
+        List<WebElement> tableRows= DriverInitializer.instance().findElements(By.tagName("tr"));
         for (WebElement element : tableRows){
             if(element.getText().contains(name)){
                 element.findElement(By.id("ediUser")).click();
@@ -412,19 +412,19 @@ public class ManagerDashBordPage extends BasePage {
 
 
     public SchedulerPage scheduleButtonClick(String name) {
-        List<WebElement> tableRows= Driver.instance().findElements(By.tagName("tr"));
+        List<WebElement> tableRows= DriverInitializer.instance().findElements(By.tagName("tr"));
         for (WebElement element : tableRows){
             if(element.getText().contains(name)){
                 element.findElement(By.id("schedule")).click();
             }
         }
-        BrowserWrapper.waitUntilElementVisible(Driver.instance().findElement(By.cssSelector("div.dhx_cal_date")));
+        BrowserWrapper.waitUntilElementVisible(DriverInitializer.instance().findElement(By.cssSelector("div.dhx_cal_date")));
 
          return new SchedulerPage();
     }
 
     public void deleteButtonClick(String name) {
-        List<WebElement> tableRows= Driver.instance().findElements(By.tagName("tr"));
+        List<WebElement> tableRows= DriverInitializer.instance().findElements(By.tagName("tr"));
         for (WebElement element : tableRows){
             if(element.getText().contains(name)){
                 element.findElement(By.id("deleteDoctor")).click();

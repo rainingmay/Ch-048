@@ -1,8 +1,8 @@
 package utils;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import utils.Driver;
 
 public class BaseTest {
 
@@ -21,13 +21,14 @@ public class BaseTest {
 
     @BeforeClass
     public void before(){
-        Driver.initialization();
+        WebDriver driver = DriverInitializer.instance();
+        driver.get("https://localhost:8443/HospitalSeeker/");
     }
 
 
     @AfterClass
     public void after() {
-        Driver.close();
+        DriverInitializer.close();
     }
 
 }

@@ -7,12 +7,10 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pages.admin.AddUserPage;
-import pages.admin.AllUsersPage;
 import utils.BaseNavigation;
 import utils.BaseTest;
 import utils.BrowserWrapper;
-import utils.Driver;
+import utils.DriverInitializer;
 
 
 
@@ -211,7 +209,7 @@ public class AddUserPageTest extends BaseTest {
 
     @AfterMethod
     public void afterMethod() {
-        Driver.instance().manage().deleteAllCookies();
+        DriverInitializer.instance().manage().deleteAllCookies();
         BaseNavigation.logout();
     }
 

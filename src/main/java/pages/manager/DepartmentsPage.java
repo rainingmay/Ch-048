@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.allUsers.BasePage;
 import pages.headers.headersByRole.ManagerHeader;
-import utils.Driver;
+import utils.DriverInitializer;
 
 
 /**
@@ -40,14 +40,14 @@ public class DepartmentsPage extends BasePage {
     private WebElement backToTopButton;
 
     public WebElement viewButton(int i) {
-        return Driver.instance().findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child  a:first-child"));
+        return DriverInitializer.instance().findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child  a:first-child"));
     }
 
     public WebElement editButton(int i) {
-        return Driver.instance().findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #ediDepartment"));
+        return DriverInitializer.instance().findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #ediDepartment"));
     }
     public WebElement scheduleButton(int i) {
-        return Driver.instance().findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child a:last-child"));
+        return DriverInitializer.instance().findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child a:last-child"));
     }
 
 

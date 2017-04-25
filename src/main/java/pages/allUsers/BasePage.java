@@ -1,13 +1,13 @@
 package pages.allUsers;
 
 import org.openqa.selenium.support.PageFactory;
-import utils.Driver;
+import utils.DriverInitializer;
 
 public class BasePage {
 
 
 
     public BasePage(){
-        PageFactory.initElements(Driver.instance(), this);
+        PageFactory.initElements(DriverInitializer.instance(), this);
     }
 }

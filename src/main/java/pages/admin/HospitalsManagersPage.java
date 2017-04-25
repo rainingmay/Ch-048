@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.allUsers.BasePage;
 import pages.headers.headersByRole.AdminHeader;
-import utils.Driver;
+import utils.DriverInitializer;
 
 
 /**
@@ -30,12 +30,12 @@ public class HospitalsManagersPage extends BasePage {
     private WebElement deleteManager;
 
     public void changeManager(int rowNumber, String name) {
-        selectManager = Driver.instance().findElement(By.xpath("tbody tr[" + rowNumber + "] td[3] select"));
+        selectManager = DriverInitializer.instance().findElement(By.xpath("tbody tr[" + rowNumber + "] td[3] select"));
         selectManager.findElement(By.linkText(name));
     }
 
     public void deleteManager(int rowNumber) {
-      deleteManager = Driver.instance().findElement(By.cssSelector("tbody tr[" + rowNumber + "] btn btn-danger"));
+      deleteManager = DriverInitializer.instance().findElement(By.cssSelector("tbody tr[" + rowNumber + "] btn btn-danger"));
       deleteManager.click();
     }
 }

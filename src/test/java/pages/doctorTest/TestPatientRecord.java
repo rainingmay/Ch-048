@@ -14,10 +14,7 @@ import pages.headers.headersByRole.DoctorHeader;
 import utils.BaseNavigation;
 import utils.BaseTest;
 import utils.BrowserWrapper;
-import utils.Driver;
-
-
-import static utils.BaseTest.DOCTOR_LOGIN;
+import utils.DriverInitializer;
 
 
 /**
@@ -27,13 +24,13 @@ public class TestPatientRecord extends BaseTest {
     @BeforeMethod
     public void before() {
         //Why do you do this here?
-        Driver.initialization();
+        DriverInitializer.initialization();
     }
 
 
     @AfterMethod
     public void after() {
-        Driver.close();
+        DriverInitializer.close();
 
     }
 
@@ -41,7 +38,7 @@ public class TestPatientRecord extends BaseTest {
     @Test
 
      public void createNewRecord() throws Exception {
-       WebDriverWait wait = new WebDriverWait(Driver.instance(),5);
+       WebDriverWait wait = new WebDriverWait(DriverInitializer.instance(),5);
        BaseNavigation.loginAsDoctor(DOCTOR_LOGIN, DOCTOR_PASSWORD);
 
       wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[1]/div/div/div")));
@@ -63,7 +60,7 @@ public class TestPatientRecord extends BaseTest {
     }
   @Test
     public void checkPatientsSearch() throws Exception {
-        WebDriverWait wait = new WebDriverWait(Driver.instance(), 10);
+        WebDriverWait wait = new WebDriverWait(DriverInitializer.instance(), 10);
         BaseNavigation.loginAsDoctor(DOCTOR_LOGIN, DOCTOR_PASSWORD);
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[1]/div/div/div")));
         DoctorHeader doctorHeader = new DoctorHeader();
@@ -77,7 +74,7 @@ public class TestPatientRecord extends BaseTest {
 
     @Test
     public void testPatientsSortingByFirstName() throws Exception {
-        WebDriverWait wait = new WebDriverWait(Driver.instance(),5);
+        WebDriverWait wait = new WebDriverWait(DriverInitializer.instance(),5);
         BaseNavigation.loginAsDoctor(DOCTOR_LOGIN, DOCTOR_PASSWORD);
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[1]/div/div/div")));
         DoctorHeader doctorHeader = new DoctorHeader();
@@ -92,7 +89,7 @@ public class TestPatientRecord extends BaseTest {
     }
     @Test
     public void testPatientsSortingByLastName() throws Exception {
-        WebDriverWait wait = new WebDriverWait(Driver.instance(), 5);
+        WebDriverWait wait = new WebDriverWait(DriverInitializer.instance(), 5);
         BaseNavigation.loginAsDoctor(DOCTOR_LOGIN, DOCTOR_PASSWORD);
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[1]/div/div/div")));
         DoctorHeader doctorHeader = new DoctorHeader();
@@ -107,7 +104,7 @@ public class TestPatientRecord extends BaseTest {
     }
     @Test
     public void testPatientsSortingByEmail() throws Exception {
-        WebDriverWait wait = new WebDriverWait(Driver.instance(),5);
+        WebDriverWait wait = new WebDriverWait(DriverInitializer.instance(),5);
         BaseNavigation.loginAsDoctor(DOCTOR_LOGIN, DOCTOR_PASSWORD);
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[1]/div/div/div")));
         DoctorHeader doctorHeader = new DoctorHeader();

@@ -7,7 +7,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 
@@ -19,7 +18,9 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by radgast on 4/20/17.
  */
-public class Driver {
+public class DriverInitializer {
+
+    private DriverInitializer(){}
 
     private static final String FIREFOX_PROFILE_NAME = "default";
 
@@ -59,7 +60,7 @@ public class Driver {
 
         Properties properties = new Properties();
         try {
-            InputStream inputStream = Driver.class.getResourceAsStream("/driver.properties");
+            InputStream inputStream = DriverInitializer.class.getResourceAsStream("/driver.properties");
             properties.load(inputStream);
         } catch (IOException e) {
             e.printStackTrace();
@@ -116,18 +117,19 @@ public class Driver {
         }
 
 
-
-
         //driver = new FirefoxDriver(ffProfile);
 
-
-        driver.get(BASE_URL);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//        driver.get(BASE_URL);
+        //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
 
 
-    public static WebDriver instance(){
+    public static WebDriver instance()  {
+        if(driver == null) {
+            initialization();
+            return driver;
+        }
         return driver;
     }
 
