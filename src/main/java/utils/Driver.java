@@ -28,13 +28,13 @@ public class Driver {
     private static final String WINDOWS_IE_WEBDRIVER = "MicrosoftWebDriver";
 
 
-    private static final String UNIX_FIREFOX_WEBDRIVER_PATH = "src/main/resources/geckodriver";
-    private static final String WINDOWS_FIREFOX_WEBDRIVER_PATH = "src/main/resources/geckodriver.exe";
+    private static final String UNIX_FIREFOX_WEBDRIVER_PATH = "src/main/resources/drivers/geckodriver";
+    private static final String WINDOWS_FIREFOX_WEBDRIVER_PATH = "src/main/resources/drivers/geckodriver.exe";
 
-    private static final String UNIX_CHROME_WEBDRIVER_PATH = "src/main/resources/chromedriver";
-    private static final String WINDOWS_CHROME_WEBDRIVER_PATH = "src/main/resources/chromedriver.exe";
+    private static final String UNIX_CHROME_WEBDRIVER_PATH = "src/main/resources/drivers/chromedriver";
+    private static final String WINDOWS_CHROME_WEBDRIVER_PATH = "src/main/resources/drivers/chromedriver.exe";
 
-    private static final String WINDOWS_IE_WEBDRIVER_PATH = "src/main/resources/MicrosoftWebDriver.exe";
+    private static final String WINDOWS_IE_WEBDRIVER_PATH = "src/main/resources/drivers/MicrosoftWebDriver.exe";
 
 
     private static final String BASE_URL = "https://localhost:8443/HospitalSeeker/";
