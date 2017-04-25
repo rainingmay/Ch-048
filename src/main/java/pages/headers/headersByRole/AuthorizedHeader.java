@@ -21,9 +21,11 @@ public class AuthorizedHeader extends BaseHeader{
     @FindBy(css = "ul.my-navbar>li:nth-last-child(3)")
     protected WebElement profileButton;
 
-    @FindBy(css = "ul.my-navbar>li:nth-last-child(3) li:last-child a")
+    @FindBy(css = "a[href=\"/HospitalSeeker/logout\"]")
     protected WebElement logoutButton;
 
+    @FindBy(css = "a[data-target=\"#myModal\"]")
+    private WebElement myProfile;
 
     public void profileButtonClick() {
         BrowserWrapper.waitUntilElementClickable(profileButton);

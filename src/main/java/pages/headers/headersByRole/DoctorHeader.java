@@ -17,17 +17,12 @@ public class DoctorHeader extends AuthorizedHeader {
         super(driver);
     }
 
-    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/a")
+    @FindBy(css = "a[href=\"/HospitalSeeker/patients\"]")
     private WebElement patients;
 
-    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[5]/a")
+    @FindBy(css = "a[href=\"/HospitalSeeker/workscheduler\"]")
     private WebElement schedule;
 
-    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[6]/a")
-    private WebElement profile;
-
-    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[6]/ul/li[2]/a")
-    private WebElement logOut;
 
     public ListPatientaPage patientsButtonClick(){
         BrowserWrapper.waitUntilElementClickable(patients);

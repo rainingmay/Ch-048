@@ -30,7 +30,7 @@ public class BaseHeader extends BasePage {
     @FindBy(css = "a[href$='https://localhost:8443/HospitalSeeker/?lang=en']")
     protected WebElement enLanguage;
 
-    @FindBy(css = ".hidden-xs")
+    @FindBy(css = "a[href=\"#toggle-search\"]")
     protected WebElement searchButton;
 
     @FindBy(id = "select_hospital_search")

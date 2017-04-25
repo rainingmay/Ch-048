@@ -46,14 +46,6 @@ public class AdminHeader extends AuthorizedHeader {
     @FindBy(css = "a[href=\"/HospitalSeeker/admin/departmentName\"]")
     private WebElement addDepartment;
 
-    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[5]/a")
-    private WebElement profile;
-
-    @FindBy(css = "a[data-target=\"#myModal\"]")
-    private WebElement myProfile;
-
-    @FindBy(css = "a[href=\"/HospitalSeeker/logout\"]")
-    private WebElement logOut;
 
     public AllUsersPage allUsersPage () {
         allUsersIco.click();

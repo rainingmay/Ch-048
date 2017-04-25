@@ -14,26 +14,16 @@ public class PatientHeader extends AuthorizedHeader {
         super(driver);
     }
 
-    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/a")
+    @FindBy(linkText = "Actions")
     private WebElement actions;
 
-    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/ul/li[1]/a")
+    @FindBy(css = "a[href=\"/HospitalSeeker/card\"]")
     private WebElement card;
 
-    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/ul/li[2]/a")
+    @FindBy(css = "a[href=\"/HospitalSeeker/appointments\"]")
     private WebElement appointments;
 
-    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/ul/li[3]/a")
+    @FindBy(css = "a[href=\"/HospitalSeeker/laboratory\"]")
     private WebElement studies;
-
-
-    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[5]/a")
-    private WebElement profile;
-
-    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[5]/ul/li[1]/a")
-    private WebElement myProfile;
-
-    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[5]/ul/li[3]/a")
-    private WebElement logOut;
 
 }
