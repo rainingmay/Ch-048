@@ -28,7 +28,7 @@ public class DriverInitializer {
     private static final String CHROME_WEBDRIVER = "chromedriver";
     private static final String WINDOWS_IE_WEBDRIVER = "MicrosoftWebDriver";
 
-
+    private static final String LINUX_FIREFOX_WEBDRIVER_PATH = "src/main/resources/drivers/geckodriverLinux";
     private static final String UNIX_FIREFOX_WEBDRIVER_PATH = "src/main/resources/drivers/geckodriver";
     private static final String WINDOWS_FIREFOX_WEBDRIVER_PATH = "src/main/resources/drivers/geckodriver.exe";
 
@@ -38,7 +38,7 @@ public class DriverInitializer {
     private static final String WINDOWS_IE_WEBDRIVER_PATH = "src/main/resources/drivers/MicrosoftWebDriver.exe";
 
 
-    private static final String BASE_URL = "https://localhost:8443/HospitalSeeker/";
+
 
     private static WebDriver driver;
 
@@ -87,8 +87,10 @@ public class DriverInitializer {
                 break;
 
             case "firefoxLinux":
-                System.setProperty(FIREFOX_WEBDRIVER, UNIX_FIREFOX_WEBDRIVER_PATH);
-                driver = new FirefoxDriver(ffProfile);
+                System.setProperty(FIREFOX_WEBDRIVER, LINUX_FIREFOX_WEBDRIVER_PATH);
+                DesiredCapabilities desiredCapabilities = DesiredCapabilities.firefox();
+                desiredCapabilities.setCapability(FirefoxDriver.PROFILE,ffProfile);
+                driver = new FirefoxDriver(desiredCapabilities);
                 break;
 
             case "firefoxMacOS":
@@ -115,15 +117,14 @@ public class DriverInitializer {
                 System.out.println(browserType + " is invalid");
                 break;
         }
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
-
-        //driver = new FirefoxDriver(ffProfile);
-
-//        driver.get(BASE_URL);
-        //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
 
+    public static void getToUrl(String url){
+        instance().get(url);
+    }
 
     public static WebDriver instance()  {
         if(driver == null) {
