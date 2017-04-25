@@ -121,6 +121,13 @@ public class DriverInitializer {
 
     }
 
+    public static void setImpicityWait(Long l){
+        driver.manage().timeouts().implicitlyWait(l, TimeUnit.SECONDS);
+    }
+
+    public static void resetImplicityWait(){
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    }
 
     public static void getToUrl(String url){
         instance().get(url);
