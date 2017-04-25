@@ -40,7 +40,7 @@ public class DriverInitializer {
 
 
 
-    private static WebDriver driver;
+    private static volatile WebDriver driver;
 
     public static void initialization() {
 
@@ -132,10 +132,14 @@ public class DriverInitializer {
         instance().get(url);
     }
 
-    public static WebDriver instance()  {
-        if(driver == null) {
-            initialization();
-            return driver;
+    public static WebDriver instance() {
+        if (driver == null) {
+            synchronized(WebDriver.class) {
+                if (driver == null) {
+                    initialization();
+                    return driver;
+                }
+            }
         }
         return driver;
     }
