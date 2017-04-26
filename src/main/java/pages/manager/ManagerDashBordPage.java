@@ -1,19 +1,17 @@
 package pages.manager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.Select;
-import pages.allUsers.BasePage;
+import pages.PageInitializer;
 import pages.headers.headersByRole.ManagerHeader;
 import utils.BrowserWrapper;
-import utils.Driver;
+import utils.DriverInitializer;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class ManagerDashBordPage extends BasePage {
+public class ManagerDashBordPage implements PageInitializer{
 
     public ManagerHeader managerHeader;
     @FindBy(className = "h1.text-center")
@@ -76,19 +74,19 @@ public class ManagerDashBordPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"allDoctors\"]/thead/tr/th[4]/i")
     private WebElement lastName;
 
-    @FindBy(id="lastName")
+    @FindBy(id = "lastName")
     private WebElement sortByLastNameButton;
 
     @FindBy(xpath = "//*[@id=\"allDoctors\"]/thead/tr/th[5]/i")
     private WebElement specializtionLabel;
 
-    @FindBy(id="specialization")
+    @FindBy(id = "specialization")
     private WebElement sortBySpecializationButton;
 
     @FindBy(xpath = "//*[@id=\"allDoctors\"]/thead/tr/th[6]/i")
     private WebElement categoryLabel;
 
-    @FindBy(id="category")
+    @FindBy(id = "category")
     private WebElement sortByCategoryButton;
 
     @FindBy(xpath = "//*[@id=\"allDoctors\"]/thead/tr/th[7]/i")
@@ -98,12 +96,12 @@ public class ManagerDashBordPage extends BasePage {
     //popUpForms
 
     @FindBy(xpath = "//*[@id=\"detailForm\"]/h1")
-    private WebElement formInformationAboutDoctorLabel;
+    private WebElement formMainTextLabel;
 
-    @FindBy(id="firstName")
+    @FindBy(css="#detailForm #firstName")
     private WebElement formFirstNameInput;
 
-    @FindBy(id="lastName")
+    @FindBy(css = "input#lastName")
     private WebElement formLastNameInput;
 
     @FindBy(id="email")
@@ -170,15 +168,29 @@ public class ManagerDashBordPage extends BasePage {
     @FindBy(tagName = "tbody")
     private WebElement tableBody;
 
+    @FindBy(css = "div#deleteDoctorModal h3")
+    private WebElement deleteHeader;
+
+    @FindBy(id = "deleteButton")
+    private WebElement deleteConfirmButton;
+
+
+    public String information = "INFORMATION ABOUT DOCTOR";
+    public String edit = "EDIT DOCTOR";
     public void selectDoctorPerPage(String value) {
         BrowserWrapper.selectDropdown(doctorPerPageSelector, value);
+
     }
+
     public void selectSpecialization(String value) {
         BrowserWrapper.selectDropdown(specializationSelector, value);
+
+
     }
 
     public void selectSearchBy(String value) {
         BrowserWrapper.selectDropdown(searchBySelector, value);
+
     }
 
     public void searchByText(String value){
@@ -187,13 +199,15 @@ public class ManagerDashBordPage extends BasePage {
     }
 
     public void searchButtonClick(){
+        BrowserWrapper.waitUntilElementVisible(searchButton);
         searchButton.click();
-        BrowserWrapper.sleep(1);
+        BrowserWrapper.sleep(3);
+
     }
 
     public void clearButtonClick(){
-        clearButton.click();
-        BrowserWrapper.sleep(1);
+       BrowserWrapper.clickWithStaleException(clearButton);
+       BrowserWrapper.sleep(3);
     }
 
     public DepartmentsPage labaratoryButtonClick(){
@@ -212,30 +226,61 @@ public class ManagerDashBordPage extends BasePage {
     }
 
     public void sortByEmailButtonClick(){
+        BrowserWrapper.waitUntilElementVisible(sortByEmailButton);
         sortByEmailButton.click();
     }
 
     public void sortByFirstNameButtonClick(){
+        BrowserWrapper.waitUntilElementVisible(sortByFirstNameButton);
         sortByFirstNameButton.click();
     }
 
     public void sortByLastNameButtonClick(){
+        BrowserWrapper.waitUntilElementVisible(sortByLastNameButton);
         sortByLastNameButton.click();
     }
 
     public void sortBySpecializationButtonClick(){
+        BrowserWrapper.waitUntilElementVisible(sortBySpecializationButton);
         sortBySpecializationButton.click();
     }
 
     public void sortByCategoryButtonClick(){
+        BrowserWrapper.waitUntilElementVisible(sortByCategoryButton);
         sortByCategoryButton.click();
+        BrowserWrapper.sleep(1);
     }
 
-    public String getValue(String row, String colName){
-        String td = tdFinder(colName);
-
-       return Driver.instance().findElement(By.cssSelector("tbody tr:nth-child(" + row + ") td:nth-child(" + td + ")")).getText();
+    public void sortByEmailDoubleButtonClick(){
+        BrowserWrapper.waitUntilElementVisible(sortByEmailButton);
+        BrowserWrapper.tripleClick(sortByEmailButton);
+        BrowserWrapper.sleep(1);
     }
+
+    public void sortByFirstNameDoubleButtonClick(){
+        BrowserWrapper.waitUntilElementVisible(sortByFirstNameButton);
+        BrowserWrapper.tripleClick(sortByFirstNameButton);
+        BrowserWrapper.sleep(1);
+    }
+
+    public void sortByLastNameDoubleButtonClick(){
+        BrowserWrapper.waitUntilElementVisible(sortByLastNameButton);
+        BrowserWrapper.tripleClick(sortByLastNameButton);
+        BrowserWrapper.sleep(1);
+    }
+
+    public void sortBySpecializationDoubleButtonClick(){
+        BrowserWrapper.waitUntilElementVisible(sortBySpecializationButton);
+        BrowserWrapper.tripleClick(sortBySpecializationButton);
+        BrowserWrapper.sleep(1);
+    }
+
+    public void sortByCategoryDoubleButtonClick(){
+        BrowserWrapper.waitUntilElementVisible(sortByCategoryButton);
+        BrowserWrapper.tripleClick(sortByCategoryButton);
+        BrowserWrapper.sleep(1);
+    }
+
 
     public String tdFinder(String colName){
         String td = null;
@@ -243,10 +288,10 @@ public class ManagerDashBordPage extends BasePage {
             case "email":
                 td = "2";
                 break;
-            case "first name":
+            case "firstName":
                 td = "3";
                 break;
-            case "last name":
+            case "lastName":
                 td = "4";
                 break;
             case "specialization":
@@ -262,46 +307,157 @@ public class ManagerDashBordPage extends BasePage {
         return td;
     }
 
-    public List<String> getCoulumn(String colName){
+    public List<String> getColumn(String colName){
         String td = tdFinder(colName);
         ArrayList<String> list = new ArrayList<>();
 
-        for( WebElement webElement : Driver.instance().findElements(By.cssSelector("tbody tr td:nth-child("+ td +")"))){
-            list.add(webElement.getText());
+        String text = null;
+        List<WebElement> elements = DriverInitializer.instance().findElements(By.cssSelector("tbody tr td:nth-child("+ td +")"));
+
+        for( WebElement webElement : elements){
+            for(int i = 0; i < 5; i++) {
+                try {
+                    text = webElement.getText();
+                    break;
+                } catch (StaleElementReferenceException e) {
+                }
+            }
+            if(text!=null) {
+                list.add(text);
+            }
         }
         return list;
     }
 
+
+    public boolean isDeleteConfirmationPresent(){
+        return BrowserWrapper.isElementPresent(deleteHeader);
+    }
+
+
+    public String getTestStale(WebElement element){
+        String st = null;
+        for (int i = 0 ; i<5; i++) {
+            try {
+                st = element.getText();
+                break;
+            }catch (StaleElementReferenceException e) {
+            }
+        }
+        return st;
+    }
+
+    public boolean checkTitleDetails(){
+        return getTestStale(formMainTextLabel).equals(information);
+    }
+
+    public boolean checkTitleEdit(){
+        return getTestStale(formMainTextLabel).equals(edit);
+    }
+
+    public String getDetailedName(){
+        String text = null;
+        for(int i = 0; i<5; i++) {
+            try {
+                text = formFirstNameInput.getAttribute("value");
+                break;
+            }catch (StaleElementReferenceException e) {
+            }
+        }
+        return text;
+    }
+
     public int getNumberOfRows(){
-        return tableBody.findElements(By.tagName("tr")).size();
+        int number = 0;
+        for(int i = 0; i<5; i++){
+
+            try{
+                number = tableBody.findElements(By.tagName("tr")).size();
+                break;
+            }catch (StaleElementReferenceException e){
+            }catch (InvalidSelectorException e){
+                break;
+            }
+        }
+        return number;
     }
 
-    public void viewButtonClick(int i) {
-        Driver.instance().findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #viewUser")).click();
+    public void viewButtonClick(String name) {
+        List<WebElement> tableRows= DriverInitializer.instance().findElements(By.tagName("tr"));
+        for (WebElement element : tableRows){
+            if(element.getText().contains(name)){
+                element.findElement(By.id("viewUser")).click();
+            }
+        }
     }
 
-    public void editButtonClick(int i) {
-        Driver.instance().findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #ediUser")).click();
+    public void editButtonClick(String name) {
+        List<WebElement> tableRows= DriverInitializer.instance().findElements(By.tagName("tr"));
+        for (WebElement element : tableRows){
+            if(element.getText().contains(name)){
+                element.findElement(By.id("ediUser")).click();
+            }
+        }
     }
+
+
     public SchedulerPage scheduleButtonClick(String name) {
-        List<WebElement> tableRows= Driver.instance().findElements(By.tagName("tr"));
+        List<WebElement> tableRows= DriverInitializer.instance().findElements(By.tagName("tr"));
         for (WebElement element : tableRows){
             if(element.getText().contains(name)){
                 element.findElement(By.id("schedule")).click();
             }
         }
-        BrowserWrapper.waitUntilElementVisible(Driver.instance().findElement(By.cssSelector("div.dhx_cal_date")));
+        BrowserWrapper.waitUntilElementVisible(DriverInitializer.instance().findElement(By.cssSelector("div.dhx_cal_date")));
 
          return new SchedulerPage();
     }
 
-    public void deleteButtonClick(int i) {
-        Driver.instance().findElement(By.cssSelector("tbody tr:nth-child(" + i + ") td:last-child #deleteDoctor")).click();
+    public void deleteButtonClick(String name) {
+        List<WebElement> tableRows= DriverInitializer.instance().findElements(By.tagName("tr"));
+        for (WebElement element : tableRows){
+            if(element.getText().contains(name)){
+                element.findElement(By.id("deleteDoctor")).click();
+            }
+        }
     }
 
 
+    public void enterFullNameDetailedForm(String firstName, String lastName){
 
+        BrowserWrapper.waitUntilElementNotStale(formFirstNameInput);
+        formFirstNameInput.clear();
+        formFirstNameInput.sendKeys(firstName);
+        BrowserWrapper.waitUntilElementNotStale(formLastNameInput);
+        formLastNameInput.clear();
+        formLastNameInput.sendKeys(lastName);
+    }
+
+    public void enterEducation(String eduactaion){
+        BrowserWrapper.waitUntilElementNotStale(formEducationInput);
+        formEducationInput.clear();
+        formEducationInput.sendKeys(eduactaion);
+    }
+
+    public void enterAddress(String address){
+        BrowserWrapper.waitUntilElementNotStale(formAddressInput);
+        formAddressInput.clear();
+        formAddressInput.sendKeys(address);
+    }
+
+    public void submitEdition(){
+        BrowserWrapper.waitUntilElementNotStale(formSaveButton);
+
+        formSaveButton.click();
+    }
+
+    public  void deleteSubmit(){
+        BrowserWrapper.waitUntilElementNotStale(deleteConfirmButton);
+        deleteConfirmButton.click();
+        BrowserWrapper.waitUntilElementVisible(hospitalName);
+    }
     public ManagerDashBordPage() {
         managerHeader = new ManagerHeader();
+        pageInitialization();
     }
 }

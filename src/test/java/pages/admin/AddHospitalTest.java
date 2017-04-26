@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import utils.BaseNavigation;
 import utils.BaseTest;
 import utils.BrowserWrapper;
-import utils.Driver;
+import utils.DriverInitializer;
 
 
 
@@ -161,7 +161,7 @@ public class AddHospitalTest extends BaseTest {
 
     @AfterMethod
     public void afterMethod() {
-        Driver.instance().manage().deleteAllCookies();
+        DriverInitializer.instance().manage().deleteAllCookies();
         BaseNavigation.logout();
     }
 }

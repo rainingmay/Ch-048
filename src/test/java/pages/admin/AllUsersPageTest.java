@@ -17,16 +17,16 @@ public class AllUsersPageTest extends BaseTest {
 
     @BeforeMethod
     public void before() {
-        Driver.initialization();
+        DriverInitializer.initialization();
     }
 
     @AfterMethod
     public void after() {
         try {
             BaseNavigation.logout();
-            Driver.close();
+            DriverInitializer.close();
         } catch (Exception e) {
-            Driver.close();
+            DriverInitializer.close();
         }
     }
 

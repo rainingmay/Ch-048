@@ -7,12 +7,10 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pages.admin.AddUserPage;
-import pages.admin.AllUsersPage;
 import utils.BaseNavigation;
 import utils.BaseTest;
 import utils.BrowserWrapper;
-import utils.Driver;
+import utils.DriverInitializer;
 
 
 
@@ -35,7 +33,7 @@ public class AddUserPageTest extends BaseTest {
     }
 
 
-    @Test(groups = {"Functional"})
+    @Test(groups = {"unSucceffuly"})
     public void isElementsPresentAddUserTest() throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage();
@@ -53,7 +51,7 @@ public class AddUserPageTest extends BaseTest {
     }
 
 
-    @Test(groups = {"Other"})
+    @Test(groups = {"Succefully"})
     public void successfulAddNewUserTest() throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AllUsersPage allUsersPage = new AllUsersPage();
@@ -68,7 +66,7 @@ public class AddUserPageTest extends BaseTest {
 
     }
 
-    @Test(groups = {"Functional"})
+    @Test(groups = {"unSuccefully"})
     public void noRoleChangedAddNewUserTest() throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage();
@@ -83,7 +81,7 @@ public class AddUserPageTest extends BaseTest {
 
     }
 
-    @Test(groups = {"Functional"})
+    @Test(groups = {"unSuccefully"})
     public void noPasswordConfirmationAddNewUserTest() throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage();
@@ -135,7 +133,7 @@ public class AddUserPageTest extends BaseTest {
     }
 
 
-    @Test(groups = {"Other"})
+    @Test(groups = {"unSuccefully"})
     public void noRequiredEmailTest() throws Exception {
         // BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage();
@@ -149,7 +147,7 @@ public class AddUserPageTest extends BaseTest {
         System.out.println("Email field is required but empty");
     }
 
-    @Test
+    @Test(groups = {"unSucceffully"})
     public void noRequiredPasswordTest() throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage();
@@ -163,7 +161,7 @@ public class AddUserPageTest extends BaseTest {
         System.out.println("Password field is required but empty");
     }
 
-    @Test(dataProvider = "validInformation")
+    @Test(dataProvider = "validInformation",groups = {"Succefully"})
     public void validInfoAddNewUserTest(String addUserName, String addUserPassword) throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AllUsersPage allUsersPage = new AllUsersPage();
@@ -179,7 +177,7 @@ public class AddUserPageTest extends BaseTest {
     }
 
 
-    @Test(dataProvider = "notValidEmails")
+    @Test(dataProvider = "notValidEmails", groups = {"unSuccefully"})
     public void notValidEmailsAddNewUserTest(String addUserName, String addUserPassword) throws Exception {
        // BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage();
@@ -195,7 +193,7 @@ public class AddUserPageTest extends BaseTest {
 
     }
 
-    @Test(dataProvider = "notValidPasswords")
+    @Test(dataProvider = "notValidPasswords", groups = {"unSuccefully"})
     public void notValidPasswordsAddNewUserTest(String addUserName, String addUserPassword) throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage();
@@ -211,7 +209,7 @@ public class AddUserPageTest extends BaseTest {
 
     @AfterMethod
     public void afterMethod() {
-        Driver.instance().manage().deleteAllCookies();
+        DriverInitializer.instance().manage().deleteAllCookies();
         BaseNavigation.logout();
     }
 

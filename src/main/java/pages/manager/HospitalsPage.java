@@ -4,19 +4,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
-import pages.allUsers.BasePage;
+import pages.PageInitializer;
 import pages.headers.headersByRole.ManagerHeader;
 import utils.BrowserWrapper;
-import utils.Driver;
 
 import java.util.List;
 
 /**
  * Created by radgast on 22.04.17.
  */
-public class HospitalsPage extends BasePage{
+public class HospitalsPage implements PageInitializer{
     public ManagerHeader managerHeader;
+
     @FindBy(css = "div.team-heading")
     public WebElement hospitalText;
 
@@ -38,11 +37,8 @@ public class HospitalsPage extends BasePage{
         return new ManagerDashBordPage();
 
     }
-
-
-
-
     public HospitalsPage() {
         managerHeader = new ManagerHeader();
+        pageInitialization();
     }
 }

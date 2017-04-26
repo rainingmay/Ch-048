@@ -1,6 +1,7 @@
 package stepDefinition;
 
 import cucumber.api.java.en.*;
+import org.testng.Assert;
 import pages.manager.HospitalsPage;
 import pages.manager.ManagerDashBordPage;
 import utils.BaseNavigation;
@@ -9,7 +10,7 @@ import utils.BaseNavigation;
 /**
  * Created by radgast on 22.04.17.
  */
-public class DoctorSearchSteps {
+public class DoctorSearchSteps  {
     public static final String HOSPITAL_NAME = "Miska Poliklinika";
     public static final String MANAGER_LOGIN = "manager.jh@hospitals.ua";
     public static final String MANAGER_PASSWORD = "1111";
@@ -17,8 +18,8 @@ public class DoctorSearchSteps {
     ManagerDashBordPage managerDashBordPage;
     public int numberOfRows;
 
-    @Given("^the manager is on dashboard of particular hospital$")
-    public void the_manager_is_on_dashboard_of_particular_hospital() throws Throwable {
+    @Given("^the manager is on dashboard of particular hospital in order to search$")
+    public void the_manager_is_on_dashboard_of_particular_hospital_in_order_to_search() throws Throwable {
         HospitalsPage hospitalsPage = BaseNavigation.loginAsManager(MANAGER_LOGIN, MANAGER_PASSWORD);
         managerDashBordPage =  hospitalsPage.choseHospital(HOSPITAL_NAME);
     }
@@ -30,23 +31,22 @@ public class DoctorSearchSteps {
 
     @Then("^Number of doctors on page in table equals number$")
     public void number_of_doctors_on_page_in_table_equals_number() throws Throwable {
-        if(managerDashBordPage.getNumberOfRows() != 20) {
-            throw new AssertionError("Wrong number of doctors per page");
-        }
+        Assert.assertTrue(managerDashBordPage.getNumberOfRows() <= 20);
+
     }
 
     @When("^Manager select specialization from selector$")
     public void manager_select_specialization_from_selector() throws Throwable {
-        managerDashBordPage.selectSpecialization("Neurologist");
+
+        managerDashBordPage.selectSpecialization("Dentist");
         managerDashBordPage.searchButtonClick();
     }
 
-    @Then("^Show rows in talbe with doctors that match particular specialization$")
-    public void show_rows_in_talbe_with_doctors_that_match_particular_specialization() throws Throwable {
-        for(String string: managerDashBordPage.getCoulumn("specialization")){
-            System.out.println("1" + string);
-            if(!string.equals("Neurologist")){
-                throw  new AssertionError("Displayed wrong list of doctors");
+    @Then("^Show rows in table with doctors that match particular specialization$")
+    public void show_rows_in_table_with_doctors_that_match_particular_specialization() throws Throwable {
+        for(String string: managerDashBordPage.getColumn("specialization")){
+            if(!string.equals("Dentist")) {
+                throw new AssertionError("Displayed wrong list of doctors");
             }
         }
     }
@@ -65,8 +65,7 @@ public class DoctorSearchSteps {
 
     @Then("^Show rows in table with doctors that matched typed email$")
     public void show_rows_in_table_with_doctors_that_matched_typed_email() throws Throwable {
-        for(String string: managerDashBordPage.getCoulumn("email")){
-            System.out.println("2" + string);
+        for(String string: managerDashBordPage.getColumn("email")){
             if(!string.equals("doctor.cb@hospitals.ua")){
                 throw  new AssertionError("Displayed wrong list of doctors");
             }
@@ -86,8 +85,7 @@ public class DoctorSearchSteps {
 
     @Then("^Show rows in table with doctors that match typed first name$")
     public void show_rows_in_table_with_doctors_that_match_typed_first_name() throws Throwable {
-        for(String string: managerDashBordPage.getCoulumn("first name")){
-            System.out.println("3" + string);
+        for(String string: managerDashBordPage.getColumn("firstName")){
             if(!string.equals("Chester")){
                 throw  new AssertionError("Displayed wrong list of doctors");
             }
@@ -113,9 +111,7 @@ public class DoctorSearchSteps {
 
     @Then("^Show rows in the table in initial condition$")
     public void show_rows_in_the_table_in_initial_condition() throws Throwable {
-        if(managerDashBordPage.getNumberOfRows() != numberOfRows){
-            throw  new AssertionError("Can't reset the table");
-        }
+        Assert.assertEquals(managerDashBordPage.getNumberOfRows(), numberOfRows);
     }
 
 }

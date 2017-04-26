@@ -4,14 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pages.allUsers.BasePage;
+import pages.PageInitializer;
 import pages.headers.headersByRole.DoctorHeader;
 import utils.BrowserWrapper;
-import utils.Driver;
+import utils.DriverInitializer;
 
-public class ListPatientaPage extends BasePage {
+public class ListPatientaPage implements PageInitializer {
     public DoctorHeader header;
-    WebDriverWait wait = new WebDriverWait(Driver.instance(), 5);
+    WebDriverWait wait = new WebDriverWait(DriverInitializer.instance(), 5);
     @FindBy(className = "label[for=\"usr\"]")
     private WebElement showPatientsLabel;
 
@@ -103,15 +103,15 @@ public class ListPatientaPage extends BasePage {
 
 
     public String getDataFromTable(int k, int l) {
-        int rowCount = Driver.instance().findElements(By.xpath("//table/tbody/tr")).size();
-        int colCount = Driver.instance().findElements(By.xpath("//table/tbody/tr[1]/td")).size();
+        int rowCount = DriverInitializer.instance().findElements(By.xpath("//table/tbody/tr")).size();
+        int colCount = DriverInitializer.instance().findElements(By.xpath("//table/tbody/tr[1]/td")).size();
 
         String firstPart = "//table/tbody/tr[";
         String secondPart = "]/td[";
         String thirdPart = "]";
 
         String finalXpath = firstPart + k + secondPart + l + thirdPart;
-        String tableData = Driver.instance().findElement(By.xpath(finalXpath)).getText();
+        String tableData = DriverInitializer.instance().findElement(By.xpath(finalXpath)).getText();
         return tableData;
     }
 
@@ -136,6 +136,7 @@ public class ListPatientaPage extends BasePage {
 
     public ListPatientaPage() {
         this.header = new DoctorHeader();
+        pageInitialization();
     }
 
 }

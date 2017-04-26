@@ -1,8 +1,10 @@
 package utils;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import utils.Driver;
+
+import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
 
@@ -18,16 +20,16 @@ public class BaseTest {
     public static final String PATIENT_LOGIN = "patient.cd@hospitals.ua";
     public static final String PATIENT_PASSWORD = "1111";
 
-
+    private static final String BASE_URL = "https://localhost:8443/HospitalSeeker/";
     @BeforeClass
     public void before(){
-        Driver.initialization();
+      DriverInitializer.getToUrl(BASE_URL);
     }
 
 
     @AfterClass
     public void after() {
-        Driver.close();
+        DriverInitializer.close();
     }
 
 }

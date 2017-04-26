@@ -2,6 +2,7 @@ package pages.allUsers;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pages.PageInitializer;
 import pages.anonymous.LoginPage;
 import pages.headers.headersByRole.DoctorHeader;
 import pages.headers.headersByRole.NotAuthorizedHeader;
@@ -10,7 +11,7 @@ import pages.headers.headersByRole.NotAuthorizedHeader;
 /**
  * Created by Evgen on 05.04.2017.
  */
-public class HospitalSeekerHomePage extends BasePage {
+public class HospitalSeekerHomePage implements PageInitializer {
 
     //Temporary field
     public NotAuthorizedHeader notAuthorizedHeader;
@@ -44,6 +45,7 @@ public class HospitalSeekerHomePage extends BasePage {
 
     public HospitalSeekerHomePage() {
         notAuthorizedHeader = new NotAuthorizedHeader();
+        pageInitialization();
     }
 
 }
