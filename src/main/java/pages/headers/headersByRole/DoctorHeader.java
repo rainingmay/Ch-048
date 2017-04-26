@@ -2,6 +2,7 @@ package pages.headers.headersByRole;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pages.PageInitializer;
 import pages.doctor.ListPatientaPage;
 import pages.doctor.WorkSchedulerPage;
 import utils.BrowserWrapper;
@@ -9,20 +10,18 @@ import utils.BrowserWrapper;
 /**
  * Created by Evgen on 06.04.2017.
  */
-public class DoctorHeader extends AuthorizedHeader {
+public class DoctorHeader extends AuthorizedHeader implements PageInitializer {
 
+    public DoctorHeader() {
+        pageInitialization();
+    }
 
-    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/a")
+    @FindBy(css = "a[href=\"/HospitalSeeker/patients\"]")
     private WebElement patients;
 
-    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[5]/a")
+    @FindBy(css = "a[href=\"/HospitalSeeker/workscheduler\"]")
     private WebElement schedule;
 
-    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[6]/a")
-    private WebElement profile;
-
-    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[6]/ul/li[2]/a")
-    private WebElement logOut;
 
     public ListPatientaPage patientsButtonClick(){
         BrowserWrapper.waitUntilElementClickable(patients);

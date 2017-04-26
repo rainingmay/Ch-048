@@ -4,10 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.allUsers.BasePage;
+import pages.PageInitializer;
 import pages.headers.headersByRole.AdminHeader;
 import utils.BrowserWrapper;
-import utils.Driver;
+import utils.DriverInitializer;
 import utils.TableParser;
 
 import java.util.LinkedList;
@@ -16,12 +16,9 @@ import java.util.List;
 /**
  * Created by Evgen on 06.04.2017.
  */
-public class AllUsersPage extends BasePage {
+public class AllUsersPage implements PageInitializer {
 
     public AdminHeader header;
-
-    @FindBy(className = "all text-center")
-    public WebElement statusOfUsersLabel;
 
     @FindBy(css = "table")
     public WebElement table;
@@ -66,7 +63,7 @@ public class AllUsersPage extends BasePage {
     private WebElement lastPageButton;
 
     @FindBy(css = "body section div.content div div ul li:first-child a")
-    private WebElement firstPageButton;
+    private WebElement firstPageButto;
 
     @FindBy(id = "email")
     public WebElement sortByEmailButton;
@@ -106,6 +103,7 @@ public class AllUsersPage extends BasePage {
 
     public AllUsersPage() {
         this.header = new AdminHeader();
+        pageInitialization();
     }
 
 
@@ -116,7 +114,7 @@ public class AllUsersPage extends BasePage {
 
 
     public AllUsersPage showAllUsers() {
-        ((JavascriptExecutor) Driver.instance()).executeScript("arguments[0].click();" , enableButton);
+        ((JavascriptExecutor) DriverInitializer.instance()).executeScript("arguments[0].click();" , enableButton);
         return new AllUsersPage();
     }
 
@@ -127,7 +125,7 @@ public class AllUsersPage extends BasePage {
     }
 
     public AllUsersPage showDisableUsers() {
-        ((JavascriptExecutor)Driver.instance()).executeScript("arguments[0].click();" , disableButton);
+        ((JavascriptExecutor) DriverInitializer.instance()).executeScript("arguments[0].click();" , disableButton);
         BrowserWrapper.waitForPage();
         return new AllUsersPage();
     }
@@ -173,7 +171,7 @@ public class AllUsersPage extends BasePage {
             WebElement infoButton = new TableParser(table).getButtonFromTableRow(rowNumber, "View");
             infoButton.click();
             Thread.sleep(2000);
-            viewWindow = Driver.instance().findElement(By.className("modal-content"));
+            viewWindow = DriverInitializer.instance().findElement(By.className("modal-content"));
             result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(1) td:last-child")).getText());
             result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(2) td:last-child")).getText());
             result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(4) td:last-child")).getText());
@@ -205,19 +203,19 @@ public class AllUsersPage extends BasePage {
     public WebElement openEditWindow(int rowNumber) {
         WebElement editButton = new TableParser(table).getButtonFromTableRow(rowNumber, "Edit");
         editButton.click();
-        BrowserWrapper.sleep(2);
-        editWindow = Driver.instance().findElement(By.id("detailForm"));
+        BrowserWrapper.sleep(3);
+        editWindow = DriverInitializer.instance().findElement(By.id("detailForm"));
         return editWindow;
     }
 
 
     public AllUsersPage changeRoleInEditWindow(int rowNumber, String role) {
         openEditWindow(rowNumber);
-        BrowserWrapper.sleep(2);
+        BrowserWrapper.sleep(3);
         selectDropdownRole(editWindow.findElement(By.id("userRoles")), role);
-        BrowserWrapper.sleep(2);
+        BrowserWrapper.sleep(3);
         editWindow.findElement(By.cssSelector("input[value=\"Edit\"]")).click();
-        BrowserWrapper.sleep(2);
+        BrowserWrapper.sleep(3);
         return new AllUsersPage();
     }
 
@@ -245,8 +243,8 @@ public class AllUsersPage extends BasePage {
         deleteButton = new TableParser(table).getButtonFromTableRow(rowNumber, "Delete");
         deleteButton.click();
         BrowserWrapper.sleep(3);
-        deleteWindow = Driver.instance().findElement(By.className("modal-content"));
-        ((JavascriptExecutor)Driver.instance()).executeScript("arguments[0].click();" , Driver.instance().findElement(By.id("deleteButton")));
+        deleteWindow = DriverInitializer.instance().findElement(By.className("modal-content"));
+        ((JavascriptExecutor) DriverInitializer.instance()).executeScript("arguments[0].click();" , DriverInitializer.instance().findElement(By.id("deleteButton")));
         BrowserWrapper.sleep(2);
         return new AllUsersPage();
     }
@@ -263,6 +261,6 @@ public class AllUsersPage extends BasePage {
     }
 
     public String getCurrentUrl() {
-        return Driver.instance().getCurrentUrl();
+        return DriverInitializer.instance().getCurrentUrl();
     }
 }

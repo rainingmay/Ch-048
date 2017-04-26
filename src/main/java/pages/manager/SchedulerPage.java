@@ -6,7 +6,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
-import pages.allUsers.BasePage;
+import pages.PageInitializer;
 import pages.headers.headersByRole.ManagerHeader;
 import utils.BrowserWrapper;
 
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SchedulerPage extends BasePage {
+public class SchedulerPage implements PageInitializer {
 
     private static final int DEFAULT_NUMBER_OF_DAYS = 5;
     private static final String DEFAULT_BEGINNING_HOUR = "0 00";
@@ -437,5 +437,6 @@ public class SchedulerPage extends BasePage {
 
     public SchedulerPage(){
         managerHeader = new ManagerHeader();
+        pageInitialization();
     }
 }

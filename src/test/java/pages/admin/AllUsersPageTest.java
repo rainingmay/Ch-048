@@ -1,23 +1,13 @@
 package pages.admin;
 
-
-import org.dbunit.IDatabaseTester;
-import org.dbunit.JdbcDatabaseTester;
-import org.dbunit.dataset.Column;
-import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.filter.IColumnFilter;
-import org.dbunit.dataset.xml.FlatXmlDataSet;
-import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
-import org.dbunit.operation.DatabaseOperation;
-import org.dbunit.operation.TransactionOperation;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 import utils.*;
 import utils.databaseutil.UserDAO;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
 import java.util.*;
 
 /**
@@ -25,65 +15,19 @@ import java.util.*;
  */
 public class AllUsersPageTest extends BaseTest {
 
-    final String driverClass = "org.postgresql.Driver";
-    final String databaseUrl = "jdbc:postgresql://localhost:5432/hospital";
-    final String username = "postgres";
-    final String password = "postgres";
-
-    IDatabaseTester databaseTester;
-    IDataSet dataSet ;
-    IDataSet beforeDataSet;
-
-
-
-    @BeforeTest
-    public void before() throws Exception {
-    }
-
     @BeforeMethod
-    public void beforeMethod() {
-        try {
-            /*//FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
-            databaseTester = new JdbcDatabaseTester(driverClass, databaseUrl, password, username);
-           // dataSet = builder.build(new File("hospitalDataSet.xml"));
-            //databaseTester.setDataSet(dataSet);
-            //DatabaseOperation.TRUNCATE_TABLE.execute(databaseTester.getConnection(), dataSet);
-           // TransactionOperation.TRANSACTION(databaseTester, dataSet);
-            beforeDataSet = databaseTester.getConnection().createDataSet();
-            //databaseTester.setDataSet(beforeDataSet);
-            databaseTester.setSetUpOperation(DatabaseOperation.NONE);
-            //databaseTester.setTearDownOperation(DatabaseOperation.CLEAN_INSERT);
-            databaseTester.onSetup();*/
-            Driver.initialization();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void before() {
+        Driver.initialization();
     }
-
 
     @AfterMethod
     public void after() {
         try {
-            /*//DatabaseOperation.DELETE_ALL.execute(databaseTester.getConnection(), databaseTester.getConnection().createDataSet());
-            //DatabaseOperation.REFRESH.execute(databaseTester.getConnection(), beforeDataSet);
-            databaseTester.setDataSet(beforeDataSet);
-            databaseTester.setTearDownOperation(DatabaseOperation.TRUNCATE_TABLE);
-
-            databaseTester.onTearDown();*/
             BaseNavigation.logout();
-            Driver.close();
+            DriverInitializer.close();
         } catch (Exception e) {
-            e.printStackTrace();
-            Driver.close();
+            DriverInitializer.close();
         }
-    }
-
-    @Test
-    public void test() {
-        AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
-        BrowserWrapper.sleep(10);
-        Assert.assertEquals(true, true);
     }
 
 

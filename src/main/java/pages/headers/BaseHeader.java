@@ -2,16 +2,18 @@ package pages.headers;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import pages.PageInitializer;
 import pages.allUsers.*;
-import utils.Driver;
 
 
 /**
  * Created by Evgen on 05.04.2017.
  */
-public class BaseHeader extends BasePage {
+public class BaseHeader implements PageInitializer {
 
+    public BaseHeader(){
+        pageInitialization();
+    }
 
 
     @FindBy(className = "img-responsive logo")
@@ -32,7 +34,7 @@ public class BaseHeader extends BasePage {
     @FindBy(css = "a[href$='https://localhost:8443/HospitalSeeker/?lang=en']")
     protected WebElement enLanguage;
 
-    @FindBy(css = ".hidden-xs")
+    @FindBy(css = "a[href=\"#toggle-search\"]")
     protected WebElement searchButton;
 
     @FindBy(id = "select_hospital_search")

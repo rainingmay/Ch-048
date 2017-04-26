@@ -1,45 +1,37 @@
 package pages.admin;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pages.admin.AddNewHospitalPage;
-import pages.admin.AllUsersPage;
-import pages.admin.HospitalListPage;
 import utils.BaseNavigation;
 import utils.BaseTest;
 import utils.BrowserWrapper;
-import utils.Driver;
+import utils.DriverInitializer;
 
 
 
 public class AddHospitalTest extends BaseTest {
 
-    private static final String EMAIL = "admin@hospitals.ua";
-    private static final String PASSWORD = "1111";
-    private static final String ADMIN_HOME_PAGE_XPATH_IDENTIFICATION = "//*[@id=\"searchButton\"]";
     private static final String ALL_HOSPITALS_PAGE_XPATH_IDENTIFICATION = "/html/body/section/div/div/div/div[1]/div[1]/a[1]";
     private static final String ADD_HOSPITAL_PAGE_XPATH_IDENTIFICATION = "//*[@id=\"image-uploaded\"]";
-    private static final String ALL_USERS_PAGE_CSS_IDENTIFICATION = "#searchButton";
+    private static final String ALL_USERS_PAGE_ID_IDENTIFICATION = "#searchButton";
 
 
     @BeforeMethod
-    public void before() {
-        //Why do you do this???
-        Driver.initialization();
+    public void beforeMethod() {
+        BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
+        BrowserWrapper.waitUntilElementIsPresent(By.id(ALL_USERS_PAGE_ID_IDENTIFICATION));
+
     }
 
 
     @Test(dataProvider = "validHospitalAddress")
     public void addNewHospitalWithValidDataTest(String hospitalAddress, String hospitalName, String hospitalDescription) throws Exception {
-        try {
-            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(EMAIL, PASSWORD);
-            BrowserWrapper.waitUntilElementClickableByLocator(By.xpath(ADMIN_HOME_PAGE_XPATH_IDENTIFICATION));
 
+            BrowserWrapper.waitUntilElementClickableByLocator(By.id(ALL_USERS_PAGE_ID_IDENTIFICATION));
             HospitalListPage hospitalListPage = new HospitalListPage();
             hospitalListPage.header.goToAllHospitalsPage();
             BrowserWrapper.waitUntilElementClickableByLocator(By.xpath(ALL_HOSPITALS_PAGE_XPATH_IDENTIFICATION));
@@ -59,17 +51,13 @@ public class AddHospitalTest extends BaseTest {
             System.out.println("How much row in the table after added new hospital: " + hospitalsCountOfRowAfterAdding);
 
             Assert.assertNotEquals(hospitalsCountOfRow, hospitalsCountOfRowAfterAdding);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Test(dataProvider = "loginDataForDeleteHospital")
     public void deleteHospitalTest(String login, String password, int hospitalCountForDelete) throws Exception {
         try {
             AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(login, password);
-            BrowserWrapper.waitUntilElementClickableByLocator(By.cssSelector(ALL_USERS_PAGE_CSS_IDENTIFICATION));
+            BrowserWrapper.waitUntilElementClickableByLocator(By.id(ALL_USERS_PAGE_ID_IDENTIFICATION));
 
             HospitalListPage hospitalListPage = new HospitalListPage();
             hospitalListPage.header.goToAllHospitalsPage();
@@ -92,8 +80,8 @@ public class AddHospitalTest extends BaseTest {
     @Test(dataProvider = "editHospitalBuildingAndStreet")
     public void editHospitalTest(String building, String street, int hospitalCountForEdit) throws Exception {
         try {
-            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(EMAIL, PASSWORD);
-            BrowserWrapper.waitUntilElementClickableByLocator(By.cssSelector(ALL_USERS_PAGE_CSS_IDENTIFICATION));
+            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
+            BrowserWrapper.waitUntilElementClickableByLocator(By.id(ALL_USERS_PAGE_ID_IDENTIFICATION));
 
             HospitalListPage hospitalListPage = new HospitalListPage();
             hospitalListPage.header.goToAllHospitalsPage();
@@ -122,11 +110,7 @@ public class AddHospitalTest extends BaseTest {
     @Test(dataProvider = "invalidHospitalAddress")
     public void addNewHospitalWithInvalidDataTest(String hospitalAddress, String hospitalName, String hospitalDescription) throws Exception {
 
-        WebDriverWait wait = new WebDriverWait(Driver.instance(), 10);
-
-        AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(EMAIL, PASSWORD);
-        BrowserWrapper.waitUntilElementClickableByLocator(By.xpath(ADMIN_HOME_PAGE_XPATH_IDENTIFICATION));
-
+        BrowserWrapper.waitUntilElementClickableByLocator(By.id(ALL_USERS_PAGE_ID_IDENTIFICATION));
         HospitalListPage hospitalListPage = new HospitalListPage();
         hospitalListPage.header.goToAllHospitalsPage();
         BrowserWrapper.waitUntilElementClickableByLocator(By.xpath(ALL_HOSPITALS_PAGE_XPATH_IDENTIFICATION));
@@ -178,8 +162,8 @@ public class AddHospitalTest extends BaseTest {
     }
 
     @AfterMethod
-    public void after() {
-
+    public void afterMethod() {
+        DriverInitializer.instance().manage().deleteAllCookies();
         BaseNavigation.logout();
     }
 }

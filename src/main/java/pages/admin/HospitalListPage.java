@@ -3,21 +3,21 @@ package pages.admin;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.allUsers.BasePage;
+import pages.PageInitializer;
 import pages.headers.headersByRole.AdminHeader;
 import utils.BrowserWrapper;
-import utils.Driver;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HospitalListPage extends BasePage {
+public class HospitalListPage implements PageInitializer {
 
     public AdminHeader header;
 
     public HospitalListPage() {
         this.header = new AdminHeader();
+        pageInitialization();
     }
 
 
