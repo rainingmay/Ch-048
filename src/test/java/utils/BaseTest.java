@@ -20,7 +20,8 @@ public class BaseTest {
     public static final String PATIENT_LOGIN = "patient.cd@hospitals.ua";
     public static final String PATIENT_PASSWORD = "1111";
 
-    private static final String BASE_URL = "https://localhost:8443/HospitalSeeker/";
+    protected static final String BASE_URL = "https://localhost:8443/HospitalSeeker/";
+
     @BeforeClass
     public void before(){
       DriverInitializer.getToUrl(BASE_URL);

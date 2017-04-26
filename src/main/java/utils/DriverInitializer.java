@@ -1,5 +1,6 @@
 package utils;
 
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -13,6 +14,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -40,7 +42,7 @@ public class DriverInitializer {
 
 
 
-    private static WebDriver driver;
+    public static WebDriver driver;
 
     public static void initialization() {
 
@@ -139,6 +141,10 @@ public class DriverInitializer {
             return driver;
         }
         return driver;
+    }
+
+    public static void deleteAllCookies() {
+        instance().manage().deleteAllCookies();
     }
 
     public static void close(){

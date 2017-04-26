@@ -3,6 +3,7 @@ package pages.headers;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.allUsers.*;
+import utils.BrowserWrapper;
 
 
 /**
@@ -82,25 +83,30 @@ public class BaseHeader extends BasePage {
 
     public HospitalSearchResultPage findHospital(String hospitalName) {
         fillHospitalInput(hospitalName);
+        BrowserWrapper.waitUntilElementClickable(hospitalSearchButton);
         hospitalSearchButton.click();
         return new HospitalSearchResultPage();
     }
 
     public void fillHospitalInput(String hospitalName) {
         searchButton.click();
+        BrowserWrapper.waitUntilElementVisible(hospitalSearchField);
         hospitalSearchField.clear();
         hospitalSearchField.sendKeys(hospitalName);
     }
 
     public DoctorSearchResult findDoctor(String doctorName) {
         fillDoctorInput(doctorName);
+        BrowserWrapper.waitUntilElementClickable(doctorSearchButton);
         doctorSearchButton.click();
         return new DoctorSearchResult();
     }
 
     public void fillDoctorInput(String doctorName) {
         searchButton.click();
+        BrowserWrapper.waitUntilElementVisible(doctorSearchField);
         doctorSearchField.clear();
         doctorSearchField.sendKeys(doctorName);
+        BrowserWrapper.waitForPage();
     }
 }
