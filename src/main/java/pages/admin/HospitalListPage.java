@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import pages.PageInitializer;
 import pages.headers.headersByRole.AdminHeader;
 import utils.BrowserWrapper;
+import utils.DriverInitializer;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -102,6 +103,6 @@ public class HospitalListPage implements PageInitializer {
     }
 
     public String getTitleOfPage() {
-        return Driver.instance().getTitle();
+        return DriverInitializer.instance().getTitle();
     }
 }
