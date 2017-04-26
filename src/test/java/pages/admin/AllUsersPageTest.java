@@ -102,7 +102,7 @@ public class AllUsersPageTest extends BaseTest {
     @Test
     public void disableUsersViewTest() {
         AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
-        BrowserWrapper.waitForPage();
+        BrowserWrapper.sleep(2);
         allUsersPage = allUsersPage.showDisableUsers();
         BrowserWrapper.sleep(2);
         int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());

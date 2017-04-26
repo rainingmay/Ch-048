@@ -20,6 +20,9 @@ public class AllUsersPage extends BasePage {
 
     public AdminHeader header;
 
+    @FindBy(className = "all text-center")
+    public WebElement statusOfUsersLabel;
+
     @FindBy(css = "table")
     public WebElement table;
 
@@ -63,7 +66,7 @@ public class AllUsersPage extends BasePage {
     private WebElement lastPageButton;
 
     @FindBy(css = "body section div.content div div ul li:first-child a")
-    private WebElement firstPageButto;
+    private WebElement firstPageButton;
 
     @FindBy(id = "email")
     public WebElement sortByEmailButton;
@@ -202,7 +205,7 @@ public class AllUsersPage extends BasePage {
     public WebElement openEditWindow(int rowNumber) {
         WebElement editButton = new TableParser(table).getButtonFromTableRow(rowNumber, "Edit");
         editButton.click();
-        BrowserWrapper.sleep(3);
+        BrowserWrapper.sleep(2);
         editWindow = Driver.instance().findElement(By.id("detailForm"));
         return editWindow;
     }
@@ -210,11 +213,11 @@ public class AllUsersPage extends BasePage {
 
     public AllUsersPage changeRoleInEditWindow(int rowNumber, String role) {
         openEditWindow(rowNumber);
-        BrowserWrapper.sleep(3);
+        BrowserWrapper.sleep(2);
         selectDropdownRole(editWindow.findElement(By.id("userRoles")), role);
-        BrowserWrapper.sleep(3);
+        BrowserWrapper.sleep(2);
         editWindow.findElement(By.cssSelector("input[value=\"Edit\"]")).click();
-        BrowserWrapper.sleep(3);
+        BrowserWrapper.sleep(2);
         return new AllUsersPage();
     }
 

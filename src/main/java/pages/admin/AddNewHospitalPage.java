@@ -59,6 +59,9 @@ public class AddNewHospitalPage extends BasePage {
     @FindBy(id = "button-reset")
     private WebElement resetButton;
 
+    @FindBy(css = ".ol-md-12")
+    public WebElement pageLabel;
+
     public void setClipboardData(String pathToPhoto) {
         StringSelection stringSelection = new StringSelection(pathToPhoto);
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);

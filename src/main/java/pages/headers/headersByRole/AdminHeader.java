@@ -15,7 +15,7 @@ import utils.BrowserWrapper;
 public class AdminHeader extends AuthorizedHeader {
 
 
-    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/a")
+    @FindBy(css = "#bs-example-navbar-collapse-1 > ul > li:nth-child(4) > a")
     private WebElement actions;
 
     @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/ul/li[2]/a")
@@ -24,7 +24,7 @@ public class AdminHeader extends AuthorizedHeader {
     @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/ul/li[2]/a")
     private WebElement addUserIco;
 
-    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/ul/li[3]/a")
+    @FindBy(css = "#dropdawn > li:nth-child(3) > a > span")
     private WebElement hospitalListIco;
 
     @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/ul/li[4]/a")

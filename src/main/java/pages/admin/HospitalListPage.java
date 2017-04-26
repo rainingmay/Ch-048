@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import pages.allUsers.BasePage;
 import pages.headers.headersByRole.AdminHeader;
 import utils.BrowserWrapper;
+import utils.Driver;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -21,9 +22,8 @@ public class HospitalListPage extends BasePage {
 
 
 
-
-    @FindBy(xpath = "/html/body/section/div/div/div/div[1]/div[1]/a[1]")
-    private WebElement addNewHospitalButton;
+    @FindBy(css = ".btn-group a:first-child")
+    public WebElement addNewHospitalButton;
 
     @FindBy(xpath = "/html/body/section/div/div/div/div[1]/div[1]/a[2]")
     private WebElement checkGooglePoiButton;
@@ -99,5 +99,9 @@ public class HospitalListPage extends BasePage {
 
     public int getCountOfHospitalsInTable() {
         return tableBody.findElements(By.cssSelector("tr")).size();
+    }
+
+    public String getTitleOfPage() {
+        return Driver.instance().getTitle();
     }
 }
