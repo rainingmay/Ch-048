@@ -3,6 +3,7 @@ package pages.allUsers;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pages.PageInitializer;
 import pages.headers.BaseHeader;
 
 import java.util.List;
@@ -11,11 +12,12 @@ import java.util.List;
 /**
  * Created by Yana on 06.04.2017.
  */
-public class DoctorSearchResult extends BasePage {
+public class DoctorSearchResult implements PageInitializer {
     private BaseHeader header;
 
-    public DoctorSearchResult(WebDriver driver) {
-        super(driver);
+    public DoctorSearchResult() {
+        header = new BaseHeader();
+        pageInitialization();
     }
 
     @FindBy(css = "[class='filter-col'])")

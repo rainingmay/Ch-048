@@ -3,14 +3,14 @@ package pages.manager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.allUsers.BasePage;
+import pages.PageInitializer;
 import pages.headers.headersByRole.ManagerHeader;
 
 
 /**
  * Created by radga on 06.04.2017.
  */
-public class ModerationFeedBackPage extends BasePage {
+public class ModerationFeedBackPage implements PageInitializer {
     public ManagerHeader managerHeader;
 
     @FindBy(css = "input[value=\"remove\"]")
@@ -72,8 +72,8 @@ public class ModerationFeedBackPage extends BasePage {
     @FindBy(xpath = "/html/body/section/a")
     private WebElement backToTopButton;
 
-    public ModerationFeedBackPage(WebDriver driver){
-        super(driver);
-        managerHeader = new ManagerHeader(driver);
+    public ModerationFeedBackPage(){
+        managerHeader = new ManagerHeader();
+        pageInitialization();
     }
 }

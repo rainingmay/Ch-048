@@ -1,9 +1,8 @@
 package pages.admin;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.allUsers.BasePage;
+import pages.PageInitializer;
 import pages.headers.headersByRole.AdminHeader;
 import utils.BrowserWrapper;
 
@@ -14,12 +13,12 @@ import java.awt.event.KeyEvent;
 /**
  * Created by Jeksonis on 06.04.2017.
  */
-public class AddNewHospitalPage extends BasePage {
+public class AddNewHospitalPage implements PageInitializer {
     public AdminHeader header;
 
-    public AddNewHospitalPage(WebDriver driver){
-        super(driver);
-        this.header = new AdminHeader(driver);
+    public AddNewHospitalPage(){
+        this.header = new AdminHeader();
+        pageInitialization();
     }
 
     @FindBy(id = "image-uploaded")
@@ -61,6 +60,9 @@ public class AddNewHospitalPage extends BasePage {
     @FindBy(id = "button-reset")
     private WebElement resetButton;
 
+    @FindBy(css = "body > section > div > h3")
+    public WebElement pageLabel;
+
     public void setClipboardData(String pathToPhoto) {
         StringSelection stringSelection = new StringSelection(pathToPhoto);
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
@@ -92,25 +94,25 @@ public class AddNewHospitalPage extends BasePage {
     public AddNewHospitalPage changeCountry(String text) {
         countryInputField.clear();
         countryInputField.sendKeys(text);
-        return new AddNewHospitalPage(driver);
+        return new AddNewHospitalPage();
     }
 
     public AddNewHospitalPage changeCity(String text) {
         cityInputField.clear();
         cityInputField.sendKeys(text);
-        return new AddNewHospitalPage(driver);
+        return new AddNewHospitalPage();
     }
 
     public AddNewHospitalPage changeStreet(String text) {
         streetInputField.clear();
         streetInputField.sendKeys(text);
-        return new AddNewHospitalPage(driver);
+        return new AddNewHospitalPage();
     }
 
     public AddNewHospitalPage changeBuilding(String text) {
         buildingInputField.clear();
         buildingInputField.sendKeys(text);
-        return new AddNewHospitalPage(driver);
+        return new AddNewHospitalPage();
     }
 
     public void addHospitalName(String text) {
@@ -137,7 +139,7 @@ public class AddNewHospitalPage extends BasePage {
 
    public HospitalListPage pushSaveButton() {
         saveButton.click();
-        return new HospitalListPage(driver);
+        return new HospitalListPage();
    }
 
    public void addNewHospital(String address, String name, String description) {
