@@ -80,7 +80,7 @@ public class BrowserWrapper {
 
 
     public static void waitForPage(){
-        Driver.instance().manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+        Driver.instance().manage().timeouts().pageLoadTimeout(3, TimeUnit.SECONDS);
     }
 
     public static void refreshPage(){

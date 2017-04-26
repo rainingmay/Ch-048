@@ -3,10 +3,13 @@ package pages.admin;
 
 import org.dbunit.IDatabaseTester;
 import org.dbunit.JdbcDatabaseTester;
+import org.dbunit.dataset.Column;
 import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.filter.IColumnFilter;
 import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
+import org.dbunit.operation.TransactionOperation;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import utils.*;
@@ -29,36 +32,45 @@ public class AllUsersPageTest extends BaseTest {
 
     IDatabaseTester databaseTester;
     IDataSet dataSet ;
+    IDataSet beforeDataSet;
 
 
 
     @BeforeTest
     public void before() throws Exception {
-
-        FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
-
-        dataSet = builder.build(new File("hospitalDataSet.xml"));
-        databaseTester = new JdbcDatabaseTester(driverClass, databaseUrl, username, password);
-        databaseTester.setDataSet(dataSet);
-        databaseTester.setSetUpOperation(DatabaseOperation.NONE);
-        databaseTester.setTearDownOperation(DatabaseOperation.CLEAN_INSERT);
-
     }
 
     @BeforeMethod
     public void beforeMethod() {
         try {
-            databaseTester.onSetup();
+            /*//FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
+            databaseTester = new JdbcDatabaseTester(driverClass, databaseUrl, password, username);
+           // dataSet = builder.build(new File("hospitalDataSet.xml"));
+            //databaseTester.setDataSet(dataSet);
+            //DatabaseOperation.TRUNCATE_TABLE.execute(databaseTester.getConnection(), dataSet);
+           // TransactionOperation.TRANSACTION(databaseTester, dataSet);
+            beforeDataSet = databaseTester.getConnection().createDataSet();
+            //databaseTester.setDataSet(beforeDataSet);
+            databaseTester.setSetUpOperation(DatabaseOperation.NONE);
+            //databaseTester.setTearDownOperation(DatabaseOperation.CLEAN_INSERT);
+            databaseTester.onSetup();*/
             Driver.initialization();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+
     @AfterMethod
     public void after() {
         try {
-            databaseTester.onTearDown();
+            /*//DatabaseOperation.DELETE_ALL.execute(databaseTester.getConnection(), databaseTester.getConnection().createDataSet());
+            //DatabaseOperation.REFRESH.execute(databaseTester.getConnection(), beforeDataSet);
+            databaseTester.setDataSet(beforeDataSet);
+            databaseTester.setTearDownOperation(DatabaseOperation.TRUNCATE_TABLE);
+
+            databaseTester.onTearDown();*/
             BaseNavigation.logout();
             Driver.close();
         } catch (Exception e) {
@@ -69,6 +81,8 @@ public class AllUsersPageTest extends BaseTest {
 
     @Test
     public void test() {
+        AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
+        BrowserWrapper.sleep(10);
         Assert.assertEquals(true, true);
     }
 
@@ -113,7 +127,7 @@ public class AllUsersPageTest extends BaseTest {
     @Test(dataProvider = "roles")
     public void changeRoleTest(String role) {
         AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
-        BrowserWrapper.waitForPage();
+        //BrowserWrapper.sleep(2);
         String expected = role;
         int rowNumber = 1;
         allUsersPage = allUsersPage.changeRoleInEditWindow(rowNumber, role);
@@ -198,10 +212,6 @@ public class AllUsersPageTest extends BaseTest {
         int actual = new TableParser(allUsersPage.table).getFieldFromTableRow(1, "@email").compareToIgnoreCase(new TableParser(allUsersPage.table).getFieldFromTableRow(2, "@email"));
         Assert.assertEquals(actual < 0, true);
     }
-
-
-
-
 
 
 
