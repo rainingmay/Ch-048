@@ -11,8 +11,6 @@ import utils.BrowserWrapper;
  */
 public class BaseHeader extends BasePage {
 
-
-
     @FindBy(className = "img-responsive logo")
     protected WebElement logo;
 
@@ -22,13 +20,13 @@ public class BaseHeader extends BasePage {
     @FindBy(css = "a[href$='/HospitalSeeker/mapsearch']")
     protected WebElement nearestHospital;
 
-    @FindBy(className = "img.localization-flag")
+    @FindBy(css = "img.localization-flag")
     protected WebElement changeLanguageIco;
 
-    @FindBy(css = "a[href$='https://localhost:8443/HospitalSeeker/?lang=ua']")
+    @FindBy(css = "a[href$='/HospitalSeeker/?lang=ua']")
     protected WebElement uaLanguage;
 
-    @FindBy(css = "a[href$='https://localhost:8443/HospitalSeeker/?lang=en']")
+    @FindBy(css = "a[href$='/HospitalSeeker/?lang=en']")
     protected WebElement enLanguage;
 
     @FindBy(css = "a[href=\"#toggle-search\"]")
@@ -52,6 +50,9 @@ public class BaseHeader extends BasePage {
     @FindBy(id = "select_doctor_search_button")
     protected WebElement doctorSearchButton;
 
+    public WebElement getChangeLanguageIco() {
+        return changeLanguageIco;
+    }
 
     public WebElement getDoctorSearchError() {
         return doctorSearchError;
@@ -72,14 +73,17 @@ public class BaseHeader extends BasePage {
     }
 
 
-  /*  public BaseHeader changeLanguageToUa() {
+    public BaseHeader changeLanguageToUa() {
+        changeLanguageIco.click();
         uaLanguage.click();
-        return new BaseHeader(driver);
+        return new BaseHeader();
     }
-    public BaseHeader changeLanguagetoEn() {
+
+    public BaseHeader changeLanguageToEn() {
+        changeLanguageIco.click();
         enLanguage.click();
         return this;
-    }*/
+    }
 
     public HospitalSearchResultPage findHospital(String hospitalName) {
         fillHospitalInput(hospitalName);

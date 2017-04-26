@@ -1,20 +1,19 @@
 package pages.allUsers;
 
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.annotations.*;
-import pages.allUsers.DoctorSearchResult;
-import pages.anonymous.LoginPage;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 import pages.headers.BaseHeader;
 import pages.headers.headersByRole.NotAuthorizedHeader;
 import utils.BaseNavigation;
 import utils.BaseTest;
-import utils.BrowserWrapper;
 import utils.DriverInitializer;
 
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Properties;
 
 import static org.testng.Assert.assertEquals;
 
@@ -22,6 +21,9 @@ import static org.testng.Assert.assertEquals;
  * Created by Yana on 17.04.2017.
  */
 public class TestDoctorSearch extends BaseTest {
+
+    private Properties properties;
+
 
     @DataProvider(name = "SearchProvider")
     public static Object[][] parametrizedData() {
@@ -35,6 +37,11 @@ public class TestDoctorSearch extends BaseTest {
     @BeforeMethod
     public void beforeMethod() {
         DriverInitializer.getToUrl(BASE_URL);
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void afterMethod() throws Exception{
+        DriverInitializer.deleteAllCookies();
     }
 
     @Test(dataProvider = "SearchProvider")
@@ -55,13 +62,34 @@ public class TestDoctorSearch extends BaseTest {
 
     @Test
     public void testFindDoctorInputValidation() throws Exception {
-        BaseHeader header = new BaseHeader();
+        NotAuthorizedHeader header = new NotAuthorizedHeader();
+        header.fillDoctorInput("ho");
+        header.changeLanguageToUa();
+        header.changeLanguageToEn();
+        checkLanguageAndLoadProperties(header);
+        assertEquals(header.getDoctorSearchError().getText(), properties.getProperty("lineToShort"));
+    }
+
+    @Test
+    public void testFindDoctorInputValidationUa() throws Exception {
+        NotAuthorizedHeader header = new NotAuthorizedHeader();
+        header.changeLanguageToUa();
         header.fillDoctorInput("ho");
         assertEquals(header.getDoctorSearchError().getText(), "Please enter at least 3 symbols");
     }
 
-    @AfterMethod(alwaysRun = true)
-     public void afterMethod() throws Exception{
-     DriverInitializer.deleteAllCookies();
+    private void checkLanguageAndLoadProperties(BaseHeader header){
+        properties = new Properties();
+        try {
+            if (header.getChangeLanguageIco().getAttribute("src").endsWith("/en.png")) {
+                properties.load(new InputStreamReader(
+                        new FileInputStream("src/main/resources/languageEng.properties"), "UTF-8"));
+            } else {
+                properties.load(new InputStreamReader(
+                        new FileInputStream("src/main/resources/languageUa.properties"), "UTF-8"));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
