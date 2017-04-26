@@ -67,15 +67,15 @@ public class AddNewHospitalPage extends BasePage {
     public void addNewHospitalPhoto() throws AWTException {
         setClipboardData("D:\\RhodeIslandHosp14_360_360_90.jpg");
         Robot robot = new Robot();
-        robot.delay(1000);
+        robot.delay(500);
         robot.keyPress(KeyEvent.VK_CONTROL);
         robot.keyPress(KeyEvent.VK_V);
         robot.keyRelease(KeyEvent.VK_V);
         robot.keyRelease(KeyEvent.VK_CONTROL);
-        robot.delay(2000);
+        robot.delay(1000);
         robot.keyPress(KeyEvent.VK_ENTER);
         robot.keyRelease(KeyEvent.VK_ENTER);
-        robot.delay(1000);
+        robot.delay(500);
     }
 
     public void pushAddPhotoButton() {
@@ -83,29 +83,34 @@ public class AddNewHospitalPage extends BasePage {
     }
 
     public void addressData(String text) {
+        BrowserWrapper.waitUntilElementClickable(addressInputField);
         addressInputField.clear();
         addressInputField.sendKeys(text);
     }
 
     public AddNewHospitalPage changeCountry(String text) {
+        BrowserWrapper.waitUntilElementClickable(countryInputField);
         countryInputField.clear();
         countryInputField.sendKeys(text);
         return new AddNewHospitalPage();
     }
 
     public AddNewHospitalPage changeCity(String text) {
+        BrowserWrapper.waitUntilElementClickable(cityInputField);
         cityInputField.clear();
         cityInputField.sendKeys(text);
         return new AddNewHospitalPage();
     }
 
-    public AddNewHospitalPage changeStreet(String text) {
+    public  AddNewHospitalPage  changeStreet(String text) {
+        BrowserWrapper.waitUntilElementClickable(streetInputField);
         streetInputField.clear();
         streetInputField.sendKeys(text);
         return new AddNewHospitalPage();
     }
 
-    public AddNewHospitalPage changeBuilding(String text) {
+    public  AddNewHospitalPage changeBuilding(String text) {
+        BrowserWrapper.waitUntilElementClickable(buildingInputField);
         buildingInputField.clear();
         buildingInputField.sendKeys(text);
         return new AddNewHospitalPage();
@@ -122,11 +127,17 @@ public class AddNewHospitalPage extends BasePage {
     }
 
    public void pushFindButton() {
+        BrowserWrapper.waitUntilElementClickable(findButton);
         findButton.click();
    }
 
    public void pushFillButton() {
+        BrowserWrapper.waitUntilElementClickable(fillButton);
         fillButton.click();
+   }
+
+   public void pushFillButtonWithInvalidData() {
+
    }
 
    public void pushResetButton() {
@@ -139,15 +150,15 @@ public class AddNewHospitalPage extends BasePage {
    }
 
    public void addNewHospital(String address, String name, String description) {
-       BrowserWrapper.sleep(2);
+       //BrowserWrapper.sleep(2);
        addressData(address);
        addHospitalName(name);
        addHospitalDescription(description);
-       BrowserWrapper.sleep(2);
+       //BrowserWrapper.sleep(2);
        pushFillButton();
-       BrowserWrapper.sleep(2);
+       //BrowserWrapper.sleep(2);
        pushFindButton();
-       BrowserWrapper.sleep(2);
+       //BrowserWrapper.sleep(2);
        pushSaveButton();
    }
 }

@@ -15,11 +15,11 @@ import java.util.concurrent.TimeUnit;
  */
 public class Driver {
 
-    private static final String FIREFOX_PROFILE_NAME = "default";
+    private static final String FIREFOX_PROFILE_NAME = "myProfile";
     private static final String WEBDRIVER_NAME = "webdriver.gecko.driver";
-    private static final String LINUX_WEBDRIVER_PATH = "src/main/resources/geckodriver";
-    private static final String MACOS_WEBDRIVER_PATH = "src/main/resources/geckodriver";
-    private static final String WEBDRIVER_PATH = "src/main/resources/geckodriver.exe";
+    private static final String LINUX_WEBDRIVER_PATH = "src/main/resources/drivers/geckodriver";
+    private static final String MACOS_WEBDRIVER_PATH = "src/main/resources/drivers/geckodriver";
+    private static final String WEBDRIVER_PATH = "src/main/resources/drivers/geckodriver.exe";
     private static final String BASE_URL = "https://localhost:8443/HospitalSeeker/";
 
     private static WebDriver driver;

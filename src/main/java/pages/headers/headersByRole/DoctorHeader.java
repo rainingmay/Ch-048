@@ -11,17 +11,26 @@ import utils.BrowserWrapper;
  */
 public class DoctorHeader extends AuthorizedHeader {
 
+    @FindBy(css = "a[href=\"/HospitalSeeker/\"]")
+    private WebElement home;
 
-    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/a")
+    @FindBy(css = "a[href=\"/HospitalSeeker/mapsearch\"]")
+    private WebElement nearestHospital;
+
+//    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[4]/a")
+    @FindBy(css = "a[href=\"/HospitalSeeker/patients\"]")
     private WebElement patients;
 
-    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[5]/a")
+//    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[5]/a")
+    @FindBy(css = "a[href=\"/HospitalSeeker/workscheduler\"]")
     private WebElement schedule;
 
-    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[6]/a")
+//    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[6]/a")
+    @FindBy(css = "a.nav.navbar-nav.dropdown.dropdown-toggle.active")
     private WebElement profile;
 
-    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[6]/ul/li[2]/a")
+//    @FindBy(xpath = "/html/body/nav/div[1]/div[2]/ul/li[6]/ul/li[2]/a")
+    @FindBy(css = "a[href=\"/HospitalSeeker/logout\"]")
     private WebElement logOut;
 
     public ListPatientaPage patientsButtonClick(){
