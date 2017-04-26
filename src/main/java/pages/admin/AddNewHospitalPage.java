@@ -60,7 +60,7 @@ public class AddNewHospitalPage implements PageInitializer {
     @FindBy(id = "button-reset")
     private WebElement resetButton;
 
-    @FindBy(css = ".ol-md-12")
+    @FindBy(css = "body > section > div > h3")
     public WebElement pageLabel;
 
     public void setClipboardData(String pathToPhoto) {

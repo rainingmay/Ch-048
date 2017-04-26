@@ -15,16 +15,17 @@
     When  ADMIN press button "Check Google POI"
     Then  ADMIN must see page where he can check GooglePOI
 
-  Scenario: Show on map
-    When  ADMIN press button "Show on map" in row with certain hospital
-    Then  ADMIN must see this hospital on map
+
+#  Scenario: Show on map
+    # When  ADMIN press button "Show on map" in row with certain hospital
+    # Then  ADMIN must see this hospital on map
 
   Scenario: Edit hospital
-    When  ADMIN press button "Edit" in row with certain hospital
+    When  ADMIN press button "Edit" in row '1' with certain hospital
     Then  ADMIN must see page "Hospital add/edit page"
 
   Scenario: Delete hospital
-    When  ADMIN press button "Delete" in row with certain hospital
+    When  ADMIN press button "Delete" in row '1' with certain hospital
     Then  ADMIN must see this page again without this hospital
 
 
