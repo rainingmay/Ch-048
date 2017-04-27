@@ -21,11 +21,6 @@ import utils.DriverInitializer;
  * Created by Natasha on 18.04.2017.
  */
 public class TestPatientRecord extends BaseTest {
-    @BeforeMethod
-    public void before() {
-        //Why do you do this here?
-        DriverInitializer.initialization();
-    }
 
 
     @AfterMethod

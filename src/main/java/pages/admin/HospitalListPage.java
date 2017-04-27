@@ -6,14 +6,13 @@ import org.openqa.selenium.support.FindBy;
 import pages.PageInitializer;
 import pages.headers.headersByRole.AdminHeader;
 import utils.BrowserWrapper;
+import utils.DriverInitializer;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HospitalListPage implements PageInitializer {
-
-    private static final String ADD_HOSPITAL_PAGE_ID_IDENTIFICATION = "address.street";
 
     public AdminHeader header;
 
@@ -27,6 +26,9 @@ public class HospitalListPage implements PageInitializer {
 
     @FindBy(css = "a.btn:nth-child(2)")
     private WebElement checkGooglePoiButton;
+
+    @FindBy(css = "table")
+    public WebElement table;
 
     @FindBy(css = "thead")
     private WebElement tableHead;
@@ -67,7 +69,7 @@ public class HospitalListPage implements PageInitializer {
             WebElement tableRow = tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")"));
             editButton = tableRow.findElement(By.cssSelector("body > section > div > div > div > div.col-sm-8 > div.pre-scrollable.panel.panel-default > table > tbody > tr:nth-child(" + rowNumber + ") > td:nth-child(3) > form > a"));
             editButton.click();
-            BrowserWrapper.waitUntilElementClickableByLocator(By.id(ADD_HOSPITAL_PAGE_ID_IDENTIFICATION));
+            BrowserWrapper.waitUntilElementClickableByLocator(By.xpath("//*[@id=\"image-uploaded\"]"));
             return new AddNewHospitalPage();
         }
         return null;
@@ -99,5 +101,9 @@ public class HospitalListPage implements PageInitializer {
 
     public int getCountOfHospitalsInTable() {
         return tableBody.findElements(By.cssSelector("tr")).size();
+    }
+
+    public String getTitleOfPage() {
+        return DriverInitializer.instance().getTitle();
     }
 }

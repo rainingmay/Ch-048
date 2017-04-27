@@ -60,6 +60,9 @@ public class AddNewHospitalPage implements PageInitializer {
     @FindBy(id = "button-reset")
     private WebElement resetButton;
 
+    @FindBy(css = "body > section > div > h3")
+    public WebElement pageLabel;
+
     public void setClipboardData(String pathToPhoto) {
         StringSelection stringSelection = new StringSelection(pathToPhoto);
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);

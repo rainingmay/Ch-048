@@ -27,7 +27,7 @@ public class AdminHeader extends AuthorizedHeader implements PageInitializer {
     @FindBy(css = "a[href=\"/HospitalSeeker/admin/newUser\"]")
     private WebElement addUserIco;
 
-    @FindBy(css = "a[href=\"/HospitalSeeker/admin/newUser\" ]")
+    @FindBy(css = "a[href=\"/HospitalSeeker/admin/map/listhospitals\"]")
     private WebElement hospitalListIco;
 
     @FindBy(css = "a[href=\"/HospitalSeeker/admin/map/new\"]")
