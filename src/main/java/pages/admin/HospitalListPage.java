@@ -75,7 +75,7 @@ public class HospitalListPage implements PageInitializer {
         return null;
     }
 
-    public HospitalListPage deleteHospital(int rowNumber) throws AWTException {
+    public HospitalListPage deleteHospital(int rowNumber) {
         if (tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")")).isDisplayed()) {
             WebElement tableRow = tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")"));
             deleteButton = tableRow.findElement(By.cssSelector("body > section > div > div > div > div.col-sm-8 > div.pre-scrollable.panel.panel-default > table > tbody > tr:nth-child(" + rowNumber + ") > td:nth-child(3) > form > button:nth-child(4)"));

@@ -12,7 +12,6 @@ import utils.BrowserWrapper;
 import utils.DriverInitializer;
 
 
-
 public class AddHospitalTest extends BaseTest {
 
     private static final String ALL_HOSPITALS_PAGE_ID_IDENTIFICATION = "googleMap";
