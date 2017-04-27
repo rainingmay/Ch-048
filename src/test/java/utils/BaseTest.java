@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
@@ -22,7 +23,7 @@ public class BaseTest {
 
     private static final String BASE_URL = "https://localhost:8443/HospitalSeeker/";
     @BeforeClass
-    public void before(){
+    public void before() throws IOException {
       DriverInitializer.getToUrl(BASE_URL);
     }
 

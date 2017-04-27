@@ -18,8 +18,11 @@ public class AdminHeader extends AuthorizedHeader implements PageInitializer {
         pageInitialization();
     }
 
+    @FindBy(css = "#bs-example-navbar-collapse-1 > ul li:nth-child(2)")
+    public WebElement homeButton;
+
     @FindBy(linkText = "Actions")
-    private WebElement actions;
+    public WebElement actions;
 
     @FindBy(css = "a[href=\"/HospitalSeeker/admin/users?status=true\"]")
     private WebElement allUsersIco;
@@ -69,4 +72,6 @@ public class AdminHeader extends AuthorizedHeader implements PageInitializer {
         addHospitalIco.click();
         return new AddNewHospitalPage();
     }
+
+
 }

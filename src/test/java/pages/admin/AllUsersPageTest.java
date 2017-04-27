@@ -1,5 +1,6 @@
 package pages.admin;
 
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -8,6 +9,10 @@ import org.testng.annotations.Test;
 import utils.*;
 import utils.databaseutil.UserDAO;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -15,13 +20,28 @@ import java.util.*;
  */
 public class AllUsersPageTest extends BaseTest {
 
+    private AllUsersPage allUsersPage;
+
     @BeforeMethod
-    public void before() {
-        DriverInitializer.initialization();
+    public void beforeMethod() throws IOException {
+        AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
+
+        String language = "ua";
+
+        Properties properties = new Properties();
+        InputStream inputStream;
+
+        if (language.equals("ua")) inputStream = new FileInputStream("src/test/resources/localization/ua.properties");
+            else if (language.equals("en")) inputStream = new FileInputStream("src/test/resources/localization/en.properties");
+                else inputStream = null;
+
+        properties.load(inputStream);
+
+        Assert.assertEquals(allUsersPage.header.homeButton.getText(), properties.getProperty("header.menu.home"));
     }
 
     @AfterMethod
-    public void after() {
+    public void afterMethod() {
         try {
             BaseNavigation.logout();
             DriverInitializer.close();
@@ -30,12 +50,15 @@ public class AllUsersPageTest extends BaseTest {
         }
     }
 
+    @Test
+    public void test() {
+        Assert.assertEquals(true, true);
+    }
+
 
 
     @Test
     public void enableUsersViewTest() {
-        AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
-        BrowserWrapper.waitForPage();
         allUsersPage = allUsersPage.showEnableUsers();
         int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
         boolean actual = UserDAO.getStatusByEmail(new TableParser(allUsersPage.table).getFieldFromTableRow(rowNumber, "@email"));
@@ -45,8 +68,6 @@ public class AllUsersPageTest extends BaseTest {
 
     @Test
     public void disableUsersViewTest() {
-        AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
-        BrowserWrapper.sleep(2);
         allUsersPage = allUsersPage.showDisableUsers();
         BrowserWrapper.sleep(2);
         int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
@@ -57,8 +78,6 @@ public class AllUsersPageTest extends BaseTest {
 
     @Test
     public void viewWindowTest() {
-        AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
-        BrowserWrapper.waitForPage();
         int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
         List<String> actual = allUsersPage.getUserDataFromInfoWindow(rowNumber);
         List<String> allInfo = UserDAO.getUserFromDatabaseByEmail(actual.get(1));
@@ -70,8 +89,6 @@ public class AllUsersPageTest extends BaseTest {
 
     @Test(dataProvider = "roles")
     public void changeRoleTest(String role) {
-        AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
-        //BrowserWrapper.sleep(2);
         String expected = role;
         int rowNumber = 1;
         allUsersPage = allUsersPage.changeRoleInEditWindow(rowNumber, role);
@@ -82,8 +99,6 @@ public class AllUsersPageTest extends BaseTest {
 
     @Test(dataProvider = "count")
     public void changeCountOfUsersOnPageTest(String count) {
-        AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
-        BrowserWrapper.waitForPage();
         int expected = Integer.parseInt(count);
         allUsersPage = allUsersPage.changeCountOfUsersOnPage(expected);
         int actual = allUsersPage.getCountOfUsersInTable();
@@ -93,8 +108,6 @@ public class AllUsersPageTest extends BaseTest {
 
     @Test(dataProvider = "roles")
     public void searchByRoleTest(String role) {
-        AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
-        BrowserWrapper.waitForPage();
         String expected = role;
         allUsersPage = allUsersPage.changeRole(expected);
         BrowserWrapper.sleep(2);
@@ -106,8 +119,6 @@ public class AllUsersPageTest extends BaseTest {
 
     @Test(dataProvider = "searchParams")
     public void searchTest(String role, String valueOfField, String count) {
-        AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
-        BrowserWrapper.waitForPage();
         allUsersPage = allUsersPage.search(Integer.parseInt(count), role, "firstName", valueOfField);
         BrowserWrapper.sleep(2);
         int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
@@ -124,8 +135,6 @@ public class AllUsersPageTest extends BaseTest {
 
     @Test
     public void nextPageButtonTest() {
-        AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
-        BrowserWrapper.waitForPage();
         AllUsersPage allUsersPage1 = allUsersPage.toNextPage();
         BrowserWrapper.waitForPage();
         Assert.assertNotEquals(allUsersPage, allUsersPage1);
@@ -134,8 +143,6 @@ public class AllUsersPageTest extends BaseTest {
 
     @Test
     public void deleteUsersTest() {
-        AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
-        BrowserWrapper.waitForPage();
         int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
         String actual = allUsersPage.getCurrentUrl();
         allUsersPage = allUsersPage.deleteUser(rowNumber);
@@ -146,8 +153,6 @@ public class AllUsersPageTest extends BaseTest {
 
     @Test(dataProvider = "roles")
     public void sortByEmailTest(String role) {
-        AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
-        BrowserWrapper.waitForPage();
         allUsersPage.changeRole(role);
         allUsersPage.searchButton.click();
         BrowserWrapper.sleep(2);

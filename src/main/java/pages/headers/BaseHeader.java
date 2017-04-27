@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.PageInitializer;
 import pages.allUsers.*;
+import utils.DriverInitializer;
 
 
 /**
@@ -75,14 +76,6 @@ public class BaseHeader implements PageInitializer {
     }
 
 
-  /*  public BaseHeader changeLanguageToUa() {
-        uaLanguage.click();
-        return new BaseHeader(driver);
-    }
-    public BaseHeader changeLanguagetoEn() {
-        enLanguage.click();
-        return this;
-    }*/
 
     public HospitalSearchResultPage findHospital(String hospitalName) {
         fillHospitalInput(hospitalName);

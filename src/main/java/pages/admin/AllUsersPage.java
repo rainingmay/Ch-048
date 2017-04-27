@@ -63,7 +63,7 @@ public class AllUsersPage implements PageInitializer {
     private WebElement lastPageButton;
 
     @FindBy(css = "body section div.content div div ul li:first-child a")
-    private WebElement firstPageButto;
+    private WebElement firstPageButton;
 
     @FindBy(id = "email")
     public WebElement sortByEmailButton;
@@ -105,6 +105,8 @@ public class AllUsersPage implements PageInitializer {
         this.header = new AdminHeader();
         pageInitialization();
     }
+
+
 
 
     public AllUsersPage getCreatedTableText(){
