@@ -12,11 +12,14 @@
 
                 <include name="unSucefully"/>
 
+                <include name="InputValidation"/>
+
             </define>
 
             <run>
 
-                <include name="unSucefully"/>
+                <!--<include name="unSucefully"/>-->
+        <include name="InputValidation"/>
 
             </run>
 
@@ -25,6 +28,8 @@
         <classes>
 
             <class name="pages.admin.AddUserPageTest" />
+            <class name="pages.allUsers.TestDoctorSearch" />
+            <class name="pages.allUsers.TestHospitalSearch" />
 
         </classes>
 
