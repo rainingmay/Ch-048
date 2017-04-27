@@ -13,11 +13,12 @@ import utils.DriverInitializer;
  * Created by radgast on 22.04.17.
  */
 public class Hook {
+    private static final String BASE_URL = "https://localhost:8443/HospitalSeeker/";
 
 
     @Before
     public void setUp(){
-        DriverInitializer.initialization();
+        DriverInitializer.getToUrl(BASE_URL);
     }
 
     @After
@@ -33,6 +34,7 @@ public class Hook {
             }
 
         }
+
         DriverInitializer.close();
     }
 

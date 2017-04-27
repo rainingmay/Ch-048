@@ -3,17 +3,19 @@ package pages.allUsers;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pages.PageInitializer;
 import pages.headers.BaseHeader;
 
 import java.util.List;
 
 
-public class HospitalSearchResultPage extends BasePage {
+public class HospitalSearchResultPage implements PageInitializer{
     public BaseHeader header;
 
 
     public HospitalSearchResultPage() {
         header = new BaseHeader();
+        pageInitialization();
     }
 
     @FindBy(css = "[class='filter-col'])")

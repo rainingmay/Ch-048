@@ -24,12 +24,12 @@ Feature: Using actions of particular doctor
     When Manager click on the details button of particular doctor
     Then Name of doctor in details form should match with name from table
 
-#  Scenario: Checking edition ability
-#    When Manager click on the edit button of particular doctor
-#    And Manager type diffrent first name, second name, education and addres
-#    And click on save button
+  Scenario: Checking edition ability
+    When Manager click on the edit button of particular doctor
+    And Manager type different first name, second name, education and address
+    Then First name in table changed to proper name
 
-#  Scenario: Checing deliting ability
+#  Scenario: Checking deleting ability
 #    When Manager click on delete button of particular doctor
-#    And Confirm delition
-#    Then Doctor shouldn't apear in the table
+#    And Confirm deletion
+#    Then Doctor shouldn't appear in the table

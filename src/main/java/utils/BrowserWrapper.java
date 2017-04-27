@@ -82,10 +82,6 @@ public class BrowserWrapper {
         DriverInitializer.instance().manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
     }
 
-    public static void waitForPageLoad(){
-        DriverInitializer.instance().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-    }
-
     public static void refreshPage(){
         DriverInitializer.instance().navigate().refresh();
     }
@@ -129,9 +125,7 @@ public class BrowserWrapper {
       b = clickWithStaleException(element);
 
       c = clickWithStaleException(element);
-        System.out.print(a);
-        System.out.print(b);
-        System.out.println(c);
+
     }
 
 
@@ -162,5 +156,9 @@ public class BrowserWrapper {
         }
 
         return true;
+    }
+
+    public static void waitUntilElementNotStale(WebElement element){
+        wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(element)));
     }
 }

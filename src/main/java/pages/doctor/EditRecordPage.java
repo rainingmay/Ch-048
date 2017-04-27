@@ -3,10 +3,10 @@ package pages.doctor;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.allUsers.BasePage;
+import pages.PageInitializer;
 import pages.headers.headersByRole.DoctorHeader;
 
-public class EditRecordPage extends BasePage {
+public class EditRecordPage implements PageInitializer {
     public DoctorHeader header;
     @FindBy (id = "complaint")
     private WebElement complaintTextField;
@@ -25,6 +25,7 @@ public class EditRecordPage extends BasePage {
 
     public EditRecordPage() {
         this.header =  new DoctorHeader();
+        pageInitialization();
     }
 
     public void modifyComplaint(String value){

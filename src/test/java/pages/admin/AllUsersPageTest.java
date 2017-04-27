@@ -46,7 +46,7 @@ public class AllUsersPageTest extends BaseTest {
     @Test
     public void disableUsersViewTest() {
         AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
-        BrowserWrapper.waitForPage();
+        BrowserWrapper.sleep(2);
         allUsersPage = allUsersPage.showDisableUsers();
         BrowserWrapper.sleep(2);
         int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
@@ -71,7 +71,7 @@ public class AllUsersPageTest extends BaseTest {
     @Test(dataProvider = "roles")
     public void changeRoleTest(String role) {
         AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
-        BrowserWrapper.waitForPage();
+        //BrowserWrapper.sleep(2);
         String expected = role;
         int rowNumber = 1;
         allUsersPage = allUsersPage.changeRoleInEditWindow(rowNumber, role);
@@ -122,9 +122,9 @@ public class AllUsersPageTest extends BaseTest {
     }
 
 
-    @Test(dataProvider = "loginData")
-    public void nextPageButtonTest(String login, String password) {
-        AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(login, password);
+    @Test
+    public void nextPageButtonTest() {
+        AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
         BrowserWrapper.waitForPage();
         AllUsersPage allUsersPage1 = allUsersPage.toNextPage();
         BrowserWrapper.waitForPage();
@@ -156,10 +156,6 @@ public class AllUsersPageTest extends BaseTest {
         int actual = new TableParser(allUsersPage.table).getFieldFromTableRow(1, "@email").compareToIgnoreCase(new TableParser(allUsersPage.table).getFieldFromTableRow(2, "@email"));
         Assert.assertEquals(actual < 0, true);
     }
-
-
-
-
 
 
 

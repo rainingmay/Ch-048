@@ -3,30 +3,32 @@ package pages.admin;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.allUsers.BasePage;
+import pages.PageInitializer;
 import pages.headers.headersByRole.AdminHeader;
 import utils.BrowserWrapper;
+import utils.DriverInitializer;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HospitalListPage extends BasePage {
+public class HospitalListPage implements PageInitializer {
 
     public AdminHeader header;
 
     public HospitalListPage() {
         this.header = new AdminHeader();
+        pageInitialization();
     }
 
-
-
-
-    @FindBy(xpath = "/html/body/section/div/div/div/div[1]/div[1]/a[1]")
+    @FindBy(css = "a.btn:nth-child(1)")
     private WebElement addNewHospitalButton;
 
-    @FindBy(xpath = "/html/body/section/div/div/div/div[1]/div[1]/a[2]")
+    @FindBy(css = "a.btn:nth-child(2)")
     private WebElement checkGooglePoiButton;
+
+    @FindBy(css = "table")
+    public WebElement table;
 
     @FindBy(css = "thead")
     private WebElement tableHead;
@@ -73,7 +75,7 @@ public class HospitalListPage extends BasePage {
         return null;
     }
 
-    public HospitalListPage deleteHospital(int rowNumber) throws AWTException {
+    public HospitalListPage deleteHospital(int rowNumber) {
         if (tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")")).isDisplayed()) {
             WebElement tableRow = tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")"));
             deleteButton = tableRow.findElement(By.cssSelector("body > section > div > div > div > div.col-sm-8 > div.pre-scrollable.panel.panel-default > table > tbody > tr:nth-child(" + rowNumber + ") > td:nth-child(3) > form > button:nth-child(4)"));
@@ -99,5 +101,9 @@ public class HospitalListPage extends BasePage {
 
     public int getCountOfHospitalsInTable() {
         return tableBody.findElements(By.cssSelector("tr")).size();
+    }
+
+    public String getTitleOfPage() {
+        return DriverInitializer.instance().getTitle();
     }
 }

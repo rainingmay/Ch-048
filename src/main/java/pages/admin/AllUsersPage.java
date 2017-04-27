@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.allUsers.BasePage;
+import pages.PageInitializer;
 import pages.headers.headersByRole.AdminHeader;
 import utils.BrowserWrapper;
 import utils.DriverInitializer;
@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by Evgen on 06.04.2017.
  */
-public class AllUsersPage extends BasePage {
+public class AllUsersPage implements PageInitializer {
 
     public AdminHeader header;
 
@@ -103,6 +103,7 @@ public class AllUsersPage extends BasePage {
 
     public AllUsersPage() {
         this.header = new AdminHeader();
+        pageInitialization();
     }
 
 

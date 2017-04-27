@@ -2,14 +2,17 @@ package pages.headers.headersByRole;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pages.PageInitializer;
 
 
 /**
  * Created by Evgen on 06.04.2017.
  */
-public class PatientHeader extends AuthorizedHeader {
+public class PatientHeader extends AuthorizedHeader implements PageInitializer {
 
-
+    public PatientHeader() {
+        pageInitialization();
+    }
 
     @FindBy(linkText = "Actions")
     private WebElement actions;

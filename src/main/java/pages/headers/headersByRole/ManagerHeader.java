@@ -2,6 +2,7 @@ package pages.headers.headersByRole;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pages.PageInitializer;
 import pages.manager.AddNewDoctorPage;
 import pages.manager.ManagerDashBordPage;
 import pages.manager.ModerationFeedBackPage;
@@ -10,9 +11,11 @@ import pages.manager.ModerationFeedBackPage;
 /**
  * Created by Evgen on 06.04.2017.
  */
-public class ManagerHeader extends AuthorizedHeader {
+public class ManagerHeader extends AuthorizedHeader implements PageInitializer {
 
-
+    public ManagerHeader() {
+        pageInitialization();
+    }
 
     @FindBy(linkText = "Actions")
     private WebElement actions;

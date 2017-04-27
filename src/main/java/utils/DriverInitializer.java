@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.firefox.internal.Extension;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -42,7 +43,7 @@ public class DriverInitializer {
 
 
 
-    public static WebDriver driver;
+    private static volatile WebDriver driver;
 
     public static void initialization() {
 
@@ -131,24 +132,28 @@ public class DriverInitializer {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
+    public static synchronized WebDriver instance() {
+        if (driver == null) {
+            initialization();
+            return driver;
+            }
+        return driver;
+    }
+
     public static void getToUrl(String url){
         instance().get(url);
     }
 
-    public static WebDriver instance()  {
-        if(driver == null) {
-            initialization();
-            return driver;
+    public static void close() {
+        if (driver != null) {
+            driver.quit();
+            driver = null;
+        } else {
+            System.out.println("Cant close session");
         }
-        return driver;
     }
 
     public static void deleteAllCookies() {
         instance().manage().deleteAllCookies();
     }
-
-    public static void close(){
-        driver.quit();
-    }
-
 }
