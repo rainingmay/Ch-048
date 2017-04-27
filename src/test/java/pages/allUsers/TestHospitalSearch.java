@@ -8,7 +8,13 @@ import pages.headers.BaseHeader;
 import pages.headers.headersByRole.NotAuthorizedHeader;
 import utils.BaseNavigation;
 import utils.BaseTest;
+import utils.BrowserWrapper;
 import utils.DriverInitializer;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Properties;
 
 import static org.testng.Assert.assertEquals;
 
@@ -32,11 +38,16 @@ public class TestHospitalSearch extends BaseTest {
         DriverInitializer.getToUrl(BASE_URL);
     }
 
+    @AfterMethod(alwaysRun = true)
+    public void afterMethod() throws Exception{
+        DriverInitializer.deleteAllCookies();
+    }
+
     @Test(dataProvider = "SearchProvider")
     public void testFindHospitalNotAuthorizedUser(String searchWord, int expected) throws Exception {
         NotAuthorizedHeader header = new NotAuthorizedHeader();
         HospitalSearchResultPage hospitalSearchResult = header.findHospital(searchWord);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         assertEquals(hospitalSearchResult.countOfHospital(), expected);
     }
 
@@ -44,20 +55,28 @@ public class TestHospitalSearch extends BaseTest {
     public void testFindHospitalAuthorizedUser(String searchWord, int expected) throws Exception {
         NotAuthorizedHeader header = new NotAuthorizedHeader();
         BaseNavigation.login("admin@hospitals.ua", "1111");
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         HospitalSearchResultPage hospitalSearchResult = header.findHospital(searchWord);
         assertEquals(hospitalSearchResult.countOfHospital(), expected);
     }
 
     @Test
-    public void testFindHospitalInputValidation() throws Exception {
+    public void testFindHospitalInputValidationUa() throws Exception {
         BaseHeader header = new BaseHeader();
+        header.changeLanguageToUa();
+        Thread.sleep(1000);
         header.fillHospitalInput("ho");
-        assertEquals(header.getHospitalSearchError().getText(), "Please enter at least 3 symbols");
+        BaseTest.checkLanguageAndLoadProperties(header);
+        assertEquals(header.getHospitalSearchError().getText(), properties.getProperty("lineToShort"));
     }
 
-    @AfterMethod(alwaysRun = true)
-    public void afterMethod() throws Exception{
-        DriverInitializer.deleteAllCookies();
+    @Test
+    public void testFindHospitalInputValidationEng() throws Exception {
+        BaseHeader header = new BaseHeader();
+        header.changeLanguageToEn();
+        Thread.sleep(1000);
+        header.fillHospitalInput("ho");
+        BaseTest.checkLanguageAndLoadProperties(header);
+        assertEquals(header.getHospitalSearchError().getText(), properties.getProperty("lineToShort"));
     }
 }

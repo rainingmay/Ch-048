@@ -3,10 +3,17 @@ package utils;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import pages.headers.BaseHeader;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
+
+    public static Properties properties = null;
 
     public static final String ADMIN_LOGIN = "admin@hospitals.ua";
     public static final String ADMIN_PASSWORD = "1111";
@@ -23,8 +30,8 @@ public class BaseTest {
     protected static final String BASE_URL = "https://localhost:8443/HospitalSeeker/";
 
     @BeforeClass
-    public void before(){
-      DriverInitializer.getToUrl(BASE_URL);
+    public void before() {
+        DriverInitializer.getToUrl(BASE_URL);
     }
 
 
@@ -33,6 +40,23 @@ public class BaseTest {
         DriverInitializer.close();
     }
 
+
+    public static void checkLanguageAndLoadProperties(BaseHeader header) {
+        properties = new Properties();
+        try {
+            if (header.getChangeLanguageIco().getAttribute("src").endsWith("/en.png")) {
+                properties.load(new InputStreamReader(
+                        new FileInputStream("src/main/resources/languageEng.properties"), "UTF-8"));
+            } else {
+                properties.load(new InputStreamReader(
+                        new FileInputStream("src/main/resources/languageUa.properties"), "UTF-8"));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
+
+
 
 
