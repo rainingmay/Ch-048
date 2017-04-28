@@ -24,6 +24,7 @@
             <version>3.4.0</version>
         </dependency>
 
+
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
@@ -70,56 +71,56 @@
         </dependency>
     </dependencies>
 
-        <build>
-            <extensions>
-                <!-- start - for deploying using webdav -->
-                <extension>
-                    <groupId>org.apache.maven.wagon</groupId>
-                    <artifactId>wagon-webdav</artifactId>
-                    <version>1.0-beta-2</version>
-                </extension>
-                <!-- end - for deploying using webdav -->
-            </extensions>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <id>init-res</id>
-                            <!-- use the copy resources instead of resources, which adds it to
-                                the eclipse buildpath -->
-                            <phase>initialize</phase>
-                            <goals>
-                                <goal>copy-resources</goal>
-                            </goals>
-                            <configuration>
-                                <outputDirectory>${project.basedir}/src/main/resources</outputDirectory>
-                                <resources>
-                                    <resource>
-                                        <directory>${project.basedir}/src/template/resources</directory>
-                                        <targetPath>${project.basedir}/src/main/resources</targetPath>
-                                        <filtering>true</filtering>
-                                    </resource>
-                                </resources>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.1</version>
-                    <configuration>
-                        <source>1.8</source>
-                        <target>1.8</target>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>sonar-maven-plugin</artifactId>
-                    <version>2.1</version>
-                </plugin>
+    <build>
+        <extensions>
+            <!-- start - for deploying using webdav -->
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-webdav</artifactId>
+                <version>1.0-beta-2</version>
+            </extension>
+            <!-- end - for deploying using webdav -->
+        </extensions>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>init-res</id>
+                        <!-- use the copy resources instead of resources, which adds it to
+                            the eclipse buildpath -->
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.basedir}/src/main/resources</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/src/template/resources</directory>
+                                    <targetPath>${project.basedir}/src/main/resources</targetPath>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>2.1</version>
+            </plugin>
 
                 <plugin>
                     <groupId>ru.yandex.qatools.allure</groupId>
@@ -169,6 +170,18 @@
         </plugins>
     </reporting>
 
+            <plugin>
+                <groupId>ru.yandex.qatools.allure</groupId>
+                <artifactId>allure-maven-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <resultsDirectory>allure-results</resultsDirectory>
+                    <reportDirectory>allure-report</reportDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+
+    </build>
     <profiles>
         <profile>
             <id>Firefox</id>

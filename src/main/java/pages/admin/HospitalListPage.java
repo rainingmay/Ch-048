@@ -21,12 +21,10 @@ public class HospitalListPage implements PageInitializer {
         pageInitialization();
     }
 
+    @FindBy(css = "a.btn:nth-child(1)")
+    private WebElement addNewHospitalButton;
 
-
-    @FindBy(css = ".btn-group a:first-child")
-    public WebElement addNewHospitalButton;
-
-    @FindBy(css = ".btn-group a:last-child")
+    @FindBy(css = "a.btn:nth-child(2)")
     private WebElement checkGooglePoiButton;
 
     @FindBy(css = "table")

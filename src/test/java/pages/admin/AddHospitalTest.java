@@ -12,12 +12,12 @@ import utils.BrowserWrapper;
 import utils.DriverInitializer;
 
 
-
 public class AddHospitalTest extends BaseTest {
 
+    private static final String ALL_HOSPITALS_PAGE_ID_IDENTIFICATION = "googleMap";
     private static final String ALL_HOSPITALS_PAGE_XPATH_IDENTIFICATION = "/html/body/section/div/div/div/div[1]/div[1]/a[1]";
-    private static final String ADD_HOSPITAL_PAGE_XPATH_IDENTIFICATION = "//*[@id=\"image-uploaded\"]";
-    private static final String ALL_USERS_PAGE_ID_IDENTIFICATION = "#searchButton";
+    private static final String ADD_HOSPITAL_PAGE_ID_IDENTIFICATION = "image-uploaded";
+    private static final String ALL_USERS_PAGE_ID_IDENTIFICATION = "searchButton";
 
 
     @BeforeMethod
@@ -40,7 +40,7 @@ public class AddHospitalTest extends BaseTest {
             System.out.println("How much row in the table: " + hospitalsCountOfRow);
             hospitalListPage.submitAddNewHospital();
             AddNewHospitalPage addNewHospitalPage = new AddNewHospitalPage();
-            BrowserWrapper.waitUntilElementClickableByLocator(By.xpath(ADD_HOSPITAL_PAGE_XPATH_IDENTIFICATION));
+            BrowserWrapper.waitUntilElementClickableByLocator(By.id(ADD_HOSPITAL_PAGE_ID_IDENTIFICATION));
 
             //addNewHospitalPage.pushAddPhotoButton();
             //addNewHospitalPage.addNewHospitalPhoto();
@@ -55,8 +55,7 @@ public class AddHospitalTest extends BaseTest {
 
     @Test(dataProvider = "loginDataForDeleteHospital")
     public void deleteHospitalTest(String login, String password, int hospitalCountForDelete) throws Exception {
-        try {
-            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(login, password);
+
             BrowserWrapper.waitUntilElementClickableByLocator(By.id(ALL_USERS_PAGE_ID_IDENTIFICATION));
 
             HospitalListPage hospitalListPage = new HospitalListPage();
@@ -72,16 +71,12 @@ public class AddHospitalTest extends BaseTest {
 
             Assert.assertNotEquals(hospitalCountOfRow, hospitalCountOfRowAfterDelete);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Test(dataProvider = "editHospitalBuildingAndStreet")
     public void editHospitalTest(String building, String street, int hospitalCountForEdit) throws Exception {
-        try {
-            AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
-            BrowserWrapper.waitUntilElementClickableByLocator(By.id(ALL_USERS_PAGE_ID_IDENTIFICATION));
+
+            //BrowserWrapper.waitUntilElementClickableByLocator(By.id(ALL_USERS_PAGE_ID_IDENTIFICATION));
 
             HospitalListPage hospitalListPage = new HospitalListPage();
             hospitalListPage.header.goToAllHospitalsPage();
@@ -90,7 +85,7 @@ public class AddHospitalTest extends BaseTest {
             int hospitalCountOfRow = hospitalListPage.getCountOfHospitalsInTable();
             String actual = hospitalListPage.getHospitalDataFromTableRow(hospitalCountOfRow - 2).toString();
             hospitalListPage.editButton(hospitalCountForEdit);
-            BrowserWrapper.waitUntilElementClickableByLocator(By.xpath(ADD_HOSPITAL_PAGE_XPATH_IDENTIFICATION));
+            BrowserWrapper.waitUntilElementClickableByLocator(By.id(ADD_HOSPITAL_PAGE_ID_IDENTIFICATION));
 
             AddNewHospitalPage addNewHospitalPage = new AddNewHospitalPage();
             addNewHospitalPage.changeBuilding(building);
@@ -98,38 +93,40 @@ public class AddHospitalTest extends BaseTest {
             addNewHospitalPage.pushSaveButton();
             BrowserWrapper.waitUntilElementClickableByLocator(By.xpath(ALL_HOSPITALS_PAGE_XPATH_IDENTIFICATION));
 
-            String expected = hospitalListPage.getHospitalDataFromTableRow(15).toString();
+            String expected = hospitalListPage.getHospitalDataFromTableRow(hospitalCountForEdit).toString();
 
             Assert.assertNotEquals(actual, expected);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
     
     @Test(dataProvider = "invalidHospitalAddress")
     public void addNewHospitalWithInvalidDataTest(String hospitalAddress, String hospitalName, String hospitalDescription) throws Exception {
 
-        BrowserWrapper.waitUntilElementClickableByLocator(By.id(ALL_USERS_PAGE_ID_IDENTIFICATION));
+        //BrowserWrapper.waitUntilElementClickableByLocator(By.id(ALL_USERS_PAGE_ID_IDENTIFICATION));
         HospitalListPage hospitalListPage = new HospitalListPage();
         hospitalListPage.header.goToAllHospitalsPage();
-        BrowserWrapper.waitUntilElementClickableByLocator(By.xpath(ALL_HOSPITALS_PAGE_XPATH_IDENTIFICATION));
+        BrowserWrapper.waitUntilElementClickableByLocator(By.id(ALL_HOSPITALS_PAGE_ID_IDENTIFICATION));
 
         int hospitalsCountOfRow = hospitalListPage.getCountOfHospitalsInTable();
         System.out.println("How much row in the table: " + hospitalsCountOfRow);
         hospitalListPage.submitAddNewHospital();
         AddNewHospitalPage addNewHospitalPage = new AddNewHospitalPage();
-        BrowserWrapper.waitUntilElementClickableByLocator(By.xpath(ADD_HOSPITAL_PAGE_XPATH_IDENTIFICATION));
+        BrowserWrapper.waitUntilElementClickableByLocator(By.id(ADD_HOSPITAL_PAGE_ID_IDENTIFICATION));
 
         addNewHospitalPage.addNewHospital(hospitalAddress, hospitalName, hospitalDescription);
-        BrowserWrapper.sleep(3);
+        BrowserWrapper.sleep(1);
         hospitalListPage.header.goToAllHospitalsPage();
-        BrowserWrapper.waitUntilElementClickableByLocator(By.xpath(ALL_HOSPITALS_PAGE_XPATH_IDENTIFICATION));
+        BrowserWrapper.waitUntilElementClickableByLocator(By.id(ALL_HOSPITALS_PAGE_ID_IDENTIFICATION));
 
         int hospitalsCountOfRowAfterAdding = hospitalListPage.getCountOfHospitalsInTable();
         System.out.println("How much row in the table after added new hospital: " + hospitalsCountOfRowAfterAdding);
 
         Assert.assertEquals(hospitalsCountOfRow, hospitalsCountOfRowAfterAdding);
+    }
+
+    @Test
+    public void addNewHospitalWithoutDataTest() {
+
     }
 
     @DataProvider
@@ -142,15 +139,15 @@ public class AddHospitalTest extends BaseTest {
     @DataProvider
     public Object [] [] loginDataForDeleteHospital() {
             return new Object [] [] {
-                    {"admin@hospitals.ua", "1111", 10}
+                    {"admin@hospitals.ua", "1111", 12}
             };
     }
 
     @DataProvider
     public Object [] [] editHospitalBuildingAndStreet() {
         return new Object[][] {
-                {"2", "Вулиця Руська", 8},
-                {"4", "Вулиця Лесі Українки", 9}
+                {"2", "Вулиця Руська", 11},
+                {"4", "Вулиця Лесі Українки", 12}
         };
     }
 
