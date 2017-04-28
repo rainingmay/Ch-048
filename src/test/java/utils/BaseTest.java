@@ -1,16 +1,17 @@
 package utils;
 
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import pages.headers.BaseHeader;
+import org.testng.annotations.Listeners;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
+
+@Listeners({ScreenshotListener.class})
 public class BaseTest {
 
     public static Properties properties = null;
@@ -56,7 +57,3 @@ public class BaseTest {
         }
     }
 }
-
-
-
-

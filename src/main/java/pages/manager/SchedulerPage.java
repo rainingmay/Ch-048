@@ -289,10 +289,12 @@ public class SchedulerPage implements PageInitializer {
     }
 
     private boolean checkBeginAtHourSelector(){
+        BrowserWrapper.waitUntilElementNotStale(beginningHour);
         return BrowserWrapper.isElementPresent(beginningHour);
     }
 
     private boolean checkEndAtHourSelector() {
+        BrowserWrapper.waitUntilElementNotStale(endHour);
         return BrowserWrapper.isElementPresent(endHour);
     }
 
