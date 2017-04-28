@@ -16,23 +16,6 @@ public class ScreenshotListener extends TestListenerAdapter{
     @Override
     public void onTestFailure(ITestResult result){
         saveScreenshot(result);
-
-
-    }
-
-    @Override
-    public void onTestSuccess(ITestResult result){
-        saveScreenshot(result);
-
-
-
-    }
-
-    @Override
-    public void onTestSkipped(ITestResult result){
-        saveScreenshot(result);
-
-
     }
 
     @Attachment(value = "Page screenshot", type = "image/png")
