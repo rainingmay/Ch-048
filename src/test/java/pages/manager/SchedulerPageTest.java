@@ -50,7 +50,7 @@ public class SchedulerPageTest extends BaseTest {
     }
 
 
-    @Test
+    @Test(groups = {"smoke test"})
     public void testElementPresence() {
         try{
             BrowserWrapper.waitForPage();
@@ -60,10 +60,10 @@ public class SchedulerPageTest extends BaseTest {
             throw new AssertionError(e.getMessage());
         }
         Assert.assertTrue(schedulerPage.isPageReady(),"Not all elements are on the page");
-        logger.info("All element present");
+        logger.debug("All element present");
     }
 
-    @Test
+    @Test(groups = {"smoke test"})
     public void testDefaultSchedulerValues(){
         BrowserWrapper.waitForPage();
         try{
@@ -73,11 +73,11 @@ public class SchedulerPageTest extends BaseTest {
             throw new AssertionError(e.getMessage());
         }
         Assert.assertTrue(schedulerPage.checkDefaultConditionScheduler(), "Scheduler values doesn't set to default");
-        logger.info("Table set to default values");
+        logger.error("Table set to default values");
     }
 
 
-    @Test
+    @Test(groups = "schedule setting")
     public void testWeekSize(){
         schedulerPage.workWeekSizeSelector(TEST_WEEK_SIZE);
         schedulerPage.saveButtonClick();
@@ -85,17 +85,17 @@ public class SchedulerPageTest extends BaseTest {
         logger.info("Test pass");
     }
 
-    @Test
+    @Test(groups = "schedule setting")
     public void testWorkingDayDuration(){
         schedulerPage.setDayDuration(TEST_BEGIN_AT_HOUR, TEST_END_AT_HOUR);
         schedulerPage.saveButtonClick();
         Assert.assertTrue(schedulerPage.getBeginningHour().equals(EXPECTED_BEGIN_AT_HOUR) && schedulerPage.getEndingHour().equals(EXPECTED_END_AT_HOUR), "Can't change day duration");
-        logger.info("Test pass");
+        logger.debug("Test pass");
     }
 
 
 
-    @Test(dataProvider = "eventCreation")
+    @Test(dataProvider = "eventCreation",groups = "event creation")
     public void testEventCreation(String actualText, String expectedText){
         schedulerPage.createAppointment(actualText);
         BaseNavigation.logout();
@@ -107,7 +107,7 @@ public class SchedulerPageTest extends BaseTest {
         logger.info("Test pass");
     }
 
-    @Test
+    @Test(groups = "event creation")
     public void testEventDeletion(){
         schedulerPage.createAppointment(TEST_APPOINTMENT_TEXT);
         BrowserWrapper.refreshPage();
@@ -122,7 +122,7 @@ public class SchedulerPageTest extends BaseTest {
         logger.info("Test pass");
     }
 
-    @Test
+    @Test(groups = "event creation")
     public void testEventEdition(){
         schedulerPage.createAppointment(TEST_APPOINTMENT_TEXT);
         BrowserWrapper.refreshPage();
@@ -136,7 +136,7 @@ public class SchedulerPageTest extends BaseTest {
         Assert.assertTrue( schedulerPage.getEvents().size() > 0 && schedulerPage.getEvents().contains(EXPECTED_EDITABLE_APPOINTMENT_TEXT), "Can't edit event");
         logger.info("Test pass");
     }
-    @Test
+    @Test(groups = "event creation")
     public void testEventCancel(){
         schedulerPage.nextButtonClick();
         schedulerPage.inputEvent(TEST_APPOINTMENT_TEXT);
@@ -148,7 +148,7 @@ public class SchedulerPageTest extends BaseTest {
 
     }
 
-    @Test
+    @Test(groups = "event creation")
     public void testCreateEventDayTab() {
         schedulerPage.dayTabButtonClick();
         schedulerPage.createAppointment(TEST_APPOINTMENT_TEXT);
@@ -162,7 +162,7 @@ public class SchedulerPageTest extends BaseTest {
         logger.info("Test pass");
     }
 
-    @Test
+    @Test(groups = "event creation")
     public void testCreateEventMonthTab(){
         schedulerPage.monthTabButtonClick();
         schedulerPage.createEventCalendar(TEST_APPOINTMENT_TEXT);
@@ -177,14 +177,14 @@ public class SchedulerPageTest extends BaseTest {
     }
 
 
-    @Test
+    @Test(groups = "miscellaneous")
     public void testMiniCalendar(){
         schedulerPage.miniCalendarButtonClick();
         Assert.assertTrue(schedulerPage.checkMiniCalendarVisibility());
         logger.info("Test pass");
     }
 
-    @Test
+    @Test(groups = "miscellaneous")
     public void testTodayButton(){
         schedulerPage.nextButtonClick();
         schedulerPage.todayButtonClick();
@@ -193,7 +193,7 @@ public class SchedulerPageTest extends BaseTest {
     }
 
 
-    @Test
+    @Test(groups = "miscellaneous")
     public void testAlertIfNotSaved(){
         schedulerPage.nextButtonClick();
         schedulerPage.createAppointmentWithoutSave(TEST_APPOINTMENT_TEXT);

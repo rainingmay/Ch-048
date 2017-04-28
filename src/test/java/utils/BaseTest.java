@@ -1,9 +1,7 @@
 package utils;
 
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.*;
 import pages.headers.BaseHeader;
-import org.testng.annotations.Listeners;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -30,13 +28,13 @@ public class BaseTest {
 
     protected static final String BASE_URL = "https://localhost:8443/HospitalSeeker/";
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void before() {
         DriverInitializer.getToUrl(BASE_URL);
     }
 
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void after() {
         DriverInitializer.close();
     }
