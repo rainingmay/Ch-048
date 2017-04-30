@@ -1,15 +1,19 @@
 package pages.headers;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import pages.PageInitializer;
 import pages.allUsers.*;
 
 
 /**
  * Created by Evgen on 05.04.2017.
  */
-public class BaseHeader extends BasePage {
+public class BaseHeader implements PageInitializer {
+
+    public BaseHeader(){
+        pageInitialization();
+    }
 
 
     @FindBy(className = "img-responsive logo")
@@ -30,7 +34,7 @@ public class BaseHeader extends BasePage {
     @FindBy(css = "a[href$='https://localhost:8443/HospitalSeeker/?lang=en']")
     protected WebElement enLanguage;
 
-    @FindBy(css = ".hidden-xs")
+    @FindBy(css = "a[href=\"#toggle-search\"]")
     protected WebElement searchButton;
 
     @FindBy(id = "select_hospital_search")
@@ -51,9 +55,6 @@ public class BaseHeader extends BasePage {
     @FindBy(id = "select_doctor_search_button")
     protected WebElement doctorSearchButton;
 
-    public BaseHeader(WebDriver driver) {
-        super(driver);
-    }
 
     public WebElement getDoctorSearchError() {
         return doctorSearchError;
@@ -65,12 +66,12 @@ public class BaseHeader extends BasePage {
 
     public HospitalSeekerHomePage toHomePage() {
         home.click();
-        return new HospitalSeekerHomePage(driver);
+        return new HospitalSeekerHomePage();
     }
 
     public MapSearchPage toMapOfHospitals() {
         nearestHospital.click();
-        return new MapSearchPage(driver);
+        return new MapSearchPage();
     }
 
 
@@ -86,7 +87,7 @@ public class BaseHeader extends BasePage {
     public HospitalSearchResultPage findHospital(String hospitalName) {
         fillHospitalInput(hospitalName);
         hospitalSearchButton.click();
-        return new HospitalSearchResultPage(driver);
+        return new HospitalSearchResultPage();
     }
 
     public void fillHospitalInput(String hospitalName) {
@@ -98,7 +99,7 @@ public class BaseHeader extends BasePage {
     public DoctorSearchResult findDoctor(String doctorName) {
         fillDoctorInput(doctorName);
         doctorSearchButton.click();
-        return new DoctorSearchResult(driver);
+        return new DoctorSearchResult();
     }
 
     public void fillDoctorInput(String doctorName) {
