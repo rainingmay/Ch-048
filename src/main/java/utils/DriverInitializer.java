@@ -1,5 +1,6 @@
 package utils;
 
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -14,6 +15,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -44,6 +46,7 @@ public class DriverInitializer {
     private static volatile WebDriver driver;
 
     public static void initialization() {
+
 
         //Firefox options
         ProfilesIni profile = new ProfilesIni();
@@ -142,12 +145,15 @@ public class DriverInitializer {
     }
 
     public static void close() {
-        if (driver!=null) {
+        if (driver != null) {
             driver.quit();
-            driver=null;
-        }else {
+            driver = null;
+        } else {
             System.out.println("Cant close session");
         }
     }
 
+    public static void deleteAllCookies() {
+        instance().manage().deleteAllCookies();
+    }
 }
