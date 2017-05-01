@@ -1,5 +1,12 @@
 package pages.admin;
 
+import org.apache.xerces.xs.StringList;
+import org.dbunit.IDatabaseTester;
+import org.dbunit.JdbcDatabaseTester;
+import org.dbunit.dataset.IDataSet;
+import org.dbunit.dataset.xml.FlatXmlDataSet;
+import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
+import org.dbunit.operation.DatabaseOperation;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -9,7 +16,9 @@ import org.testng.annotations.Test;
 import utils.*;
 import utils.databaseutil.UserDAO;
 
+import javax.xml.crypto.Data;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Array;
@@ -20,41 +29,72 @@ import java.util.*;
  */
 public class AllUsersPageTest extends BaseTest {
 
+
     private AllUsersPage allUsersPage;
 
+    private IDataSet dataSet;
+    private IDataSet defaultDataSet;
+    IDatabaseTester databaseTester;
+
+
     @BeforeMethod
-    public void beforeMethod() throws IOException {
-        AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
+    public void before() throws Exception {
+        /*FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
+        builder.setColumnSensing(true);
+        dataSet = builder.build(new java.io.File("dependents.xml"));
 
-        String language = "ua";
+        //dataSet = new FlatXmlDataSet(Thread.currentThread().getContextClassLoader().getResourceAsStream("full.xml"));
+        databaseTester = new JdbcDatabaseTester(driverClass, databaseUrl, username, password);
+        databaseTester.setDataSet(dataSet);
+        databaseTester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
+        databaseTester.setDataSet(dataSet);
+        databaseTester.setTearDownOperation(DatabaseOperation.NONE);
+        databaseTester.onSetup();
+        */
 
-        Properties properties = new Properties();
-        InputStream inputStream;
-
-        if (language.equals("ua")) inputStream = new FileInputStream("src/test/resources/localization/ua.properties");
-            else if (language.equals("en")) inputStream = new FileInputStream("src/test/resources/localization/en.properties");
-                else inputStream = null;
-
-        properties.load(inputStream);
-
-        Assert.assertEquals(allUsersPage.header.homeButton.getText(), properties.getProperty("header.menu.home"));
+        DriverInitializer.getToUrl(BASE_URL);
+        allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
     }
 
     @AfterMethod
-    public void afterMethod() {
+    public void after() {
         try {
             BaseNavigation.logout();
             DriverInitializer.close();
+            //databaseTester.onTearDown();
         } catch (Exception e) {
             DriverInitializer.close();
         }
     }
 
-    @Test
-    public void test() {
-        Assert.assertEquals(true, true);
-    }
+   @Test
+   public void localizationTest() throws IOException {
+       String language = System.getProperty("LANGUAGE");
 
+       Properties properties = new Properties();
+       InputStream inputStream;
+
+       if (language.equals("ua")) inputStream = new FileInputStream("src/test/resources/localization/ua.properties");
+        else if (language.equals("en")) inputStream = new FileInputStream("src/test/resources/localization/en.properties");
+            else inputStream = null;
+
+       properties.load(inputStream);
+
+       Assert.assertEquals(allUsersPage.header.homeButton.getText(), properties.getProperty("header.menu.home"));
+
+
+        List<String> actual = new ArrayList<>();
+        actual.add(allUsersPage.header.homeButton.getText());
+        actual.add(allUsersPage.header.actions.getText());
+        allUsersPage.usersPerPageLabel.getText();
+
+        List<String> expected = new ArrayList<>();
+        expected.add(properties.getProperty("header.menu.home"));
+        expected.add(properties.getProperty("admin.hospital.list.table.actions"));
+        expected.add(properties.getProperty("admin.dashboard.users.show.users"));
+
+        Assert.assertEquals(actual, expected);
+   }
 
 
     @Test
@@ -167,8 +207,8 @@ public class AllUsersPageTest extends BaseTest {
     @DataProvider
     public Object[][] roles() {
         return new Object[][] {
-                {"MANAGER"},
-                {"PATIENT"}
+                {"MANAGER"}//,
+                //{"PATIENT"}
         };
     }
 

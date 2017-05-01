@@ -26,6 +26,9 @@ public class AllUsersPage implements PageInitializer {
     @FindBy(id = "userPerPage")
     private WebElement usersPerPagePopUp;
 
+    @FindBy(css = "#searchForm > div:first-child > label")
+    public WebElement usersPerPageLabel;
+
     @FindBy(id = "pref-roleby")
     private WebElement role;
 
