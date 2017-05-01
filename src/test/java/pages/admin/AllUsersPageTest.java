@@ -2,6 +2,8 @@ package pages.admin;
 
 import org.apache.xerces.xs.StringList;
 import org.openqa.selenium.By;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -27,7 +29,7 @@ public class AllUsersPageTest extends BaseTest {
 
     private AllUsersPage allUsersPage;
 
-
+    Logger logger = LoggerFactory.getLogger(AllUsersPage.class);
 
     @BeforeMethod
     public void before() {
@@ -46,17 +48,15 @@ public class AllUsersPageTest extends BaseTest {
 
         DriverInitializer.getToUrl(BASE_URL);
         allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
+        logger.info("Test is initialized");
     }
 
     @AfterMethod
     public void after() {
-        try {
-            BaseNavigation.logout();
-            DriverInitializer.close();
-            //databaseTester.onTearDown();
-        } catch (Exception e) {
-            DriverInitializer.close();
-        }
+        BaseNavigation.logout();
+        DriverInitializer.close();
+        //databaseTester.onTearDown();
+        logger.info("Test is close");
     }
 
    @Test
@@ -76,6 +76,7 @@ public class AllUsersPageTest extends BaseTest {
         expected.add(properties.getProperty("admin.dashboard.users.show.users"));
 
         Assert.assertEquals(actual, expected);
+        logger.info("Test pass");
    }
 
 
@@ -85,6 +86,7 @@ public class AllUsersPageTest extends BaseTest {
         int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
         boolean actual = UserDAO.getStatusByEmail(new TableParser(allUsersPage.table).getFieldFromTableRow(rowNumber, "@email"));
         Assert.assertEquals(actual, true);
+        logger.info("Test pass");
     }
 
 
@@ -95,6 +97,7 @@ public class AllUsersPageTest extends BaseTest {
         int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
         boolean actual = UserDAO.getStatusByEmail(new TableParser(allUsersPage.table).getFieldFromTableRow(rowNumber, "@email"));
         Assert.assertEquals(actual, false);
+        logger.info("Test pass");
     }
 
 
@@ -106,6 +109,7 @@ public class AllUsersPageTest extends BaseTest {
         List<String> expected = new LinkedList<>();
         Collections.addAll(expected, new String[]{allInfo.get(0),allInfo.get(1), "true"});
         Assert.assertEquals(actual, expected);
+        logger.info("Test pass");
     }
 
 
@@ -116,6 +120,7 @@ public class AllUsersPageTest extends BaseTest {
         allUsersPage = allUsersPage.changeRoleInEditWindow(rowNumber, role);
         String actual = new TableParser(allUsersPage.table).getFieldFromTableRow(rowNumber, "role");
         Assert.assertEquals(actual, expected);
+        logger.info("Test pass");
     }
 
 
@@ -125,6 +130,7 @@ public class AllUsersPageTest extends BaseTest {
         allUsersPage = allUsersPage.changeCountOfUsersOnPage(expected);
         int actual = allUsersPage.getCountOfUsersInTable();
         Assert.assertEquals(actual, expected);
+        logger.info("Test pass");
     }
 
 
@@ -136,6 +142,7 @@ public class AllUsersPageTest extends BaseTest {
         int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
         String actual = new TableParser(allUsersPage.table).getFieldFromTableRow(rowNumber, "role");
         Assert.assertEquals(actual, expected);
+        logger.info("Test pass");
     }
 
 
@@ -152,6 +159,7 @@ public class AllUsersPageTest extends BaseTest {
         else actual.add("noSame");
         actual.add(tableParser.getFieldFromTableRow(rowNumber, "role"));
         Assert.assertEquals(actual, expected);
+        logger.info("Test pass");
     }
 
 
@@ -160,6 +168,7 @@ public class AllUsersPageTest extends BaseTest {
         AllUsersPage allUsersPage1 = allUsersPage.toNextPage();
         BrowserWrapper.waitForPage();
         Assert.assertNotEquals(allUsersPage, allUsersPage1);
+        logger.info("Test pass");
     }
 
 
@@ -170,6 +179,7 @@ public class AllUsersPageTest extends BaseTest {
         allUsersPage = allUsersPage.deleteUser(rowNumber);
         String expected = allUsersPage.getCurrentUrl();
         Assert.assertEquals(actual, expected);
+        logger.info("Test info");
     }
 
 
@@ -182,6 +192,7 @@ public class AllUsersPageTest extends BaseTest {
         BrowserWrapper.sleep(2);
         int actual = new TableParser(allUsersPage.table).getFieldFromTableRow(1, "@email").compareToIgnoreCase(new TableParser(allUsersPage.table).getFieldFromTableRow(2, "@email"));
         Assert.assertEquals(actual < 0, true);
+        logger.info("Test pass");
     }
 
 
