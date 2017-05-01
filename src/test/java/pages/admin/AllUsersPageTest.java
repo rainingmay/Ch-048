@@ -1,12 +1,6 @@
 package pages.admin;
 
 import org.apache.xerces.xs.StringList;
-import org.dbunit.IDatabaseTester;
-import org.dbunit.JdbcDatabaseTester;
-import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.xml.FlatXmlDataSet;
-import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
-import org.dbunit.operation.DatabaseOperation;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -24,6 +18,7 @@ import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.util.*;
 
+
 /**
  * Created by Evgen on 10.04.2017.
  */
@@ -32,13 +27,10 @@ public class AllUsersPageTest extends BaseTest {
 
     private AllUsersPage allUsersPage;
 
-    private IDataSet dataSet;
-    private IDataSet defaultDataSet;
-    IDatabaseTester databaseTester;
 
 
     @BeforeMethod
-    public void before() throws Exception {
+    public void before() {
         /*FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
         builder.setColumnSensing(true);
         dataSet = builder.build(new java.io.File("dependents.xml"));
@@ -69,16 +61,6 @@ public class AllUsersPageTest extends BaseTest {
 
    @Test
    public void localizationTest() throws IOException {
-       String language = System.getProperty("LANGUAGE");
-
-       Properties properties = new Properties();
-       InputStream inputStream;
-
-       if (language.equals("ua")) inputStream = new FileInputStream("src/test/resources/localization/ua.properties");
-        else if (language.equals("en")) inputStream = new FileInputStream("src/test/resources/localization/en.properties");
-            else inputStream = null;
-
-       properties.load(inputStream);
 
        Assert.assertEquals(allUsersPage.header.homeButton.getText(), properties.getProperty("header.menu.home"));
 
