@@ -11,9 +11,9 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <aspectj.version>1.7.4</aspectj.version>
-        <allure.version>2.5</allure.version>
         <browser.drivers.path>src/main/resources/drivers</browser.drivers.path>
+        <aspectj.version>1.8.10</aspectj.version>
+        <allure.version>1.5.2</allure.version>
     </properties>
 
     <dependencies>
@@ -23,31 +23,6 @@
             <artifactId>selenium-java</artifactId>
             <version>3.4.0</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.seleniumhq.selenium</groupId>-->
-            <!--<artifactId>selenium-server</artifactId>-->
-            <!--<version>3.3.1</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.seleniumhq.selenium</groupId>-->
-            <!--<artifactId>selenium-firefox-driver</artifactId>-->
-            <!--<version>3.3.1</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.seleniumhq.selenium</groupId>-->
-            <!--<artifactId>selenium-chrome-driver</artifactId>-->
-            <!--<version>3.3.1</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.seleniumhq.selenium</groupId>-->
-            <!--<artifactId>selenium-remote-driver</artifactId>-->
-            <!--<version>3.3.1</version>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.seleniumhq.selenium</groupId>-->
-            <!--<artifactId>selenium-ie-driver</artifactId>-->
-            <!--<version>3.3.1</version>-->
-        <!--</dependency>-->
 
         <dependency>
             <groupId>org.testng</groupId>
@@ -63,11 +38,6 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/ru.yandex.qatools.allure/allure-testng-adaptor -->
-        <dependency>
-            <groupId>ru.yandex.qatools.allure</groupId>
-            <artifactId>allure-testng-adaptor</artifactId>
-            <version>1.5.2</version>
-        </dependency>
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-jvm-deps</artifactId>
@@ -88,24 +58,6 @@
             <artifactId>cucumber-junit</artifactId>
             <version>1.2.5</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.dbunit</groupId>
-            <artifactId>dbunit</artifactId>
-            <version>2.5.3</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.5</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.6.4</version>
-        </dependency>
-
     </dependencies>
 
         <build>
