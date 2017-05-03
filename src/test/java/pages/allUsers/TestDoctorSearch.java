@@ -31,7 +31,7 @@ public class TestDoctorSearch extends BaseTest {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void afterMethod() throws Exception{
+    public void afterMethod() throws Exception {
         DriverInitializer.deleteAllCookies();
     }
 
@@ -54,9 +54,9 @@ public class TestDoctorSearch extends BaseTest {
     @Test(groups = "InputValidation")
     public void testFindDoctorInputValidationEng() throws Exception {
         NotAuthorizedHeader header = new NotAuthorizedHeader();
-        header.fillDoctorInput("ho");
         header.changeLanguageToUa();
         Thread.sleep(1000);
+        header.fillDoctorInput("ho");
         BaseTest.checkLanguageAndLoadProperties(header);
         assertEquals(header.getDoctorSearchError().getText(), properties.getProperty("lineToShort"));
     }
