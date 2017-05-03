@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+        <suite name="Suite" >
+
+    <test name="Practice Grouping">
+
+
+        <groups>
+
+            <define name="All">
+
+                <include name="Succefully"/>
+
+                <include name="unSucceffuly"/>
+
+            </define>
+
+            <run>
+
+                <include name="unSucceffuly"/>
+
+            </run>
+
+        </groups>
+
+        <classes>
+
+            <class name="pages.admin.AddUserPageTest" />
+
+        </classes>
+
+         </test>
+        </suite>
