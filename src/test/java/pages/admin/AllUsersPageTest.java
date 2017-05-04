@@ -1,12 +1,6 @@
 package pages.admin;
 
 import org.apache.xerces.xs.StringList;
-import org.dbunit.IDatabaseTester;
-import org.dbunit.JdbcDatabaseTester;
-import org.dbunit.dataset.IDataSet;
-import org.dbunit.dataset.xml.FlatXmlDataSet;
-import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
-import org.dbunit.operation.DatabaseOperation;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -31,10 +25,6 @@ public class AllUsersPageTest extends BaseTest {
 
 
     private AllUsersPage allUsersPage;
-
-    private IDataSet dataSet;
-    private IDataSet defaultDataSet;
-    IDatabaseTester databaseTester;
 
 
     @BeforeMethod
