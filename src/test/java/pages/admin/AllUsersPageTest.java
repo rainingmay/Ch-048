@@ -9,22 +9,29 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import pages.headers.BaseHeader;
 import utils.*;
+import utils.databaseutil.DatabaseOperations;
 import utils.databaseutil.UserDAO;
 
 import javax.xml.crypto.Data;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.lang.reflect.Array;
+import java.net.MalformedURLException;
 import java.util.*;
 
 
 /**
  * Created by Evgen on 10.04.2017.
  */
-public class AllUsersPageTest extends BaseTest {
+public class AllUsersPageTest {
+    public static Properties properties = null;
+
+    public static final String ADMIN_LOGIN = "admin@hospitals.ua";
+    public static final String ADMIN_PASSWORD = "1111";
+
+    public static final String BASE_URL = "https://localhost:8443/HospitalSeeker/";
+
 
 
     private AllUsersPage allUsersPage;
@@ -33,19 +40,7 @@ public class AllUsersPageTest extends BaseTest {
 
     @BeforeMethod
     public void before() {
-        /*FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
-        builder.setColumnSensing(true);
-        dataSet = builder.build(new java.io.File("dependents.xml"));
-
-        //dataSet = new FlatXmlDataSet(Thread.currentThread().getContextClassLoader().getResourceAsStream("full.xml"));
-        databaseTester = new JdbcDatabaseTester(driverClass, databaseUrl, username, password);
-        databaseTester.setDataSet(dataSet);
-        databaseTester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
-        databaseTester.setDataSet(dataSet);
-        databaseTester.setTearDownOperation(DatabaseOperation.NONE);
-        databaseTester.onSetup();
-        */
-
+        DatabaseOperations.restore("hospital.backup");
         DriverInitializer.getToUrl(BASE_URL);
         allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
         logger.info("Test is initialized");
@@ -53,22 +48,25 @@ public class AllUsersPageTest extends BaseTest {
 
     @AfterMethod
     public void after() {
+        DatabaseOperations.restore("hospital.backup");
         BaseNavigation.logout();
         DriverInitializer.close();
-        //databaseTester.onTearDown();
         logger.info("Test is close");
     }
+
 
    @Test
    public void localizationTest() throws IOException {
 
-       Assert.assertEquals(allUsersPage.header.homeButton.getText(), properties.getProperty("header.menu.home"));
+        checkLanguageAndLoadProperties(allUsersPage.header);
+
+        //Assert.assertEquals(allUsersPage.header.homeButton.getText(), properties.getProperty("header.menu.home"));
 
 
         List<String> actual = new ArrayList<>();
         actual.add(allUsersPage.header.homeButton.getText());
         actual.add(allUsersPage.header.actions.getText());
-        allUsersPage.usersPerPageLabel.getText();
+        actual.add(allUsersPage.usersPerPageLabel.getText());
 
         List<String> expected = new ArrayList<>();
         expected.add(properties.getProperty("header.menu.home"));
@@ -223,6 +221,21 @@ public class AllUsersPageTest extends BaseTest {
     public int randomNumber(int max) {
         Random random = new Random();
         return random.nextInt(max-1)+1;
+    }
+
+    public static void checkLanguageAndLoadProperties(BaseHeader header) {
+        properties = new Properties();
+        try {
+            if (header.getChangeLanguageIco().getAttribute("src").endsWith("/en.png")) {
+                properties.load(new InputStreamReader(
+                        new FileInputStream("src/main/resources/languageEng.properties"), "UTF-8"));
+            } else {
+                properties.load(new InputStreamReader(
+                        new FileInputStream("src/main/resources/languageUa.properties"), "UTF-8"));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

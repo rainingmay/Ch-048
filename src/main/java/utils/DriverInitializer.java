@@ -51,8 +51,8 @@ public class DriverInitializer {
         //Firefox options
         ProfilesIni profile = new ProfilesIni();
         FirefoxProfile ffProfile = profile.getProfile(FIREFOX_PROFILE_NAME);
-        ffProfile.setAcceptUntrustedCertificates(true);
-        ffProfile.setAssumeUntrustedCertificateIssuer(false);
+        //ffProfile.setAcceptUntrustedCertificates(true);
+        //ffProfile.setAssumeUntrustedCertificateIssuer(false);
 
         //Chrome options
         ChromeOptions options = new ChromeOptions();
