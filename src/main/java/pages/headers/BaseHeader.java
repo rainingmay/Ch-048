@@ -16,7 +16,6 @@ public class BaseHeader implements PageInitializer {
         pageInitialization();
     }
 
-
     @FindBy(className = "img-responsive logo")
     protected WebElement logo;
 
