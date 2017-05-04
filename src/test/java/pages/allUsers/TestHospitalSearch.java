@@ -8,13 +8,7 @@ import pages.headers.BaseHeader;
 import pages.headers.headersByRole.NotAuthorizedHeader;
 import utils.BaseNavigation;
 import utils.BaseTest;
-import utils.BrowserWrapper;
 import utils.DriverInitializer;
-
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Properties;
 
 import static org.testng.Assert.assertEquals;
 
@@ -60,7 +54,7 @@ public class TestHospitalSearch extends BaseTest {
         assertEquals(hospitalSearchResult.countOfHospital(), expected);
     }
 
-    @Test
+    @Test(groups = "InputValidation")
     public void testFindHospitalInputValidationUa() throws Exception {
         BaseHeader header = new BaseHeader();
         header.changeLanguageToUa();
@@ -70,7 +64,7 @@ public class TestHospitalSearch extends BaseTest {
         assertEquals(header.getHospitalSearchError().getText(), properties.getProperty("lineToShort"));
     }
 
-    @Test
+    @Test(groups = "InputValidation")
     public void testFindHospitalInputValidationEng() throws Exception {
         BaseHeader header = new BaseHeader();
         header.changeLanguageToEn();

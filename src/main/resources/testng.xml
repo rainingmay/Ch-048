@@ -10,6 +10,7 @@
                 <include name="unSuccessfully"/>
                 <include name="event creation"/>
                 <include name="miscellaneous"/>
+                <include name="InputValidation"/>
             </define>
 
             <run>
@@ -21,6 +22,8 @@
         <classes>
             <class name="pages.admin.AddUserPageTest" />
             <class name="pages.manager.SchedulerPageTest" />
+            <class name="pages.allUsers.TestHospitalSearch" />
+            <class name="pages.allUsers.TestDoctorSearch" />
         </classes>
 
     </test>

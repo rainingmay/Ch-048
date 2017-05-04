@@ -4,17 +4,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.PageInitializer;
-import pages.headers.BaseHeader;
+import pages.headers.headersByRole.NotAuthorizedHeader;
 
 import java.util.List;
 
 
 public class HospitalSearchResultPage implements PageInitializer{
-    public BaseHeader header;
-
+    public NotAuthorizedHeader notAuthorizedHeader;
 
     public HospitalSearchResultPage() {
-        header = new BaseHeader();
+        notAuthorizedHeader = new NotAuthorizedHeader();
         pageInitialization();
     }
 
@@ -35,15 +34,11 @@ public class HospitalSearchResultPage implements PageInitializer{
 
     @FindBy(css = ".cd-top")
     private WebDriver onTop;
-    //css = "[class='cd-top active cd-is-visible']" (cd-top active cd-is-visible)
 
     @FindBy(css = "[class='pagination pagination-lg']")
     private WebDriver pageNavigation;
 
-    // для теста
     public int countOfHospital() {
-        // driver.get("https://localhost:8443/HospitalSeeker/" + urlHospitalSearch + searchWord);
-        //   ExpectedConditions.visibilityOfAllElements(hospitalNameAtList);
         return hospitalNameAtList.size();
     }
 }

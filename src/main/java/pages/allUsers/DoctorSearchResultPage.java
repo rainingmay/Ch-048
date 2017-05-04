@@ -3,7 +3,7 @@ package pages.allUsers;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.PageInitializer;
-import pages.headers.BaseHeader;
+import pages.headers.headersByRole.NotAuthorizedHeader;
 import utils.BrowserWrapper;
 
 import java.util.List;
@@ -13,11 +13,10 @@ import java.util.List;
  * Created by Yana on 06.04.2017.
  */
 public class DoctorSearchResultPage implements PageInitializer {
-    private BaseHeader header;
-
+    public NotAuthorizedHeader notAuthorizedHeader;
 
     public DoctorSearchResultPage() {
-        header = new BaseHeader();
+        notAuthorizedHeader = new NotAuthorizedHeader();
         pageInitialization();
     }
 
@@ -45,19 +44,12 @@ public class DoctorSearchResultPage implements PageInitializer {
     @FindBy(css = "a[href=/HospitalSeeker/doctor/6]")
     private WebElement testlink;
 
-
-
     @FindBy(css = "[class='pagination pagination-lg']")
     private WebElement pageNavigation;
-
-
-
-
 
     public int countOfDoctors() {
         return doctorNameAtList.size();
     }
-
 
     public DoctorInfoPage goToDoctorInfoPage(){
         BrowserWrapper.sleep(3);
@@ -66,5 +58,4 @@ public class DoctorSearchResultPage implements PageInitializer {
         BrowserWrapper.sleep(5);
         return new DoctorInfoPage();
     }
-
 }
