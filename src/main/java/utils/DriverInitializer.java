@@ -53,8 +53,8 @@ public class DriverInitializer {
         //Firefox options
         ProfilesIni profile = new ProfilesIni();
         FirefoxProfile ffProfile = profile.getProfile(FIREFOX_PROFILE_NAME);
-        ffProfile.setAcceptUntrustedCertificates(true);
-        ffProfile.setAssumeUntrustedCertificateIssuer(false);
+//        ffProfile.setAcceptUntrustedCertificates(true);
+//        ffProfile.setAssumeUntrustedCertificateIssuer(false);
 
         //Chrome options
 
@@ -122,7 +122,6 @@ public class DriverInitializer {
                 System.setProperty(WINDOWS_IE_WEBDRIVER, WINDOWS_IE_WEBDRIVER_PATH);
                 driver = new InternetExplorerDriver();
                 break;
-
             default:
                 System.out.println(browserType + " is invalid");
                 break;
