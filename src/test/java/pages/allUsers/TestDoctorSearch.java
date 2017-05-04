@@ -38,7 +38,7 @@ public class TestDoctorSearch extends BaseTest {
     @Test(dataProvider = "SearchProvider")
     public void testFindDoctorNotAuthorizedUser(String searchWord, int expected) throws Exception {
         NotAuthorizedHeader header = new NotAuthorizedHeader();
-        DoctorSearchResult doctorSearchResult = header.findDoctor(searchWord);
+        DoctorSearchResultPage doctorSearchResult = header.findDoctor(searchWord);
         assertEquals(doctorSearchResult.countOfDoctors(), expected);
     }
 
@@ -47,7 +47,7 @@ public class TestDoctorSearch extends BaseTest {
         NotAuthorizedHeader header = new NotAuthorizedHeader();
         BaseNavigation.login("admin@hospitals.ua", "1111");
         Thread.sleep(1000);
-        DoctorSearchResult doctorSearchResult = header.findDoctor(searchWord);
+        DoctorSearchResultPage doctorSearchResult = header.findDoctor(searchWord);
         assertEquals(doctorSearchResult.countOfDoctors(), expected);
     }
 

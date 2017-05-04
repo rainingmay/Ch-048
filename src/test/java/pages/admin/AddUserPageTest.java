@@ -25,7 +25,7 @@ public class AddUserPageTest extends BaseTest {
     public static final String SUCCEFULYCREATEDUSERTEXT = " successfully registered!";
 
 
-    @BeforeMethod(alwaysRun = true)
+    @BeforeMethod
     private void beforeMethod() throws InterruptedException {
         //  this.driver = BrowserWrapper.browserInitialization();
         BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);

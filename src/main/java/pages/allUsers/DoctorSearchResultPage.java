@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.PageInitializer;
-import pages.headers.BaseHeader;
+import pages.headers.headersByRole.NotAuthorizedHeader;
 
 import java.util.List;
 
@@ -12,11 +12,11 @@ import java.util.List;
 /**
  * Created by Yana on 06.04.2017.
  */
-public class DoctorSearchResult implements PageInitializer {
-    private BaseHeader header;
+public class DoctorSearchResultPage implements PageInitializer {
+    public NotAuthorizedHeader notAuthorizedHeader;
 
-    public DoctorSearchResult() {
-        header = new BaseHeader();
+    public DoctorSearchResultPage() {
+        notAuthorizedHeader = new NotAuthorizedHeader();
         pageInitialization();
     }
 

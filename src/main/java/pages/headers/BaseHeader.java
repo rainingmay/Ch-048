@@ -103,11 +103,11 @@ public class BaseHeader implements PageInitializer {
         hospitalSearchField.sendKeys(hospitalName);
     }
 
-    public DoctorSearchResult findDoctor(String doctorName) {
+    public DoctorSearchResultPage findDoctor(String doctorName) {
         fillDoctorInput(doctorName);
         BrowserWrapper.waitUntilElementClickable(doctorSearchButton);
         doctorSearchButton.click();
-        return new DoctorSearchResult();
+        return new DoctorSearchResultPage();
     }
 
     public void fillDoctorInput(String doctorName) {
