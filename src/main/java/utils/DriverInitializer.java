@@ -9,6 +9,7 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.internal.Extension;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 
@@ -28,14 +29,15 @@ public class DriverInitializer {
     private static final String FIREFOX_PROFILE_NAME = "default";
 
     private static final String FIREFOX_WEBDRIVER = "webdriver.gecko.driver";
-    private static final String CHROME_WEBDRIVER = "chromedriver";
-    private static final String WINDOWS_IE_WEBDRIVER = "MicrosoftWebDriver";
+    private static final String CHROME_WEBDRIVER = "webdriver.chrome.driver";
+    private static final String WINDOWS_IE_WEBDRIVER = "webdriver.MicrosoftWebDriver.driver";
 
     private static final String LINUX_FIREFOX_WEBDRIVER_PATH = "src/main/resources/drivers/geckodriverLinux";
-    private static final String UNIX_FIREFOX_WEBDRIVER_PATH = "src/main/resources/drivers/geckodriver";
+    private static final String MAC_FIREFOX_WEBDRIVER_PATH = "src/main/resources/drivers/geckodriver";
     private static final String WINDOWS_FIREFOX_WEBDRIVER_PATH = "src/main/resources/drivers/geckodriver.exe";
 
-    private static final String UNIX_CHROME_WEBDRIVER_PATH = "src/main/resources/drivers/chromedriver";
+    private static final String MAC_CHROME_WEBDRIVER_PATH = "src/main/resources/drivers/chromedriverMac";
+    private static final String LINUX_CHROME_WEBDRIVER_PATH = "src/main/resources/drivers/chromedriver";
     private static final String WINDOWS_CHROME_WEBDRIVER_PATH = "src/main/resources/drivers/chromedriver.exe";
 
     private static final String WINDOWS_IE_WEBDRIVER_PATH = "src/main/resources/drivers/MicrosoftWebDriver.exe";
@@ -51,15 +53,20 @@ public class DriverInitializer {
         //Firefox options
         ProfilesIni profile = new ProfilesIni();
         FirefoxProfile ffProfile = profile.getProfile(FIREFOX_PROFILE_NAME);
-        ffProfile.setAcceptUntrustedCertificates(true);
-        ffProfile.setAssumeUntrustedCertificateIssuer(false);
+//        ffProfile.setAcceptUntrustedCertificates(true);
+//        ffProfile.setAssumeUntrustedCertificateIssuer(false);
 
         //Chrome options
-        ChromeOptions options = new ChromeOptions();
+
+        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+        capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+
+
+       /* ChromeOptions options = new ChromeOptions();
         options.addArguments("--ignore-certificate-errors");
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-
+*/
 
         Properties properties = new Properties();
         try {
@@ -97,17 +104,17 @@ public class DriverInitializer {
                 break;
 
             case "firefoxMacOS":
-               // System.setProperty(FIREFOX_WEBDRIVER, UNIX_FIREFOX_WEBDRIVER_PATH);
+                System.setProperty(FIREFOX_WEBDRIVER, MAC_FIREFOX_WEBDRIVER_PATH);
                 driver = new FirefoxDriver(ffProfile);
                 break;
 
             case "chromeLinux":
-                System.setProperty(CHROME_WEBDRIVER, UNIX_CHROME_WEBDRIVER_PATH);
+                System.setProperty(CHROME_WEBDRIVER, LINUX_CHROME_WEBDRIVER_PATH);
                 driver = new ChromeDriver(capabilities);
                 break;
 
             case "chromeMacOS":
-                System.setProperty(driverType, driverPath);
+                System.setProperty(CHROME_WEBDRIVER, MAC_CHROME_WEBDRIVER_PATH);
                 driver = new ChromeDriver(capabilities);
                 break;
 
@@ -115,7 +122,6 @@ public class DriverInitializer {
                 System.setProperty(WINDOWS_IE_WEBDRIVER, WINDOWS_IE_WEBDRIVER_PATH);
                 driver = new InternetExplorerDriver();
                 break;
-
             default:
                 System.out.println(browserType + " is invalid");
                 break;

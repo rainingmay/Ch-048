@@ -1,10 +1,10 @@
 package pages.allUsers;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.PageInitializer;
 import pages.headers.headersByRole.NotAuthorizedHeader;
+import utils.BrowserWrapper;
 
 import java.util.List;
 
@@ -33,16 +33,29 @@ public class DoctorSearchResultPage implements PageInitializer {
     private List<WebElement> doctorPhotoAtList;
 
     @FindBy(css = ".img-responsive")
-    private List<WebElement> doctorLogoAtList;
+    protected List<WebElement> doctorLogoAtList;
 
     @FindBy(css = ".cd-top")
-    private WebDriver onTop;
+    private WebElement onTop;
+
+    @FindBy(css = "div.about-img > a > img.img-responsive")
+    public WebElement firstDoctorImage;
+
+    @FindBy(css = "a[href=/HospitalSeeker/doctor/6]")
+    private WebElement testlink;
 
     @FindBy(css = "[class='pagination pagination-lg']")
-    private WebDriver pageNavigation;
+    private WebElement pageNavigation;
 
     public int countOfDoctors() {
         return doctorNameAtList.size();
     }
 
+    public DoctorInfoPage goToDoctorInfoPage(){
+        BrowserWrapper.sleep(3);
+        //BrowserWrapper.doubleClickJs(firstDoctorImage);
+        firstDoctorImage.click();
+        BrowserWrapper.sleep(5);
+        return new DoctorInfoPage();
+    }
 }
