@@ -55,6 +55,12 @@ public class BaseHeader implements PageInitializer {
     @FindBy(id = "select_doctor_search_button")
     protected WebElement doctorSearchButton;
 
+    @FindBy(xpath = "//*[@id=\"bs-example-navbar-collapse-1\"]/ul/li[7]/a")
+    private WebElement searchLogo;
+
+    @FindBy(id = "select_doctor_search_button")
+    private WebElement doctorSearchFieldButton;
+
     public WebElement getChangeLanguageIco() {
         return changeLanguageIco;
     }
@@ -103,11 +109,11 @@ public class BaseHeader implements PageInitializer {
         hospitalSearchField.sendKeys(hospitalName);
     }
 
-    public DoctorSearchResult findDoctor(String doctorName) {
+    public  DoctorSearchResultPage findDoctor(String doctorName) {
         fillDoctorInput(doctorName);
         BrowserWrapper.waitUntilElementClickable(doctorSearchButton);
         doctorSearchButton.click();
-        return new DoctorSearchResult();
+        return new DoctorSearchResultPage();
     }
 
     public void fillDoctorInput(String doctorName) {

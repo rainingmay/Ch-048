@@ -95,7 +95,6 @@
                         <version>${aspectj.version}</version>
                     </dependency>
                 </dependencies>
-
             </plugin>
 
             <!--Needed only to show reports locally. Run jetty:run and
@@ -350,8 +349,8 @@
                 </configuration>
             </plugin>
         </plugins>
-    </build>
 
+    </build>
     <reporting>
         <excludeDefaults>true</excludeDefaults>
         <plugins>
