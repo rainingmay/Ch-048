@@ -16,7 +16,7 @@ public class Main {
             Class driverClass = Class.forName("org.postgresql.Driver");
             Connection jdbcConnection = DriverManager.getConnection(
                     "jdbc:postgresql://localhost:5432/hospital", "postgres", "postgres");
-            IDatabaseConnection connection = new DatabaseConnection(jdbcConnection);
+            IDatabaseConnection connection = new DatabaseOperations(jdbcConnection);
 
            *//* // partial database export
             QueryDataSet partialDataSet = new QueryDataSet(connection);

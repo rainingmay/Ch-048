@@ -2,81 +2,71 @@ package pages.admin;
 
 import org.apache.xerces.xs.StringList;
 import org.openqa.selenium.By;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import pages.headers.BaseHeader;
 import utils.*;
+import utils.databaseutil.DatabaseOperations;
 import utils.databaseutil.UserDAO;
 
 import javax.xml.crypto.Data;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.lang.reflect.Array;
+import java.net.MalformedURLException;
 import java.util.*;
+
 
 /**
  * Created by Evgen on 10.04.2017.
  */
-public class AllUsersPageTest extends BaseTest {
+public class AllUsersPageTest {
+    public static Properties properties = null;
+
+    public static final String ADMIN_LOGIN = "admin@hospitals.ua";
+    public static final String ADMIN_PASSWORD = "1111";
+
+    public static final String BASE_URL = "https://localhost:8443/HospitalSeeker/";
+
 
 
     private AllUsersPage allUsersPage;
 
+    Logger logger = LoggerFactory.getLogger(AllUsersPage.class);
 
     @BeforeMethod
-    public void before() throws Exception {
-        /*FlatXmlDataSetBuilder builder = new FlatXmlDataSetBuilder();
-        builder.setColumnSensing(true);
-        dataSet = builder.build(new java.io.File("dependents.xml"));
-
-        //dataSet = new FlatXmlDataSet(Thread.currentThread().getContextClassLoader().getResourceAsStream("full.xml"));
-        databaseTester = new JdbcDatabaseTester(driverClass, databaseUrl, username, password);
-        databaseTester.setDataSet(dataSet);
-        databaseTester.setSetUpOperation(DatabaseOperation.CLEAN_INSERT);
-        databaseTester.setDataSet(dataSet);
-        databaseTester.setTearDownOperation(DatabaseOperation.NONE);
-        databaseTester.onSetup();
-        */
-
+    public void before() {
+        DatabaseOperations.restore("hospital.backup");
         DriverInitializer.getToUrl(BASE_URL);
         allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
+        logger.info("Test is initialized");
     }
 
     @AfterMethod
     public void after() {
-        try {
-            BaseNavigation.logout();
-            DriverInitializer.close();
-            //databaseTester.onTearDown();
-        } catch (Exception e) {
-            DriverInitializer.close();
-        }
+        DatabaseOperations.restore("hospital.backup");
+        BaseNavigation.logout();
+        DriverInitializer.close();
+        logger.info("Test is close");
     }
+
 
    @Test
    public void localizationTest() throws IOException {
-       String language = System.getProperty("LANGUAGE");
 
-       Properties properties = new Properties();
-       InputStream inputStream;
+        checkLanguageAndLoadProperties(allUsersPage.header);
 
-       if (language.equals("ua")) inputStream = new FileInputStream("src/test/resources/localization/ua.properties");
-        else if (language.equals("en")) inputStream = new FileInputStream("src/test/resources/localization/en.properties");
-            else inputStream = null;
-
-       properties.load(inputStream);
-
-       Assert.assertEquals(allUsersPage.header.homeButton.getText(), properties.getProperty("header.menu.home"));
+        //Assert.assertEquals(allUsersPage.header.homeButton.getText(), properties.getProperty("header.menu.home"));
 
 
         List<String> actual = new ArrayList<>();
         actual.add(allUsersPage.header.homeButton.getText());
         actual.add(allUsersPage.header.actions.getText());
-        allUsersPage.usersPerPageLabel.getText();
+        actual.add(allUsersPage.usersPerPageLabel.getText());
 
         List<String> expected = new ArrayList<>();
         expected.add(properties.getProperty("header.menu.home"));
@@ -84,6 +74,7 @@ public class AllUsersPageTest extends BaseTest {
         expected.add(properties.getProperty("admin.dashboard.users.show.users"));
 
         Assert.assertEquals(actual, expected);
+        logger.info("Test pass");
    }
 
 
@@ -93,6 +84,7 @@ public class AllUsersPageTest extends BaseTest {
         int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
         boolean actual = UserDAO.getStatusByEmail(new TableParser(allUsersPage.table).getFieldFromTableRow(rowNumber, "@email"));
         Assert.assertEquals(actual, true);
+        logger.info("Test pass");
     }
 
 
@@ -103,6 +95,7 @@ public class AllUsersPageTest extends BaseTest {
         int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
         boolean actual = UserDAO.getStatusByEmail(new TableParser(allUsersPage.table).getFieldFromTableRow(rowNumber, "@email"));
         Assert.assertEquals(actual, false);
+        logger.info("Test pass");
     }
 
 
@@ -114,6 +107,7 @@ public class AllUsersPageTest extends BaseTest {
         List<String> expected = new LinkedList<>();
         Collections.addAll(expected, new String[]{allInfo.get(0),allInfo.get(1), "true"});
         Assert.assertEquals(actual, expected);
+        logger.info("Test pass");
     }
 
 
@@ -124,6 +118,7 @@ public class AllUsersPageTest extends BaseTest {
         allUsersPage = allUsersPage.changeRoleInEditWindow(rowNumber, role);
         String actual = new TableParser(allUsersPage.table).getFieldFromTableRow(rowNumber, "role");
         Assert.assertEquals(actual, expected);
+        logger.info("Test pass");
     }
 
 
@@ -133,6 +128,7 @@ public class AllUsersPageTest extends BaseTest {
         allUsersPage = allUsersPage.changeCountOfUsersOnPage(expected);
         int actual = allUsersPage.getCountOfUsersInTable();
         Assert.assertEquals(actual, expected);
+        logger.info("Test pass");
     }
 
 
@@ -144,6 +140,7 @@ public class AllUsersPageTest extends BaseTest {
         int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
         String actual = new TableParser(allUsersPage.table).getFieldFromTableRow(rowNumber, "role");
         Assert.assertEquals(actual, expected);
+        logger.info("Test pass");
     }
 
 
@@ -160,6 +157,7 @@ public class AllUsersPageTest extends BaseTest {
         else actual.add("noSame");
         actual.add(tableParser.getFieldFromTableRow(rowNumber, "role"));
         Assert.assertEquals(actual, expected);
+        logger.info("Test pass");
     }
 
 
@@ -168,6 +166,7 @@ public class AllUsersPageTest extends BaseTest {
         AllUsersPage allUsersPage1 = allUsersPage.toNextPage();
         BrowserWrapper.waitForPage();
         Assert.assertNotEquals(allUsersPage, allUsersPage1);
+        logger.info("Test pass");
     }
 
 
@@ -178,6 +177,7 @@ public class AllUsersPageTest extends BaseTest {
         allUsersPage = allUsersPage.deleteUser(rowNumber);
         String expected = allUsersPage.getCurrentUrl();
         Assert.assertEquals(actual, expected);
+        logger.info("Test info");
     }
 
 
@@ -190,6 +190,7 @@ public class AllUsersPageTest extends BaseTest {
         BrowserWrapper.sleep(2);
         int actual = new TableParser(allUsersPage.table).getFieldFromTableRow(1, "@email").compareToIgnoreCase(new TableParser(allUsersPage.table).getFieldFromTableRow(2, "@email"));
         Assert.assertEquals(actual < 0, true);
+        logger.info("Test pass");
     }
 
 
@@ -220,6 +221,21 @@ public class AllUsersPageTest extends BaseTest {
     public int randomNumber(int max) {
         Random random = new Random();
         return random.nextInt(max-1)+1;
+    }
+
+    public static void checkLanguageAndLoadProperties(BaseHeader header) {
+        properties = new Properties();
+        try {
+            if (header.getChangeLanguageIco().getAttribute("src").endsWith("/en.png")) {
+                properties.load(new InputStreamReader(
+                        new FileInputStream("src/main/resources/languageEng.properties"), "UTF-8"));
+            } else {
+                properties.load(new InputStreamReader(
+                        new FileInputStream("src/main/resources/languageUa.properties"), "UTF-8"));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
