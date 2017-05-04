@@ -28,6 +28,7 @@ public class AddUserPageTest extends BaseTest {
     @BeforeMethod
     private void beforeMethod() throws InterruptedException {
         //  this.driver = BrowserWrapper.browserInitialization();
+       // DriverInitializer.setImpicityWait(10l);
         BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
     }

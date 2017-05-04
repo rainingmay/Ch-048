@@ -447,7 +447,6 @@ public class ManagerDashBordPage implements PageInitializer{
 
     public void submitEdition(){
         BrowserWrapper.waitUntilElementNotStale(formSaveButton);
-
         formSaveButton.click();
     }
 

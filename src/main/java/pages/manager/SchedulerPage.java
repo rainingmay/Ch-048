@@ -238,9 +238,11 @@ public class SchedulerPage implements PageInitializer {
     public boolean checkDefaultConditionScheduler(){
         boolean result = false;
         try {
-            result = beginningHour.getText().equals(DEFAULT_BEGINNING_HOUR)
-                    && endHour.getText().endsWith(DEFAULT_ENDING_HOUR)
-                    && getDaysNumber() == DEFAULT_NUMBER_OF_DAYS;
+            BrowserWrapper.waitUntilElementNotStale(beginningHour);
+            boolean r1 = beginningHour.getText().equals(DEFAULT_BEGINNING_HOUR);
+            BrowserWrapper.waitUntilElementNotStale(endHour);
+            boolean r2 = endHour.getText().equals(DEFAULT_ENDING_HOUR);
+            result = r1 && r2 && getDaysNumber() == DEFAULT_NUMBER_OF_DAYS;
         }catch (Exception e){
             e.printStackTrace();
         }
