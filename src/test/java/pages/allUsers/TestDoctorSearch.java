@@ -57,13 +57,12 @@ public class TestDoctorSearch extends BaseTest {
         assertEquals(header.getDoctorSearchError().getText(), properties.getProperty("lineToShort"));
     }
 
-
     @DataProvider(name = "SearchProvider")
     public static Object[][] parametrizedData() {
         return new Object[][]{
                 {"hous", 1},
                 {"hou", 1},
-                {"абрвал", 0}
+                {"qwerty", 0}
         };
     }
 }
