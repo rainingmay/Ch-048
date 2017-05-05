@@ -24,14 +24,10 @@ import java.util.*;
 /**
  * Created by Evgen on 10.04.2017.
  */
-public class AllUsersPageTest {
+public class AllUsersPageTest extends BaseTest{
     public static Properties properties = null;
 
-    public static final String ADMIN_LOGIN = "admin@hospitals.ua";
-    public static final String ADMIN_PASSWORD = "1111";
-
     public static final String BASE_URL = "https://localhost:8443/HospitalSeeker/";
-
 
 
     private AllUsersPage allUsersPage;
@@ -39,29 +35,23 @@ public class AllUsersPageTest {
     Logger logger = LoggerFactory.getLogger(AllUsersPage.class);
 
     @BeforeMethod
-    public void before() {
+    public void beforeMethod() {
         DatabaseOperations.restore("hospital.backup");
-        DriverInitializer.getToUrl(BASE_URL);
         allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
         logger.info("Test is initialized");
     }
 
     @AfterMethod
-    public void after() {
-        DatabaseOperations.restore("hospital.backup");
+    public void afterMethod() {
         BaseNavigation.logout();
         DriverInitializer.close();
         logger.info("Test is close");
     }
 
 
-   @Test
-   public void localizationTest() throws IOException {
-
+    @Test
+    public void localizationTest() throws IOException {
         checkLanguageAndLoadProperties(allUsersPage.header);
-
-        //Assert.assertEquals(allUsersPage.header.homeButton.getText(), properties.getProperty("header.menu.home"));
-
 
         List<String> actual = new ArrayList<>();
         actual.add(allUsersPage.header.homeButton.getText());
@@ -75,7 +65,7 @@ public class AllUsersPageTest {
 
         Assert.assertEquals(actual, expected);
         logger.info("Test pass");
-   }
+    }
 
 
     @Test
@@ -105,7 +95,7 @@ public class AllUsersPageTest {
         List<String> actual = allUsersPage.getUserDataFromInfoWindow(rowNumber);
         List<String> allInfo = UserDAO.getUserFromDatabaseByEmail(actual.get(1));
         List<String> expected = new LinkedList<>();
-        Collections.addAll(expected, new String[]{allInfo.get(0),allInfo.get(1), "true"});
+        Collections.addAll(expected, new String[]{allInfo.get(0), allInfo.get(1), "true"});
         Assert.assertEquals(actual, expected);
         logger.info("Test pass");
     }
@@ -153,7 +143,7 @@ public class AllUsersPageTest {
         Collections.addAll(expected, new String[]{valueOfField, role});
         TableParser tableParser = new TableParser(allUsersPage.table);
         List<String> actual = new LinkedList<>();
-        if (tableParser.getFieldFromTableRow(rowNumber, "@email").contains(valueOfField))actual.add(valueOfField);
+        if (tableParser.getFieldFromTableRow(rowNumber, "@email").contains(valueOfField)) actual.add(valueOfField);
         else actual.add("noSame");
         actual.add(tableParser.getFieldFromTableRow(rowNumber, "role"));
         Assert.assertEquals(actual, expected);
@@ -170,7 +160,7 @@ public class AllUsersPageTest {
     }
 
 
-    @Test
+    /*@Test
     public void deleteUsersTest() {
         int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
         String actual = allUsersPage.getCurrentUrl();
@@ -178,7 +168,7 @@ public class AllUsersPageTest {
         String expected = allUsersPage.getCurrentUrl();
         Assert.assertEquals(actual, expected);
         logger.info("Test info");
-    }
+    }*/
 
 
     @Test(dataProvider = "roles")
@@ -194,10 +184,9 @@ public class AllUsersPageTest {
     }
 
 
-
     @DataProvider
     public Object[][] roles() {
-        return new Object[][] {
+        return new Object[][]{
                 {"MANAGER"}//,
                 //{"PATIENT"}
         };
@@ -205,14 +194,14 @@ public class AllUsersPageTest {
 
     @DataProvider
     public Object[][] count() {
-        return new Object[][] {
+        return new Object[][]{
                 {"20"}
         };
     }
 
     @DataProvider
     public Object[][] searchParams() {
-        return new Object[][] {
+        return new Object[][]{
                 {"MANAGER", "a", "20"}
         };
     }
@@ -220,22 +209,8 @@ public class AllUsersPageTest {
 
     public int randomNumber(int max) {
         Random random = new Random();
-        return random.nextInt(max-1)+1;
+        return random.nextInt(max - 1) + 1;
     }
 
-    public static void checkLanguageAndLoadProperties(BaseHeader header) {
-        properties = new Properties();
-        try {
-            if (header.getChangeLanguageIco().getAttribute("src").endsWith("/en.png")) {
-                properties.load(new InputStreamReader(
-                        new FileInputStream("src/main/resources/languageEng.properties"), "UTF-8"));
-            } else {
-                properties.load(new InputStreamReader(
-                        new FileInputStream("src/main/resources/languageUa.properties"), "UTF-8"));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
 }

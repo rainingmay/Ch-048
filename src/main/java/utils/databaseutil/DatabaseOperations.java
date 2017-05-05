@@ -67,11 +67,11 @@ public class DatabaseOperations {
 
             Properties properties = new Properties();
             String filepath = "src\\main\\resources\\" + filename;
-            InputStream inputStream = new FileInputStream("src\\main\\resources\\detailedDatabaseProperties.properties");
+            InputStream inputStream = new FileInputStream("src/main/resources/detailedDatabaseProperties.properties");
             properties.load(inputStream);
 
             Runtime runtime = Runtime.getRuntime();
-            ProcessBuilder processBuilder = new ProcessBuilder(
+            /*ProcessBuilder processBuilder = new ProcessBuilder(
                     "pg_restore",
                     "--host=" + properties.getProperty("db.host"),
                     "--port=" + properties.getProperty("db.port"),
@@ -82,7 +82,21 @@ public class DatabaseOperations {
                     "--verbose",
                     filepath);
             processBuilder.redirectErrorStream(true);
-            Process process = processBuilder.start();
+            Process process = processBuilder.start();*/
+
+            String[] cmd = {
+                    "pg_restore",
+                    "--host=" + properties.getProperty("db.host"),
+                    "--port=" + properties.getProperty("db.port"),
+                    "--username=postgres",
+                    "--dbname=" + properties.getProperty("db.name"),
+                    "--role=postgres",
+                    "--no-password",
+                    "--verbose",
+                    filepath
+            };
+            Process process = runtime.exec(cmd);
+
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
