@@ -2,11 +2,14 @@ package pages.admin;
 
 
 import org.openqa.selenium.By;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import pages.manager.SchedulerPage;
 import utils.BaseNavigation;
 import utils.BaseTest;
 import utils.BrowserWrapper;
@@ -17,12 +20,14 @@ import utils.DriverInitializer;
 public class AddUserPageTest extends BaseTest {
 
 
-    public static final String NEWUSERLOGIN = "ut5estadmin182@gmail.com.ua";
+    public static final String NEWUSERLOGIN = "klsd@gmail@com";
     public static final String NEWUSERPASSWORD = "Q12345w";
     public static final String NEWUSERROLE = "ADMIN";
 
     public static final String IDFORWAITING = "searchButton";
     public static final String SUCCEFULYCREATEDUSERTEXT = " successfully registered!";
+
+    Logger logger = LoggerFactory.getLogger(SchedulerPage.class);
 
 
     @BeforeMethod(alwaysRun = true)
@@ -31,6 +36,7 @@ public class AddUserPageTest extends BaseTest {
         DriverInitializer.setImpicityWait(10l);
         BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
+        logger.info("Test is initialized");
     }
 
 
@@ -117,7 +123,8 @@ public class AddUserPageTest extends BaseTest {
                 {"aa@sd.", NEWUSERPASSWORD},
                 {"skdjw@.c", NEWUSERPASSWORD},
                 {"sd)@.com.ua", NEWUSERPASSWORD},
-                {"sdd@@com.ua", NEWUSERPASSWORD}
+                {"sdd@@com.ua", NEWUSERPASSWORD},
+                {"гарнийвуйко22@к.юа",NEWUSERPASSWORD}
         };
     }
 
