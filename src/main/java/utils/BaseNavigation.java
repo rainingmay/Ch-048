@@ -30,6 +30,7 @@ public class BaseNavigation {
 
     public static AllUsersPage loginAsAdmin( String email, String password) {
         login( email, password);
+        BrowserWrapper.sleep(2);
         return new AllUsersPage();
     }
 

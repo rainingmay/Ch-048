@@ -30,10 +30,10 @@ public class AddUserPageTest extends BaseTest {
     Logger logger = LoggerFactory.getLogger(SchedulerPage.class);
 
 
-    @BeforeMethod(alwaysRun = true)
+    @BeforeMethod
     private void beforeMethod() throws InterruptedException {
         //  this.driver = BrowserWrapper.browserInitialization();
-        DriverInitializer.setImpicityWait(10l);
+       // DriverInitializer.setImpicityWait(10l);
         BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         logger.info("Test is initialized");

@@ -4,17 +4,10 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pages.headers.BaseHeader;
 import pages.headers.headersByRole.NotAuthorizedHeader;
 import utils.BaseNavigation;
 import utils.BaseTest;
-import utils.BrowserWrapper;
 import utils.DriverInitializer;
-
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Properties;
 
 import static org.testng.Assert.assertEquals;
 
@@ -38,7 +31,7 @@ public class TestDoctorSearch extends BaseTest {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void afterMethod() throws Exception{
+    public void afterMethod() throws Exception {
         DriverInitializer.deleteAllCookies();
     }
 
@@ -58,17 +51,17 @@ public class TestDoctorSearch extends BaseTest {
         assertEquals(doctorSearchResult.countOfDoctors(), expected);
     }
 
-    @Test
+    @Test(groups = "InputValidation")
     public void testFindDoctorInputValidationEng() throws Exception {
         NotAuthorizedHeader header = new NotAuthorizedHeader();
-        header.fillDoctorInput("ho");
         header.changeLanguageToUa();
         Thread.sleep(1000);
+        header.fillDoctorInput("ho");
         BaseTest.checkLanguageAndLoadProperties(header);
         assertEquals(header.getDoctorSearchError().getText(), properties.getProperty("lineToShort"));
     }
 
-    @Test
+    @Test(groups = "InputValidation")
     public void testFindDoctorInputValidationUa() throws Exception {
         NotAuthorizedHeader header = new NotAuthorizedHeader();
         header.changeLanguageToEn();
