@@ -1,5 +1,9 @@
 package utils.databaseutil;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import pages.admin.AllUsersPage;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
@@ -71,7 +75,7 @@ public class DatabaseOperations {
             properties.load(inputStream);
 
             Runtime runtime = Runtime.getRuntime();
-            /*ProcessBuilder processBuilder = new ProcessBuilder(
+            ProcessBuilder processBuilder = new ProcessBuilder(
                     "pg_restore",
                     "--host=" + properties.getProperty("db.host"),
                     "--port=" + properties.getProperty("db.port"),
@@ -82,21 +86,17 @@ public class DatabaseOperations {
                     "--verbose",
                     filepath);
             processBuilder.redirectErrorStream(true);
-            Process process = processBuilder.start();*/
+            Process process = processBuilder.start();
 
-            String[] cmd = {
-                    "pg_restore",
-                    "--host=" + properties.getProperty("db.host"),
-                    "--port=" + properties.getProperty("db.port"),
-                    "--username=postgres",
-                    "--dbname=" + properties.getProperty("db.name"),
-                    "--role=postgres",
-                    "--no-password",
-                    "--verbose",
-                    filepath
-            };
-            Process process = runtime.exec(cmd);
+            Logger logger = LoggerFactory.getLogger(DatabaseOperations.class);
 
+            InputStream is = process.getInputStream();
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader br = new BufferedReader(isr);
+            String ll;
+            while ((ll = br.readLine()) != null) {
+                logger.info(ll);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
