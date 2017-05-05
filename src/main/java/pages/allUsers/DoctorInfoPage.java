@@ -1,11 +1,13 @@
 package pages.allUsers;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.PageInitializer;
 import pages.headers.BaseHeader;
 import utils.BrowserWrapper;
+import utils.DriverInitializer;
 
 
 public class DoctorInfoPage implements PageInitializer {
@@ -26,8 +28,8 @@ public class DoctorInfoPage implements PageInitializer {
     @FindBy(css = "div.panel-footer")
     private WebElement doctorsHospitalLabel;
 
-    //@FindBy(id = "input-feedback")
-    @FindBy(xpath = "//*[@id=\"input-feedback\"]")
+    @FindBy(id = "input-feedback")
+  //  @FindBy(xpath = "//*[@id=\"input-feedback\"]")
     public WebElement doctorFeedbackInput;
 
     @FindBy(id = "sendFeedback")
@@ -36,19 +38,15 @@ public class DoctorInfoPage implements PageInitializer {
 
 
     public void createFeedBack(String value){
+        System.out.println("ksks");
+        BrowserWrapper.waitUntilElementVisible(doctorFeedbackInput);
         doctorFeedbackInput.clear();
+        BrowserWrapper.sleep(5);
+        sendFeedbackButton.sendKeys(value);
         BrowserWrapper.sleep(2);
-        doctorFeedbackInput.sendKeys(value);
-        BrowserWrapper.sleep(2);
-        BrowserWrapper.waitUntilElementClickableByLocator(By.id("sendFeedback"));
         sendFeedbackButton.click();
-        BrowserWrapper.sleep(2);
         BrowserWrapper.refreshPage();;
     }
-
-
-
-
 
 
 

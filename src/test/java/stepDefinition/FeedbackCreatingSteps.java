@@ -42,21 +42,17 @@ public class FeedbackCreatingSteps {
         BrowserWrapper.sleep(3);
         BaseHeader header = new BaseHeader();
         DoctorSearchResultPage doctorSearchResultPage = header.findDoctor(CURRENT_DOCTOR_SURNAME);
-        DoctorInfoPage doctorInfoPage = doctorSearchResultPage.goToDoctorInfoPage();
-        throw new PendingException();
+        doctorInfoPage = doctorSearchResultPage.goToDoctorInfoPage();
     }
 
     @Then("^click on the feedback field  write Feedback and submit it$")
     public void click_on_the_feedback_field_write_Feedback_and_submit_it() throws Throwable {
         doctorInfoPage.createFeedBack(FEEDBACK_MESSAGE);
-        throw new PendingException();
     }
 
     @Then("^feedback field should disappear after page refresh$")
     public void feedback_field_should_disappear_after_page_refresh() throws Throwable {
-        BrowserWrapper.sleep(3);
         Assert.assertFalse(BrowserWrapper.isElementPresent(doctorInfoPage.doctorFeedbackInput));
-        throw new PendingException();
     }
 
     @When("^i sign in as a manager and move to the feedbackManagePage$")
@@ -64,21 +60,18 @@ public class FeedbackCreatingSteps {
         HospitalsPage hospitalsPage = BaseNavigation.loginAsManager(MANAGER_LOGIN, MANAGER_PASSWORD);
 
         BrowserWrapper.sleep(5);
-        throw new PendingException();
     }
 
     @And("^approve or disapprove feedback about current doctor$")
     public void approve_or_disapprove_feedback_about_current_doctor() throws Throwable {
         moderationFeedBackPage = moderationFeedBackPage.confirmFeedback();
         BrowserWrapper.sleep(5);
-        throw new PendingException();
     }
 
     @Then("^feedback field on manager page should disappear after page refresh$")
     public void feedback_field_on_manager_page_should_disappear_after_page_refresh() throws Throwable {
         BrowserWrapper.sleep(5);
         Assert.assertFalse(BrowserWrapper.isElementPresent(moderationFeedBackPage.patientOneFeedbackBody));
-        throw new PendingException();
     }
 
 
@@ -91,14 +84,12 @@ public class FeedbackCreatingSteps {
         DoctorSearchResultPage doctorSearchResultPage = header.findDoctor(CURRENT_DOCTOR_SURNAME);
         BrowserWrapper.sleep(5);
         DoctorInfoPage doctorInfoPage = doctorSearchResultPage.goToDoctorInfoPage();
-        throw new PendingException();
     }
 
     @Then("^my feedback , wich was written by me early should be added$")
     public void my_feedback_wich_was_written_by_me_early_should_be_added() throws Throwable {
         BrowserWrapper.sleep(5);
         Assert.assertEquals(FEEDBACK_MESSAGE,doctorInfoPage.doctorInfoLabel.getText());
-        throw new PendingException();
     }
 
 

@@ -14,7 +14,7 @@ import utils.BaseNavigation;
 import utils.BaseTest;
 import utils.BrowserWrapper;
 import utils.DriverInitializer;
-
+import utils.databaseutil.DatabaseOperations;
 
 
 public class AddUserPageTest extends BaseTest {
@@ -32,6 +32,7 @@ public class AddUserPageTest extends BaseTest {
 
     @BeforeMethod
     private void beforeMethod() throws InterruptedException {
+       // DatabaseOperations.restore("hospital.backup");
         //  this.driver = BrowserWrapper.browserInitialization();
        // DriverInitializer.setImpicityWait(10l);
         BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
