@@ -72,6 +72,8 @@ public class ListPatientaPage implements PageInitializer {
     private WebElement patientcd;
     @FindBy(partialLinkText = "a@gmail.com")
     private WebElement patienta;
+    @FindBy(linkText = "patient.ta@hospitals.ua")
+    private WebElement patientTa;
 
     public void searchPatients(String value){
         searchTextField.clear();
@@ -126,9 +128,14 @@ public class ListPatientaPage implements PageInitializer {
     }
 
     public PatientsCardPage getPatientsCardClick(){
-        BrowserWrapper.waitUntilElementClickable(patientsf);
+        //BrowserWrapper.waitUntilElementClickable(patientsf);
         patientta.click();
 
+        return new PatientsCardPage();
+    }
+
+    public PatientsCardPage getPatientTaCardClick() {
+        patientTa.click();
         return new PatientsCardPage();
     }
 

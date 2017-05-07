@@ -23,7 +23,7 @@ public class DriverInitializer {
 
     private DriverInitializer(){}
 
-    private static final String FIREFOX_PROFILE_NAME = "default";
+    private static final String FIREFOX_PROFILE_NAME = "myProfile";
 
     private static final String FIREFOX_WEBDRIVER = "webdriver.gecko.driver";
     private static final String CHROME_WEBDRIVER = "chromedriver";

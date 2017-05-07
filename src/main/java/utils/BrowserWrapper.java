@@ -52,6 +52,10 @@ public class BrowserWrapper {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
+    public static void waitUntilElementVisibleByLocator(By by) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+    }
+
     public static void waitUntilElementLocated(By by) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(by));
     }

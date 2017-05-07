@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.PageInitializer;
 import pages.headers.headersByRole.DoctorHeader;
+import utils.BrowserWrapper;
 
 public class CreateNewRecordPage implements PageInitializer {
     public DoctorHeader header;
@@ -39,17 +40,23 @@ public class CreateNewRecordPage implements PageInitializer {
     }
 
     public void inputComplaint(String value){
+        complaint.clear();
         complaint.sendKeys(value);
     }
 
     public void inputResult(String value){
+        result.clear();
         result.sendKeys(value);
     }
 
     public void inputPrescription(String value){
+        prescription.clear();
         prescription.sendKeys(value);
     }
 
+    public boolean checkSubmitButton() {
+        return BrowserWrapper.isElementPresent(submitButton);
+    }
 
     public void inputRecord(String complaint, String result, String prescription ){
         inputComplaint(complaint);

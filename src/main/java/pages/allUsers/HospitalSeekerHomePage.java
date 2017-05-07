@@ -6,6 +6,7 @@ import pages.PageInitializer;
 import pages.anonymous.LoginPage;
 import pages.headers.headersByRole.DoctorHeader;
 import pages.headers.headersByRole.NotAuthorizedHeader;
+import utils.BrowserWrapper;
 
 
 /**
@@ -42,6 +43,9 @@ public class HospitalSeekerHomePage implements PageInitializer {
     @FindBy(css = "img[src=\"/HospitalSeeker/img/slide-four.jpg\"]")
     private WebElement image;
 
+    public boolean isCarouselPresent() {
+       return BrowserWrapper.isElementPresent(image);
+    }
 
     public HospitalSeekerHomePage() {
         notAuthorizedHeader = new NotAuthorizedHeader();

@@ -43,5 +43,9 @@ public class BaseNavigation {
         return new HospitalSeekerHomePage() ;
     }
 
+    public static HospitalSeekerHomePage loginAsPatient(String email, String password)  {
+        login(email, password);
+        return new HospitalSeekerHomePage() ;
+    }
 
 }
