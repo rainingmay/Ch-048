@@ -39,8 +39,6 @@ public class SchedulerPageTest extends BaseTest {
         ManagerDashBordPage managerDashBordPage =  hospitalsPage.choseHospital(HOSPITAL_NAME);
         schedulerPage = managerDashBordPage.scheduleButtonClick("Chester");
         logger.info("Test is initialized");
-
-
     }
 
     @AfterMethod(alwaysRun = true)

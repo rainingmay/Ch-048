@@ -33,7 +33,7 @@ public class AllUsersPageTest extends BaseTest{
     @BeforeMethod
     public void beforeMethod() {
         DriverInitializer.getToUrl(BASE_URL);
-        DatabaseOperations.restore("hospital.backup");
+//        DatabaseOperations.restore("hospital.backup");
         allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
         logger.info("Test is initialized");
     }
