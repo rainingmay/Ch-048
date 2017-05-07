@@ -132,7 +132,7 @@ public class AddHospitalTest extends BaseTest {
     @DataProvider
     public static Object [] [] validHospitalAddress() {
         return new  Object [] [] {
-                {"Вул. Мусоргського, 8, Чернівці, Чернівецька, Україна", "МІСЬКА СТАНЦІЯ ШВИДКОЇ МЕДИЧНОЇ ДОПОМОГИ", ""}
+                {"Musorhs'koho St, 4, Chernivtsi, Chernivets'ka oblast, Ukraine", "Hospital #15", ""}
         };
     }
 
@@ -146,15 +146,15 @@ public class AddHospitalTest extends BaseTest {
     @DataProvider
     public Object [] [] editHospitalBuildingAndStreet() {
         return new Object[][] {
-                {"2", "Вулиця Руська", 11},
-                {"4", "Вулиця Лесі Українки", 12}
+                {"2", "Fastivs'ka St", 11},
+                {"11", "Lesi Ukrainky St", 12}
         };
     }
 
     @DataProvider
     public Object [] [] invalidHospitalAddress() {
         return new Object[][] {
-                {"вул. Березовська, 14, смт Глибока, Чернівецька область, Україна", "Лікарня №2", ""},
+                {"Berezovska St, 14, Glybokaya, Chernivets'ka oblast, Ukraine", "Hospital #7", ""}
         };
     }
 
