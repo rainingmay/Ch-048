@@ -157,6 +157,7 @@ public class AllUsersPage implements PageInitializer {
 
     public void sendKeysToSearchField(String keys) {
         searchWindow.clear();
+        BrowserWrapper.sleep(1);
         searchWindow.sendKeys(keys);
     }
 

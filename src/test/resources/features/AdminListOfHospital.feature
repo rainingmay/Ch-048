@@ -16,10 +16,6 @@
     Then  ADMIN must see page where he can check GooglePOI
 
 
-#  Scenario: Show on map
-    # When  ADMIN press button "Show on map" in row with certain hospital
-    # Then  ADMIN must see this hospital on map
-
   Scenario: Edit hospital
     When  ADMIN press button "Edit" in row '1' with certain hospital
     Then  ADMIN must see page "Hospital add/edit page"

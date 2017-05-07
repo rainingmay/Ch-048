@@ -70,7 +70,7 @@ public class DatabaseOperations {
 
 
             Properties properties = new Properties();
-            String filepath = "src\\main\\resources\\" + filename;
+            String filepath = "src/main/resources/" + filename;
             InputStream inputStream = new FileInputStream("src/main/resources/detailedDatabaseProperties.properties");
             properties.load(inputStream);
 
@@ -107,11 +107,11 @@ public class DatabaseOperations {
     }
 
 
-    /*public static void backup(String filename) {
+    public static void backup(String filename) {
         try {
             Properties properties = new Properties();
-            String filepath = "src\\main\\resources\\" + filename;
-            InputStream inputStream = new FileInputStream("src\\main\\resources\\detailedDatabaseProperties.properties");
+            String filepath = "src/ main/resources/" + filename;
+            InputStream inputStream = new FileInputStream("src/main/resources/detailedDatabaseProperties.properties");
             properties.load(inputStream);
 
             Runtime runtime = Runtime.getRuntime();;
@@ -125,10 +125,20 @@ public class DatabaseOperations {
                     "--blobs",
                     "--verbose", "--file", filepath, properties.getProperty("db.name"));
             Process process = processBuilder.start();
+
+            Logger logger = LoggerFactory.getLogger(DatabaseOperations.class);
+
+            InputStream is = process.getInputStream();
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader br = new BufferedReader(isr);
+            String ll;
+            while ((ll = br.readLine()) != null) {
+                logger.info(ll);
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 }

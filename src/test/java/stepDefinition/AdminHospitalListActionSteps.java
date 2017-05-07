@@ -30,6 +30,7 @@ public class AdminHospitalListActionSteps {
     @Given("ADMIN is on hospital list page")
     public void to_hospital_list_page() {
         allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
+        BrowserWrapper.sleep(2);
         hospitalListPage = allUsersPage.header.goToAllHospitalsPage();
         BrowserWrapper.sleep(2);
     }

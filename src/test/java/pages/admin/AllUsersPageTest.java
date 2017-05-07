@@ -25,10 +25,6 @@ import java.util.*;
  * Created by Evgen on 10.04.2017.
  */
 public class AllUsersPageTest extends BaseTest{
-    public static Properties properties = null;
-
-    public static final String BASE_URL = "https://localhost:8443/HospitalSeeker/";
-
 
     private AllUsersPage allUsersPage;
 
@@ -72,6 +68,7 @@ public class AllUsersPageTest extends BaseTest{
     @Test
     public void enableUsersViewTest() {
         allUsersPage = allUsersPage.showEnableUsers();
+        BrowserWrapper.sleep(2);
         int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
         boolean actual = UserDAO.getStatusByEmail(new TableParser(allUsersPage.table).getFieldFromTableRow(rowNumber, "@email"));
         Assert.assertEquals(actual, true);
@@ -155,7 +152,7 @@ public class AllUsersPageTest extends BaseTest{
     @Test
     public void nextPageButtonTest() {
         AllUsersPage allUsersPage1 = allUsersPage.toNextPage();
-        BrowserWrapper.waitForPage();
+        BrowserWrapper.sleep(2);
         Assert.assertNotEquals(allUsersPage, allUsersPage1);
         logger.info("Test pass");
     }
