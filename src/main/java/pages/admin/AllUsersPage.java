@@ -26,6 +26,9 @@ public class AllUsersPage implements PageInitializer {
     @FindBy(id = "userPerPage")
     private WebElement usersPerPagePopUp;
 
+    @FindBy(css = "#searchForm > div:first-child > label")
+    public WebElement usersPerPageLabel;
+
     @FindBy(id = "pref-roleby")
     private WebElement role;
 
@@ -63,7 +66,7 @@ public class AllUsersPage implements PageInitializer {
     private WebElement lastPageButton;
 
     @FindBy(css = "body section div.content div div ul li:first-child a")
-    private WebElement firstPageButto;
+    private WebElement firstPageButton;
 
     @FindBy(id = "email")
     public WebElement sortByEmailButton;
@@ -105,6 +108,8 @@ public class AllUsersPage implements PageInitializer {
         this.header = new AdminHeader();
         pageInitialization();
     }
+
+
 
 
     public AllUsersPage getCreatedTableText(){
@@ -152,6 +157,7 @@ public class AllUsersPage implements PageInitializer {
 
     public void sendKeysToSearchField(String keys) {
         searchWindow.clear();
+        BrowserWrapper.sleep(1);
         searchWindow.sendKeys(keys);
     }
 

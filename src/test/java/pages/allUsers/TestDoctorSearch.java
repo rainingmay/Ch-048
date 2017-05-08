@@ -1,11 +1,13 @@
 package pages.allUsers;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pages.allUsers.DoctorSearchResult;
-import pages.headers.BaseHeader;
+import pages.headers.headersByRole.NotAuthorizedHeader;
+import utils.BaseNavigation;
 import utils.BaseTest;
-
+import utils.DriverInitializer;
 
 import static org.testng.Assert.assertEquals;
 
@@ -17,23 +19,55 @@ public class TestDoctorSearch extends BaseTest {
     @DataProvider(name = "SearchProvider")
     public static Object[][] parametrizedData() {
         return new Object[][]{
+                {"hous", 1},
                 {"hou", 1},
                 {"абрвал", 0}
         };
     }
 
+    @BeforeMethod
+    public void beforeMethod() {
+        DriverInitializer.getToUrl(BASE_URL);
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void afterMethod() throws Exception {
+        DriverInitializer.deleteAllCookies();
+    }
+
     @Test(dataProvider = "SearchProvider")
-    public void testFindDoctor(String searchWord, int expected) throws Exception {
-        BaseHeader header = new BaseHeader();
-        DoctorSearchResult doctorSearchResult = header.findDoctor(searchWord);
-        Thread.sleep(10000);
+    public void testFindDoctorNotAuthorizedUser(String searchWord, int expected) throws Exception {
+        NotAuthorizedHeader header = new NotAuthorizedHeader();
+        DoctorSearchResultPage doctorSearchResult = header.findDoctor(searchWord);
         assertEquals(doctorSearchResult.countOfDoctors(), expected);
     }
 
-    @Test
-    public void testFindDoctorInputValidation() throws Exception {
-        BaseHeader header = new BaseHeader();
+    @Test(dataProvider = "SearchProvider")
+    public void testFindDoctorAuthorizedUser(String searchWord, int expected) throws Exception {
+        NotAuthorizedHeader header = new NotAuthorizedHeader();
+        BaseNavigation.login("admin@hospitals.ua", "1111");
+        Thread.sleep(1000);
+        DoctorSearchResultPage doctorSearchResult = header.findDoctor(searchWord);
+        assertEquals(doctorSearchResult.countOfDoctors(), expected);
+    }
+
+    @Test(groups = "InputValidation")
+    public void testFindDoctorInputValidationEng() throws Exception {
+        NotAuthorizedHeader header = new NotAuthorizedHeader();
+        header.changeLanguageToUa();
+        Thread.sleep(1000);
         header.fillDoctorInput("ho");
-        assertEquals(header.getDoctorSearchError().getText(), "Please enter at least 3 symbols");
+        BaseTest.checkLanguageAndLoadProperties(header);
+        assertEquals(header.getDoctorSearchError().getText(), properties.getProperty("lineToShort"));
+    }
+
+    @Test(groups = "InputValidation")
+    public void testFindDoctorInputValidationUa() throws Exception {
+        NotAuthorizedHeader header = new NotAuthorizedHeader();
+        header.changeLanguageToEn();
+        Thread.sleep(1000);
+        header.fillDoctorInput("ho");
+        BaseTest.checkLanguageAndLoadProperties(header);
+        assertEquals(header.getDoctorSearchError().getText(), properties.getProperty("lineToShort"));
     }
 }

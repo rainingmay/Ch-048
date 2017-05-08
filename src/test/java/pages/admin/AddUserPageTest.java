@@ -28,12 +28,13 @@ public class AddUserPageTest extends BaseTest {
     @BeforeMethod
     private void beforeMethod() throws InterruptedException {
         //  this.driver = BrowserWrapper.browserInitialization();
+       // DriverInitializer.setImpicityWait(10l);
         BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
     }
 
 
-    @Test(groups = {"unSucceffuly"})
+    @Test(groups = {"unSuccessfully"})
     public void isElementsPresentAddUserTest() throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage();
@@ -51,7 +52,7 @@ public class AddUserPageTest extends BaseTest {
     }
 
 
-    @Test(groups = {"Succefully"})
+    @Test(groups = {"Successfully"})
     public void successfulAddNewUserTest() throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AllUsersPage allUsersPage = new AllUsersPage();
@@ -66,7 +67,7 @@ public class AddUserPageTest extends BaseTest {
 
     }
 
-    @Test(groups = {"unSuccefully"})
+    @Test(groups = {"unSuccessfully"})
     public void noRoleChangedAddNewUserTest() throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage();
@@ -81,7 +82,7 @@ public class AddUserPageTest extends BaseTest {
 
     }
 
-    @Test(groups = {"unSuccefully"})
+    @Test(groups = {"unSuccessfully"})
     public void noPasswordConfirmationAddNewUserTest() throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage();
@@ -133,7 +134,7 @@ public class AddUserPageTest extends BaseTest {
     }
 
 
-    @Test(groups = {"unSuccefully"})
+    @Test(groups = {"unSuccessfully"})
     public void noRequiredEmailTest() throws Exception {
         // BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage();
@@ -147,7 +148,7 @@ public class AddUserPageTest extends BaseTest {
         System.out.println("Email field is required but empty");
     }
 
-    @Test(groups = {"unSucceffully"})
+    @Test(groups = {"unSuccessfully"})
     public void noRequiredPasswordTest() throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage();
@@ -161,7 +162,7 @@ public class AddUserPageTest extends BaseTest {
         System.out.println("Password field is required but empty");
     }
 
-    @Test(dataProvider = "validInformation",groups = {"Succefully"})
+    @Test(dataProvider = "validInformation",groups = {"Successfully"})
     public void validInfoAddNewUserTest(String addUserName, String addUserPassword) throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AllUsersPage allUsersPage = new AllUsersPage();
@@ -177,7 +178,7 @@ public class AddUserPageTest extends BaseTest {
     }
 
 
-    @Test(dataProvider = "notValidEmails", groups = {"unSuccefully"})
+    @Test(dataProvider = "notValidEmails", groups = {"unSuccessfully"})
     public void notValidEmailsAddNewUserTest(String addUserName, String addUserPassword) throws Exception {
        // BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage();
@@ -193,7 +194,7 @@ public class AddUserPageTest extends BaseTest {
 
     }
 
-    @Test(dataProvider = "notValidPasswords", groups = {"unSuccefully"})
+    @Test(dataProvider = "notValidPasswords", groups = {"unSuccessfully"})
     public void notValidPasswordsAddNewUserTest(String addUserName, String addUserPassword) throws Exception {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         AddUserPage addUserPage = new AddUserPage();
@@ -207,7 +208,7 @@ public class AddUserPageTest extends BaseTest {
         Assert.assertNotEquals(expectedPasswordErrorLabelText, actualPasswordErrorLabelText);
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void afterMethod() {
         DriverInitializer.instance().manage().deleteAllCookies();
         BaseNavigation.logout();
