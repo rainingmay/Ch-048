@@ -34,7 +34,6 @@ public class BaseTest {
     public void before() {
         DriverInitializer.getToUrl(BASE_URL);
         String s = System.getProperty("test.language");
-        System.out.println(s);
         BaseNavigation.changeLanguage(s);
     }
 
