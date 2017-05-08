@@ -337,6 +337,12 @@
             </properties>
         </profile>
         <profile>
+            <id>firefoxLinux</id>
+            <properties>
+                <browser.name>firefoxLinux</browser.name>
+            </properties>
+        </profile>
+        <profile>
             <id>chrome</id>
             <properties>
                 <browser.name>chrome</browser.name>

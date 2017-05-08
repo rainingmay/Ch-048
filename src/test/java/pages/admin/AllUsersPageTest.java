@@ -33,7 +33,7 @@ public class AllUsersPageTest extends BaseTest{
     @BeforeMethod
     public void beforeMethod() {
         DriverInitializer.getToUrl(BASE_URL);
-//        DatabaseOperations.restore("hospital.backup");
+        DatabaseOperations.restore("hospital.backup");
         allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
         logger.info("Test is initialized");
     }
@@ -91,9 +91,11 @@ public class AllUsersPageTest extends BaseTest{
     public void viewWindowTest() {
         int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
         List<String> actual = allUsersPage.getUserDataFromInfoWindow(rowNumber);
-        List<String> allInfo = UserDAO.getUserFromDatabaseByEmail(actual.get(1));
+        int ID_INDEX = 0;
+        int EMAIL_INDEX = 1;
+        List<String> allInfo = UserDAO.getUserFromDatabaseByEmail(actual.get(EMAIL_INDEX));
         List<String> expected = new LinkedList<>();
-        Collections.addAll(expected, new String[]{allInfo.get(0), allInfo.get(1), "true"});
+        Collections.addAll(expected, new String[]{allInfo.get(ID_INDEX), allInfo.get(EMAIL_INDEX), "true"});
         Assert.assertEquals(actual, expected);
         logger.info("Test pass");
     }
@@ -156,17 +158,6 @@ public class AllUsersPageTest extends BaseTest{
         Assert.assertNotEquals(allUsersPage, allUsersPage1);
         logger.info("Test pass");
     }
-
-
-    /*@Test
-    public void deleteUsersTest() {
-        int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
-        String actual = allUsersPage.getCurrentUrl();
-        allUsersPage = allUsersPage.deleteUser(rowNumber);
-        String expected = allUsersPage.getCurrentUrl();
-        Assert.assertEquals(actual, expected);
-        logger.info("Test info");
-    }*/
 
 
     @Test(dataProvider = "roles")
