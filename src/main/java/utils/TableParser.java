@@ -53,6 +53,8 @@ public class TableParser {
         for (WebElement cell : webElements) {
             if (cell.findElements(By.cssSelector("span[title=\"" + buttonName + "\"]")).size() > 0)
                 button = cell.findElement(By.cssSelector("span[title=\"" + buttonName + "\"]"));
+            if (cell.findElements(By.cssSelector("a[title=\"" + buttonName + "\"]")).size() > 0)
+                button = cell.findElement(By.cssSelector("a[title=\"" + buttonName + "\"]"));
         }
         return button;
     }
