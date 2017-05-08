@@ -43,6 +43,7 @@ public class HospitalSeekerHomePage implements PageInitializer {
     private WebElement image;
 
 
+
     public HospitalSeekerHomePage() {
         notAuthorizedHeader = new NotAuthorizedHeader();
         pageInitialization();

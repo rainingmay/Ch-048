@@ -307,9 +307,7 @@
                     </execution>
                 </executions>
             </plugin>
-
         </plugins>
-
     </build>
     <reporting>
         <excludeDefaults>true</excludeDefaults>
