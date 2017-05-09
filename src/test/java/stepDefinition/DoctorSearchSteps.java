@@ -15,8 +15,8 @@ public class DoctorSearchSteps  {
     public static final String MANAGER_LOGIN = "manager.jh@hospitals.ua";
     public static final String MANAGER_PASSWORD = "1111";
     public static final String NUMBER_DOCTORS_PER_PAGE = "20";
-    ManagerDashBordPage managerDashBordPage;
-    public int numberOfRows;
+    private ManagerDashBordPage managerDashBordPage;
+    private int numberOfRows;
 
     @Given("^the manager is on dashboard of particular hospital in order to search$")
     public void the_manager_is_on_dashboard_of_particular_hospital_in_order_to_search() throws Throwable {

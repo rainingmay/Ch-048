@@ -45,16 +45,10 @@ public class BrowserWrapper {
     }
 
 
-    public static void waitUntiElementsVisible(List<WebElement> list){
-        wait.until(ExpectedConditions.visibilityOfAllElements(list));
-    }
+
 
     public static void waitUntilElementVisible(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
-    }
-
-    public static void waitUntilElementLocated(By by) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(by));
     }
 
 
@@ -105,11 +99,7 @@ public class BrowserWrapper {
     }
 
 
-    public static void dragdrop(WebElement LocatorFrom, String xto, String yto) {
-        ((JavascriptExecutor) DriverInitializer.instance()).executeScript("function simulate(f,c,d,e){var b,a=null;for(b in eventMatchers)if(eventMatchers[b].test(c)){a=b;break}if(!a)return!1;document.createEvent?(b=document.createEvent(a),a==\"HTMLEvents\"?b.initEvent(c,!0,!0):b.initMouseEvent(c,!0,!0,document.defaultView,0,d,e,d,e,!1,!1,!1,!1,0,null),f.dispatchEvent(b)):(a=document.createEventObject(),a.detail=0,a.screenX=d,a.screenY=e,a.clientX=d,a.clientY=e,a.ctrlKey=!1,a.altKey=!1,a.shiftKey=!1,a.metaKey=!1,a.button=1,f.fireEvent(\"on\"+c,a));return!0} var eventMatchers={HTMLEvents:/^(?:load|unload|abort|error|select|change|submit|reset|focus|blur|resize|scroll)$/,MouseEvents:/^(?:click|dblclick|mouse(?:down|up|over|move|out))$/}; " +
-                        "simulate(arguments[0],\"mousedown\",0,0); simulate(arguments[0],\"mousemove\",arguments[1],arguments[2]); simulate(arguments[0],\"mouseup\",arguments[1],arguments[2]); ",
-                LocatorFrom,xto,yto);
-    }
+
 
     public static void doubleClickJs(WebElement element){
         JavascriptExecutor js = (JavascriptExecutor) DriverInitializer.instance();
@@ -117,14 +107,9 @@ public class BrowserWrapper {
         js.executeScript(doubleClickJS, element);
     }
     public static void tripleClick(WebElement element){
-      boolean a;
-      boolean b;
-      boolean c;
-      a = clickWithStaleException(element);
-
-      b = clickWithStaleException(element);
-
-      c = clickWithStaleException(element);
+       for (int i=0;i<3;i++) {
+           clickWithStaleException(element);
+       }
 
     }
 
@@ -147,7 +132,7 @@ public class BrowserWrapper {
 
 
     public static boolean isSorted(List<String> list){
-        String previous = ""; // empty string: guaranteed to be less than or equal to any other
+        String previous = "";
 
         for (final String current: list) {
             if (current.compareTo(previous) < 0)

@@ -59,5 +59,25 @@ public class TableParser {
         return button;
     }
 
+    public WebElement getButtonFromTableRowByLinkElement(int rowNumber) {
+        List<WebElement> webElementsList = getCellsFromTableRow(rowNumber);
+        WebElement link = null;
+        for (WebElement cell : webElementsList) {
+            if (cell.findElements(By.className("glyphicon glyphicon-pencil")).size() > 0)
+                link = cell.findElement(By.className("glyphicon glyphicon-pencil"));
+        }
+        return link;
+    }
+
+    public WebElement getButtonFromTableRowByButtonTitle(int rowNumber) {
+        List<WebElement> webElementList = getCellsFromTableRow(rowNumber);
+        WebElement button = null;
+        for (WebElement cell : webElementList) {
+            if (cell.findElements(By.className("glyphicon glyphicon-remove")).size() > 0)
+                button = cell.findElement(By.className("glyphicon glyphicon-remove"));
+        }
+        return button;
+    }
+
 
 }

@@ -3,6 +3,7 @@ package utils;
 import pages.admin.AllUsersPage;
 import pages.allUsers.HospitalSeekerHomePage;
 import pages.anonymous.LoginPage;
+import pages.headers.BaseHeader;
 import pages.headers.headersByRole.AuthorizedHeader;
 import pages.manager.HospitalsPage;
 
@@ -30,7 +31,6 @@ public class BaseNavigation {
 
     public static AllUsersPage loginAsAdmin( String email, String password) {
         login( email, password);
-        BrowserWrapper.sleep(2);
         return new AllUsersPage();
     }
 
@@ -49,5 +49,13 @@ public class BaseNavigation {
         return new HospitalSeekerHomePage() ;
     }
 
+    public static void changeLanguage(String lang){
+        BaseHeader baseHeader = new BaseHeader();
+        if(lang.equals("ukr")){
+            baseHeader.changeLanguageToUa();
+        }else {
+            baseHeader.changeLanguageToEn();
+        }
+    }
 
 }

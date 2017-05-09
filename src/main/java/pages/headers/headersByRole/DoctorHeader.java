@@ -24,7 +24,7 @@ public class DoctorHeader extends AuthorizedHeader implements PageInitializer {
 
 
     public ListPatientaPage patientsButtonClick(){
-        BrowserWrapper.waitUntilElementClickable(patients);
+        //BrowserWrapper.waitUntilElementClickable(patients);
         patients.click();
         return new ListPatientaPage();
     }

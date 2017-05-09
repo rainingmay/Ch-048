@@ -1,6 +1,6 @@
 Feature: Searching doctors on a hospital page table
-As a manager I want to find doctors according to my requirements
-So then i can use on of the fields in searching part of page
+  As a manager I want to find doctors according to my requirements
+  So then i can use on of the fields in searching part of page
   Background:
     Given the manager is on dashboard of particular hospital in order to search
 
