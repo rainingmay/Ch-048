@@ -67,7 +67,7 @@ public class DoctorActionsSteps {
 
     @Then("^Pop up form with confirmation for deleting$")
     public void pop_up_form_with_confirmation_for_deleting() throws Throwable {
-        managerDashBordPage.isDeleteConfirmationPresent();
+        Assert.assertTrue(managerDashBordPage.isDeleteConfirmationPresent(),"Can't delete doctor");
     }
 
     @Then("^Name of doctor in details form should match with name from table$")

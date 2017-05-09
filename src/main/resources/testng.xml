@@ -6,9 +6,9 @@
         <groups>
             <define name="All">
                 <include name="Successfully"/>
-                <include name="smoke test"/>
+                <include name="smokeTest"/>
                 <include name="unSuccessfully"/>
-                <include name="event creation"/>
+                <include name="eventCreation"/>
                 <include name="miscellaneous"/>
                 <include name="InputValidation"/>
             </define>

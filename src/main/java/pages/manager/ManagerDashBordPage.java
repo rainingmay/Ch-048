@@ -174,23 +174,19 @@ public class ManagerDashBordPage implements PageInitializer{
     @FindBy(id = "deleteButton")
     private WebElement deleteConfirmButton;
 
-
     public String information = "INFORMATION ABOUT DOCTOR";
     public String edit = "EDIT DOCTOR";
+
     public void selectDoctorPerPage(String value) {
         BrowserWrapper.selectDropdown(doctorPerPageSelector, value);
-
     }
 
     public void selectSpecialization(String value) {
         BrowserWrapper.selectDropdown(specializationSelector, value);
-
-
     }
 
     public void selectSearchBy(String value) {
         BrowserWrapper.selectDropdown(searchBySelector, value);
-
     }
 
     public void searchByText(String value){
@@ -202,7 +198,6 @@ public class ManagerDashBordPage implements PageInitializer{
         BrowserWrapper.waitUntilElementVisible(searchButton);
         searchButton.click();
         BrowserWrapper.sleep(3);
-
     }
 
     public void clearButtonClick(){
@@ -310,10 +305,8 @@ public class ManagerDashBordPage implements PageInitializer{
     public List<String> getColumn(String colName){
         String td = tdFinder(colName);
         ArrayList<String> list = new ArrayList<>();
-
         String text = null;
         List<WebElement> elements = DriverInitializer.instance().findElements(By.cssSelector("tbody tr td:nth-child("+ td +")"));
-
         for( WebElement webElement : elements){
             for(int i = 0; i < 5; i++) {
                 try {
@@ -335,7 +328,7 @@ public class ManagerDashBordPage implements PageInitializer{
     }
 
 
-    public String getTestStale(WebElement element){
+    private String getTestStale(WebElement element){
         String st = null;
         for (int i = 0 ; i<5; i++) {
             try {
@@ -424,7 +417,6 @@ public class ManagerDashBordPage implements PageInitializer{
 
 
     public void enterFullNameDetailedForm(String firstName, String lastName){
-
         BrowserWrapper.waitUntilElementNotStale(formFirstNameInput);
         formFirstNameInput.clear();
         formFirstNameInput.sendKeys(firstName);
