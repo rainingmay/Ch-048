@@ -49,14 +49,15 @@ public class TableParser {
 
     public WebElement getButtonFromTableRow(int rowNumber, String buttonName) {
         List<WebElement> webElements = getCellsFromTableRow(rowNumber);
-        WebElement button = null;
+        WebElement button;
         for (WebElement cell : webElements) {
             if (cell.findElements(By.cssSelector("span[title=\"" + buttonName + "\"]")).size() > 0)
-                button = cell.findElement(By.cssSelector("span[title=\"" + buttonName + "\"]"));
+                return cell.findElement(By.cssSelector("span[title=\"" + buttonName + "\"]"));
             if (cell.findElements(By.cssSelector("a[title=\"" + buttonName + "\"]")).size() > 0)
-                button = cell.findElement(By.cssSelector("a[title=\"" + buttonName + "\"]"));
+                return cell.findElement(By.cssSelector("a[title=\"" + buttonName + "\"]"));
         }
-        return button;
+
+        return null;
     }
 
     public WebElement getButtonFromTableRowByLinkElement(int rowNumber) {

@@ -14,7 +14,7 @@ import java.awt.event.KeyEvent;
  * Created by Jeksonis on 06.04.2017.
  */
 public class AddNewHospitalPage implements PageInitializer {
-    public AdminHeader header;
+        public AdminHeader header;
 
     public AddNewHospitalPage(){
         this.header = new AdminHeader();
