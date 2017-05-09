@@ -334,7 +334,7 @@
     <profiles>
         <profile>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <id>ua</id>
             <properties>
@@ -344,7 +344,7 @@
 
         <profile>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <id>eng</id>
             <properties>
