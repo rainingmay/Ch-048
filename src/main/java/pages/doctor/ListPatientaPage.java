@@ -1,6 +1,7 @@
 package pages.doctor;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -8,12 +9,21 @@ import pages.PageInitializer;
 import pages.headers.headersByRole.DoctorHeader;
 import utils.BrowserWrapper;
 import utils.DriverInitializer;
+import utils.TableParser;
 
 public class ListPatientaPage implements PageInitializer {
     public DoctorHeader header;
     WebDriverWait wait = new WebDriverWait(DriverInitializer.instance(), 5);
     @FindBy(className = "label[for=\"usr\"]")
     private WebElement showPatientsLabel;
+    @FindBy(css = "table")
+    public WebElement table;
+    @FindBy(css = "thead")
+    private WebElement tableHead;
+
+    @FindBy(css = "tbody")
+    public WebElement tableBody;
+
 
     @FindBy(id = "usr")
     private WebElement searchTextField;
@@ -30,15 +40,6 @@ public class ListPatientaPage implements PageInitializer {
     @FindBy (className = "fa fa-angle-double-right")
     private WebElement goLastPage;
 
-    @FindBy(xpath = "/html/body/section/div/div/div[2]/table/thead/tr/th[2]/div[1]")
-    private WebElement colomEmailPatients;
-
-    @FindBy(xpath = "/html/body/section/div/div/div[2]/table/thead/tr/th[3]/div[1]")
-    private WebElement colomFirstName;
-
-    @FindBy(xpath = "/html/body/section/div/div/div[2]/table/thead/tr/th[4]/div[1]")
-    private WebElement colomLastName;
-
     @FindBy(xpath = "/html/body/section/div/div/div[2]/table/thead/tr/th[2]/div[2]/a/i")
     private WebElement sortEmailPatients;
 
@@ -47,16 +48,6 @@ public class ListPatientaPage implements PageInitializer {
 
     @FindBy(xpath = "/html/body/section/div/div/div[2]/table/thead/tr/th[4]/div[2]/a/i")
     private WebElement sortByLastName;
-
-    //First row
-    @FindBy(xpath = "/html/body/section/div/div/div[2]/table/tbody/tr[1]/td[2]/a")
-    private WebElement firstRowPatient;
-
-    @FindBy (xpath = "/html/body/section/div/div/div[2]/table/tbody/tr[1]/td[3]")
-    private WebElement firstRowFirstName;
-
-    @FindBy (xpath = "/html/body/section/div/div/div[2]/table/tbody/tr[1]/td[4]")
-    private WebElement firstRowLastName;
 
     @FindBy(partialLinkText = "patient.ta@hospitals.ua")
     private WebElement patientta;
@@ -72,8 +63,6 @@ public class ListPatientaPage implements PageInitializer {
     private WebElement patientcd;
     @FindBy(partialLinkText = "a@gmail.com")
     private WebElement patienta;
-    @FindBy(linkText = "patient.ta@hospitals.ua")
-    private WebElement patientTa;
 
     public void searchPatients(String value){
         searchTextField.clear();
@@ -84,9 +73,10 @@ public class ListPatientaPage implements PageInitializer {
         return BrowserWrapper.isElementPresent(patientsf);
     }
 
-    public void sortByEmailButton(){
+    public ListPatientaPage sortByEmailButton(){
         BrowserWrapper.waitUntilElementClickable(sortEmailPatients);
         sortEmailPatients.click();
+        return new ListPatientaPage();
     }
 
     public WebElement getEmailPatients(){
@@ -102,21 +92,23 @@ public class ListPatientaPage implements PageInitializer {
         sortByLastName.click();
 
     }
+    public WebDriver getDriver(){
+        return DriverInitializer.instance();
+    }
 
 
     public String getDataFromTable(int k, int l) {
-        int rowCount = DriverInitializer.instance().findElements(By.xpath("//table/tbody/tr")).size();
-        int colCount = DriverInitializer.instance().findElements(By.xpath("//table/tbody/tr[1]/td")).size();
+        int rowCount = getDriver().findElements(By.xpath("//table/tbody/tr")).size();
+        int colCount = getDriver().findElements(By.xpath("//table/tbody/tr[1]/td")).size();
 
         String firstPart = "//table/tbody/tr[";
         String secondPart = "]/td[";
         String thirdPart = "]";
 
         String finalXpath = firstPart + k + secondPart + l + thirdPart;
-        String tableData = DriverInitializer.instance().findElement(By.xpath(finalXpath)).getText();
+        String tableData = getDriver().findElement(By.xpath(finalXpath)).getText();
         return tableData;
     }
-
 
 
     public void searchButtonClick(){
@@ -128,14 +120,8 @@ public class ListPatientaPage implements PageInitializer {
     }
 
     public PatientsCardPage getPatientsCardClick(){
-        //BrowserWrapper.waitUntilElementClickable(patientsf);
+        BrowserWrapper.waitUntilElementClickable(patientsf);
         patientta.click();
-
-        return new PatientsCardPage();
-    }
-
-    public PatientsCardPage getPatientTaCardClick() {
-        patientTa.click();
         return new PatientsCardPage();
     }
 

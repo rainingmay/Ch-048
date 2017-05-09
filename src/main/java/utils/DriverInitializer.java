@@ -1,32 +1,24 @@
 package utils;
 
-import gherkin.lexer.De;
-import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.firefox.internal.Extension;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
+
+;
 
 /**
  * Created by radgast on 4/20/17.
  */
 public class DriverInitializer {
 
-    private DriverInitializer(){}
+    private DriverInitializer() {
+    }
 
     private static final String FIREFOX_PROFILE_NAME = "default";
 
@@ -45,25 +37,23 @@ public class DriverInitializer {
     private static final String WINDOWS_IE_WEBDRIVER_PATH = "src/main/resources/drivers/MicrosoftWebDriver.exe";
 
 
-
-
     private static volatile WebDriver driver;
 
-    private static void setSystemProperties(){
+    private static void setSystemProperties() {
         String os = System.getProperty("os.name");
-        switch (os){
+        switch (os) {
             case "Windows 10":
-                System.setProperty(FIREFOX_WEBDRIVER,WINDOWS_FIREFOX_WEBDRIVER_PATH);
-                System.setProperty(CHROME_WEBDRIVER,WINDOWS_CHROME_WEBDRIVER_PATH);
+                System.setProperty(FIREFOX_WEBDRIVER, WINDOWS_FIREFOX_WEBDRIVER_PATH);
+                System.setProperty(CHROME_WEBDRIVER, WINDOWS_CHROME_WEBDRIVER_PATH);
                 System.setProperty(WINDOWS_IE_WEBDRIVER, WINDOWS_IE_WEBDRIVER_PATH);
                 break;
-            case "MacOS" :
-                System.setProperty(FIREFOX_WEBDRIVER,MAC_FIREFOX_WEBDRIVER_PATH);
-                System.setProperty(CHROME_WEBDRIVER,MAC_CHROME_WEBDRIVER_PATH);
+            case "MacOS":
+                System.setProperty(FIREFOX_WEBDRIVER, MAC_FIREFOX_WEBDRIVER_PATH);
+                System.setProperty(CHROME_WEBDRIVER, MAC_CHROME_WEBDRIVER_PATH);
                 break;
-            case "Linux" :
-                System.setProperty(FIREFOX_WEBDRIVER,LINUX_FIREFOX_WEBDRIVER_PATH);
-                System.setProperty(CHROME_WEBDRIVER,LINUX_CHROME_WEBDRIVER_PATH);
+            case "Linux":
+                System.setProperty(FIREFOX_WEBDRIVER, LINUX_FIREFOX_WEBDRIVER_PATH);
+                System.setProperty(CHROME_WEBDRIVER, LINUX_CHROME_WEBDRIVER_PATH);
                 break;
         }
 
@@ -96,15 +86,15 @@ public class DriverInitializer {
 
     }
 
-      public static synchronized WebDriver instance() {
+    public static synchronized WebDriver instance() {
         if (driver == null) {
             initialization();
             return driver;
-            }
+        }
         return driver;
     }
 
-    public static void getToUrl(String url){
+    public static void getToUrl(String url) {
         instance().get(url);
     }
 

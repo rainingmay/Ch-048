@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import pages.PageInitializer;
 import pages.headers.headersByRole.DoctorHeader;
+import utils.BrowserWrapper;
 
 import java.util.List;
 
@@ -42,7 +43,11 @@ public class WorkSchedulerPage implements PageInitializer {
 
     @FindAll(@FindBy(className = "dhx_scale_hour"))
     private List<WebElement> tabelRows;
-
+    @FindAll({@FindBy(css = "div.dhx_scale_holder"),
+            @FindBy(css = "div.dhx_scale_holder_now")})
+    private List<WebElement> tableColumns;
+    @FindAll(@FindBy(css = "div.dhx_scale_ignore"))
+    private List<WebElement> tableIgnoredColumns;
 
 
     public WorkSchedulerPage( ) {
@@ -53,6 +58,7 @@ public class WorkSchedulerPage implements PageInitializer {
         dayTabButton.click();
     }
     public void weekTabButtonClick(){
+        BrowserWrapper.waitUntilElementClickable(weekTabButton);
         weekTabButton.click();
     }
     public void monthTabButtonClick(){
@@ -69,6 +75,9 @@ public class WorkSchedulerPage implements PageInitializer {
     }
     public void todayButtonClick(){
         todayButton.click();
+    }
+    public int getDaysNumber(){
+        return tableColumns.size() - tableIgnoredColumns.size() - 1;
     }
 
 }
