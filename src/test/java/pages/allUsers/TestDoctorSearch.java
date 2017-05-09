@@ -16,15 +16,6 @@ import static org.testng.Assert.assertEquals;
  */
 public class TestDoctorSearch extends BaseTest {
 
-    @DataProvider(name = "SearchProvider")
-    public static Object[][] parametrizedData() {
-        return new Object[][]{
-                {"hous", 1},
-                {"hou", 1},
-                {"абрвал", 0}
-        };
-    }
-
     @BeforeMethod
     public void beforeMethod() {
         DriverInitializer.getToUrl(BASE_URL);
@@ -69,5 +60,15 @@ public class TestDoctorSearch extends BaseTest {
         header.fillDoctorInput("ho");
         BaseTest.checkLanguageAndLoadProperties(header);
         assertEquals(header.getDoctorSearchError().getText(), properties.getProperty("lineToShort"));
+    }
+
+
+    @DataProvider(name = "SearchProvider")
+    public static Object[][] parametrizedData() {
+        return new Object[][]{
+                {"hous", 1},
+                {"hou", 1},
+                {"абрвал", 0}
+        };
     }
 }
