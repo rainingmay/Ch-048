@@ -352,6 +352,10 @@ public class SchedulerPage implements PageInitializer {
         return true;
     }
 
+    public boolean isEventOnCalendarTab(String event){
+        return getEventsCalendar().stream().anyMatch(e -> e.contains(event));
+    }
+
     public List<String> getEventsCalendar(){
         List<String> list = new ArrayList<>();
 
@@ -363,6 +367,15 @@ public class SchedulerPage implements PageInitializer {
         }
 
         return list;
+    }
+
+    public boolean isEventsPresent(){
+        return getEvents().size() > 0;
+    }
+
+
+    public boolean isEventOnWeekTab(String event){
+        return getEvents().stream().anyMatch(e -> e.contains(event));
     }
 
     public List<String> getEvents(){

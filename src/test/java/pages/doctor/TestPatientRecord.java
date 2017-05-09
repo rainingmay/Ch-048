@@ -13,6 +13,15 @@ import utils.*;
  * Created by Natasha on 18.04.2017.
  */
 public class TestPatientRecord extends BaseTest {
+    public static final String COMPLAIN = "New complaint";
+    public static final String RESULT = "New result";
+    public static final String PRESCRIPTION = "New prescription";
+    public static final String PATIENT = "patient.sf@hospitals.ua";
+    public static final String FIRST_PATIENT = "Charles";
+    public static final String SECOND_PATIENT = "Auginas";
+
+
+
     Logger logger = LoggerFactory.getLogger(ListPatientPage.class);
 
     @BeforeMethod
@@ -25,13 +34,11 @@ public class TestPatientRecord extends BaseTest {
     public void after() {
         DriverInitializer.instance().manage().deleteAllCookies();
         BaseNavigation.logout();
-        // DriverInitializer.close();
         logger.info("Test is over");
     }
 
 
     @Test
-
     public void createNewRecord() throws Exception {
         ListPatientPage listPatientPage = new ListPatientPage();
         listPatientPage.header.patientsButtonClick();
@@ -39,15 +46,16 @@ public class TestPatientRecord extends BaseTest {
         PatientsCardPage patientsCardPage = new PatientsCardPage();
         patientsCardPage.addNewRecordButtonClick();
         CreateNewRecordPage createNewRecord = new CreateNewRecordPage();
-        createNewRecord.inputRecord("New complaint", "New result", "New prescription");
+        createNewRecord.inputRecord(COMPLAIN, RESULT, PRESCRIPTION);
         Assert.assertTrue(patientsCardPage.checkRecord());
         logger.debug("Create new record");
     }
+
     @Test
     public void checkPatientsSearch() throws Exception {
         ListPatientPage listPatientPage = new ListPatientPage();
         listPatientPage.header.patientsButtonClick();
-        listPatientPage.searchPatients("patient.sf@hospitals.ua");
+        listPatientPage.searchPatients(PATIENT);
         Assert.assertTrue(listPatientPage.checkResultSearch());
         logger.info("Test pass");
     }
@@ -59,7 +67,7 @@ public class TestPatientRecord extends BaseTest {
         listPatientPage.sortByFirstNameButton();
         BrowserWrapper.sleep(4);
         String first_patient_after_sort = listPatientPage.getDataFromTable(1, 3);
-        Assert.assertEquals(first_patient_after_sort, "Charles");
+        Assert.assertEquals(first_patient_after_sort, FIRST_PATIENT);
         logger.info("Test pass");
     }
     @Test
@@ -69,7 +77,7 @@ public class TestPatientRecord extends BaseTest {
         listPatientPage.sortByLastNameButton();
         BrowserWrapper.sleep(3);
         String first_patient_after_sort = listPatientPage.getDataFromTable(1, 4);
-        Assert.assertEquals(first_patient_after_sort, "Auginas");
+        Assert.assertEquals(first_patient_after_sort, SECOND_PATIENT);
         logger.info("Test pass");
     }
     @Test
@@ -79,7 +87,7 @@ public class TestPatientRecord extends BaseTest {
         listPatientPage.sortByEmailButton();
         BrowserWrapper.sleep(3);
         int actual = new TableParser(listPatientPage.table).getFieldFromTableRow(1, "patient:").compareToIgnoreCase(new TableParser(listPatientPage.table).getFieldFromTableRow(2, "patient:"));
-        Assert.assertEquals(actual < 0, true);
+        Assert.assertTrue(actual < 0);
         logger.info("Test pass");
     }
 
