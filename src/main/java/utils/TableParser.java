@@ -50,7 +50,12 @@ public class TableParser {
     public String getFieldFromFirstTableRow(String fieldName) {
         return getFieldFromTableRow(1,fieldName);
     }
-
+    public String getEmailFromTableRow(int rowNumber) {
+        return getFieldFromTableRow(rowNumber, "@email");
+    }
+    public String getEmailFromFirstTableRow(){
+        return getFieldFromTableRow(1, "@email");
+    }
 
     public WebElement getButtonFromTableRow(int rowNumber, String buttonName) {
         List<WebElement> webElements = getCellsFromTableRow(rowNumber);

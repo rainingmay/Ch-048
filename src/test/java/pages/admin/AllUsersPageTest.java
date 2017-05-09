@@ -22,6 +22,7 @@ import java.util.List;
 public class AllUsersPageTest extends BaseTest {
 
     private AllUsersPage allUsersPage;
+    private static TableParser tableParser;
 
     Logger logger = LoggerFactory.getLogger(AllUsersPage.class);
 
@@ -31,6 +32,7 @@ public class AllUsersPageTest extends BaseTest {
         DriverInitializer.getToUrl(BASE_URL);
         DatabaseOperations.restore("hospital_database.backup");
         allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
+        tableParser = new TableParser(allUsersPage.table);
         logger.info("Test is initialized");
     }
 
@@ -44,7 +46,7 @@ public class AllUsersPageTest extends BaseTest {
     @Test
     public void enableUsersViewTest() {
         allUsersPage = allUsersPage.showEnableUsers();
-        boolean actual = UserDAO.getStatusByEmail(new TableParser(allUsersPage.table).getFieldFromFirstTableRow("@email"));
+        boolean actual = UserDAO.getStatusByEmail(tableParser.getEmailFromFirstTableRow());
         Assert.assertTrue(actual);
         logger.info("Test pass");
     }
@@ -53,7 +55,7 @@ public class AllUsersPageTest extends BaseTest {
     @Test
     public void disableUsersViewTest() {
         allUsersPage = allUsersPage.showDisableUsers();
-        boolean actual = UserDAO.getStatusByEmail(new TableParser(allUsersPage.table).getFieldFromFirstTableRow("@email"));
+        boolean actual = UserDAO.getStatusByEmail(tableParser.getEmailFromFirstTableRow());
         Assert.assertFalse(actual);
         logger.info("Test pass");
     }
@@ -62,11 +64,8 @@ public class AllUsersPageTest extends BaseTest {
     @Test
     public void viewWindowTest() {
         List<String> actual = allUsersPage.getFirstUserDataFromInfoWindow();
-        int ID_INDEX = 0;
-        int EMAIL_INDEX = 1;
-        List<String> allInfo = UserDAO.getUserFromDatabaseByEmail(actual.get(EMAIL_INDEX));
-        List<String> expected = new LinkedList<>();
-        Collections.addAll(expected, new String[]{allInfo.get(ID_INDEX), allInfo.get(EMAIL_INDEX), "true"});
+        List<String> expected = UserDAO.getWindowDataFromDatabase(
+                tableParser.getEmailFromFirstTableRow(), "userInfoWindow");
         Assert.assertEquals(actual, expected);
         logger.info("Test pass");
     }
@@ -76,7 +75,7 @@ public class AllUsersPageTest extends BaseTest {
     public void changeRoleTest(String role) {
         String expected = role;
         allUsersPage = allUsersPage.changeRoleInEditWindow(role);
-        String actual = new TableParser(allUsersPage.table).getFieldFromFirstTableRow("role");
+        String actual = tableParser.getFieldFromFirstTableRow("role");
         Assert.assertEquals(actual, expected);
         logger.info("Test pass");
     }
@@ -96,7 +95,7 @@ public class AllUsersPageTest extends BaseTest {
     public void searchByRoleTest(String role) {
         String expected = role;
         allUsersPage = allUsersPage.changeRole(expected);
-        String actual = new TableParser(allUsersPage.table).getFieldFromFirstTableRow("role");
+        String actual = tableParser.getFieldFromFirstTableRow("role");
         Assert.assertEquals(actual, expected);
         logger.info("Test pass");
     }
@@ -107,10 +106,9 @@ public class AllUsersPageTest extends BaseTest {
         allUsersPage = allUsersPage.search(Integer.parseInt(count), role, "firstName", valueOfField);
         List<String> expected = new LinkedList<>();
         Collections.addAll(expected, new String[]{valueOfField, role});
-        TableParser tableParser = new TableParser(allUsersPage.table);
         List<String> actual = new LinkedList<>();
         if (tableParser.getFieldFromFirstTableRow("@email").contains(valueOfField)) actual.add(valueOfField);
-        else actual.add("noSame");
+            else actual.add("noSame");
         actual.add(tableParser.getFieldFromFirstTableRow("role"));
         Assert.assertEquals(actual, expected);
         logger.info("Test pass");
@@ -131,9 +129,10 @@ public class AllUsersPageTest extends BaseTest {
         allUsersPage.searchButton.click();
         BrowserWrapper.sleep(2);
         allUsersPage = allUsersPage.clickSortByEmail();
-        int actual = new TableParser(allUsersPage.table).getFieldFromFirstTableRow("@email").compareToIgnoreCase(new TableParser(allUsersPage.table).getFieldFromTableRow(2, "@email"));
-        boolean isSortCorrect = actual < 0;
-        Assert.assertTrue(isSortCorrect);
+        int compareResult = tableParser.getEmailFromFirstTableRow().
+                compareToIgnoreCase(tableParser.getEmailFromTableRow(2));
+        boolean actual = compareResult < 0;
+        Assert.assertTrue(actual);
         logger.info("Test pass");
     }
 
