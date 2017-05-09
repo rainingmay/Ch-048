@@ -47,6 +47,7 @@ public class HospitalSeekerHomePage implements PageInitializer {
        return BrowserWrapper.isElementPresent(image);
     }
 
+
     public HospitalSeekerHomePage() {
         notAuthorizedHeader = new NotAuthorizedHeader();
         pageInitialization();
