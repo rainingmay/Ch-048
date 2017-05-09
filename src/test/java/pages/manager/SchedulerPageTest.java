@@ -52,7 +52,7 @@ public class SchedulerPageTest extends BaseTest {
     @Test(groups = {"smokeTest"})
     public void testElementPresence() {
         try{
-            BrowserWrapper.waitForPage();
+            BrowserWrapper.waitForPage(10L);
             schedulerPage.isPageReady();
         }catch (Exception e){
             logger.error("Not all element's found");
@@ -64,7 +64,7 @@ public class SchedulerPageTest extends BaseTest {
 
     @Test(groups = {"smokeTest"})
     public void testDefaultSchedulerValues(){
-        BrowserWrapper.waitForPage();
+        BrowserWrapper.waitForPage(10L);
         try{
             schedulerPage.checkDefaultConditionScheduler();
         }catch (Exception e){

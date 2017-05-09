@@ -1,10 +1,12 @@
 package stepDefinition;
 
-import cucumber.api.java.en.*;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import pages.doctor.CreateNewRecordPage;
-import pages.doctor.ListPatientaPage;
+import pages.doctor.ListPatientPage;
 import pages.doctor.PatientsCardPage;
 import pages.headers.headersByRole.DoctorHeader;
 import pages.headers.headersByRole.PatientHeader;
@@ -36,9 +38,9 @@ public class DoctorAddNewRecordToPatientCardSteps {
         DoctorHeader doctorHeader = new DoctorHeader();
         doctorHeader.patientsButtonClick();
         BrowserWrapper.waitUntilElementIsPresent(By.id(PATIENTS_LIST_OF_CURRENT_DOCTOR));
-        ListPatientaPage listPatientaPage = new ListPatientaPage();
+        ListPatientPage listPatientPage = new ListPatientPage();
         PatientsCardPage patientsCardPage = new PatientsCardPage();
-        listPatientaPage.getPatientsCardClick();
+        listPatientPage.getPatientsCardClick();
         BrowserWrapper.waitUntilElementClickableByLocator(By.cssSelector(PATIENT_CARD_AT_DOCTOR_ROLE_CSS_SELECTOR_FOR_WAIT));
         patientsCardPage.addNewRecordButtonClick();
     }

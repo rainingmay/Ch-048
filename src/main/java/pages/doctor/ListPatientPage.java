@@ -4,26 +4,25 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.PageInitializer;
 import pages.headers.headersByRole.DoctorHeader;
 import utils.BrowserWrapper;
 import utils.DriverInitializer;
-import utils.TableParser;
 
-public class ListPatientaPage implements PageInitializer {
+public class ListPatientPage implements PageInitializer {
     public DoctorHeader header;
-    WebDriverWait wait = new WebDriverWait(DriverInitializer.instance(), 5);
+
     @FindBy(className = "label[for=\"usr\"]")
     private WebElement showPatientsLabel;
+
     @FindBy(css = "table")
     public WebElement table;
+
     @FindBy(css = "thead")
     private WebElement tableHead;
 
     @FindBy(css = "tbody")
     public WebElement tableBody;
-
 
     @FindBy(id = "usr")
     private WebElement searchTextField;
@@ -40,29 +39,20 @@ public class ListPatientaPage implements PageInitializer {
     @FindBy (className = "fa fa-angle-double-right")
     private WebElement goLastPage;
 
-    @FindBy(xpath = "/html/body/section/div/div/div[2]/table/thead/tr/th[2]/div[2]/a/i")
+    @FindBy(css = "a[href=\"/HospitalSeeker/patients?page=1&sortBy=email&order=true\"] i")
     private WebElement sortEmailPatients;
 
-    @FindBy(xpath = "/html/body/section/div/div/div[2]/table/thead/tr/th[3]/div[2]/a/i")
+    @FindBy(xpath = "a[href=\"/HospitalSeeker/patients?page=1&sortBy=lastName&order=true\"] i")
     private WebElement sortByFirstName;
 
-    @FindBy(xpath = "/html/body/section/div/div/div[2]/table/thead/tr/th[4]/div[2]/a/i")
+    @FindBy(xpath = "a[href=\"/HospitalSeeker/patients?page=1&sortBy=firstName&order=true\"] i")
     private WebElement sortByLastName;
 
     @FindBy(partialLinkText = "patient.ta@hospitals.ua")
     private WebElement patientta;
+
     @FindBy(partialLinkText = "patient.sf@hospitals.ua")
     private WebElement patientsf;
-    @FindBy(partialLinkText = "patient.qm@hospitals.ua")
-    private WebElement patientqm;
-    @FindBy(partialLinkText = "patient.ow@hospitals.ua")
-    private WebElement patientow;
-    @FindBy(partialLinkText = "patient.in@hospitals.ua")
-    private WebElement patientin;
-    @FindBy(partialLinkText = "patient.cd@hospitals.ua")
-    private WebElement patientcd;
-    @FindBy(partialLinkText = "a@gmail.com")
-    private WebElement patienta;
 
     public void searchPatients(String value){
         searchTextField.clear();
@@ -73,10 +63,10 @@ public class ListPatientaPage implements PageInitializer {
         return BrowserWrapper.isElementPresent(patientsf);
     }
 
-    public ListPatientaPage sortByEmailButton(){
+    public ListPatientPage sortByEmailButton(){
         BrowserWrapper.waitUntilElementClickable(sortEmailPatients);
         sortEmailPatients.click();
-        return new ListPatientaPage();
+        return new ListPatientPage();
     }
 
     public WebElement getEmailPatients(){
@@ -98,16 +88,9 @@ public class ListPatientaPage implements PageInitializer {
 
 
     public String getDataFromTable(int k, int l) {
-        int rowCount = getDriver().findElements(By.xpath("//table/tbody/tr")).size();
-        int colCount = getDriver().findElements(By.xpath("//table/tbody/tr[1]/td")).size();
+        String finalXpath = "//table/tbody/tr[" + k + "]/td[" + l + "]";
+        return getDriver().findElement(By.xpath(finalXpath)).getText();
 
-        String firstPart = "//table/tbody/tr[";
-        String secondPart = "]/td[";
-        String thirdPart = "]";
-
-        String finalXpath = firstPart + k + secondPart + l + thirdPart;
-        String tableData = getDriver().findElement(By.xpath(finalXpath)).getText();
-        return tableData;
     }
 
 
@@ -127,7 +110,7 @@ public class ListPatientaPage implements PageInitializer {
 
 
 
-    public ListPatientaPage() {
+    public ListPatientPage() {
         this.header = new DoctorHeader();
         pageInitialization();
     }

@@ -125,13 +125,13 @@ public class AllUsersPage implements PageInitializer {
 
     public AllUsersPage showEnableUsers() {
         enableButton.click();
-        BrowserWrapper.waitForPage();
+        BrowserWrapper.waitForPage(10L);
         return new AllUsersPage();
     }
 
     public AllUsersPage showDisableUsers() {
         ((JavascriptExecutor) DriverInitializer.instance()).executeScript("arguments[0].click();" , disableButton);
-        BrowserWrapper.waitForPage();
+        BrowserWrapper.waitForPage(10L);
         return new AllUsersPage();
     }
 
@@ -145,7 +145,7 @@ public class AllUsersPage implements PageInitializer {
     public AllUsersPage changeRole(String role) {
         this.role.findElement(By.cssSelector("option[value=" + role + "]")).click();
         searchButton.click();
-        BrowserWrapper.waitForPage();
+        BrowserWrapper.waitForPage(10L);
         return new AllUsersPage();
     }
 

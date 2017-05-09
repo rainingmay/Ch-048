@@ -5,10 +5,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.PageInitializer;
 import pages.headers.headersByRole.DoctorHeader;
-import utils.BrowserWrapper;
 
 public class CreateNewRecordPage implements PageInitializer {
+
     public DoctorHeader header;
+
     @FindBy(className = "label[for=\"complaint\"]")
     private WebElement complaintLabel;
 
@@ -54,10 +55,6 @@ public class CreateNewRecordPage implements PageInitializer {
         prescription.sendKeys(value);
     }
 
-    public boolean checkSubmitButton() {
-        return BrowserWrapper.isElementPresent(submitButton);
-    }
-
     public void inputRecord(String complaint, String result, String prescription ){
         inputComplaint(complaint);
         inputResult(result);
@@ -65,11 +62,6 @@ public class CreateNewRecordPage implements PageInitializer {
         submitButtonClick();
     }
 
-
-    public PatientsCardPage backButtonClick (){
-        backButton.click();
-        return new PatientsCardPage();
-    }
     public PatientsCardPage submitButtonClick(){
         submitButton.click();
         return new PatientsCardPage();

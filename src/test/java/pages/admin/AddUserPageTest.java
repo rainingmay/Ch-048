@@ -41,7 +41,7 @@ public class AddUserPageTest extends BaseTest {
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
         addUserPage = addUserPage.header.goToAddUserPage();
         try {
-            BrowserWrapper.waitForPage();
+            BrowserWrapper.waitForPage(10L);
             addUserPage.isPageReady();
         } catch (Exception e) {
 
