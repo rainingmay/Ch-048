@@ -27,6 +27,13 @@ public class AddHospitalTest extends BaseTest {
 
     }
 
+    @AfterMethod
+    public void afterMethod() {
+        DriverInitializer.instance().manage().deleteAllCookies();
+        BaseNavigation.logout();
+    }
+
+
 
     @Test(dataProvider = "validHospitalAddress")
     public void addNewHospitalWithValidDataTest(String hospitalAddress, String hospitalName, String hospitalDescription) throws Exception {
@@ -42,8 +49,7 @@ public class AddHospitalTest extends BaseTest {
             AddNewHospitalPage addNewHospitalPage = new AddNewHospitalPage();
             BrowserWrapper.waitUntilElementClickableByLocator(By.id(ADD_HOSPITAL_PAGE_ID_IDENTIFICATION));
 
-            //addNewHospitalPage.pushAddPhotoButton();
-            //addNewHospitalPage.addNewHospitalPhoto();
+
             addNewHospitalPage.addNewHospital(hospitalAddress, hospitalName, hospitalDescription);
             BrowserWrapper.waitUntilElementClickableByLocator(By.xpath(ALL_HOSPITALS_PAGE_XPATH_IDENTIFICATION));
 
@@ -158,9 +164,4 @@ public class AddHospitalTest extends BaseTest {
         };
     }
 
-    @AfterMethod
-    public void afterMethod() {
-        DriverInitializer.instance().manage().deleteAllCookies();
-        BaseNavigation.logout();
-    }
 }

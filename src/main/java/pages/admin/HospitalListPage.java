@@ -10,7 +10,6 @@ import utils.BrowserWrapper;
 import utils.DriverInitializer;
 import utils.TableParser;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,21 +86,6 @@ public class HospitalListPage implements PageInitializer {
         return new HospitalListPage();
     }
 
-/*    public HospitalListPage deleteHospital(int rowNumber) {
-        if (tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")")).isDisplayed()) {
-            WebElement tableRow = tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")"));
-            deleteButton = tableRow.findElement(By.cssSelector("body > section > div > div > div > div.col-sm-8 > div.pre-scrollable.panel.panel-default > table > tbody > tr:nth-child(" + rowNumber + ") > td:nth-child(3) > form > button:nth-child(4)"));
-            deleteButton.click();
-            BrowserWrapper.sleep(1);
-            deleteModalSubmit = tableRow.findElement(By.cssSelector("body > section > div > div > div > div.col-sm-8 > div.pre-scrollable.panel.panel-default > table > tbody > tr:nth-child(" + rowNumber + ") > td:nth-child(3) > form div.modal-content div.modal-footer > button:nth-child(1)"));
-            deleteModalSubmit.click();
-            BrowserWrapper.sleep(5);
-            BrowserWrapper.waitUntilElementClickableByLocator(By.cssSelector("a.btn:nth-child(1)"));
-            return new HospitalListPage();
-        }
-        return null;
-    }
-*/
 
     public List<String> getHospitalDataFromTableRow(int rowNumber) {
         List<String> result = new ArrayList<>();

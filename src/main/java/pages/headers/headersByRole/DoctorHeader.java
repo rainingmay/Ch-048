@@ -5,7 +5,6 @@ import org.openqa.selenium.support.FindBy;
 import pages.PageInitializer;
 import pages.doctor.ListPatientaPage;
 import pages.doctor.WorkSchedulerPage;
-import utils.BrowserWrapper;
 
 /**
  * Created by Evgen on 06.04.2017.
@@ -24,7 +23,6 @@ public class DoctorHeader extends AuthorizedHeader implements PageInitializer {
 
 
     public ListPatientaPage patientsButtonClick(){
-        //BrowserWrapper.waitUntilElementClickable(patients);
         patients.click();
         return new ListPatientaPage();
     }

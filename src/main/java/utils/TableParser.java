@@ -47,6 +47,11 @@ public class TableParser {
         return allInfo.get(indexOfField);
     }
 
+    public String getFieldFromFirstTableRow(String fieldName) {
+        return getFieldFromTableRow(1,fieldName);
+    }
+
+
     public WebElement getButtonFromTableRow(int rowNumber, String buttonName) {
         List<WebElement> webElements = getCellsFromTableRow(rowNumber);
         WebElement button;

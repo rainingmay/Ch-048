@@ -1,6 +1,5 @@
 package pages.manager;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.PageInitializer;
@@ -29,8 +28,8 @@ public class ModerationFeedBackPage implements PageInitializer {
     @FindBy(id = "searchButton")
     private WebElement searchButton;
 
-    //Feedback 1
 
+    //auto-increment of id
     @FindBy(xpath = "//*[@id=\"2\"]/div[1]/span")
     private WebElement patientOneName;
 
@@ -49,7 +48,6 @@ public class ModerationFeedBackPage implements PageInitializer {
     @FindBy(xpath = "//*[@id=\"2\"]/div[3]/span")
     private WebElement patientOneDoctorName;
 
-    //Feedback 2
 
     @FindBy(xpath = "//*[@id=\"5\"]/div[1]/span")
     private WebElement patientTwoName;

@@ -125,13 +125,13 @@ public class AllUsersPage implements PageInitializer {
 
     public AllUsersPage showEnableUsers() {
         enableButton.click();
-        BrowserWrapper.waitForPage();
+        BrowserWrapper.sleep(2);
         return new AllUsersPage();
     }
 
     public AllUsersPage showDisableUsers() {
         ((JavascriptExecutor) DriverInitializer.instance()).executeScript("arguments[0].click();" , disableButton);
-        BrowserWrapper.waitForPage();
+        BrowserWrapper.sleep(3);
         return new AllUsersPage();
     }
 
@@ -145,7 +145,7 @@ public class AllUsersPage implements PageInitializer {
     public AllUsersPage changeRole(String role) {
         this.role.findElement(By.cssSelector("option[value=" + role + "]")).click();
         searchButton.click();
-        BrowserWrapper.waitForPage();
+        BrowserWrapper.sleep(2);
         return new AllUsersPage();
     }
 
@@ -167,6 +167,7 @@ public class AllUsersPage implements PageInitializer {
         changeSearchBy(field);
         sendKeysToSearchField(keys);
         searchButton.click();
+        BrowserWrapper.sleep(2);
         return new AllUsersPage();
     }
 
@@ -189,6 +190,9 @@ public class AllUsersPage implements PageInitializer {
         }return null;
     }
 
+    public List<String> getFirstUserDataFromInfoWindow() {
+        return getUserDataFromInfoWindow(1);
+    }
 
     public int getCountOfUsersInTable() {
         return tableBody.findElements(By.cssSelector("tr")).size();
@@ -215,7 +219,8 @@ public class AllUsersPage implements PageInitializer {
     }
 
 
-    public AllUsersPage changeRoleInEditWindow(int rowNumber, String role) {
+    public AllUsersPage changeRoleInEditWindow(String role) {
+        int rowNumber = 1;
         openEditWindow(rowNumber);
         BrowserWrapper.sleep(3);
         selectDropdownRole(editWindow.findElement(By.id("userRoles")), role);
@@ -240,6 +245,7 @@ public class AllUsersPage implements PageInitializer {
     public AllUsersPage toNextPage() {
             if (!nextPageButton.equals(null)) {
                 nextPageButton.click();
+                BrowserWrapper.sleep(2);
                 return new AllUsersPage();
             }
             return null;
@@ -257,16 +263,8 @@ public class AllUsersPage implements PageInitializer {
 
     public AllUsersPage clickSortByEmail() {
         sortByEmailButton.click();
+        BrowserWrapper.sleep(2);
         return new AllUsersPage();
     }
 
-
-    public boolean equals(AllUsersPage allUsersPage) {
-        if (this.tableBody.equals(allUsersPage.tableBody)) return true;
-        return false;
-    }
-
-    public String getCurrentUrl() {
-        return DriverInitializer.instance().getCurrentUrl();
-    }
 }

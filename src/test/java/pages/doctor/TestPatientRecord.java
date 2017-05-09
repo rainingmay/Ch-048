@@ -1,17 +1,11 @@
 package pages.doctor;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.allUsers.HospitalSeekerHomePage;
-import pages.headers.headersByRole.DoctorHeader;
-import pages.manager.SchedulerPage;
 import utils.*;
 
 
@@ -31,7 +25,6 @@ public class TestPatientRecord extends BaseTest {
     public void after() {
         DriverInitializer.instance().manage().deleteAllCookies();
         BaseNavigation.logout();
-        // DriverInitializer.close();
         logger.info("Test is over");
     }
 

@@ -4,7 +4,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.PageInitializer;
 import pages.anonymous.LoginPage;
-import pages.headers.headersByRole.DoctorHeader;
 import pages.headers.headersByRole.NotAuthorizedHeader;
 import utils.BrowserWrapper;
 
@@ -15,12 +14,12 @@ import utils.BrowserWrapper;
 public class HospitalSeekerHomePage implements PageInitializer {
 
     //Temporary field
-    public NotAuthorizedHeader notAuthorizedHeader;
+    public NotAuthorizedHeader header;
     //public DoctorHeader header;
 
 
     public LoginPage moveToLoginPage(){
-        notAuthorizedHeader.loginButton();
+        header.loginButton();
         return new LoginPage();
     }
 
@@ -49,7 +48,7 @@ public class HospitalSeekerHomePage implements PageInitializer {
 
 
     public HospitalSeekerHomePage() {
-        notAuthorizedHeader = new NotAuthorizedHeader();
+        header = new NotAuthorizedHeader();
         pageInitialization();
     }
 

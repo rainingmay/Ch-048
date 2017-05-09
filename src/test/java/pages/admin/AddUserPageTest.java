@@ -13,7 +13,6 @@ import utils.BrowserWrapper;
 import utils.DriverInitializer;
 
 
-
 public class AddUserPageTest extends BaseTest {
 
 
@@ -29,6 +28,12 @@ public class AddUserPageTest extends BaseTest {
     private void beforeMethod() throws InterruptedException {
         BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
         BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
+    }
+
+    @AfterMethod(alwaysRun = true)
+    public void afterMethod() {
+        DriverInitializer.instance().manage().deleteAllCookies();
+        BaseNavigation.logout();
     }
 
 
@@ -63,6 +68,20 @@ public class AddUserPageTest extends BaseTest {
 
         Assert.assertEquals(actualCreatedLableText, expectedCreatedLabelText);
 
+    }
+
+    @Test(dataProvider = "validInformation",groups = {"Successfully"})
+    public void validInfoAddNewUserTest(String addUserName, String addUserPassword) throws Exception {
+        BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
+        AllUsersPage allUsersPage = new AllUsersPage();
+        AddUserPage addUserPage = new AddUserPage();
+        addUserPage = addUserPage.header.goToAddUserPage();
+        addUserPage.addNewUser(addUserName, addUserPassword, NEWUSERROLE);
+
+        String actualCreatedLabelText = allUsersPage.createdLabel.getText();
+        String expectedCreatedLabelText = addUserName + SUCCEFULYCREATEDUSERTEXT; //" successfully registered!";
+
+        Assert.assertEquals(actualCreatedLabelText, expectedCreatedLabelText);
     }
 
     @Test(groups = {"unSuccessfully"})
@@ -107,30 +126,6 @@ public class AddUserPageTest extends BaseTest {
 
     }
 
-    @DataProvider(name = "notValidEmails")
-    public static Object[][] notValidEmailDetails() {
-        return new Object[][]{
-                {"@gmail.com", NEWUSERPASSWORD},
-                {"sd@sdj", NEWUSERPASSWORD},
-                {"aa@sd.", NEWUSERPASSWORD},
-                {"skdjw@.c", NEWUSERPASSWORD},
-                {"sd)@.com.ua", NEWUSERPASSWORD},
-                {"sdd@@com.ua", NEWUSERPASSWORD}
-        };
-    }
-
-    @DataProvider(name = "notValidPasswords")
-    public static Object[][] notValidPasswordsDetails() {
-        return new Object[][]{
-                {"bnm@mail.ru", "a"},
-                {"hjsn@mail.ru", "aaaaa"},
-                {"sdx@gmail.com", " "},
-                {"jdhjsnw@mail.ua", ""}
-
-
-        };
-    }
-
 
     @Test(groups = {"unSuccessfully"})
     public void noRequiredEmailTest() throws Exception {
@@ -158,21 +153,6 @@ public class AddUserPageTest extends BaseTest {
 
         Assert.assertEquals(expectedPasswordErrorLabelText, actualPasswordErrorLabel);
         System.out.println("Password field is required but empty");
-    }
-
-    @Test(dataProvider = "validInformation",groups = {"Successfully"})
-    public void validInfoAddNewUserTest(String addUserName, String addUserPassword) throws Exception {
-        BrowserWrapper.waitUntilElementIsPresent(By.id(IDFORWAITING));
-        AllUsersPage allUsersPage = new AllUsersPage();
-        AddUserPage addUserPage = new AddUserPage();
-        addUserPage = addUserPage.header.goToAddUserPage();
-        addUserPage.addNewUser(addUserName, addUserPassword, NEWUSERROLE);
-
-        String actualCreatedLabelText = allUsersPage.createdLabel.getText();
-        String expectedCreatedLabelText = addUserName + SUCCEFULYCREATEDUSERTEXT; //" successfully registered!";
-
-        Assert.assertEquals(actualCreatedLabelText, expectedCreatedLabelText);
-
     }
 
 
@@ -206,11 +186,27 @@ public class AddUserPageTest extends BaseTest {
         Assert.assertNotEquals(expectedPasswordErrorLabelText, actualPasswordErrorLabelText);
     }
 
-    @AfterMethod(alwaysRun = true)
-    public void afterMethod() {
-        DriverInitializer.instance().manage().deleteAllCookies();
-        BaseNavigation.logout();
+    @DataProvider(name = "notValidEmails")
+    public static Object[][] notValidEmailDetails() {
+        return new Object[][]{
+                {"@gmail.com", NEWUSERPASSWORD},
+                {"sd@sdj", NEWUSERPASSWORD},
+                {"aa@sd.", NEWUSERPASSWORD},
+                {"skdjw@.c", NEWUSERPASSWORD},
+                {"sd)@.com.ua", NEWUSERPASSWORD},
+                {"sdd@@com.ua", NEWUSERPASSWORD}
+        };
     }
 
+    @DataProvider(name = "notValidPasswords")
+    public static Object[][] notValidPasswordsDetails() {
+        return new Object[][]{
+                {"bnm@mail.ru", "a"},
+                {"hjsn@mail.ru", "aaaaa"},
+                {"sdx@gmail.com", " "},
+                {"jdhjsnw@mail.ua", ""}
 
+
+        };
+    }
 }

@@ -49,7 +49,7 @@ public class AdminHeader extends AuthorizedHeader implements PageInitializer {
     private WebElement addDepartment;
 
 
-    public AllUsersPage allUsersPage () {
+    public AllUsersPage goToAllUsersPage() {
         allUsersIco.click();
         return new AllUsersPage();
     }
