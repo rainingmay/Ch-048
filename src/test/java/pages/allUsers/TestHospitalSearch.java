@@ -1,13 +1,12 @@
 package pages.allUsers;
 
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pages.headers.BaseHeader;
 import pages.headers.headersByRole.NotAuthorizedHeader;
 import utils.BaseNavigation;
 import utils.BaseTest;
+import utils.BrowserWrapper;
 import utils.DriverInitializer;
 
 import static org.testng.Assert.assertEquals;
@@ -18,60 +17,63 @@ import static org.testng.Assert.assertEquals;
  */
 public class TestHospitalSearch extends BaseTest {
 
-    @DataProvider(name = "SearchProvider")
-    public static Object[][] parametrizedData() {
-        return new Object[][]{
-//                {"поліклініка", 2},
-                {"polik", 1},
-                {"hosp", 3},
-                {"qwerty", 0}
-        };
-    }
-
-    @BeforeMethod
-    public void beforeMethod() {
-        DriverInitializer.getToUrl(BASE_URL);
-    }
+    public static final String TOO_SHORT_SEARCH_WORD = "ho";
+    public static final int SLEEP_TIMEOUT = 2;
 
     @AfterMethod(alwaysRun = true)
-    public void afterMethod() throws Exception{
+    public void afterMethod() throws Exception {
         DriverInitializer.deleteAllCookies();
     }
 
     @Test(dataProvider = "SearchProvider")
     public void testFindHospitalNotAuthorizedUser(String searchWord, int expected) throws Exception {
-        NotAuthorizedHeader header = new NotAuthorizedHeader();
-        HospitalSearchResultPage hospitalSearchResult = header.findHospital(searchWord);
-        Thread.sleep(1000);
+        NotAuthorizedHeader notAuthorizedHeader = new NotAuthorizedHeader();
+        HospitalSearchResultPage hospitalSearchResult = notAuthorizedHeader.findHospital(searchWord);
+        BrowserWrapper.sleep(SLEEP_TIMEOUT);
         assertEquals(hospitalSearchResult.countOfHospital(), expected);
     }
 
     @Test(dataProvider = "SearchProvider")
     public void testFindHospitalAuthorizedUser(String searchWord, int expected) throws Exception {
-        NotAuthorizedHeader header = new NotAuthorizedHeader();
-        BaseNavigation.login("admin@hospitals.ua", "1111");
-        Thread.sleep(1000);
-        HospitalSearchResultPage hospitalSearchResult = header.findHospital(searchWord);
+        NotAuthorizedHeader notAuthorizedHeader = new NotAuthorizedHeader();
+        BaseNavigation.login(ADMIN_LOGIN, ADMIN_PASSWORD);
+        BrowserWrapper.sleep(SLEEP_TIMEOUT);
+        HospitalSearchResultPage hospitalSearchResult = notAuthorizedHeader.findHospital(searchWord);
         assertEquals(hospitalSearchResult.countOfHospital(), expected);
+        BaseNavigation.logout();
+        BrowserWrapper.sleep(SLEEP_TIMEOUT);
     }
 
     @Test(groups = "InputValidation")
     public void testFindHospitalInputValidationUa() throws Exception {
-        BaseHeader header = new BaseHeader();
-        header.changeLanguageToUa();
-        Thread.sleep(1000);
-        header.fillHospitalInput("ho");
-        BaseTest.checkLanguageAndLoadProperties(header);
-        assertEquals(header.getHospitalSearchError().getText(), properties.getProperty("lineToShort"));
+        NotAuthorizedHeader notAuthorizedHeader = new NotAuthorizedHeader();
+        notAuthorizedHeader.changeLanguageToUa();
+        BrowserWrapper.sleep(SLEEP_TIMEOUT);
+        notAuthorizedHeader.fillHospitalInput(TOO_SHORT_SEARCH_WORD);
+        BaseTest.checkLanguageAndLoadProperties(notAuthorizedHeader);
+        assertEquals(notAuthorizedHeader.getHospitalSearchError().getText(),
+                     properties.getProperty("search.validation.line.too.short")
+                    );
     }
 
     @Test(groups = "InputValidation")
     public void testFindHospitalInputValidationEng() throws Exception {
-        BaseHeader header = new BaseHeader();
-        header.changeLanguageToEn();
-        Thread.sleep(1000);
-        header.fillHospitalInput("ho");
-        BaseTest.checkLanguageAndLoadProperties(header);
-        assertEquals(header.getHospitalSearchError().getText(), properties.getProperty("lineToShort"));
+        NotAuthorizedHeader notAuthorizedHeader = new NotAuthorizedHeader();
+        notAuthorizedHeader.changeLanguageToEn();
+        BrowserWrapper.sleep(SLEEP_TIMEOUT);
+        notAuthorizedHeader.fillHospitalInput(TOO_SHORT_SEARCH_WORD);
+        BaseTest.checkLanguageAndLoadProperties(notAuthorizedHeader);
+        assertEquals(notAuthorizedHeader.getHospitalSearchError().getText(),
+                     properties.getProperty("search.validation.line.too.short")
+                    );
+    }
+
+    @DataProvider(name = "SearchProvider")
+    public static Object[][] parametrizedData() {
+        return new Object[][]{
+                {"polik", 1},
+                {"hosp", 3},
+                {"qwerty", 0}
+        };
     }
 }

@@ -30,10 +30,10 @@ public class BaseHeader implements PageInitializer {
     @FindBy(css = "img.localization-flag")
     protected WebElement changeLanguageIco;
 
-    @FindBy(css = "a[href$='/HospitalSeeker/?lang=ua']")
+    @FindBy(css = "a[href$='?lang=ua']")
     protected WebElement uaLanguage;
 
-    @FindBy(css = "a[href$='/HospitalSeeker/?lang=en']")
+    @FindBy(css = "a[href$='?lang=en']")
     protected WebElement enLanguage;
 
     @FindBy(css = "a[href=\"#toggle-search\"]")
@@ -80,8 +80,6 @@ public class BaseHeader implements PageInitializer {
         return new HospitalSeekerHomePage();
     }
 
-
-
     public BaseHeader changeLanguageToUa() {
         changeLanguageIco.click();
         uaLanguage.click();
@@ -102,13 +100,14 @@ public class BaseHeader implements PageInitializer {
     }
 
     public void fillHospitalInput(String hospitalName) {
+        BrowserWrapper.sleep(2);
         searchButton.click();
         BrowserWrapper.waitUntilElementVisible(hospitalSearchField);
         hospitalSearchField.clear();
         hospitalSearchField.sendKeys(hospitalName);
     }
 
-    public  DoctorSearchResultPage findDoctor(String doctorName) {
+    public DoctorSearchResultPage findDoctor(String doctorName) {
         fillDoctorInput(doctorName);
         BrowserWrapper.waitUntilElementClickable(doctorSearchButton);
         doctorSearchButton.click();
@@ -116,6 +115,7 @@ public class BaseHeader implements PageInitializer {
     }
 
     public void fillDoctorInput(String doctorName) {
+        BrowserWrapper.sleep(2);
         searchButton.click();
         BrowserWrapper.waitUntilElementVisible(doctorSearchField);
         doctorSearchField.clear();

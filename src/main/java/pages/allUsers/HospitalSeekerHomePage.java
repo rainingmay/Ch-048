@@ -3,9 +3,7 @@ package pages.allUsers;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.PageInitializer;
-import pages.headers.headersByRole.DoctorHeader;
 import pages.headers.headersByRole.NotAuthorizedHeader;
-
 
 /**
  * Created by Evgen on 05.04.2017.
@@ -14,9 +12,6 @@ public class HospitalSeekerHomePage implements PageInitializer {
 
     //Temporary field
     public NotAuthorizedHeader notAuthorizedHeader;
-    //public DoctorHeader header;
-
-
 
     //End of temporary
     @FindBy(xpath = "//*[@id=\"carouselHacked\"]/div[2]/div[3]/div/h1")
@@ -39,5 +34,4 @@ public class HospitalSeekerHomePage implements PageInitializer {
         notAuthorizedHeader = new NotAuthorizedHeader();
         pageInitialization();
     }
-
 }
