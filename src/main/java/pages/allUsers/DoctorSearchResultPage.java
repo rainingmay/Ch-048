@@ -13,6 +13,7 @@ import java.util.List;
  * Created by Yana on 06.04.2017.
  */
 public class DoctorSearchResultPage implements PageInitializer {
+
     public NotAuthorizedHeader notAuthorizedHeader;
 
     public DoctorSearchResultPage() {
@@ -20,7 +21,7 @@ public class DoctorSearchResultPage implements PageInitializer {
         pageInitialization();
     }
 
-    @FindBy(css = "[class='filter-col'])")
+    @FindBy(className = "filter-col")
     private WebElement doctorsPerPage;
 
     @FindBy(id = "perpage")
@@ -44,7 +45,7 @@ public class DoctorSearchResultPage implements PageInitializer {
     @FindBy(css = "a[href=/HospitalSeeker/doctor/6]")
     private WebElement testlink;
 
-    @FindBy(css = "[class='pagination pagination-lg']")
+    @FindBy(className = "pagination pagination-lg")
     private WebElement pageNavigation;
 
     public int countOfDoctors() {
@@ -53,7 +54,6 @@ public class DoctorSearchResultPage implements PageInitializer {
 
     public DoctorInfoPage goToDoctorInfoPage(){
         BrowserWrapper.sleep(3);
-        //BrowserWrapper.doubleClickJs(firstDoctorImage);
         firstDoctorImage.click();
         BrowserWrapper.sleep(5);
         return new DoctorInfoPage();

@@ -52,7 +52,7 @@ public class SchedulerPageTest extends BaseTest {
     @Test(groups = {"smokeTest"})
     public void testElementPresence() {
         try{
-            BrowserWrapper.waitForPage();
+            BrowserWrapper.waitForPage(10L);
             schedulerPage.isPageReady();
         }catch (Exception e){
             logger.error("Not all element's found");
@@ -64,7 +64,7 @@ public class SchedulerPageTest extends BaseTest {
 
     @Test(groups = {"smokeTest"})
     public void testDefaultSchedulerValues(){
-        BrowserWrapper.waitForPage();
+        BrowserWrapper.waitForPage(10L);
         try{
             schedulerPage.checkDefaultConditionScheduler();
         }catch (Exception e){
@@ -102,7 +102,7 @@ public class SchedulerPageTest extends BaseTest {
         ManagerDashBordPage managerDashBordPage =  hospitalsPage.choseHospital(HOSPITAL_NAME);
         schedulerPage = managerDashBordPage.scheduleButtonClick(DOCTOR_NAME);
         schedulerPage.nextButtonClick();
-        Assert.assertTrue( schedulerPage.getEvents().size() > 0 && schedulerPage.getEvents().contains(expectedText), "Can't create event");
+        Assert.assertTrue( schedulerPage.isEventsPresent() && schedulerPage.isEventOnWeekTab(expectedText), "Can't create event");
         logger.info("Test pass");
     }
 
@@ -117,7 +117,7 @@ public class SchedulerPageTest extends BaseTest {
         ManagerDashBordPage managerDashBordPage =  hospitalsPage.choseHospital(HOSPITAL_NAME);
         schedulerPage = managerDashBordPage.scheduleButtonClick(DOCTOR_NAME);
         schedulerPage.nextButtonClick();
-        Assert.assertEquals( schedulerPage.getEvents().size(), 0, "Cant edit event");
+        Assert.assertFalse( schedulerPage.isEventsPresent(), "Cant edit event");
         logger.info("Test pass");
     }
 
@@ -132,7 +132,7 @@ public class SchedulerPageTest extends BaseTest {
         ManagerDashBordPage managerDashBordPage =  hospitalsPage.choseHospital(HOSPITAL_NAME);
         schedulerPage = managerDashBordPage.scheduleButtonClick(DOCTOR_NAME);
         schedulerPage.nextButtonClick();
-        Assert.assertTrue( schedulerPage.getEvents().size() > 0 && schedulerPage.getEvents().contains(EXPECTED_EDITABLE_APPOINTMENT_TEXT), "Can't edit event");
+        Assert.assertTrue( schedulerPage.isEventsPresent() && schedulerPage.isEventOnWeekTab(EXPECTED_EDITABLE_APPOINTMENT_TEXT), "Can't edit event");
         logger.info("Test pass");
     }
     @Test(groups = "eventCreation")
@@ -142,7 +142,7 @@ public class SchedulerPageTest extends BaseTest {
         schedulerPage.cancelButtonClick();
         BrowserWrapper.refreshPage();
         schedulerPage.nextButtonClick();
-        Assert.assertEquals( schedulerPage.getEvents().size(), 0, "Can't cancel event creation");
+        Assert.assertFalse( schedulerPage.isEventsPresent(), "Can't cancel event creation");
         logger.info("Test pass");
 
     }
@@ -157,7 +157,7 @@ public class SchedulerPageTest extends BaseTest {
         schedulerPage = managerDashBordPage.scheduleButtonClick(DOCTOR_NAME);
         schedulerPage.dayTabButtonClick();
         schedulerPage.nextButtonClick();
-        Assert.assertTrue( schedulerPage.getEvents().size() > 0 && schedulerPage.getEvents().contains(EXPECTED_APPOINTMENT_TEXT),"Can't create event at day tab");
+        Assert.assertTrue( schedulerPage.isEventsPresent() && schedulerPage.getEvents().contains(EXPECTED_APPOINTMENT_TEXT),"Can't create event at day tab");
         logger.info("Test pass");
     }
 
@@ -171,7 +171,7 @@ public class SchedulerPageTest extends BaseTest {
         schedulerPage = managerDashBordPage.scheduleButtonClick(DOCTOR_NAME);
         schedulerPage.monthTabButtonClick();
         schedulerPage.nextButtonClick();
-        Assert.assertTrue( schedulerPage.getEventsCalendar().size() > 0 && schedulerPage.getEventsCalendar().get(0).contains(EXPECTED_APPOINTMENT_TEXT));
+        Assert.assertTrue( schedulerPage.isEventsPresent() && schedulerPage.isEventOnCalendarTab(EXPECTED_APPOINTMENT_TEXT));
         logger.info("Test pass");
     }
 

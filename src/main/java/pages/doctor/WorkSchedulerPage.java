@@ -43,9 +43,11 @@ public class WorkSchedulerPage implements PageInitializer {
 
     @FindAll(@FindBy(className = "dhx_scale_hour"))
     private List<WebElement> tabelRows;
+
     @FindAll({@FindBy(css = "div.dhx_scale_holder"),
             @FindBy(css = "div.dhx_scale_holder_now")})
     private List<WebElement> tableColumns;
+
     @FindAll(@FindBy(css = "div.dhx_scale_ignore"))
     private List<WebElement> tableIgnoredColumns;
 

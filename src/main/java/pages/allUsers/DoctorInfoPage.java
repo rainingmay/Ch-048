@@ -33,8 +33,6 @@ public class DoctorInfoPage implements PageInitializer {
     @FindBy(id = "sendFeedback")
     private WebElement sendFeedbackButton;
 
-
-
     public void createFeedBack(String value){
         doctorFeedbackInput.clear();
         BrowserWrapper.sleep(2);
@@ -45,12 +43,6 @@ public class DoctorInfoPage implements PageInitializer {
         BrowserWrapper.sleep(2);
         BrowserWrapper.refreshPage();;
     }
-
-
-
-
-
-
 
     public DoctorInfoPage() {
         baseHeader = new BaseHeader();

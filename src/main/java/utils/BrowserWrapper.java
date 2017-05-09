@@ -6,7 +6,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-import java.util.StringJoiner;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -29,12 +28,9 @@ public class BrowserWrapper {
         }
     }
 
-
     public static void waitUntilAlertIsPresent() {
         wait.until(ExpectedConditions.alertIsPresent());
     }
-
-
 
     public static void waitUntilElementClickable(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
@@ -44,9 +40,6 @@ public class BrowserWrapper {
         wait.until(ExpectedConditions.elementToBeClickable(by));
     }
 
-
-
-
     public static void waitUntilElementVisible(WebElement element) {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
@@ -55,7 +48,6 @@ public class BrowserWrapper {
     public static void waitUntilElementIsPresent(By locator) {
         wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
-
 
     public static void selectDropdown(WebElement element, String text) {
         Select dropdown = new Select(element);
@@ -72,8 +64,8 @@ public class BrowserWrapper {
     }
 
 
-    public static void waitForPage(){
-        DriverInitializer.instance().manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+    public static void waitForPage(Long l){
+        DriverInitializer.instance().manage().timeouts().pageLoadTimeout(l, TimeUnit.SECONDS);
     }
 
     public static void refreshPage(){

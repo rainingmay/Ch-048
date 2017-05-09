@@ -1,6 +1,8 @@
 package stepDefinition;
 
-import cucumber.api.java.en.*;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.testng.Assert;
 import pages.manager.HospitalsPage;
 import pages.manager.ManagerDashBordPage;
@@ -15,6 +17,11 @@ public class DoctorSearchSteps  {
     public static final String MANAGER_LOGIN = "manager.jh@hospitals.ua";
     public static final String MANAGER_PASSWORD = "1111";
     public static final String NUMBER_DOCTORS_PER_PAGE = "20";
+    public static final int EXPECTED_NUMBER_OF_DOCTORS_PER_PAGE= 20;
+    public static final String SPECIALIZATION = "Dentist";
+    public static final String SPECIALIZATION_COLUMN = "specialization";
+
+
     private ManagerDashBordPage managerDashBordPage;
     private int numberOfRows;
 
@@ -31,21 +38,21 @@ public class DoctorSearchSteps  {
 
     @Then("^Number of doctors on page in table equals number$")
     public void number_of_doctors_on_page_in_table_equals_number() throws Throwable {
-        Assert.assertTrue(managerDashBordPage.getNumberOfRows() <= 20);
+        Assert.assertTrue(managerDashBordPage.getNumberOfRows() <= EXPECTED_NUMBER_OF_DOCTORS_PER_PAGE);
 
     }
 
     @When("^Manager select specialization from selector$")
     public void manager_select_specialization_from_selector() throws Throwable {
 
-        managerDashBordPage.selectSpecialization("Dentist");
+        managerDashBordPage.selectSpecialization(SPECIALIZATION);
         managerDashBordPage.searchButtonClick();
     }
 
     @Then("^Show rows in table with doctors that match particular specialization$")
     public void show_rows_in_table_with_doctors_that_match_particular_specialization() throws Throwable {
-        for(String string: managerDashBordPage.getColumn("specialization")){
-            if(!string.equals("Dentist")) {
+        for(String string: managerDashBordPage.getColumn(SPECIALIZATION_COLUMN)){
+            if(!string.equals(SPECIALIZATION)) {
                 throw new AssertionError("Displayed wrong list of doctors");
             }
         }

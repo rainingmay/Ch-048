@@ -3,7 +3,7 @@ package pages.headers.headersByRole;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.PageInitializer;
-import pages.doctor.ListPatientaPage;
+import pages.doctor.ListPatientPage;
 import pages.doctor.WorkSchedulerPage;
 
 /**
@@ -22,9 +22,10 @@ public class DoctorHeader extends AuthorizedHeader implements PageInitializer {
     private WebElement schedule;
 
 
-    public ListPatientaPage patientsButtonClick(){
+    public ListPatientPage patientsButtonClick(){
+        //BrowserWrapper.waitUntilElementClickable(patients);
         patients.click();
-        return new ListPatientaPage();
+        return new ListPatientPage();
     }
     public WorkSchedulerPage scheduleButtonClick(){
         schedule.click();

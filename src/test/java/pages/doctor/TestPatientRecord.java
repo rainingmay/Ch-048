@@ -13,7 +13,16 @@ import utils.*;
  * Created by Natasha on 18.04.2017.
  */
 public class TestPatientRecord extends BaseTest {
-    Logger logger = LoggerFactory.getLogger(ListPatientaPage.class);
+    public static final String COMPLAIN = "New complaint";
+    public static final String RESULT = "New result";
+    public static final String PRESCRIPTION = "New prescription";
+    public static final String PATIENT = "patient.sf@hospitals.ua";
+    public static final String FIRST_PATIENT = "Charles";
+    public static final String SECOND_PATIENT = "Auginas";
+
+
+
+    Logger logger = LoggerFactory.getLogger(ListPatientPage.class);
 
     @BeforeMethod
     public void beforeMethod() throws InterruptedException{
@@ -30,55 +39,55 @@ public class TestPatientRecord extends BaseTest {
 
 
     @Test
-
     public void createNewRecord() throws Exception {
-        ListPatientaPage listPatientaPage = new ListPatientaPage();
-        listPatientaPage.header.patientsButtonClick();
-        listPatientaPage.getPatientsCardClick();
+        ListPatientPage listPatientPage = new ListPatientPage();
+        listPatientPage.header.patientsButtonClick();
+        listPatientPage.getPatientsCardClick();
         PatientsCardPage patientsCardPage = new PatientsCardPage();
         patientsCardPage.addNewRecordButtonClick();
         CreateNewRecordPage createNewRecord = new CreateNewRecordPage();
-        createNewRecord.inputRecord("New complaint", "New result", "New prescription");
+        createNewRecord.inputRecord(COMPLAIN, RESULT, PRESCRIPTION);
         Assert.assertTrue(patientsCardPage.checkRecord());
         logger.debug("Create new record");
     }
+
     @Test
     public void checkPatientsSearch() throws Exception {
-        ListPatientaPage listPatientaPage = new ListPatientaPage();
-        listPatientaPage.header.patientsButtonClick();
-        listPatientaPage.searchPatients("patient.sf@hospitals.ua");
-        Assert.assertTrue(listPatientaPage.checkResultSearch());
+        ListPatientPage listPatientPage = new ListPatientPage();
+        listPatientPage.header.patientsButtonClick();
+        listPatientPage.searchPatients(PATIENT);
+        Assert.assertTrue(listPatientPage.checkResultSearch());
         logger.info("Test pass");
     }
 
     @Test
     public void testPatientsSortingByFirstName() throws Exception {
-        ListPatientaPage listPatientaPage = new ListPatientaPage();
-        listPatientaPage.header.patientsButtonClick();
-        listPatientaPage.sortByFirstNameButton();
+        ListPatientPage listPatientPage = new ListPatientPage();
+        listPatientPage.header.patientsButtonClick();
+        listPatientPage.sortByFirstNameButton();
         BrowserWrapper.sleep(4);
-        String first_patient_after_sort = listPatientaPage.getDataFromTable(1, 3);
-        Assert.assertEquals(first_patient_after_sort, "Charles");
+        String first_patient_after_sort = listPatientPage.getDataFromTable(1, 3);
+        Assert.assertEquals(first_patient_after_sort, FIRST_PATIENT);
         logger.info("Test pass");
     }
     @Test
     public void testPatientsSortingByLastName() throws Exception {
-        ListPatientaPage listPatientaPage = new ListPatientaPage();
-        listPatientaPage.header.patientsButtonClick();
-        listPatientaPage.sortByLastNameButton();
+        ListPatientPage listPatientPage = new ListPatientPage();
+        listPatientPage.header.patientsButtonClick();
+        listPatientPage.sortByLastNameButton();
         BrowserWrapper.sleep(3);
-        String first_patient_after_sort = listPatientaPage.getDataFromTable(1, 4);
-        Assert.assertEquals(first_patient_after_sort, "Auginas");
+        String first_patient_after_sort = listPatientPage.getDataFromTable(1, 4);
+        Assert.assertEquals(first_patient_after_sort, SECOND_PATIENT);
         logger.info("Test pass");
     }
     @Test
     public void testPatientsSortingByEmail() throws Exception {
-        ListPatientaPage listPatientaPage = new ListPatientaPage();
-        listPatientaPage.header.patientsButtonClick();
-        listPatientaPage.sortByEmailButton();
+        ListPatientPage listPatientPage = new ListPatientPage();
+        listPatientPage.header.patientsButtonClick();
+        listPatientPage.sortByEmailButton();
         BrowserWrapper.sleep(3);
-        int actual = new TableParser(listPatientaPage.table).getFieldFromTableRow(1, "patient:").compareToIgnoreCase(new TableParser(listPatientaPage.table).getFieldFromTableRow(2, "patient:"));
-        Assert.assertEquals(actual < 0, true);
+        int actual = new TableParser(listPatientPage.table).getFieldFromTableRow(1, "patient:").compareToIgnoreCase(new TableParser(listPatientPage.table).getFieldFromTableRow(2, "patient:"));
+        Assert.assertTrue(actual < 0);
         logger.info("Test pass");
     }
 
