@@ -16,7 +16,7 @@ public class PatientHeader extends AuthorizedHeader implements PageInitializer {
         pageInitialization();
     }
 
-    @FindBy(linkText = "Actions")
+    @FindBy(css = "div#bs-example-navbar-collapse-1 ul li:nth-child(3)")
     private WebElement actions;
 
     @FindBy(css = "a[href=\"/HospitalSeeker/card\"]")

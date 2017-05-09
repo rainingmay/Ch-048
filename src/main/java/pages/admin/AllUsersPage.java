@@ -44,10 +44,10 @@ public class AllUsersPage implements PageInitializer {
     @FindBy(id = "clearButton")
     private WebElement clearButton;
 
-    @FindBy(xpath = "/html/body/section/div[1]/div/form/div[5]/a[1]")
+    @FindBy(css = "a[href=\"/HospitalSeeker/admin/users?status=true\"]")
     private WebElement enableButton;
 
-    @FindBy(xpath = "/html/body/section/div[1]/div/form/div[5]/a[2]")
+    @FindBy(css = "a[href=\"/HospitalSeeker/admin/users?status=false\"]")
     private WebElement disableButton;
 
     @FindBy(css = ".pull-right .btn-group a:last-child")

@@ -25,7 +25,7 @@ public class AddNewDoctorPage implements PageInitializer {
     @FindBy(id = "email")
     private WebElement emailTextField;
 
-    @FindBy(xpath = "//*[@id=\"registerNewUser\"]/div[1]/div[2]/div/figure/a")
+    @FindBy(css = "figure a")
     private WebElement imageHolder;
 
     @FindBy(xpath = "//*[@id=\"registerNewUser\"]/div[2]/div[1]/div[1]")
