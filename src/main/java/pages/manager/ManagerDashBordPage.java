@@ -280,22 +280,22 @@ public class ManagerDashBordPage implements PageInitializer{
     public String tdFinder(String colName){
         String td = null;
         switch (colName){
-            case "email":
+            case "Email":
                 td = "2";
                 break;
-            case "firstName":
+            case "First Name":
                 td = "3";
                 break;
-            case "lastName":
+            case "Last Name":
                 td = "4";
                 break;
-            case "specialization":
+            case "Specialization":
                 td = "5";
                 break;
-            case "category":
+            case "Category":
                 td = "6";
                 break;
-            case "actions":
+            case "Actions":
                 td = "7";
                 break;
         }
