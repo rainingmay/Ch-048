@@ -324,11 +324,12 @@ public class ManagerDashBordPage implements PageInitializer{
 
 
     public boolean isDeleteConfirmationPresent(){
+        BrowserWrapper.waitUntilElementVisible(deleteHeader);
         return BrowserWrapper.isElementPresent(deleteHeader);
     }
 
 
-    private String getTestStale(WebElement element){
+    private String getTextStale(WebElement element){
         String st = null;
         for (int i = 0 ; i<5; i++) {
             try {
@@ -340,13 +341,15 @@ public class ManagerDashBordPage implements PageInitializer{
         return st;
     }
 
-    public boolean checkTitleDetails(){
-        return getTestStale(formMainTextLabel).equals(information);
+    public boolean checkTitleEdit(){
+        return getTextStale(formMainTextLabel).equals(edit);
+    }
+        public boolean checkTitleDetails(){
+        BrowserWrapper.waitUntilElementNotStale(formMainTextLabel);
+        return formMainTextLabel.getText().equals(information);
     }
 
-    public boolean checkTitleEdit(){
-        return getTestStale(formMainTextLabel).equals(edit);
-    }
+
 
     public String getDetailedName(){
         String text = null;
