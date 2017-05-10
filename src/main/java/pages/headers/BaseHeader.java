@@ -3,7 +3,10 @@ package pages.headers;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.PageInitializer;
-import pages.allUsers.*;
+import pages.allUsers.DoctorSearchResultPage;
+import pages.allUsers.HospitalSearchResultPage;
+import pages.allUsers.HospitalSeekerHomePage;
+import pages.allUsers.MapSearchPage;
 import utils.BrowserWrapper;
 
 
@@ -110,6 +113,7 @@ public class BaseHeader implements PageInitializer {
     }
 
     public  DoctorSearchResultPage findDoctor(String doctorName) {
+        BrowserWrapper.sleep(2);
         fillDoctorInput(doctorName);
         BrowserWrapper.waitUntilElementClickable(doctorSearchButton);
         doctorSearchButton.click();

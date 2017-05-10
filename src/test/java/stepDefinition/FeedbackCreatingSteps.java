@@ -67,7 +67,7 @@ public class FeedbackCreatingSteps {
 
     @And("^approve or disapprove feedback about current doctor$")
     public void approve_or_disapprove_feedback_about_current_doctor() throws Throwable {
-        BrowserWrapper.sleep(2);
+       // BrowserWrapper.sleep(2);
         ModerationFeedBackPage moderationFeedBackPage = new ModerationFeedBackPage();
         moderationFeedBackPage.confirmFeedback();
     }
@@ -86,14 +86,12 @@ public class FeedbackCreatingSteps {
     public void i_sign_in_as_a_patient_and_move_to_the_current_doctorInfoPage() throws Throwable {
         HospitalSeekerHomePage hospitalSeekerHomePage = BaseNavigation.loginAsPatient(PATIENT_LOGIN, PATIENT_PASSWORD);
         BaseHeader header = new BaseHeader();
-        BrowserWrapper.sleep(3);
         DoctorSearchResultPage doctorSearchResultPage = header.findDoctor(CURRENT_DOCTOR_SURNAME);
         doctorSearchResultPage.goToDoctorInfoPage();
     }
 
     @Then("^my feedback , wich was written by me early should be added$")
     public void my_feedback_wich_was_written_by_me_early_should_be_added() throws Throwable {
-        BrowserWrapper.sleep(2);
         DoctorInfoPage doctorInfoPage = new DoctorInfoPage();
         doctorInfoPage.infoLabel.click();
         BrowserWrapper.sleep(2);
