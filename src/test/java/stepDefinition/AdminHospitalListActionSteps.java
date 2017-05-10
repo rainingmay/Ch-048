@@ -13,7 +13,7 @@ import utils.BrowserWrapper;
 
 /**
  * Created by Evgen on 26.04.2017.
- */
+ *//*
 public class AdminHospitalListActionSteps {
     private static final String ADMIN_LOGIN = "admin@hospitals.ua";
     private static final String ADMIN_PASSWORD = "1111";
@@ -78,4 +78,4 @@ public class AdminHospitalListActionSteps {
     public void admin_delete_hospital() {
         Assert.assertEquals(hospitalListPage.getTitleOfPage().toLowerCase(), HOSPITAL_LIST_TITLE);
     }
-}
+}*/

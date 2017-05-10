@@ -14,7 +14,7 @@ import pages.patient.CardPage;
 import utils.BaseNavigation;
 import utils.BrowserWrapper;
 
-
+/*
 public class DoctorAddNewRecordToPatientCardSteps {
 
     private static final String DOCTOR_LOGIN = "doctor.cb@hospitals.ua";
@@ -73,4 +73,4 @@ public class DoctorAddNewRecordToPatientCardSteps {
         Assert.assertTrue(cardPage.getDoctorNameFromNewRecord().contains(DOCTOR_NAME));
     }
 
-}
+}*/
