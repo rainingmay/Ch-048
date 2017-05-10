@@ -3,9 +3,7 @@ package pages.allUsers;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.PageInitializer;
-import pages.anonymous.LoginPage;
 import pages.headers.headersByRole.NotAuthorizedHeader;
-import utils.BrowserWrapper;
 
 
 /**
@@ -18,12 +16,6 @@ public class HospitalSeekerHomePage implements PageInitializer {
     //public DoctorHeader header;
 
 
-    public LoginPage moveToLoginPage(){
-        header.loginButton();
-        return new LoginPage();
-    }
-
-
 
     //End of temporary
     @FindBy(xpath = "//*[@id=\"carouselHacked\"]/div[2]/div[3]/div/h1")
@@ -33,19 +25,14 @@ public class HospitalSeekerHomePage implements PageInitializer {
     private WebElement textParagraph;
 
 
-    @FindBy(css = "left carousel-control")
+    @FindBy(css = "a.left.carousel-control")
     private WebElement leftCarouselButton;
 
-    @FindBy(css = "right carousel-control")
+    @FindBy(css = "a.right.carousel-control")
     private WebElement rightCarouselButton;
 
     @FindBy(css = "img[src=\"/HospitalSeeker/img/slide-four.jpg\"]")
     private WebElement image;
-
-    public boolean isCarouselPresent() {
-       return BrowserWrapper.isElementPresent(image);
-    }
-
 
     public HospitalSeekerHomePage() {
         header = new NotAuthorizedHeader();

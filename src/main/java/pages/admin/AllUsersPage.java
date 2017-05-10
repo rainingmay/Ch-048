@@ -84,7 +84,7 @@ public class AllUsersPage implements PageInitializer {
     @FindBy(id = "roles.type")
     private WebElement sortByRoleButton;
 
-    private WebElement viewWindow;
+    public WebElement viewWindow;
 
     @FindBy(className = "table table-user-information")
     private WebElement editWindow;
@@ -173,21 +173,17 @@ public class AllUsersPage implements PageInitializer {
 
 
     public List<String> getUserDataFromInfoWindow(int rowNumber) {
-        try {
-            List<String> result = new LinkedList<>();
-            WebElement infoButton = new TableParser(table).getButtonFromTableRow(rowNumber, "View");
-            infoButton.click();
-            Thread.sleep(2000);
-            viewWindow = DriverInitializer.instance().findElement(By.className("modal-content"));
-            result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(1) td:last-child")).getText());
-            result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(2) td:last-child")).getText());
-            result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(4) td:last-child")).getText());
-            closeViewWindow();
-            Thread.sleep(2000);
-            return result;
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }return null;
+        List<String> result = new LinkedList<>();
+        WebElement infoButton = new TableParser(table).getButtonFromTableRow(rowNumber, "View");
+        infoButton.click();
+        BrowserWrapper.sleep(3);
+        viewWindow = DriverInitializer.instance().findElement(By.className("modal-content"));
+        result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(1) td:last-child")).getText());
+        result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(2) td:last-child")).getText());
+        result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(4) td:last-child")).getText());
+        closeViewWindow();
+        BrowserWrapper.sleep(2);
+        return result;
     }
 
     public List<String> getFirstUserDataFromInfoWindow() {

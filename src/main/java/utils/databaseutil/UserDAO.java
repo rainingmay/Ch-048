@@ -43,6 +43,7 @@ public class UserDAO {
             result.add(list.get(0));
             result.add(list.get(1));
             result.add(String.valueOf(getStatusByEmail(email)));
+            return result;
         }
         return null;
     }
