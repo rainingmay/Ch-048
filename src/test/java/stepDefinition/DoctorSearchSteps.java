@@ -1,6 +1,8 @@
 package stepDefinition;
 
-import cucumber.api.java.en.*;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 import org.testng.Assert;
 import pages.manager.HospitalsPage;
 import pages.manager.ManagerDashBordPage;
@@ -15,8 +17,17 @@ public class DoctorSearchSteps  {
     public static final String MANAGER_LOGIN = "manager.jh@hospitals.ua";
     public static final String MANAGER_PASSWORD = "1111";
     public static final String NUMBER_DOCTORS_PER_PAGE = "20";
-    ManagerDashBordPage managerDashBordPage;
-    public int numberOfRows;
+    public static final int EXPECTED_NUMBER_OF_DOCTORS_PER_PAGE= 20;
+    public static final String SPECIALIZATION = "Dentist";
+    public static final String SPECIALIZATION_COLUMN = "specialization";
+    public static final String DOCTOR_EMAIL = "doctor.cb@hospitals.ua";
+    public static final String EMAIL = "Email";
+    public static final String FIRST_NAME = "First Name";
+    public static final String DOCTOR_NAME = "Chester";
+
+
+    private ManagerDashBordPage managerDashBordPage;
+    private int numberOfRows;
 
     @Given("^the manager is on dashboard of particular hospital in order to search$")
     public void the_manager_is_on_dashboard_of_particular_hospital_in_order_to_search() throws Throwable {
@@ -31,21 +42,21 @@ public class DoctorSearchSteps  {
 
     @Then("^Number of doctors on page in table equals number$")
     public void number_of_doctors_on_page_in_table_equals_number() throws Throwable {
-        Assert.assertTrue(managerDashBordPage.getNumberOfRows() <= 20);
+        Assert.assertTrue(managerDashBordPage.getNumberOfRows() <= EXPECTED_NUMBER_OF_DOCTORS_PER_PAGE);
 
     }
 
     @When("^Manager select specialization from selector$")
     public void manager_select_specialization_from_selector() throws Throwable {
 
-        managerDashBordPage.selectSpecialization("Dentist");
+        managerDashBordPage.selectSpecialization(SPECIALIZATION);
         managerDashBordPage.searchButtonClick();
     }
 
     @Then("^Show rows in table with doctors that match particular specialization$")
     public void show_rows_in_table_with_doctors_that_match_particular_specialization() throws Throwable {
-        for(String string: managerDashBordPage.getColumn("specialization")){
-            if(!string.equals("Dentist")) {
+        for(String string: managerDashBordPage.getColumn(SPECIALIZATION_COLUMN)){
+            if(!string.equals(SPECIALIZATION)) {
                 throw new AssertionError("Displayed wrong list of doctors");
             }
         }
@@ -53,20 +64,20 @@ public class DoctorSearchSteps  {
 
     @When("^Manager chose email from search list$")
     public void manager_chose_email_from_search_list() throws Throwable {
-       managerDashBordPage.selectSearchBy("Email");
+       managerDashBordPage.selectSearchBy(EMAIL);
 
     }
 
     @When("^Type email in text field$")
     public void type_email_in_text_field() throws Throwable {
-        managerDashBordPage.searchByText("doctor.cb@hospitals.ua");
+        managerDashBordPage.searchByText(DOCTOR_EMAIL);
         managerDashBordPage.searchButtonClick();
     }
 
     @Then("^Show rows in table with doctors that matched typed email$")
     public void show_rows_in_table_with_doctors_that_matched_typed_email() throws Throwable {
-        for(String string: managerDashBordPage.getColumn("email")){
-            if(!string.equals("doctor.cb@hospitals.ua")){
+        for(String string: managerDashBordPage.getColumn(EMAIL)){
+            if(!string.equals(DOCTOR_EMAIL)){
                 throw  new AssertionError("Displayed wrong list of doctors");
             }
         }
@@ -74,19 +85,19 @@ public class DoctorSearchSteps  {
 
     @When("^Manager chose first name from search list$")
     public void manager_chose_first_name_from_search_list() throws Throwable {
-        managerDashBordPage.selectSearchBy("First Name");
+        managerDashBordPage.selectSearchBy(FIRST_NAME);
     }
 
     @When("^Type name in text field$")
     public void type_name_in_text_field() throws Throwable {
-        managerDashBordPage.searchByText("Chester");
+        managerDashBordPage.searchByText(DOCTOR_NAME);
         managerDashBordPage.searchButtonClick();
     }
 
     @Then("^Show rows in table with doctors that match typed first name$")
     public void show_rows_in_table_with_doctors_that_match_typed_first_name() throws Throwable {
-        for(String string: managerDashBordPage.getColumn("firstName")){
-            if(!string.equals("Chester")){
+        for(String string: managerDashBordPage.getColumn(FIRST_NAME)){
+            if(!string.equals(DOCTOR_NAME)){
                 throw  new AssertionError("Displayed wrong list of doctors");
             }
         }
@@ -100,7 +111,7 @@ public class DoctorSearchSteps  {
 
     @When("^Then make simple find$")
     public void then_make_simple_find() throws Throwable{
-        managerDashBordPage.searchByText("Test");
+        managerDashBordPage.searchByText(DOCTOR_NAME);
         managerDashBordPage.searchButtonClick();
     }
 

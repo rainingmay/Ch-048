@@ -102,7 +102,7 @@ public class SchedulerPage implements PageInitializer {
     private WebElement saveEvent;
 
     @FindBy(css = "div.icon_cancel")
-    public WebElement cancelEvent;
+    private WebElement cancelEvent;
 
     @FindBy(css = "div.icon_details")
     private WebElement detaisEvent;
@@ -129,29 +129,29 @@ public class SchedulerPage implements PageInitializer {
     private WebElement saveDetailedChanges;
 
     @FindBy(css = "div.dhx_scale_hour:first-child")
-    public WebElement beginningHour;
+    private WebElement beginningHour;
 
     @FindBy(css = "div.dhx_scale_hour:last-child")
-    public WebElement endHour;
+    private WebElement endHour;
 
     @FindBy(css = "div.dhtmlx_ok_button")
-    public WebElement eventDeleteConfirmation;
+    private WebElement eventDeleteConfirmation;
 
     @FindBy(css = "div.dhx_event_resize")
     public WebElement resizeButton;
 
 
     @FindAll(@FindBy(css = "div.dhx_cal_event_line_start"))
-    public List<WebElement> monthElements;
+    private List<WebElement> monthElements;
 
     @FindBy(css = "div.dhx_month_body")
-    public WebElement monthElement;
+    private WebElement monthElement;
 
     @FindBy(css = "div.dhx_mini_calendar")
-    public WebElement calendarBody;
+    private WebElement calendarBody;
 
     @FindBy(css = "div.gray_section")
-    public List<WebElement> notActiveRows;
+    private List<WebElement> notActiveRows;
 
 
 
@@ -352,6 +352,10 @@ public class SchedulerPage implements PageInitializer {
         return true;
     }
 
+    public boolean isEventOnCalendarTab(String event){
+        return getEventsCalendar().stream().anyMatch(e -> e.contains(event));
+    }
+
     public List<String> getEventsCalendar(){
         List<String> list = new ArrayList<>();
 
@@ -363,6 +367,18 @@ public class SchedulerPage implements PageInitializer {
         }
 
         return list;
+    }
+
+    public boolean isEventsPresentOnCalendar(){
+        return getEventsCalendar().size()>0;
+    }
+    public boolean isEventsPresent(){
+        return getEvents().size() > 0;
+    }
+
+
+    public boolean isEventOnWeekTab(String event){
+        return getEvents().stream().anyMatch(e -> e.contains(event));
     }
 
     public List<String> getEvents(){
@@ -388,17 +404,6 @@ public class SchedulerPage implements PageInitializer {
         BrowserWrapper.waitUntilElementVisible(cancelEvent);
         cancelEvent.click();
         saveButtonClick();
-    }
-    public void workDayBeginAtSelector(String value){
-        BrowserWrapper.selectDropdown(workDayBeginAtSelector, value);
-    }
-
-    public void workDayEndAtSelector(String value){
-        BrowserWrapper.selectDropdown(workDayEndAtSelector, value);
-    }
-
-    public void apointmentSizeSelector(String value){
-        BrowserWrapper.selectDropdown(apointmentSizeSelector, value);
     }
 
     public void saveButtonClick(){

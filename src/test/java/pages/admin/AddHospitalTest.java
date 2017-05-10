@@ -27,6 +27,13 @@ public class AddHospitalTest extends BaseTest {
 
     }
 
+    @AfterMethod
+    public void afterMethod() {
+        DriverInitializer.instance().manage().deleteAllCookies();
+        BaseNavigation.logout();
+    }
+
+
 
     @Test(dataProvider = "validHospitalAddress")
     public void addNewHospitalWithValidDataTest(String hospitalAddress, String hospitalName, String hospitalDescription) throws Exception {
@@ -42,8 +49,7 @@ public class AddHospitalTest extends BaseTest {
             AddNewHospitalPage addNewHospitalPage = new AddNewHospitalPage();
             BrowserWrapper.waitUntilElementClickableByLocator(By.id(ADD_HOSPITAL_PAGE_ID_IDENTIFICATION));
 
-            //addNewHospitalPage.pushAddPhotoButton();
-            //addNewHospitalPage.addNewHospitalPhoto();
+
             addNewHospitalPage.addNewHospital(hospitalAddress, hospitalName, hospitalDescription);
             BrowserWrapper.waitUntilElementClickableByLocator(By.xpath(ALL_HOSPITALS_PAGE_XPATH_IDENTIFICATION));
 
@@ -132,7 +138,7 @@ public class AddHospitalTest extends BaseTest {
     @DataProvider
     public static Object [] [] validHospitalAddress() {
         return new  Object [] [] {
-                {"Вул. Мусоргського, 8, Чернівці, Чернівецька, Україна", "МІСЬКА СТАНЦІЯ ШВИДКОЇ МЕДИЧНОЇ ДОПОМОГИ", ""}
+                {"Musorhs'koho St, 4, Chernivtsi, Chernivets'ka oblast, Ukraine", "Hospital #15", ""}
         };
     }
 
@@ -146,21 +152,16 @@ public class AddHospitalTest extends BaseTest {
     @DataProvider
     public Object [] [] editHospitalBuildingAndStreet() {
         return new Object[][] {
-                {"2", "Вулиця Руська", 11},
-                {"4", "Вулиця Лесі Українки", 12}
+                {"2", "Fastivs'ka St", 11},
+                {"11", "Lesi Ukrainky St", 12}
         };
     }
 
     @DataProvider
     public Object [] [] invalidHospitalAddress() {
         return new Object[][] {
-                {"вул. Березовська, 14, смт Глибока, Чернівецька область, Україна", "Лікарня №2", ""},
+                {"Berezovska St, 14, Glybokaya, Chernivets'ka oblast, Ukraine", "Hospital #7", ""}
         };
     }
 
-    @AfterMethod
-    public void afterMethod() {
-        DriverInitializer.instance().manage().deleteAllCookies();
-        BaseNavigation.logout();
-    }
 }

@@ -10,7 +10,6 @@ import pages.admin.CheckGooglePOIPage;
 import pages.admin.HospitalListPage;
 import utils.BaseNavigation;
 import utils.BrowserWrapper;
-import utils.TableParser;
 
 /**
  * Created by Evgen on 26.04.2017.
@@ -27,9 +26,10 @@ public class AdminHospitalListActionSteps {
     private AddNewHospitalPage addNewHospitalPage;
     private CheckGooglePOIPage googlePOIPage;
 
-    @Given("ADMIN is on hospital list page")
+    @Given("^ADMIN is on hospital list page$")
     public void to_hospital_list_page() {
         allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
+        BrowserWrapper.sleep(2);
         hospitalListPage = allUsersPage.header.goToAllHospitalsPage();
         BrowserWrapper.sleep(2);
     }
@@ -41,19 +41,27 @@ public class AdminHospitalListActionSteps {
         BrowserWrapper.sleep(2);
     }
 
-    @When("ADMIN press button \"Edit\" in row '(.*)' with certain hospital")
-    public void admin_try_edit_hospital(String number) {
-        new TableParser(hospitalListPage.table).getButtonFromTableRow(Integer.parseInt(number), "Edit").click();
-    }
-
     @Then("^ADMIN must see page \"Hospital add/edit page\"$")
     public void admin_is_on_add_hospital_page() {
         Assert.assertEquals(addNewHospitalPage.pageLabel.getText().toLowerCase(), "hospital add/edit page" );
     }
 
+    @When("^ADMIN press button \"Edit\" in row '(.*)' with certain hospital$")
+    public void admin_try_edit_hospital(String number) {
+        addNewHospitalPage = hospitalListPage.editButtonClick(number);
+        BrowserWrapper.sleep(2);
+    }
+
+    @Then("^ADMIN must see page with \"Hospital add/edit page\"$")
+    public void admin_on_add_hospital_page() {
+        Assert.assertEquals(addNewHospitalPage.pageLabel.getText().toLowerCase(), "hospital add/edit page" );
+    }
+
+
     @When("^ADMIN press button \"Check Google POI\"$")
     public void admin_try_open_googlepoi_page() {
         googlePOIPage = hospitalListPage.submitCheckGooglePoi();
+        BrowserWrapper.sleep(2);
     }
 
     @Then("^ADMIN must see page where he can check GooglePOI$")
@@ -63,7 +71,7 @@ public class AdminHospitalListActionSteps {
 
     @When("ADMIN press button \"Delete\" in row '(.*)' with certain hospital")
     public void admin_try_delete_user(String number) {
-        hospitalListPage.deleteHospital(Integer.parseInt(number));
+        hospitalListPage.deleteButtonClick(number);
     }
 
     @Then("ADMIN must see this page again without this hospital")

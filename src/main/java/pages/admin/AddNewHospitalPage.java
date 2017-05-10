@@ -14,7 +14,7 @@ import java.awt.event.KeyEvent;
  * Created by Jeksonis on 06.04.2017.
  */
 public class AddNewHospitalPage implements PageInitializer {
-    public AdminHeader header;
+        public AdminHeader header;
 
     public AddNewHospitalPage(){
         this.header = new AdminHeader();
@@ -48,7 +48,7 @@ public class AddNewHospitalPage implements PageInitializer {
     @FindBy(id = "description")
     private WebElement descriptionInputField;
 
-    @FindBy(xpath = "//*[@id=\"button-find\"]")
+    @FindBy(id = "button-find")
     private WebElement findButton;
 
     @FindBy(id = "button-fill")
@@ -68,7 +68,10 @@ public class AddNewHospitalPage implements PageInitializer {
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
     }
 
+
     public void addNewHospitalPhoto() throws AWTException {
+        //why you use hard path to image??
+        //may be setClipboardData("src/main/resources/RhodeIslandHosp14_360_360_90.jpg");
         setClipboardData("D:\\RhodeIslandHosp14_360_360_90.jpg");
         Robot robot = new Robot();
         robot.delay(500);
@@ -140,9 +143,6 @@ public class AddNewHospitalPage implements PageInitializer {
         fillButton.click();
    }
 
-   public void pushFillButtonWithInvalidData() {
-
-   }
 
    public void pushResetButton() {
         resetButton.click();
@@ -154,15 +154,11 @@ public class AddNewHospitalPage implements PageInitializer {
    }
 
    public void addNewHospital(String address, String name, String description) {
-       //BrowserWrapper.sleep(2);
        addressData(address);
        addHospitalName(name);
        addHospitalDescription(description);
-       //BrowserWrapper.sleep(2);
        pushFillButton();
-       //BrowserWrapper.sleep(2);
        pushFindButton();
-       //BrowserWrapper.sleep(2);
        pushSaveButton();
    }
 }

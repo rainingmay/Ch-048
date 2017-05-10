@@ -3,6 +3,8 @@ package pages.headers.headersByRole;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.PageInitializer;
+import pages.patient.CardPage;
+import utils.BrowserWrapper;
 
 
 /**
@@ -14,7 +16,7 @@ public class PatientHeader extends AuthorizedHeader implements PageInitializer {
         pageInitialization();
     }
 
-    @FindBy(linkText = "Actions")
+    @FindBy(css = "div#bs-example-navbar-collapse-1 ul li:nth-child(3)")
     private WebElement actions;
 
     @FindBy(css = "a[href=\"/HospitalSeeker/card\"]")
@@ -25,5 +27,24 @@ public class PatientHeader extends AuthorizedHeader implements PageInitializer {
 
     @FindBy(css = "a[href=\"/HospitalSeeker/laboratory\"]")
     private WebElement studies;
+
+    @FindBy(linkText = "Thomas Auginas")
+    private WebElement patientProfileName;
+
+    public CardPage goToCardPage() {
+        BrowserWrapper.waitUntilElementClickable(actions);
+        actions.click();
+        BrowserWrapper.waitUntilElementClickable(card);
+        card.click();
+        return new CardPage();
+    }
+
+    public boolean isActionsButtonPresent() {
+        return BrowserWrapper.isElementPresent(actions);
+    }
+
+    public String getPatientProfileName() {
+       return patientProfileName.getText();
+    }
 
 }

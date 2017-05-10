@@ -15,7 +15,7 @@ public class CheckGooglePOIPage implements PageInitializer {
         pageInitialization();
     }
 
-    @FindBy(css = "body > section > div > div > div > div.col-sm-8 > button")
+    @FindBy(css = "div.col-sm-8 > button")
     private WebElement getGooglePoiButton;
 
     public void pushGetGooglePoi() {

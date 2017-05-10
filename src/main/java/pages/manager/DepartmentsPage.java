@@ -14,9 +14,9 @@ import utils.DriverInitializer;
 public class DepartmentsPage implements PageInitializer {
 
     public ManagerHeader managerHeader;
+
     @FindBy(xpath = "/html/body/section/div/div/h1")
     private WebElement departmentsLabel;
-    private WebElement departmentsText;
 
     @FindBy(xpath = "//*[@id=\"allDepartment\"]/thead/tr/th[1]")
     private WebElement nameText;

@@ -1,7 +1,5 @@
 package pages.admin;
 
-import org.apache.xerces.xs.StringList;
-import org.openqa.selenium.By;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -9,36 +7,32 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pages.headers.BaseHeader;
 import utils.*;
 import utils.databaseutil.DatabaseOperations;
 import utils.databaseutil.UserDAO;
 
-import javax.xml.crypto.Data;
-import java.io.*;
-import java.lang.reflect.Array;
-import java.net.MalformedURLException;
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 
 /**
  * Created by Evgen on 10.04.2017.
  */
-public class AllUsersPageTest extends BaseTest{
-    public static Properties properties = null;
-
-    public static final String BASE_URL = "https://localhost:8443/HospitalSeeker/";
-
+public class AllUsersPageTest extends BaseTest {
 
     private AllUsersPage allUsersPage;
+    private static TableParser tableParser;
 
     Logger logger = LoggerFactory.getLogger(AllUsersPage.class);
+
 
     @BeforeMethod
     public void beforeMethod() {
         DriverInitializer.getToUrl(BASE_URL);
-//        DatabaseOperations.restore("hospital.backup");
+        DatabaseOperations.restore("hospital_database.backup");
         allUsersPage = BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
+        tableParser = new TableParser(allUsersPage.table);
         logger.info("Test is initialized");
     }
 
@@ -49,32 +43,11 @@ public class AllUsersPageTest extends BaseTest{
         DriverInitializer.close();
     }
 
-
-    @Test
-    public void localizationTest() throws IOException {
-        checkLanguageAndLoadProperties(allUsersPage.header);
-
-        List<String> actual = new ArrayList<>();
-        actual.add(allUsersPage.header.homeButton.getText());
-        actual.add(allUsersPage.header.actions.getText());
-        actual.add(allUsersPage.usersPerPageLabel.getText());
-
-        List<String> expected = new ArrayList<>();
-        expected.add(properties.getProperty("header.menu.home"));
-        expected.add(properties.getProperty("admin.hospital.list.table.actions"));
-        expected.add(properties.getProperty("admin.dashboard.users.show.users"));
-
-        Assert.assertEquals(actual, expected);
-        logger.info("Test pass");
-    }
-
-
     @Test
     public void enableUsersViewTest() {
         allUsersPage = allUsersPage.showEnableUsers();
-        int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
-        boolean actual = UserDAO.getStatusByEmail(new TableParser(allUsersPage.table).getFieldFromTableRow(rowNumber, "@email"));
-        Assert.assertEquals(actual, true);
+        boolean actual = UserDAO.getStatusByEmail(tableParser.getEmailFromFirstTableRow());
+        Assert.assertTrue(actual);
         logger.info("Test pass");
     }
 
@@ -82,21 +55,17 @@ public class AllUsersPageTest extends BaseTest{
     @Test
     public void disableUsersViewTest() {
         allUsersPage = allUsersPage.showDisableUsers();
-        BrowserWrapper.sleep(2);
-        int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
-        boolean actual = UserDAO.getStatusByEmail(new TableParser(allUsersPage.table).getFieldFromTableRow(rowNumber, "@email"));
-        Assert.assertEquals(actual, false);
+        boolean actual = UserDAO.getStatusByEmail(tableParser.getEmailFromFirstTableRow());
+        Assert.assertFalse(actual);
         logger.info("Test pass");
     }
 
 
     @Test
     public void viewWindowTest() {
-        int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
-        List<String> actual = allUsersPage.getUserDataFromInfoWindow(rowNumber);
-        List<String> allInfo = UserDAO.getUserFromDatabaseByEmail(actual.get(1));
-        List<String> expected = new LinkedList<>();
-        Collections.addAll(expected, new String[]{allInfo.get(0), allInfo.get(1), "true"});
+        List<String> actual = allUsersPage.getFirstUserDataFromInfoWindow();
+        List<String> expected = UserDAO.getWindowDataFromDatabase(
+                tableParser.getEmailFromFirstTableRow(), "userInfoWindow");
         Assert.assertEquals(actual, expected);
         logger.info("Test pass");
     }
@@ -105,9 +74,8 @@ public class AllUsersPageTest extends BaseTest{
     @Test(dataProvider = "roles")
     public void changeRoleTest(String role) {
         String expected = role;
-        int rowNumber = 1;
-        allUsersPage = allUsersPage.changeRoleInEditWindow(rowNumber, role);
-        String actual = new TableParser(allUsersPage.table).getFieldFromTableRow(rowNumber, "role");
+        allUsersPage = allUsersPage.changeRoleInEditWindow(role);
+        String actual = tableParser.getFieldFromFirstTableRow("role");
         Assert.assertEquals(actual, expected);
         logger.info("Test pass");
     }
@@ -127,9 +95,7 @@ public class AllUsersPageTest extends BaseTest{
     public void searchByRoleTest(String role) {
         String expected = role;
         allUsersPage = allUsersPage.changeRole(expected);
-        BrowserWrapper.sleep(2);
-        int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
-        String actual = new TableParser(allUsersPage.table).getFieldFromTableRow(rowNumber, "role");
+        String actual = tableParser.getFieldFromFirstTableRow("role");
         Assert.assertEquals(actual, expected);
         logger.info("Test pass");
     }
@@ -138,15 +104,12 @@ public class AllUsersPageTest extends BaseTest{
     @Test(dataProvider = "searchParams")
     public void searchTest(String role, String valueOfField, String count) {
         allUsersPage = allUsersPage.search(Integer.parseInt(count), role, "firstName", valueOfField);
-        BrowserWrapper.sleep(2);
-        int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
         List<String> expected = new LinkedList<>();
         Collections.addAll(expected, new String[]{valueOfField, role});
-        TableParser tableParser = new TableParser(allUsersPage.table);
         List<String> actual = new LinkedList<>();
-        if (tableParser.getFieldFromTableRow(rowNumber, "@email").contains(valueOfField)) actual.add(valueOfField);
-        else actual.add("noSame");
-        actual.add(tableParser.getFieldFromTableRow(rowNumber, "role"));
+        if (tableParser.getFieldFromFirstTableRow("@email").contains(valueOfField)) actual.add(valueOfField);
+            else actual.add("noSame");
+        actual.add(tableParser.getFieldFromFirstTableRow("role"));
         Assert.assertEquals(actual, expected);
         logger.info("Test pass");
     }
@@ -155,21 +118,9 @@ public class AllUsersPageTest extends BaseTest{
     @Test
     public void nextPageButtonTest() {
         AllUsersPage allUsersPage1 = allUsersPage.toNextPage();
-        BrowserWrapper.waitForPage();
         Assert.assertNotEquals(allUsersPage, allUsersPage1);
         logger.info("Test pass");
     }
-
-
-    /*@Test
-    public void deleteUsersTest() {
-        int rowNumber = randomNumber(allUsersPage.getCountOfUsersInTable());
-        String actual = allUsersPage.getCurrentUrl();
-        allUsersPage = allUsersPage.deleteUser(rowNumber);
-        String expected = allUsersPage.getCurrentUrl();
-        Assert.assertEquals(actual, expected);
-        logger.info("Test info");
-    }*/
 
 
     @Test(dataProvider = "roles")
@@ -178,9 +129,10 @@ public class AllUsersPageTest extends BaseTest{
         allUsersPage.searchButton.click();
         BrowserWrapper.sleep(2);
         allUsersPage = allUsersPage.clickSortByEmail();
-        BrowserWrapper.sleep(2);
-        int actual = new TableParser(allUsersPage.table).getFieldFromTableRow(1, "@email").compareToIgnoreCase(new TableParser(allUsersPage.table).getFieldFromTableRow(2, "@email"));
-        Assert.assertEquals(actual < 0, true);
+        int compareResult = tableParser.getEmailFromFirstTableRow().
+                compareToIgnoreCase(tableParser.getEmailFromTableRow(2));
+        boolean actual = compareResult < 0;
+        Assert.assertTrue(actual);
         logger.info("Test pass");
     }
 
@@ -188,8 +140,7 @@ public class AllUsersPageTest extends BaseTest{
     @DataProvider
     public Object[][] roles() {
         return new Object[][]{
-                {"MANAGER"}//,
-                //{"PATIENT"}
+                {"MANAGER"}
         };
     }
 
@@ -206,12 +157,5 @@ public class AllUsersPageTest extends BaseTest{
                 {"MANAGER", "a", "20"}
         };
     }
-
-
-    public int randomNumber(int max) {
-        Random random = new Random();
-        return random.nextInt(max - 1) + 1;
-    }
-
 
 }

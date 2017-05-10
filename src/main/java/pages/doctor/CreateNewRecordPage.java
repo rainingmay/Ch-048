@@ -7,7 +7,9 @@ import pages.PageInitializer;
 import pages.headers.headersByRole.DoctorHeader;
 
 public class CreateNewRecordPage implements PageInitializer {
+
     public DoctorHeader header;
+
     @FindBy(className = "label[for=\"complaint\"]")
     private WebElement complaintLabel;
 
@@ -39,17 +41,19 @@ public class CreateNewRecordPage implements PageInitializer {
     }
 
     public void inputComplaint(String value){
+        complaint.clear();
         complaint.sendKeys(value);
     }
 
     public void inputResult(String value){
+        result.clear();
         result.sendKeys(value);
     }
 
     public void inputPrescription(String value){
+        prescription.clear();
         prescription.sendKeys(value);
     }
-
 
     public void inputRecord(String complaint, String result, String prescription ){
         inputComplaint(complaint);
@@ -58,11 +62,6 @@ public class CreateNewRecordPage implements PageInitializer {
         submitButtonClick();
     }
 
-
-    public PatientsCardPage backButtonClick (){
-        backButton.click();
-        return new PatientsCardPage();
-    }
     public PatientsCardPage submitButtonClick(){
         submitButton.click();
         return new PatientsCardPage();

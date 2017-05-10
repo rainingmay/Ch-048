@@ -1,14 +1,15 @@
 package pages.admin;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.PageInitializer;
 import pages.headers.headersByRole.AdminHeader;
 import utils.BrowserWrapper;
 import utils.DriverInitializer;
+import utils.TableParser;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,8 +42,8 @@ public class HospitalListPage implements PageInitializer {
 
     private WebElement deleteModalSubmit;
     private WebElement showOnMap;
-    private WebElement editButton;
-    private WebElement deleteButton;
+    public WebElement editButton;
+    public WebElement deleteButton;
 
     public boolean checkAddNewHospitalButton() {
         return BrowserWrapper.isElementPresent(addNewHospitalButton);
@@ -76,19 +77,15 @@ public class HospitalListPage implements PageInitializer {
     }
 
     public HospitalListPage deleteHospital(int rowNumber) {
-        if (tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")")).isDisplayed()) {
-            WebElement tableRow = tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")"));
-            deleteButton = tableRow.findElement(By.cssSelector("body > section > div > div > div > div.col-sm-8 > div.pre-scrollable.panel.panel-default > table > tbody > tr:nth-child(" + rowNumber + ") > td:nth-child(3) > form > button:nth-child(4)"));
-            deleteButton.click();
-            BrowserWrapper.sleep(1);
-            deleteModalSubmit = tableRow.findElement(By.cssSelector("body > section > div > div > div > div.col-sm-8 > div.pre-scrollable.panel.panel-default > table > tbody > tr:nth-child(" + rowNumber + ") > td:nth-child(3) > form div.modal-content div.modal-footer > button:nth-child(1)"));
-            deleteModalSubmit.click();
-            BrowserWrapper.sleep(5);
-            BrowserWrapper.waitUntilElementClickableByLocator(By.cssSelector("a.btn:nth-child(1)"));
-            return new HospitalListPage();
-        }
-        return null;
+        deleteButton = new TableParser(table).getButtonFromTableRowByButtonTitle(rowNumber);
+        deleteButton.click();
+        BrowserWrapper.sleep(1);
+        deleteModalSubmit = DriverInitializer.instance().findElement(By.className("modal-content"));
+        ((JavascriptExecutor) DriverInitializer.instance()).executeScript("arguments[0].click();" , DriverInitializer.instance().findElement(By.cssSelector("//form div.modal-content div.modal-footer > button:nth-child(1)")));
+        BrowserWrapper.sleep(3);
+        return new HospitalListPage();
     }
+
 
     public List<String> getHospitalDataFromTableRow(int rowNumber) {
         List<String> result = new ArrayList<>();
@@ -105,5 +102,19 @@ public class HospitalListPage implements PageInitializer {
 
     public String getTitleOfPage() {
         return DriverInitializer.instance().getTitle();
+    }
+
+    public AddNewHospitalPage editButtonClick(String rowNumber) {
+        editButton = new TableParser(this.table).getButtonFromTableRow(Integer.parseInt(rowNumber), "Edit");
+        editButton.click();
+        BrowserWrapper.sleep(2);
+        return new AddNewHospitalPage();
+    }
+
+    public HospitalListPage deleteButtonClick(String rowNumber) {
+        deleteButton = new TableParser(this.table).getButtonFromTableRow(Integer.parseInt(rowNumber), "Delete");
+        deleteButton.click();
+        BrowserWrapper.sleep(2);
+        return new HospitalListPage();
     }
 }

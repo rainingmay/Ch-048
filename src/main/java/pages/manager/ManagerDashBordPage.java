@@ -1,9 +1,6 @@
 package pages.manager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.InvalidSelectorException;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import pages.PageInitializer;
 import pages.headers.headersByRole.ManagerHeader;
@@ -20,7 +17,6 @@ public class ManagerDashBordPage implements PageInitializer{
     @FindBy(className = "h1.text-center")
     private WebElement hospitalName;
 
-    //maybe no work
     @FindBy(className = "label[for=\"doctorPerPage\"]")
     private WebElement showDoctorsLabel;
 
@@ -177,24 +173,19 @@ public class ManagerDashBordPage implements PageInitializer{
     @FindBy(id = "deleteButton")
     private WebElement deleteConfirmButton;
 
-
-
     public String information = "INFORMATION ABOUT DOCTOR";
     public String edit = "EDIT DOCTOR";
+
     public void selectDoctorPerPage(String value) {
         BrowserWrapper.selectDropdown(doctorPerPageSelector, value);
-
     }
 
     public void selectSpecialization(String value) {
         BrowserWrapper.selectDropdown(specializationSelector, value);
-
-
     }
 
     public void selectSearchBy(String value) {
         BrowserWrapper.selectDropdown(searchBySelector, value);
-
     }
 
     public void searchByText(String value){
@@ -206,7 +197,6 @@ public class ManagerDashBordPage implements PageInitializer{
         BrowserWrapper.waitUntilElementVisible(searchButton);
         searchButton.click();
         BrowserWrapper.sleep(3);
-
     }
 
     public void clearButtonClick(){
@@ -289,22 +279,22 @@ public class ManagerDashBordPage implements PageInitializer{
     public String tdFinder(String colName){
         String td = null;
         switch (colName){
-            case "email":
+            case "Email":
                 td = "2";
                 break;
-            case "firstName":
+            case "First Name":
                 td = "3";
                 break;
-            case "lastName":
+            case "Last Name":
                 td = "4";
                 break;
-            case "specialization":
+            case "Specialization":
                 td = "5";
                 break;
-            case "category":
+            case "Category":
                 td = "6";
                 break;
-            case "actions":
+            case "Actions":
                 td = "7";
                 break;
         }
@@ -314,10 +304,8 @@ public class ManagerDashBordPage implements PageInitializer{
     public List<String> getColumn(String colName){
         String td = tdFinder(colName);
         ArrayList<String> list = new ArrayList<>();
-
         String text = null;
         List<WebElement> elements = DriverInitializer.instance().findElements(By.cssSelector("tbody tr td:nth-child("+ td +")"));
-
         for( WebElement webElement : elements){
             for(int i = 0; i < 5; i++) {
                 try {
@@ -335,11 +323,12 @@ public class ManagerDashBordPage implements PageInitializer{
 
 
     public boolean isDeleteConfirmationPresent(){
+        BrowserWrapper.waitUntilElementVisible(deleteHeader);
         return BrowserWrapper.isElementPresent(deleteHeader);
     }
 
 
-    public String getTestStale(WebElement element){
+    private String getTextStale(WebElement element){
         String st = null;
         for (int i = 0 ; i<5; i++) {
             try {
@@ -351,13 +340,15 @@ public class ManagerDashBordPage implements PageInitializer{
         return st;
     }
 
-    public boolean checkTitleDetails(){
-        return getTestStale(formMainTextLabel).equals(information);
+    public boolean checkTitleEdit(){
+        return getTextStale(formMainTextLabel).equals(edit);
+    }
+        public boolean checkTitleDetails(){
+        BrowserWrapper.waitUntilElementNotStale(formMainTextLabel);
+        return formMainTextLabel.getText().equals(information);
     }
 
-    public boolean checkTitleEdit(){
-        return getTestStale(formMainTextLabel).equals(edit);
-    }
+
 
     public String getDetailedName(){
         String text = null;
@@ -428,7 +419,6 @@ public class ManagerDashBordPage implements PageInitializer{
 
 
     public void enterFullNameDetailedForm(String firstName, String lastName){
-
         BrowserWrapper.waitUntilElementNotStale(formFirstNameInput);
         formFirstNameInput.clear();
         formFirstNameInput.sendKeys(firstName);

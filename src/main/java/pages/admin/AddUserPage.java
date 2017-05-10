@@ -25,7 +25,7 @@ public class AddUserPage implements PageInitializer {
     }
 
 
-    @FindBy(css = "/html/body/section/div/div/div/div/div/form/fieldset/h1")
+    @FindBy(css = "form fieldset h1")
     private WebElement addUserLabel;
 
     @FindBy(id = "email")
@@ -43,7 +43,7 @@ public class AddUserPage implements PageInitializer {
     @FindBy(id = "userRoles")
     private WebElement userRolesSelect;
 
-    @FindBy(xpath = "//*[@id=\"enabledUserCheckbox\"]/button")
+    @FindBy(css = "#enabledUserCheckbox.button-checkbox button.btn.btn-default")
     private WebElement enableButton;
 
     @FindBy(id = "newUserSubmit")

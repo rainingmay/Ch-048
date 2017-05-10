@@ -5,6 +5,7 @@ import pages.headers.BaseHeader;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Properties;
 
@@ -12,7 +13,8 @@ import java.util.Properties;
 @Listeners({ScreenshotListener.class})
 public class BaseTest {
 
-    public static Properties properties = null;
+
+    public static Properties properties;
 
     public static final String ADMIN_LOGIN = "admin@hospitals.ua";
     public static final String ADMIN_PASSWORD = "1111";
@@ -26,11 +28,13 @@ public class BaseTest {
     public static final String PATIENT_LOGIN = "patient.cd@hospitals.ua";
     public static final String PATIENT_PASSWORD = "1111";
 
-    protected static final String BASE_URL = "https://localhost:8443/HospitalSeeker/";
+    public static final String BASE_URL = "https://localhost:8443/HospitalSeeker/";
 
     @BeforeClass(alwaysRun = true)
     public void before() {
         DriverInitializer.getToUrl(BASE_URL);
+        String s = System.getProperty("test.language");
+        BaseNavigation.changeLanguage(s);
     }
 
 
@@ -43,12 +47,12 @@ public class BaseTest {
     public static void checkLanguageAndLoadProperties(BaseHeader header) {
         properties = new Properties();
         try {
-            if (header.getChangeLanguageIco().getAttribute("src").endsWith("/en.png")) {
-                properties.load(new InputStreamReader(
-                        new FileInputStream("src/main/resources/languageEng.properties"), "UTF-8"));
+            if (header.getChangeLanguageIco().getAttribute("src").contains("en")) {
+                InputStream inputStream = new FileInputStream("src/test/resources/localization/en.properties");
+                properties.load(inputStream);
             } else {
-                properties.load(new InputStreamReader(
-                        new FileInputStream("src/main/resources/languageUa.properties"), "UTF-8"));
+                InputStream inputStream = new FileInputStream("src/main/resources/localization/ua.properties");
+                properties.load(inputStream);
             }
         } catch (IOException e) {
             e.printStackTrace();

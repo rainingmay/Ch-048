@@ -2,14 +2,12 @@ package utils.databaseutil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pages.admin.AllUsersPage;
 
-import javax.swing.*;
-import java.awt.*;
 import java.io.*;
-import java.net.URISyntaxException;
-import java.security.CodeSource;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 
@@ -70,8 +68,8 @@ public class DatabaseOperations {
 
 
             Properties properties = new Properties();
-            String filepath = "src\\main\\resources\\" + filename;
-            InputStream inputStream = new FileInputStream("src/main/resources/detailedDatabaseProperties.properties");
+            String filepath = "src/main/resources/" + filename;
+            InputStream inputStream = new FileInputStream("src/main/resources/database.properties");
             properties.load(inputStream);
 
             Runtime runtime = Runtime.getRuntime();
@@ -107,11 +105,11 @@ public class DatabaseOperations {
     }
 
 
-    /*public static void backup(String filename) {
+    public static void backup(String filename) {
         try {
             Properties properties = new Properties();
-            String filepath = "src\\main\\resources\\" + filename;
-            InputStream inputStream = new FileInputStream("src\\main\\resources\\detailedDatabaseProperties.properties");
+            String filepath = "src/ main/resources/" + filename;
+            InputStream inputStream = new FileInputStream("src/main/resources/database.properties");
             properties.load(inputStream);
 
             Runtime runtime = Runtime.getRuntime();;
@@ -125,10 +123,20 @@ public class DatabaseOperations {
                     "--blobs",
                     "--verbose", "--file", filepath, properties.getProperty("db.name"));
             Process process = processBuilder.start();
+
+            Logger logger = LoggerFactory.getLogger(DatabaseOperations.class);
+
+            InputStream is = process.getInputStream();
+            InputStreamReader isr = new InputStreamReader(is);
+            BufferedReader br = new BufferedReader(isr);
+            String ll;
+            while ((ll = br.readLine()) != null) {
+                logger.info(ll);
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 }

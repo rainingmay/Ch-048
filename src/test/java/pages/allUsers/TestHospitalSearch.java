@@ -1,13 +1,12 @@
 package pages.allUsers;
 
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import pages.headers.BaseHeader;
-import pages.headers.headersByRole.NotAuthorizedHeader;
+import pages.admin.AllUsersPage;
 import utils.BaseNavigation;
 import utils.BaseTest;
+import utils.BrowserWrapper;
 import utils.DriverInitializer;
 
 import static org.testng.Assert.assertEquals;
@@ -27,50 +26,45 @@ public class TestHospitalSearch extends BaseTest {
         };
     }
 
-    @BeforeMethod
-    public void beforeMethod() {
-        DriverInitializer.getToUrl(BASE_URL);
-    }
-
     @AfterMethod(alwaysRun = true)
     public void afterMethod() throws Exception{
         DriverInitializer.deleteAllCookies();
     }
 
     @Test(dataProvider = "SearchProvider")
-    public void testFindHospitalNotAuthorizedUser(String searchWord, int expected) throws Exception {
-        NotAuthorizedHeader header = new NotAuthorizedHeader();
-        HospitalSearchResultPage hospitalSearchResult = header.findHospital(searchWord);
-        Thread.sleep(1000);
+    public void testFindHospitalNotAuthorizedUser(String searchWord, int expected) {
+        HospitalSeekerHomePage hospitalSeekerHomePage = new HospitalSeekerHomePage();
+        HospitalSearchResultPage hospitalSearchResult = hospitalSeekerHomePage.header.findHospital(searchWord);
+        BrowserWrapper.sleep(1);
         assertEquals(hospitalSearchResult.countOfHospital(), expected);
     }
 
     @Test(dataProvider = "SearchProvider")
     public void testFindHospitalAuthorizedUser(String searchWord, int expected) throws Exception {
-        NotAuthorizedHeader header = new NotAuthorizedHeader();
-        BaseNavigation.login("admin@hospitals.ua", "1111");
-        Thread.sleep(1000);
-        HospitalSearchResultPage hospitalSearchResult = header.findHospital(searchWord);
+        HospitalSeekerHomePage hospitalSeekerHomePage = new HospitalSeekerHomePage();
+        AllUsersPage allUsersPage = BaseNavigation.loginAsAdmin("admin@hospitals.ua", "1111");
+        BrowserWrapper.sleep(1);
+        HospitalSearchResultPage hospitalSearchResult = allUsersPage.header.findHospital(searchWord);
         assertEquals(hospitalSearchResult.countOfHospital(), expected);
     }
 
     @Test(groups = "InputValidation")
     public void testFindHospitalInputValidationUa() throws Exception {
-        BaseHeader header = new BaseHeader();
-        header.changeLanguageToUa();
-        Thread.sleep(1000);
-        header.fillHospitalInput("ho");
-        BaseTest.checkLanguageAndLoadProperties(header);
-        assertEquals(header.getHospitalSearchError().getText(), properties.getProperty("lineToShort"));
+        HospitalSeekerHomePage hospitalSeekerHomePage = new HospitalSeekerHomePage();
+        hospitalSeekerHomePage.header.changeLanguageToUa();
+        BrowserWrapper.sleep(1);
+        hospitalSeekerHomePage.header.fillHospitalInput("ho");
+        BaseTest.checkLanguageAndLoadProperties(hospitalSeekerHomePage.header);
+        assertEquals(hospitalSeekerHomePage.header.getHospitalSearchError().getText(), properties.getProperty("lineToShort"));
     }
 
     @Test(groups = "InputValidation")
     public void testFindHospitalInputValidationEng() throws Exception {
-        BaseHeader header = new BaseHeader();
-        header.changeLanguageToEn();
-        Thread.sleep(1000);
-        header.fillHospitalInput("ho");
-        BaseTest.checkLanguageAndLoadProperties(header);
-        assertEquals(header.getHospitalSearchError().getText(), properties.getProperty("lineToShort"));
+        HospitalSeekerHomePage hospitalSeekerHomePage = new HospitalSeekerHomePage();
+        hospitalSeekerHomePage.header.changeLanguageToEn();
+        BrowserWrapper.sleep(1);
+        hospitalSeekerHomePage.header.fillHospitalInput("ho");
+        BaseTest.checkLanguageAndLoadProperties(hospitalSeekerHomePage.header);
+        assertEquals(hospitalSeekerHomePage.header.getHospitalSearchError().getText(), properties.getProperty("lineToShort"));
     }
 }

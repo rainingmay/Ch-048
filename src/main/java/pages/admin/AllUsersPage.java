@@ -44,10 +44,10 @@ public class AllUsersPage implements PageInitializer {
     @FindBy(id = "clearButton")
     private WebElement clearButton;
 
-    @FindBy(xpath = "/html/body/section/div[1]/div/form/div[5]/a[1]")
+    @FindBy(css = "a[href=\"/HospitalSeeker/admin/users?status=true\"]")
     private WebElement enableButton;
 
-    @FindBy(xpath = "/html/body/section/div[1]/div/form/div[5]/a[2]")
+    @FindBy(css = "a[href=\"/HospitalSeeker/admin/users?status=false\"]")
     private WebElement disableButton;
 
     @FindBy(css = ".pull-right .btn-group a:last-child")
@@ -84,7 +84,7 @@ public class AllUsersPage implements PageInitializer {
     @FindBy(id = "roles.type")
     private WebElement sortByRoleButton;
 
-    private WebElement viewWindow;
+    public WebElement viewWindow;
 
     @FindBy(className = "table table-user-information")
     private WebElement editWindow;
@@ -124,14 +124,14 @@ public class AllUsersPage implements PageInitializer {
     }
 
     public AllUsersPage showEnableUsers() {
-        enableButton.click();
-        BrowserWrapper.waitForPage();
+        ((JavascriptExecutor) DriverInitializer.instance()).executeScript("arguments[0].click();" , enableButton);
+        BrowserWrapper.sleep(2);
         return new AllUsersPage();
     }
 
     public AllUsersPage showDisableUsers() {
         ((JavascriptExecutor) DriverInitializer.instance()).executeScript("arguments[0].click();" , disableButton);
-        BrowserWrapper.waitForPage();
+        BrowserWrapper.sleep(3);
         return new AllUsersPage();
     }
 
@@ -145,7 +145,7 @@ public class AllUsersPage implements PageInitializer {
     public AllUsersPage changeRole(String role) {
         this.role.findElement(By.cssSelector("option[value=" + role + "]")).click();
         searchButton.click();
-        BrowserWrapper.waitForPage();
+        BrowserWrapper.sleep(2);
         return new AllUsersPage();
     }
 
@@ -157,6 +157,7 @@ public class AllUsersPage implements PageInitializer {
 
     public void sendKeysToSearchField(String keys) {
         searchWindow.clear();
+        BrowserWrapper.sleep(1);
         searchWindow.sendKeys(keys);
     }
 
@@ -166,28 +167,28 @@ public class AllUsersPage implements PageInitializer {
         changeSearchBy(field);
         sendKeysToSearchField(keys);
         searchButton.click();
+        BrowserWrapper.sleep(2);
         return new AllUsersPage();
     }
 
 
     public List<String> getUserDataFromInfoWindow(int rowNumber) {
-        try {
-            List<String> result = new LinkedList<>();
-            WebElement infoButton = new TableParser(table).getButtonFromTableRow(rowNumber, "View");
-            infoButton.click();
-            Thread.sleep(2000);
-            viewWindow = DriverInitializer.instance().findElement(By.className("modal-content"));
-            result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(1) td:last-child")).getText());
-            result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(2) td:last-child")).getText());
-            result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(4) td:last-child")).getText());
-            closeViewWindow();
-            Thread.sleep(2000);
-            return result;
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }return null;
+        List<String> result = new LinkedList<>();
+        WebElement infoButton = new TableParser(table).getButtonFromTableRow(rowNumber, "View");
+        infoButton.click();
+        BrowserWrapper.sleep(3);
+        viewWindow = DriverInitializer.instance().findElement(By.className("modal-content"));
+        result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(1) td:last-child")).getText());
+        result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(2) td:last-child")).getText());
+        result.add(viewWindow.findElement(By.cssSelector("tbody tr:nth-child(4) td:last-child")).getText());
+        closeViewWindow();
+        BrowserWrapper.sleep(2);
+        return result;
     }
 
+    public List<String> getFirstUserDataFromInfoWindow() {
+        return getUserDataFromInfoWindow(1);
+    }
 
     public int getCountOfUsersInTable() {
         return tableBody.findElements(By.cssSelector("tr")).size();
@@ -208,19 +209,20 @@ public class AllUsersPage implements PageInitializer {
     public WebElement openEditWindow(int rowNumber) {
         WebElement editButton = new TableParser(table).getButtonFromTableRow(rowNumber, "Edit");
         editButton.click();
-        BrowserWrapper.sleep(3);
+        BrowserWrapper.sleep(2);
         editWindow = DriverInitializer.instance().findElement(By.id("detailForm"));
         return editWindow;
     }
 
 
-    public AllUsersPage changeRoleInEditWindow(int rowNumber, String role) {
+    public AllUsersPage changeRoleInEditWindow(String role) {
+        int rowNumber = 1;
         openEditWindow(rowNumber);
-        BrowserWrapper.sleep(3);
+        BrowserWrapper.sleep(2);
         selectDropdownRole(editWindow.findElement(By.id("userRoles")), role);
-        BrowserWrapper.sleep(3);
+        BrowserWrapper.sleep(2);
         editWindow.findElement(By.cssSelector("input[value=\"Edit\"]")).click();
-        BrowserWrapper.sleep(3);
+        BrowserWrapper.sleep(2);
         return new AllUsersPage();
     }
 
@@ -239,6 +241,7 @@ public class AllUsersPage implements PageInitializer {
     public AllUsersPage toNextPage() {
             if (!nextPageButton.equals(null)) {
                 nextPageButton.click();
+                BrowserWrapper.sleep(2);
                 return new AllUsersPage();
             }
             return null;
@@ -256,16 +259,8 @@ public class AllUsersPage implements PageInitializer {
 
     public AllUsersPage clickSortByEmail() {
         sortByEmailButton.click();
+        BrowserWrapper.sleep(2);
         return new AllUsersPage();
     }
 
-
-    public boolean equals(AllUsersPage allUsersPage) {
-        if (this.tableBody.equals(allUsersPage.tableBody)) return true;
-        return false;
-    }
-
-    public String getCurrentUrl() {
-        return DriverInitializer.instance().getCurrentUrl();
-    }
 }

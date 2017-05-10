@@ -18,8 +18,7 @@ public class ManagerHeader extends AuthorizedHeader implements PageInitializer {
         pageInitialization();
     }
 
-   // @FindBy(linkText = "Actions")
-    @FindBy(xpath = "//li[4]/a")
+    @FindBy(css ="div#bs-example-navbar-collapse-1 ul li:nth-child(4)")
     private WebElement actions;
 
     @FindBy(css = "a[href=\"/HospitalSeeker/manage/hospitals]")
@@ -53,6 +52,8 @@ public class ManagerHeader extends AuthorizedHeader implements PageInitializer {
         getFeedbackManagePageIco.click();
         return new ModerationFeedBackPage();
     }
+
+
 
 
 }
