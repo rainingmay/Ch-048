@@ -17,7 +17,6 @@ public class HospitalSearchSteps {
     @When("^I try to search hospital by (.*)$")
     public void iTryToSearchHospitalBySearch_word(String search_word) {
         hospitalSearchResult = hospitalSearchResult.notAuthorizedHeader.findHospital(search_word);
-        BrowserWrapper.sleep(1);
     }
 
     @Then("^I should see (\\d+) hospitals which name, description or address consist search word$")

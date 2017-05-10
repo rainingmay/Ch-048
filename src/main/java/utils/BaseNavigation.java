@@ -23,7 +23,7 @@ public class BaseNavigation {
         AuthorizedHeader authorizedHeader = new AuthorizedHeader();
         authorizedHeader.profileButtonClick();
         HospitalSeekerHomePage hospitalSeekerHomePage = authorizedHeader.logoutButtonClick();
-        BrowserWrapper.sleep(2);
+        BrowserWrapper.waitUntilElementVisible(hospitalSeekerHomePage.getHomePageImage());
         return hospitalSeekerHomePage;
     }
 

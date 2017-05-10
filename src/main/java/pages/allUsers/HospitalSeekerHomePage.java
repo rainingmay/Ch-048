@@ -27,8 +27,12 @@ public class HospitalSeekerHomePage implements PageInitializer {
     @FindBy(css = "a.right.carousel-control")
     private WebElement rightCarouselButton;
 
-    @FindBy(css = "img[src=\"/HospitalSeeker/img/slide-four.jpg\"]")
-    private WebElement image;
+    @FindBy(css = "img[src=\"/HospitalSeeker/img/slide-one.jpg\"]")
+    protected WebElement homePageImage;
+
+    public WebElement getHomePageImage() {
+        return homePageImage;
+    }
 
     public HospitalSeekerHomePage() {
         notAuthorizedHeader = new NotAuthorizedHeader();
