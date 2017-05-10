@@ -16,8 +16,7 @@ import utils.databaseutil.UserDAO;
 
 
 
-public class
-SchedulerPageTest extends BaseTest {
+public class SchedulerPageTest extends BaseTest {
 
     public static final String TEST_BEGIN_AT_HOUR = "11:00";
     public static final String TEST_END_AT_HOUR = "20:00";
