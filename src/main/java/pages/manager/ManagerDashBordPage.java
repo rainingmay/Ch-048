@@ -1,6 +1,9 @@
 package pages.manager;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.InvalidSelectorException;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.PageInitializer;
 import pages.headers.headersByRole.ManagerHeader;
@@ -173,6 +176,7 @@ public class ManagerDashBordPage implements PageInitializer{
 
     @FindBy(id = "deleteButton")
     private WebElement deleteConfirmButton;
+
 
 
     public String information = "INFORMATION ABOUT DOCTOR";

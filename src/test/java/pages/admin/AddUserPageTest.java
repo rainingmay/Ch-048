@@ -14,18 +14,19 @@ import utils.BaseNavigation;
 import utils.BaseTest;
 import utils.BrowserWrapper;
 import utils.DriverInitializer;
-import utils.databaseutil.DatabaseOperations;
 
 
 public class AddUserPageTest extends BaseTest {
 
 
-    public static final String NEWUSERLOGIN = "klsd@gmail@com";
+    public static final String NEWUSERLOGIN = "kldd@gmail@com";
     public static final String NEWUSERPASSWORD = "Q12345w";
     public static final String NEWUSERROLE = "ADMIN";
 
     public static final String IDFORWAITING = "searchButton";
     public static final String SUCCEFULYCREATEDUSERTEXT = " successfully registered!";
+
+    public static final String REQUUIRED_FIELD_TEXT = "This field is required.";
 
     Logger logger = LoggerFactory.getLogger(SchedulerPage.class);
 
@@ -83,7 +84,7 @@ public class AddUserPageTest extends BaseTest {
         addUserPage.addNewUserWithotRole(NEWUSERLOGIN, NEWUSERPASSWORD);
 
         String actualErrorRolesLabelText = addUserPage.userRolesErrorLabel.getText();
-        String expectedErrorRolesLabelText = "This field is required.";
+        String expectedErrorRolesLabelText = REQUUIRED_FIELD_TEXT;
 
         Assert.assertEquals(actualErrorRolesLabelText, expectedErrorRolesLabelText);
 
@@ -98,7 +99,7 @@ public class AddUserPageTest extends BaseTest {
         addUserPage.addNewUserWithotPasswordConfirmation(NEWUSERLOGIN, NEWUSERPASSWORD);
 
         String actualErrorPasswordConfirmationLabelText = addUserPage.confirmPasswordErrorLabel.getText();
-        String expectedErrorPasswordConfirmationText = "This field is required.";
+        String expectedErrorPasswordConfirmationText = REQUUIRED_FIELD_TEXT;
 
         Assert.assertEquals(actualErrorPasswordConfirmationLabelText, expectedErrorPasswordConfirmationText);
 
@@ -149,11 +150,10 @@ public class AddUserPageTest extends BaseTest {
         addUserPage = addUserPage.header.goToAddUserPage();
         addUserPage.addNewUser("", NEWUSERPASSWORD, NEWUSERROLE);
 
-        String expectedEmailErrorLabelText = "This field is required.";
+        String expectedEmailErrorLabelText = REQUUIRED_FIELD_TEXT;
         String actualEmailErrorLabel = addUserPage.emailErrorLabel.getText();
 
         Assert.assertEquals(expectedEmailErrorLabelText, actualEmailErrorLabel);
-        System.out.println("Email field is required but empty");
     }
 
     @Test(groups = {"unSuccessfully"})
@@ -163,11 +163,10 @@ public class AddUserPageTest extends BaseTest {
         addUserPage = addUserPage.header.goToAddUserPage();
         addUserPage.addNewUser(NEWUSERLOGIN, "", NEWUSERROLE);
 
-        String expectedPasswordErrorLabelText = "This field is required.";
+        String expectedPasswordErrorLabelText = REQUUIRED_FIELD_TEXT;
         String actualPasswordErrorLabel = addUserPage.passwordErrorLabel.getText();
 
         Assert.assertEquals(expectedPasswordErrorLabelText, actualPasswordErrorLabel);
-        System.out.println("Password field is required but empty");
     }
 
     @Test(dataProvider = "validInformation",groups = {"Successfully"})
