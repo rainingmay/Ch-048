@@ -42,8 +42,8 @@ public class HospitalListPage implements PageInitializer {
 
     private WebElement deleteModalSubmit;
     private WebElement showOnMap;
-    private WebElement editButton;
-    private WebElement deleteButton;
+    public WebElement editButton;
+    public WebElement deleteButton;
 
     public boolean checkAddNewHospitalButton() {
         return BrowserWrapper.isElementPresent(addNewHospitalButton);
@@ -102,5 +102,19 @@ public class HospitalListPage implements PageInitializer {
 
     public String getTitleOfPage() {
         return DriverInitializer.instance().getTitle();
+    }
+
+    public AddNewHospitalPage editButtonClick(String rowNumber) {
+        editButton = new TableParser(this.table).getButtonFromTableRow(Integer.parseInt(rowNumber), "Edit");
+        editButton.click();
+        BrowserWrapper.sleep(2);
+        return new AddNewHospitalPage();
+    }
+
+    public HospitalListPage deleteButtonClick(String rowNumber) {
+        deleteButton = new TableParser(this.table).getButtonFromTableRow(Integer.parseInt(rowNumber), "Delete");
+        deleteButton.click();
+        BrowserWrapper.sleep(2);
+        return new HospitalListPage();
     }
 }

@@ -34,6 +34,10 @@ public class TableParser {
         return cellsFromRow;
     }
 
+    private WebElement getRowFromTable(int rowNumber) {
+        return table.findElement(By.cssSelector("tbody tr:nth-child(" + rowNumber + ")"));
+    }
+
     private List<String> getDataFromTableRow(int rowNumber) {
         List<WebElement> cells = getCellsFromTableRow(rowNumber);
         List<String> result = new LinkedList<>();
@@ -58,15 +62,13 @@ public class TableParser {
     }
 
     public WebElement getButtonFromTableRow(int rowNumber, String buttonName) {
-        List<WebElement> webElements = getCellsFromTableRow(rowNumber);
-        WebElement button;
-        for (WebElement cell : webElements) {
-            if (cell.findElements(By.cssSelector("span[title=\"" + buttonName + "\"]")).size() > 0)
-                return cell.findElement(By.cssSelector("span[title=\"" + buttonName + "\"]"));
-            if (cell.findElements(By.cssSelector("a[title=\"" + buttonName + "\"]")).size() > 0)
-                return cell.findElement(By.cssSelector("a[title=\"" + buttonName + "\"]"));
-        }
-
+        WebElement row = getRowFromTable(rowNumber);
+        if (row.findElements(By.cssSelector("span[title=\"" + buttonName + "\"]")).size() > 0)
+            return row.findElement(By.cssSelector("span[title=\"" + buttonName + "\"]"));
+        if (row.findElements(By.cssSelector("button[title=\"" + buttonName + "\"]")).size() > 0)
+            return row.findElement(By.cssSelector("button[title=\"" + buttonName + "\"]"));
+        if (row.findElements(By.cssSelector("a[title=\"" + buttonName + "\"]")).size() > 0)
+            return row.findElement(By.cssSelector("a[title=\"" + buttonName + "\"]"));
         return null;
     }
 

@@ -124,7 +124,7 @@ public class AllUsersPage implements PageInitializer {
     }
 
     public AllUsersPage showEnableUsers() {
-        enableButton.click();
+        ((JavascriptExecutor) DriverInitializer.instance()).executeScript("arguments[0].click();" , enableButton);
         BrowserWrapper.sleep(2);
         return new AllUsersPage();
     }
@@ -209,7 +209,7 @@ public class AllUsersPage implements PageInitializer {
     public WebElement openEditWindow(int rowNumber) {
         WebElement editButton = new TableParser(table).getButtonFromTableRow(rowNumber, "Edit");
         editButton.click();
-        BrowserWrapper.sleep(3);
+        BrowserWrapper.sleep(2);
         editWindow = DriverInitializer.instance().findElement(By.id("detailForm"));
         return editWindow;
     }
@@ -218,11 +218,11 @@ public class AllUsersPage implements PageInitializer {
     public AllUsersPage changeRoleInEditWindow(String role) {
         int rowNumber = 1;
         openEditWindow(rowNumber);
-        BrowserWrapper.sleep(3);
+        BrowserWrapper.sleep(2);
         selectDropdownRole(editWindow.findElement(By.id("userRoles")), role);
-        BrowserWrapper.sleep(3);
+        BrowserWrapper.sleep(2);
         editWindow.findElement(By.cssSelector("input[value=\"Edit\"]")).click();
-        BrowserWrapper.sleep(3);
+        BrowserWrapper.sleep(2);
         return new AllUsersPage();
     }
 

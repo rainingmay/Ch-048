@@ -85,7 +85,7 @@ public class BaseHeader implements PageInitializer {
     public BaseHeader changeLanguageToUa() {
         changeLanguageIco.click();
         uaLanguage.click();
-        return new BaseHeader();
+        return this;
     }
 
     public BaseHeader changeLanguageToEn() {

@@ -21,7 +21,7 @@ public class AdminHeader extends AuthorizedHeader implements PageInitializer {
     @FindBy(css = "#bs-example-navbar-collapse-1 > ul li:nth-child(2)")
     public WebElement homeButton;
 
-    @FindBy(css = "div#bs-example-navbar-collapse-1>ul li:nth-child(3)")
+    @FindBy(css = "#bs-example-navbar-collapse-1>ul li:nth-child(4)")
     public WebElement actions;
 
     @FindBy(css = "a[href=\"/HospitalSeeker/admin/users?status=true\"]")
