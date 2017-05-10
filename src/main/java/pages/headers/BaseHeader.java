@@ -3,9 +3,7 @@ package pages.headers;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.PageInitializer;
-import pages.allUsers.DoctorSearchResultPage;
-import pages.allUsers.HospitalSearchResultPage;
-import pages.allUsers.HospitalSeekerHomePage;
+import pages.allUsers.*;
 import utils.BrowserWrapper;
 
 
@@ -80,12 +78,15 @@ public class BaseHeader implements PageInitializer {
         return new HospitalSeekerHomePage();
     }
 
-
+    public MapSearchPage toMapOfHospitals() {
+        nearestHospital.click();
+        return new MapSearchPage();
+    }
 
     public BaseHeader changeLanguageToUa() {
         changeLanguageIco.click();
         uaLanguage.click();
-        return this;
+        return new BaseHeader();
     }
 
     public BaseHeader changeLanguageToEn() {
@@ -109,6 +110,7 @@ public class BaseHeader implements PageInitializer {
     }
 
     public  DoctorSearchResultPage findDoctor(String doctorName) {
+        BrowserWrapper.sleep(2);
         fillDoctorInput(doctorName);
         BrowserWrapper.waitUntilElementClickable(doctorSearchButton);
         doctorSearchButton.click();

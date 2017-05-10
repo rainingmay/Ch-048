@@ -2,9 +2,12 @@ package pages.manager;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 import pages.PageInitializer;
 import pages.headers.headersByRole.ManagerHeader;
 import utils.BrowserWrapper;
+
+import java.util.List;
 
 
 /**
@@ -19,8 +22,8 @@ public class ModerationFeedBackPage implements PageInitializer {
     @FindBy(css = "input[value=\"NEW\"]")
     private WebElement newButton;
 
-    @FindBy(css = "input[value=\"OK\"]")
-    private WebElement okButton;
+    @FindBys(@FindBy(css = "input[value=\"OK\"]"))
+    private List<WebElement> okButtons;
 
     @FindBy(css = "input[value=\"BAD\"]")
     private WebElement badButton;
@@ -28,44 +31,12 @@ public class ModerationFeedBackPage implements PageInitializer {
     @FindBy(id = "searchButton")
     private WebElement searchButton;
 
+   @FindBy(css = "label[value=\"OK\"]")
+   private  WebElement approveButton;
 
-    //auto-increment of id
-    @FindBy(xpath = "//*[@id=\"2\"]/div[1]/span")
-    private WebElement patientOneName;
+   @FindBy(xpath = "//*[@id=\"20\"]")
+   public WebElement patientOneFeedbackBody;
 
-    @FindBy(xpath = "//*[@id=\"2\"]/div[1]/div/span")
-    private WebElement patienOneDateOfCreation;
-
-    @FindBy(xpath = "//*[@id=\"2\"]/div[2]")
-    public WebElement patientOneFeedbackBody;
-
-    @FindBy(xpath = "//*[@id=\"2\"]/div[3]/div/label[1]")
-    private WebElement patientOneOkButton;
-
-    @FindBy(xpath = "//*[@id=\"2\"]/div[3]/div/label[2]")
-    private WebElement patientOneBlockButton;
-
-    @FindBy(xpath = "//*[@id=\"2\"]/div[3]/span")
-    private WebElement patientOneDoctorName;
-
-
-    @FindBy(xpath = "//*[@id=\"5\"]/div[1]/span")
-    private WebElement patientTwoName;
-
-    @FindBy(xpath = "//*[@id=\"5\"]/div[1]/div/span")
-    private WebElement patienTwoDateOfCreation;
-
-    @FindBy(xpath = "//*[@id=\"5\"]/div[2]")
-    private WebElement patientTwoFeedbackBody;
-
-    @FindBy(xpath = "//*[@id=\"5\"]/div[3]/div/label[1]")
-    private WebElement patientTwoOkButton;
-
-    @FindBy(xpath = "//*[@id=\"5\"]/div[3]/div/label[2]")
-    private WebElement patientTwoBlockButton;
-
-    @FindBy(xpath = "//*[@id=\"5\"]/div[3]/span")
-    private WebElement patientTwoDoctorName;
 
 
 
@@ -74,8 +45,11 @@ public class ModerationFeedBackPage implements PageInitializer {
     private WebElement backToTopButton;
 
 
+
     public ModerationFeedBackPage  confirmFeedback(){
-        patientOneOkButton.click();
+        BrowserWrapper.sleep(2);
+        okButtons.get(1).click();
+
         BrowserWrapper.refreshPage();
         return new ModerationFeedBackPage();
     }
