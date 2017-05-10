@@ -22,7 +22,9 @@ public class BaseNavigation {
     public static HospitalSeekerHomePage logout() {
         AuthorizedHeader authorizedHeader = new AuthorizedHeader();
         authorizedHeader.profileButtonClick();
-        return authorizedHeader.logoutButtonClick();
+        HospitalSeekerHomePage hospitalSeekerHomePage = authorizedHeader.logoutButtonClick();
+        BrowserWrapper.sleep(2);
+        return hospitalSeekerHomePage;
     }
 
     public static AllUsersPage loginAsAdmin(String email, String password) {

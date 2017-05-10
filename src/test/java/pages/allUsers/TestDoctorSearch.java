@@ -6,7 +6,6 @@ import org.testng.annotations.Test;
 import pages.headers.headersByRole.NotAuthorizedHeader;
 import utils.BaseNavigation;
 import utils.BaseTest;
-import utils.BrowserWrapper;
 import utils.DriverInitializer;
 
 import static org.testng.Assert.assertEquals;
@@ -17,7 +16,6 @@ import static org.testng.Assert.assertEquals;
 public class TestDoctorSearch extends BaseTest {
 
     public static final String TOO_SHORT_SEARCH_WORD = "ho";
-    public static final int SLEEP_TIMEOUT = 2;
 
     @AfterMethod(alwaysRun = true)
     public void afterMethod() throws Exception {
@@ -28,7 +26,6 @@ public class TestDoctorSearch extends BaseTest {
     public void testFindDoctorNotAuthorizedUser(String searchWord, int expected) throws Exception {
         NotAuthorizedHeader header = new NotAuthorizedHeader();
         DoctorSearchResultPage doctorSearchResult = header.findDoctor(searchWord);
-        BrowserWrapper.sleep(SLEEP_TIMEOUT);
         assertEquals(doctorSearchResult.countOfDoctors(), expected);
     }
 
@@ -36,18 +33,15 @@ public class TestDoctorSearch extends BaseTest {
     public void testFindDoctorAuthorizedUser(String searchWord, int expected) throws Exception {
         NotAuthorizedHeader header = new NotAuthorizedHeader();
         BaseNavigation.login(ADMIN_LOGIN, ADMIN_PASSWORD);
-        BrowserWrapper.sleep(SLEEP_TIMEOUT);
         DoctorSearchResultPage doctorSearchResult = header.findDoctor(searchWord);
         assertEquals(doctorSearchResult.countOfDoctors(), expected);
         BaseNavigation.logout();
-        BrowserWrapper.sleep(2);
     }
 
     @Test(groups = "InputValidation")
     public void testFindDoctorInputValidationEng() throws Exception {
         NotAuthorizedHeader header = new NotAuthorizedHeader();
         header.changeLanguageToEn();
-        BrowserWrapper.sleep(SLEEP_TIMEOUT);
         header.fillDoctorInput(TOO_SHORT_SEARCH_WORD);
         BaseTest.checkLanguageAndLoadProperties(header);
         assertEquals(header.getDoctorSearchError().getText(),
@@ -59,7 +53,6 @@ public class TestDoctorSearch extends BaseTest {
     public void testFindDoctorInputValidationUa() throws Exception {
         NotAuthorizedHeader header = new NotAuthorizedHeader();
         header.changeLanguageToUa();
-        BrowserWrapper.sleep(SLEEP_TIMEOUT);
         header.fillDoctorInput(TOO_SHORT_SEARCH_WORD);
         BaseTest.checkLanguageAndLoadProperties(header);
         assertEquals(header.getDoctorSearchError().getText(),
