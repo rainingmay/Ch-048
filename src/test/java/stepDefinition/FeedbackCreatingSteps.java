@@ -18,7 +18,7 @@ import pages.manager.ModerationFeedBackPage;
 import utils.BaseNavigation;
 import utils.BrowserWrapper;
 
-/*
+
 public class FeedbackCreatingSteps {
 
     public static final String PATIENT_LOGIN = "patient.cd@hospitals.ua";
@@ -80,7 +80,7 @@ public class FeedbackCreatingSteps {
         Assert.assertFalse(BrowserWrapper.isElementPresent(moderationFeedBackPage.patientOneFeedbackBody));
     }*/
 
-/*
+
 
     @When("^i sign in as a patient and move to the current doctorInfoPage$")
     public void i_sign_in_as_a_patient_and_move_to_the_current_doctorInfoPage() throws Throwable {
@@ -101,4 +101,4 @@ public class FeedbackCreatingSteps {
     }
 
 
-}*/
+}

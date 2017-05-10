@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * Created by radgast on 24.04.17.
- *//*
+ */
 public class DoctorActionsSteps {
     public static final String HOSPITAL_NAME = "Miska Poliklinika";
     public static final String MANAGER_LOGIN = "manager.jh@hospitals.ua";
@@ -100,4 +100,4 @@ public class DoctorActionsSteps {
         Assert.assertTrue(list.stream().noneMatch(e -> e.equals(DOCTOR_NAME)));
     }
 
-}*/
+}

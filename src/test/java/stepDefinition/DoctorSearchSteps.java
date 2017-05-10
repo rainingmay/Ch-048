@@ -11,7 +11,7 @@ import utils.BaseNavigation;
 
 /**
  * Created by radgast on 22.04.17.
- *//*
+ */
 public class DoctorSearchSteps  {
     public static final String HOSPITAL_NAME = "Miska Poliklinika";
     public static final String MANAGER_LOGIN = "manager.jh@hospitals.ua";
@@ -125,4 +125,4 @@ public class DoctorSearchSteps  {
         Assert.assertEquals(managerDashBordPage.getNumberOfRows(), numberOfRows);
     }
 
-}*/
+}

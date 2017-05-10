@@ -13,7 +13,7 @@ import static org.testng.Assert.assertEquals;
 
 /**
  * Created by ybalatc on 5/4/2017.
- *//*
+ */
 
 public class AnonymousHospitalSearchSteps {
     private NotAuthorizedHeader header;
@@ -29,4 +29,4 @@ public class AnonymousHospitalSearchSteps {
     public void iShouldSeeExpected_numberHospitalsWhichNameDescriptionOrAddressConsistSearchWord(int expected_number) {
         assertEquals(hospitalSearchResult.countOfHospital(), expected_number);
     }
-}*/
+}
