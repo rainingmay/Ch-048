@@ -74,7 +74,6 @@ public class BrowserWrapper {
 
     public static boolean isAlertPresent(){
         boolean foundAlert;
-        WebDriverWait wait = new WebDriverWait(DriverInitializer.instance(), 2);
         try {
             wait.until(ExpectedConditions.alertIsPresent());
             foundAlert = true;
