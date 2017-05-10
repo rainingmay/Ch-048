@@ -40,12 +40,12 @@ public class BaseNavigation {
 
     public static HospitalSeekerHomePage loginAsDoctor(String email, String password)  {
         login(email, password);
-        return new HospitalSeekerHomePage() ;
+        return new HospitalSeekerHomePage();
     }
 
     public static HospitalSeekerHomePage loginAsPatient(String email, String password)  {
         login(email, password);
-        return new HospitalSeekerHomePage() ;
+        return new HospitalSeekerHomePage();
     }
 
     public static void changeLanguage(String lang){

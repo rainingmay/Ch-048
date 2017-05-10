@@ -38,9 +38,9 @@ public class AddHospitalTest extends BaseTest {
 
     Logger logger = LoggerFactory.getLogger(HospitalListPage.class);
 
-
     @BeforeMethod
     public void beforeMethod() {
+        //BrowserWrapper.sleep(3);
         BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
         BrowserWrapper.waitUntilElementIsPresent(By.id(ALL_USERS_PAGE_ID_IDENTIFICATION));
         logger.info(TEST_STARTED);
@@ -50,7 +50,6 @@ public class AddHospitalTest extends BaseTest {
     @Test(dataProvider = "validHospitalAddress", groups = {"Add hospital"})
     public void addNewHospitalWithValidDataTest(String hospitalAddress, String hospitalName, String hospitalDescription) throws Exception {
 
-            BrowserWrapper.waitUntilElementClickableByLocator(By.id(ALL_USERS_PAGE_ID_IDENTIFICATION));
             HospitalListPage hospitalListPage = new HospitalListPage();
             hospitalListPage.header.goToAllHospitalsPage();
             BrowserWrapper.waitUntilElementClickableByLocator(By.xpath(ALL_HOSPITALS_PAGE_XPATH_IDENTIFICATION));
@@ -61,9 +60,6 @@ public class AddHospitalTest extends BaseTest {
             BrowserWrapper.waitUntilElementClickableByLocator(By.id(ADD_HOSPITAL_PAGE_ID_IDENTIFICATION));
             AddNewHospitalPage addNewHospitalPage = new AddNewHospitalPage();
 
-
-            //addNewHospitalPage.pushAddPhotoButton();
-            //addNewHospitalPage.addNewHospitalPhoto();
             addNewHospitalPage.addNewHospital(hospitalAddress, hospitalName, hospitalDescription);
             BrowserWrapper.waitUntilElementClickableByLocator(By.xpath(ALL_HOSPITALS_PAGE_XPATH_IDENTIFICATION));
 
@@ -76,8 +72,6 @@ public class AddHospitalTest extends BaseTest {
 
     @Test(dataProvider = "loginDataForDeleteHospital", groups = {"Edit/Delete hospital"})
     public void deleteHospitalTest(String login, String password, int hospitalCountForDelete) throws Exception {
-
-            BrowserWrapper.waitUntilElementClickableByLocator(By.id(ALL_USERS_PAGE_ID_IDENTIFICATION));
 
             HospitalListPage hospitalListPage = new HospitalListPage();
             hospitalListPage.header.goToAllHospitalsPage();
@@ -121,7 +115,6 @@ public class AddHospitalTest extends BaseTest {
     @Test(dataProvider = "invalidHospitalAddress", groups = {"Add hospital"})
     public void addNewHospitalWithInvalidDataTest(String hospitalAddress, String hospitalName, String hospitalDescription) throws Exception {
 
-        //BrowserWrapper.waitUntilElementClickableByLocator(By.id(ALL_USERS_PAGE_ID_IDENTIFICATION));
         HospitalListPage hospitalListPage = new HospitalListPage();
         hospitalListPage.header.goToAllHospitalsPage();
         BrowserWrapper.waitUntilElementClickableByLocator(By.id(ALL_HOSPITALS_PAGE_ID_IDENTIFICATION));

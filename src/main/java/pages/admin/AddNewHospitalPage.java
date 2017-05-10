@@ -156,11 +156,12 @@ public class AddNewHospitalPage implements PageInitializer {
    }
 
    public void addNewHospital(String address, String name, String description) {
-       //BrowserWrapper.sleep(2);
-       addressData(address);
+       BrowserWrapper.sleep(2);
+        addressData(address);
+       BrowserWrapper.sleep(2);
        addHospitalName(name);
        addHospitalDescription(description);
-       //BrowserWrapper.sleep(2);
+       BrowserWrapper.sleep(2);
        pushFillButton();
        BrowserWrapper.sleep(2);
        pushFindButton();

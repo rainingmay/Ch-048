@@ -1,16 +1,12 @@
 package pages.admin;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.PageInitializer;
 import pages.headers.headersByRole.AdminHeader;
 import utils.BrowserWrapper;
 import utils.DriverInitializer;
-import utils.TableParser;
-
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,7 +88,7 @@ public class HospitalListPage implements PageInitializer {
             WebElement tableRow = tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")"));
             deleteButton = tableRow.findElement(By.cssSelector("body > section > div > div > div > div.col-sm-8 > div.pre-scrollable.panel.panel-default > table > tbody > tr:nth-child(" + rowNumber + ") > td:nth-child(3) > form > button:nth-child(4)"));
             deleteButton.click();
-            BrowserWrapper.waitUntilElementVisibleByLocator(By.cssSelector("body > section > div > div > div > div.col-sm-8 > div.pre-scrollable.panel.panel-default > table > tbody > tr:nth-child(" + rowNumber + ") > td:nth-child(3) > form div.modal-content div.modal-footer > button:nth-child(1)"));
+            BrowserWrapper.waitUntilElementClickableByLocator(By.cssSelector("body > section > div > div > div > div.col-sm-8 > div.pre-scrollable.panel.panel-default > table > tbody > tr:nth-child(" + rowNumber + ") > td:nth-child(3) > form div.modal-content div.modal-footer > button:nth-child(1)"));
             //BrowserWrapper.sleep(1);
             deleteModalSubmit = tableRow.findElement(By.cssSelector("body > section > div > div > div > div.col-sm-8 > div.pre-scrollable.panel.panel-default > table > tbody > tr:nth-child(" + rowNumber + ") > td:nth-child(3) > form div.modal-content div.modal-footer > button:nth-child(1)"));
             deleteModalSubmit.click();
