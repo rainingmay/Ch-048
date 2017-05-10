@@ -199,7 +199,7 @@ public class SchedulerPageTest extends BaseTest {
         schedulerPage.createAppointmentWithoutSave(TEST_APPOINTMENT_TEXT);
         BrowserWrapper.refreshPage();
         boolean present = BrowserWrapper.isAlertPresent();
-        BrowserWrapper.confirmAlert();
+        BrowserWrapper.conformAlert();
         schedulerPage.saveButtonClick();
         Assert.assertTrue(present);
         logger.info("Test pass");
