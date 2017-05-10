@@ -78,11 +78,6 @@ public class BaseHeader implements PageInitializer {
         return new HospitalSeekerHomePage();
     }
 
-    public MapSearchPage toMapOfHospitals() {
-        nearestHospital.click();
-        return new MapSearchPage();
-    }
-
     public BaseHeader changeLanguageToUa() {
         changeLanguageIco.click();
         uaLanguage.click();
