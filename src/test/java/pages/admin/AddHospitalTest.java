@@ -25,6 +25,7 @@ public class AddHospitalTest extends BaseTest {
     private static final String VALID_HOSPITAL_ADDRESS = "Musorhs'koho St, 4, Chernivtsi, Chernivets'ka oblast, Ukraine";
     private static final String VALID_HOSPITAL_NAME = "Hospital #15";
     private static final int HOSPITAL_ROW_FOR_DELETE = 9;
+    private static final String HOSPITAL_NAME_FOR_EDIT = "Hospital #8";
     private static final String BUILDING_NUMBER_FOR_EDIT_HOSPITAL = "2";
     private static final String STREET_NAME_FOR_EDIT_HOSPITAL_DATA = "Fastivs'ka St";
     private static final int HOSPITAL_ROW_FOR_EDIT = 9;
@@ -88,18 +89,19 @@ public class AddHospitalTest extends BaseTest {
     }
 
     @Test(dataProvider = "editHospitalBuildingAndStreet", groups = {"Edit/Delete hospital"})
-    public void editHospitalTest(String building, String street, int hospitalCountForEdit) throws Exception {
+    public void editHospitalTest(String hospitalName, String building, String street, int hospitalCountForEdit) throws Exception {
 
             HospitalListPage hospitalListPage = new HospitalListPage();
             hospitalListPage.header.goToAllHospitalsPage();
             BrowserWrapper.waitUntilElementClickableByLocator(By.xpath(ALL_HOSPITALS_PAGE_XPATH_IDENTIFICATION));
 
             int hospitalCountOfRow = hospitalListPage.getCountOfHospitalsInTable();
-            String actual = hospitalListPage.getHospitalDataFromTableRow(hospitalCountOfRow - 2).toString();
+            String actual = hospitalListPage.getHospitalDataFromTableRow(hospitalCountForEdit).toString();
             hospitalListPage.editButton(hospitalCountForEdit);
             BrowserWrapper.waitUntilElementClickableByLocator(By.id(ADD_HOSPITAL_PAGE_ID_IDENTIFICATION));
 
             AddNewHospitalPage addNewHospitalPage = new AddNewHospitalPage();
+            addNewHospitalPage.addHospitalName(hospitalName);
             addNewHospitalPage.changeBuilding(building);
             addNewHospitalPage.changeStreet(street);
             addNewHospitalPage.pushSaveButton();
@@ -136,11 +138,6 @@ public class AddHospitalTest extends BaseTest {
         logger.info(TEST_PASSED);
     }
 
-    @Test
-    public void addNewHospitalWithoutDataTest() {
-
-    }
-
     @DataProvider
     public static Object [] [] validHospitalAddress() {
         return new  Object [] [] {
@@ -158,7 +155,7 @@ public class AddHospitalTest extends BaseTest {
     @DataProvider
     public Object [] [] editHospitalBuildingAndStreet() {
         return new Object[][] {
-                {BUILDING_NUMBER_FOR_EDIT_HOSPITAL, STREET_NAME_FOR_EDIT_HOSPITAL_DATA, HOSPITAL_ROW_FOR_EDIT}
+                {HOSPITAL_NAME_FOR_EDIT, BUILDING_NUMBER_FOR_EDIT_HOSPITAL, STREET_NAME_FOR_EDIT_HOSPITAL_DATA, HOSPITAL_ROW_FOR_EDIT}
         };
     }
 
