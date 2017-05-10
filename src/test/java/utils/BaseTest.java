@@ -13,6 +13,7 @@ import java.util.Properties;
 @Listeners({ScreenshotListener.class})
 public class BaseTest {
 
+
     public static Properties properties;
 
     public static final String ADMIN_LOGIN = "admin@hospitals.ua";
@@ -27,11 +28,13 @@ public class BaseTest {
     public static final String PATIENT_LOGIN = "patient.cd@hospitals.ua";
     public static final String PATIENT_PASSWORD = "1111";
 
-    protected static final String BASE_URL = "https://localhost:8443/HospitalSeeker/";
+    public static final String BASE_URL = "https://localhost:8443/HospitalSeeker/";
 
     @BeforeClass(alwaysRun = true)
     public void before() {
         DriverInitializer.getToUrl(BASE_URL);
+        String s = System.getProperty("test.language");
+        BaseNavigation.changeLanguage(s);
     }
 
 

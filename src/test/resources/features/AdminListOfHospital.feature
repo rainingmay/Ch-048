@@ -18,7 +18,7 @@
 
   Scenario: Edit hospital
     When  ADMIN press button "Edit" in row '1' with certain hospital
-    Then  ADMIN must see page "Hospital add/edit page"
+    Then  ADMIN must see page with "Hospital add/edit page"
 
   Scenario: Delete hospital
     When  ADMIN press button "Delete" in row '1' with certain hospital

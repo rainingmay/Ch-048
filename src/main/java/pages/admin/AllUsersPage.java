@@ -44,10 +44,10 @@ public class AllUsersPage implements PageInitializer {
     @FindBy(id = "clearButton")
     private WebElement clearButton;
 
-    @FindBy(xpath = "/html/body/section/div[1]/div/form/div[5]/a[1]")
+    @FindBy(css = "a[href=\"/HospitalSeeker/admin/users?status=true\"]")
     private WebElement enableButton;
 
-    @FindBy(xpath = "/html/body/section/div[1]/div/form/div[5]/a[2]")
+    @FindBy(css = "a[href=\"/HospitalSeeker/admin/users?status=false\"]")
     private WebElement disableButton;
 
     @FindBy(css = ".pull-right .btn-group a:last-child")
@@ -125,13 +125,13 @@ public class AllUsersPage implements PageInitializer {
 
     public AllUsersPage showEnableUsers() {
         enableButton.click();
-        BrowserWrapper.waitForPage();
+        BrowserWrapper.waitForPage(10L);
         return new AllUsersPage();
     }
 
     public AllUsersPage showDisableUsers() {
         ((JavascriptExecutor) DriverInitializer.instance()).executeScript("arguments[0].click();" , disableButton);
-        BrowserWrapper.waitForPage();
+        BrowserWrapper.waitForPage(10L);
         return new AllUsersPage();
     }
 
@@ -145,7 +145,7 @@ public class AllUsersPage implements PageInitializer {
     public AllUsersPage changeRole(String role) {
         this.role.findElement(By.cssSelector("option[value=" + role + "]")).click();
         searchButton.click();
-        BrowserWrapper.waitForPage();
+        BrowserWrapper.waitForPage(10L);
         return new AllUsersPage();
     }
 

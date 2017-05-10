@@ -3,10 +3,8 @@ package pages.allUsers;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.PageInitializer;
-import pages.anonymous.LoginPage;
 import pages.headers.headersByRole.DoctorHeader;
 import pages.headers.headersByRole.NotAuthorizedHeader;
-import utils.BrowserWrapper;
 
 
 /**
@@ -16,13 +14,7 @@ public class HospitalSeekerHomePage implements PageInitializer {
 
     //Temporary field
     public NotAuthorizedHeader notAuthorizedHeader;
-    public DoctorHeader header;
-
-
-    public LoginPage moveToLoginPage(){
-        notAuthorizedHeader.loginButton();
-        return new LoginPage();
-    }
+    //public DoctorHeader header;
 
 
 
@@ -34,18 +26,14 @@ public class HospitalSeekerHomePage implements PageInitializer {
     private WebElement textParagraph;
 
 
-    @FindBy(css = "left carousel-control")
+    @FindBy(css = "a.left.carousel-control")
     private WebElement leftCarouselButton;
 
-    @FindBy(css = "right carousel-control")
+    @FindBy(css = "a.right.carousel-control")
     private WebElement rightCarouselButton;
 
     @FindBy(css = "img[src=\"/HospitalSeeker/img/slide-four.jpg\"]")
     private WebElement image;
-
-    public boolean isCarouselPresent() {
-       return BrowserWrapper.isElementPresent(image);
-    }
 
     public HospitalSeekerHomePage() {
         notAuthorizedHeader = new NotAuthorizedHeader();

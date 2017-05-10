@@ -42,19 +42,26 @@ public class AdminHospitalListActionSteps {
         BrowserWrapper.sleep(2);
     }
 
-    @When("ADMIN press button \"Edit\" in row '(.*)' with certain hospital")
-    public void admin_try_edit_hospital(String number) {
-        new TableParser(hospitalListPage.table).getButtonFromTableRow(Integer.parseInt(number), "Edit").click();
-    }
-
     @Then("^ADMIN must see page \"Hospital add/edit page\"$")
     public void admin_is_on_add_hospital_page() {
         Assert.assertEquals(addNewHospitalPage.pageLabel.getText().toLowerCase(), "hospital add/edit page" );
     }
 
+    @When("^ADMIN press button \"Edit\" in row '(.*)' with certain hospital$")
+    public void admin_try_edit_hospital(String number) {
+        new TableParser(hospitalListPage.table).getButtonFromTableRow(Integer.parseInt(number), "Edit").click();
+    }
+
+    @Then("^ADMIN must see page with \"Hospital add/edit page\"$")
+    public void admin_on_add_hospital_page() {
+        Assert.assertEquals(addNewHospitalPage.pageLabel.getText().toLowerCase(), "hospital add/edit page" );
+    }
+
+
     @When("^ADMIN press button \"Check Google POI\"$")
     public void admin_try_open_googlepoi_page() {
         googlePOIPage = hospitalListPage.submitCheckGooglePoi();
+        BrowserWrapper.sleep(2);
     }
 
     @Then("^ADMIN must see page where he can check GooglePOI$")

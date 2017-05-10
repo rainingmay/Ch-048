@@ -26,17 +26,13 @@ public class HospitalsManagersPage implements PageInitializer {
     @FindBy(css = "tbody")
     private WebElement table;
 
-    private WebElement selectManager;
-
-    private WebElement deleteManager;
-
     public void changeManager(int rowNumber, String name) {
-        selectManager = DriverInitializer.instance().findElement(By.xpath("tbody tr[" + rowNumber + "] td[3] select"));
+        WebElement selectManager = DriverInitializer.instance().findElement(By.xpath("tbody tr[" + rowNumber + "] td[3] select"));
         selectManager.findElement(By.linkText(name));
     }
 
     public void deleteManager(int rowNumber) {
-      deleteManager = DriverInitializer.instance().findElement(By.cssSelector("tbody tr[" + rowNumber + "] btn btn-danger"));
+      WebElement deleteManager = DriverInitializer.instance().findElement(By.cssSelector("tbody tr[" + rowNumber + "] btn btn-danger"));
       deleteManager.click();
     }
 }

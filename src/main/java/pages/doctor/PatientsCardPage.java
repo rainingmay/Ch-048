@@ -23,7 +23,7 @@ public class PatientsCardPage implements PageInitializer {
     @FindBy (css = "#headingOne > h4 > span")
     private WebElement patientRecords;
 
-    @FindBy (xpath = "//*[@id=\"headingOne\"]/h4/span[2]/a")
+    @FindBy (css = "div#headingOne a[style=\"float:right\"]")
     private WebElement editRecord;
 
     public PatientsCardPage() {
@@ -44,7 +44,6 @@ public class PatientsCardPage implements PageInitializer {
     }
 
     public void addNewRecordButtonClick (){
-        //BrowserWrapper.waitUntilElementClickable(addNewRecord);
         addNewRecord.click();
     }
 

@@ -3,6 +3,7 @@ package utils;
 import pages.admin.AllUsersPage;
 import pages.allUsers.HospitalSeekerHomePage;
 import pages.anonymous.LoginPage;
+import pages.headers.BaseHeader;
 import pages.headers.headersByRole.AuthorizedHeader;
 import pages.manager.HospitalsPage;
 
@@ -23,8 +24,7 @@ public class BaseNavigation {
     public static HospitalSeekerHomePage logout() {
         AuthorizedHeader authorizedHeader = new AuthorizedHeader();
         authorizedHeader.profileButtonClick();
-        HospitalSeekerHomePage hospitalSeekerHomePage = authorizedHeader.logoutButtonClick();
-        return hospitalSeekerHomePage;
+        return authorizedHeader.logoutButtonClick();
     }
 
 
@@ -48,5 +48,13 @@ public class BaseNavigation {
         return new HospitalSeekerHomePage() ;
     }
 
+    public static void changeLanguage(String lang){
+        BaseHeader baseHeader = new BaseHeader();
+        if(lang.equals("ukr")){
+            baseHeader.changeLanguageToUa();
+        }else {
+            baseHeader.changeLanguageToEn();
+        }
+    }
 
 }

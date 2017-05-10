@@ -30,6 +30,7 @@ public class HospitalsPage implements PageInitializer{
         for (WebElement element : allHospitals){
             BrowserWrapper.waitUntilElementVisible(element);
             if(element.findElement(By.tagName("h3")).getText().equals(name)){
+                BrowserWrapper.waitUntilElementClickable(element);
                 element.click();
                 break;
             }
