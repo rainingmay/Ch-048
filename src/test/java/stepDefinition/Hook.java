@@ -7,6 +7,8 @@ import cucumber.api.java.Before;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriverException;
+import utils.BaseTest;
+
 import utils.DriverInitializer;
 
 /**
@@ -14,12 +16,11 @@ import utils.DriverInitializer;
  */
 
 public class Hook {
-    private static final String BASE_URL = "https://localhost:8443/HospitalSeeker/";
 
 
     @Before
     public void setUp(){
-        DriverInitializer.getToUrl(BASE_URL);
+        DriverInitializer.getToUrl(BaseTest.BASE_URL);
     }
 
     @After

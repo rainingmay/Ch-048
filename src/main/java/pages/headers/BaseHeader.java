@@ -3,11 +3,8 @@ package pages.headers;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.PageInitializer;
-import pages.allUsers.DoctorSearchResultPage;
-import pages.allUsers.HospitalSearchResultPage;
-import pages.allUsers.HospitalSeekerHomePage;
+import pages.allUsers.*;
 import utils.BrowserWrapper;
-
 
 /**
  * Created by Evgen on 05.04.2017.
@@ -74,8 +71,13 @@ public class BaseHeader implements PageInitializer {
         uaLanguage.click();
         return new BaseHeader();
     }
+  
+    public MapSearchPage toMapOfHospitals() {
+        nearestHospital.click();
+        return new MapSearchPage();
+    }
 
-    public void fillDoctorInput(String doctorName) {
+      public void fillDoctorInput(String doctorName) {
         fillInput(doctorName, doctorSearchField);
     }
 

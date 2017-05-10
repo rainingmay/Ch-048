@@ -20,29 +20,48 @@ public class DoctorInfoPage implements PageInitializer {
     @FindBy(css = "div.panel-heading text-center")
     private WebElement doctorsNameLabel;
 
-    @FindBy(css = "div.panel-body")
+   // @FindBy(css = "div.panel-body")
+    @FindBy(xpath = "/html/body/section/div/div[2]/div[3]/div/div/div/div[2]")
     public WebElement doctorInfoLabel;
 
     @FindBy(css = "div.panel-footer")
     private WebElement doctorsHospitalLabel;
 
-    //@FindBy(id = "input-feedback")
-    @FindBy(xpath = "//*[@id=\"input-feedback\"]")
+    @FindBy(id = "input-feedback")
+  //  @FindBy(xpath = "//*[@id=\"input-feedback\"]")
     public WebElement doctorFeedbackInput;
 
     @FindBy(id = "sendFeedback")
     private WebElement sendFeedbackButton;
 
-    public void createFeedBack(String value){
-        doctorFeedbackInput.clear();
+    @FindBy(id = "modal-body-text")
+    public WebElement feedbackText;
+
+   // @FindBy(css = "div.panel-body.fixed-panel-body")
+    @FindBy(xpath = "//div[3]/div/div/div/div[2]")
+    public WebElement infoLabel;
+
+
+    public DoctorInfoPage feedbackText(){
+        infoLabel.click();
         BrowserWrapper.sleep(2);
-        doctorFeedbackInput.sendKeys(value);
-        BrowserWrapper.sleep(2);
-        BrowserWrapper.waitUntilElementClickableByLocator(By.id("sendFeedback"));
-        sendFeedbackButton.click();
-        BrowserWrapper.sleep(2);
-        BrowserWrapper.refreshPage();;
+        System.out.println(feedbackText.getText());
+        return new DoctorInfoPage();
     }
+
+
+
+    public void createFeedBack(String value){
+       // BrowserWrapper.waitUntilElementVisible(doctorFeedbackInput);
+        doctorFeedbackInput.clear();
+        sendFeedbackButton.sendKeys(value);
+        BrowserWrapper.sleep(2);
+        sendFeedbackButton.click();
+        BrowserWrapper.refreshPage();;
+        BrowserWrapper.sleep(2);
+    }
+
+
 
     public DoctorInfoPage() {
         baseHeader = new BaseHeader();

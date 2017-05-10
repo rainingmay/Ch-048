@@ -20,7 +20,6 @@ public class HospitalSeekerHomePage implements PageInitializer {
     @FindBy(xpath = "//*[@id=\"carouselHacked\"]/div[2]/div[2]/div/p")
     private WebElement textParagraph;
 
-
     @FindBy(css = "a.left.carousel-control")
     private WebElement leftCarouselButton;
 

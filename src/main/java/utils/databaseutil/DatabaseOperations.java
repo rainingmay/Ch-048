@@ -2,14 +2,12 @@ package utils.databaseutil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import pages.admin.AllUsersPage;
 
-import javax.swing.*;
-import java.awt.*;
 import java.io.*;
-import java.net.URISyntaxException;
-import java.security.CodeSource;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
 
@@ -71,7 +69,7 @@ public class DatabaseOperations {
 
             Properties properties = new Properties();
             String filepath = "src/main/resources/" + filename;
-            InputStream inputStream = new FileInputStream("src/main/resources/detailedDatabaseProperties.properties");
+            InputStream inputStream = new FileInputStream("src/main/resources/database.properties");
             properties.load(inputStream);
 
             Runtime runtime = Runtime.getRuntime();
@@ -111,7 +109,7 @@ public class DatabaseOperations {
         try {
             Properties properties = new Properties();
             String filepath = "src/ main/resources/" + filename;
-            InputStream inputStream = new FileInputStream("src/main/resources/detailedDatabaseProperties.properties");
+            InputStream inputStream = new FileInputStream("src/main/resources/database.properties");
             properties.load(inputStream);
 
             Runtime runtime = Runtime.getRuntime();;

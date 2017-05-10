@@ -369,6 +369,9 @@ public class SchedulerPage implements PageInitializer {
         return list;
     }
 
+    public boolean isEventsPresentOnCalendar(){
+        return getEventsCalendar().size()>0;
+    }
     public boolean isEventsPresent(){
         return getEvents().size() > 0;
     }
