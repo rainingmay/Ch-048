@@ -7,6 +7,8 @@ import pages.PageInitializer;
 import pages.headers.headersByRole.AdminHeader;
 import utils.BrowserWrapper;
 import utils.DriverInitializer;
+import utils.TableParser;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,8 +41,8 @@ public class HospitalListPage implements PageInitializer {
 
     private WebElement deleteModalSubmit;
     private WebElement showOnMap;
-    private WebElement editButton;
-    private WebElement deleteButton;
+    public WebElement editButton;
+    public WebElement deleteButton;
 
     public boolean checkAddNewHospitalButton() {
         return BrowserWrapper.isElementPresent(addNewHospitalButton);
@@ -72,17 +74,7 @@ public class HospitalListPage implements PageInitializer {
         }
         return null;
     }
-/*
-    public HospitalListPage deleteHospital(int rowNumber) {
-        deleteButton = new TableParser(table).getButtonFromTableRowByButtonTitle(rowNumber);
-        deleteButton.click();
-        BrowserWrapper.sleep(1);
-        deleteModalSubmit = DriverInitializer.instance().findElement(By.className("modal-content"));
-        ((JavascriptExecutor) DriverInitializer.instance()).executeScript("arguments[0].click();" , DriverInitializer.instance().findElement(By.cssSelector("//form div.modal-content div.modal-footer > button:nth-child(1)")));
-        BrowserWrapper.sleep(3);
-        return new HospitalListPage();
-    }
-*/
+
     public HospitalListPage deleteHospital(int rowNumber) {
         if (tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")")).isDisplayed()) {
             WebElement tableRow = tableBody.findElement(By.cssSelector("tr:nth-child(" + rowNumber + ")"));
@@ -115,5 +107,19 @@ public class HospitalListPage implements PageInitializer {
 
     public String getTitleOfPage() {
         return DriverInitializer.instance().getTitle();
+    }
+
+    public AddNewHospitalPage editButtonClick(String rowNumber) {
+        editButton = new TableParser(this.table).getButtonFromTableRow(Integer.parseInt(rowNumber), "Edit");
+        editButton.click();
+        BrowserWrapper.sleep(2);
+        return new AddNewHospitalPage();
+    }
+
+    public HospitalListPage deleteButtonClick(String rowNumber) {
+        deleteButton = new TableParser(this.table).getButtonFromTableRow(Integer.parseInt(rowNumber), "Delete");
+        deleteButton.click();
+        BrowserWrapper.sleep(2);
+        return new HospitalListPage();
     }
 }

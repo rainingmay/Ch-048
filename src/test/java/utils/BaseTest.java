@@ -1,18 +1,17 @@
 package utils;
 
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import pages.headers.BaseHeader;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Properties;
-
 
 @Listeners({ScreenshotListener.class})
 public class BaseTest {
-
 
     public static Properties properties;
 
@@ -37,12 +36,10 @@ public class BaseTest {
         //BaseNavigation.changeLanguage(s);
     }
 
-
     @AfterClass(alwaysRun = true)
     public void after() {
         DriverInitializer.close();
     }
-
 
     public static void checkLanguageAndLoadProperties(BaseHeader header) {
         properties = new Properties();
@@ -51,7 +48,7 @@ public class BaseTest {
                 InputStream inputStream = new FileInputStream("src/test/resources/localization/en.properties");
                 properties.load(inputStream);
             } else {
-                InputStream inputStream = new FileInputStream("src/main/resources/localization/ua.properties");
+                InputStream inputStream = new FileInputStream("src/test/resources/localization/ua.properties");
                 properties.load(inputStream);
             }
         } catch (IOException e) {

@@ -16,8 +16,7 @@ import utils.databaseutil.UserDAO;
 
 
 
-public class
-SchedulerPageTest extends BaseTest {
+public class SchedulerPageTest extends BaseTest {
 
     public static final String TEST_BEGIN_AT_HOUR = "11:00";
     public static final String TEST_END_AT_HOUR = "20:00";
@@ -53,7 +52,6 @@ SchedulerPageTest extends BaseTest {
     @Test(groups = {"smokeTest"})
     public void testElementPresence() {
         try{
-            BrowserWrapper.waitForPage(10L);
             schedulerPage.isPageReady();
         }catch (Exception e){
             logger.error("Not all element's found");
@@ -65,7 +63,6 @@ SchedulerPageTest extends BaseTest {
 
     @Test(groups = {"smokeTest"})
     public void testDefaultSchedulerValues(){
-        BrowserWrapper.waitForPage(10L);
         try{
             schedulerPage.checkDefaultConditionScheduler();
         }catch (Exception e){
@@ -199,7 +196,7 @@ SchedulerPageTest extends BaseTest {
         schedulerPage.createAppointmentWithoutSave(TEST_APPOINTMENT_TEXT);
         BrowserWrapper.refreshPage();
         boolean present = BrowserWrapper.isAlertPresent();
-        BrowserWrapper.conformAlert();
+        BrowserWrapper.confirmAlert();
         schedulerPage.saveButtonClick();
         Assert.assertTrue(present);
         logger.info("Test pass");

@@ -48,7 +48,7 @@ public class AddNewHospitalPage implements PageInitializer {
     @FindBy(id = "description")
     private WebElement descriptionInputField;
 
-    @FindBy(xpath = "//*[@id=\"button-find\"]")
+    @FindBy(id = "button-find")
     private WebElement findButton;
 
     @FindBy(id = "button-fill")
@@ -68,7 +68,10 @@ public class AddNewHospitalPage implements PageInitializer {
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
     }
 
+
     public void addNewHospitalPhoto() throws AWTException {
+        //why you use hard path to image??
+        //may be setClipboardData("src/main/resources/RhodeIslandHosp14_360_360_90.jpg");
         setClipboardData("D:\\RhodeIslandHosp14_360_360_90.jpg");
         Robot robot = new Robot();
         robot.delay(500);
@@ -142,9 +145,6 @@ public class AddNewHospitalPage implements PageInitializer {
         fillButton.click();
    }
 
-   public void pushFillButtonWithInvalidData() {
-
-   }
 
    public void pushResetButton() {
         resetButton.click();

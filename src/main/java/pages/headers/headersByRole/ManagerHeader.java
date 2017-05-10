@@ -6,6 +6,7 @@ import pages.PageInitializer;
 import pages.manager.AddNewDoctorPage;
 import pages.manager.ManagerDashBordPage;
 import pages.manager.ModerationFeedBackPage;
+import utils.BrowserWrapper;
 
 
 /**
@@ -27,7 +28,12 @@ public class ManagerHeader extends AuthorizedHeader implements PageInitializer {
     private WebElement addDoctor;
 
     @FindBy(css = "a[href=\"/HospitalSeeker/moderationFeedbacks]")
-    private WebElement feedbacks;
+    private WebElement feedbackManagePage;
+
+    @FindBy(xpath = "//*[@id=\"dropdawn\"]/li[3]/a")
+    private WebElement getFeedbackManagePageIco;
+
+
 
 
     public AddNewDoctorPage addNewDoctorPage() {
@@ -40,8 +46,10 @@ public class ManagerHeader extends AuthorizedHeader implements PageInitializer {
         return new ManagerDashBordPage();
     }
 
-    public ModerationFeedBackPage feedBackPage() {
-        feedbacks.click();
+    public ModerationFeedBackPage  feedBackPage() {
+        actions.click();
+        BrowserWrapper.sleep(2);
+        getFeedbackManagePageIco.click();
         return new ModerationFeedBackPage();
     }
 

@@ -40,7 +40,6 @@ public class AddHospitalTest extends BaseTest {
 
     @BeforeMethod
     public void beforeMethod() {
-        //BrowserWrapper.sleep(3);
         BaseNavigation.loginAsAdmin(ADMIN_LOGIN, ADMIN_PASSWORD);
         BrowserWrapper.waitUntilElementIsPresent(By.id(ALL_USERS_PAGE_ID_IDENTIFICATION));
         logger.info(TEST_STARTED);
