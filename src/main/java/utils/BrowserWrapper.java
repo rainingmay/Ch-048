@@ -80,7 +80,7 @@ public class BrowserWrapper {
         return foundAlert;
     }
 
-    public static void conformAlert() {
+    public static void confirmAlert() {
         waitUntilAlertIsPresent();
         Alert alert = DriverInitializer.instance().switchTo().alert();
         alert.dismiss();

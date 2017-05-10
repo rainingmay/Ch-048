@@ -72,10 +72,10 @@ public class BaseHeader implements PageInitializer {
         return new BaseHeader();
     }
   
-    public MapSearchPage toMapOfHospitals() {
+    /*public MapSearchPage toMapOfHospitals() {
         nearestHospital.click();
         return new MapSearchPage();
-    }
+    }*/
 
       public void fillDoctorInput(String doctorName) {
         fillInput(doctorName, doctorSearchField);
