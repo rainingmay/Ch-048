@@ -16,7 +16,8 @@ import utils.databaseutil.UserDAO;
 
 
 
-public class SchedulerPageTest extends BaseTest {
+public class
+SchedulerPageTest extends BaseTest {
 
     public static final String TEST_BEGIN_AT_HOUR = "11:00";
     public static final String TEST_END_AT_HOUR = "20:00";
@@ -171,7 +172,7 @@ public class SchedulerPageTest extends BaseTest {
         schedulerPage = managerDashBordPage.scheduleButtonClick(DOCTOR_NAME);
         schedulerPage.monthTabButtonClick();
         schedulerPage.nextButtonClick();
-        Assert.assertTrue( schedulerPage.isEventsPresent() && schedulerPage.isEventOnCalendarTab(EXPECTED_APPOINTMENT_TEXT));
+        Assert.assertTrue( schedulerPage.isEventsPresentOnCalendar() && schedulerPage.isEventOnCalendarTab(EXPECTED_APPOINTMENT_TEXT),"Can't create event on month tab" );
         logger.info("Test pass");
     }
 

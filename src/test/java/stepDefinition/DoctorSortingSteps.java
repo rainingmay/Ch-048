@@ -18,7 +18,13 @@ public class DoctorSortingSteps {
     public static final String HOSPITAL_NAME = "Miska Poliklinika";
     public static final String MANAGER_LOGIN = "manager.jh@hospitals.ua";
     public static final String MANAGER_PASSWORD = "1111";
+    public static final String EMAIL = "Email";
+    public static final String FIRST_NAME = "First Name";
+    public static final String LAST_NAME = "Last Name";
+    public static final String SPECIALIZATION = "Specialization";
+    public static final String CATEGORY = "Category";
     public static ManagerDashBordPage managerDashBordPage;
+
 
     @Given("^the manager is on dashboard of particular hospital in order to sort$")
     public void the_manager_is_on_dashboard_of_particular_hospital_in_order_to_sort() throws Throwable {
@@ -39,13 +45,13 @@ public class DoctorSortingSteps {
 
     @Then("^Doctors in table is sorted by their emails ascending$")
     public void doctors_in_table_is_sorted_by_their_emails_ascending() throws Throwable {
-       List<String> emails = managerDashBordPage.getColumn("email");
+       List<String> emails = managerDashBordPage.getColumn(EMAIL);
        Assert.assertTrue(BrowserWrapper.isSorted(emails), "List not sorted by emails ascending");
     }
 
     @Then("^Doctors in table is sorted by their email descending$")
     public void doctors_in_table_is_sorted_by_their_email_descending() throws Throwable {
-        List<String> emails = managerDashBordPage.getColumn("email");
+        List<String> emails = managerDashBordPage.getColumn(EMAIL);
         Collections.reverse(emails);
         Assert.assertTrue(BrowserWrapper.isSorted(emails), "List not sorted by emails descending");
     }
@@ -62,13 +68,13 @@ public class DoctorSortingSteps {
 
     @Then("^Doctors in table is sorted by their first name ascending$")
     public void doctors_in_table_is_sorted_by_their_first_name_ascending() throws Throwable {
-        List<String> emails = managerDashBordPage.getColumn("firstName");
+        List<String> emails = managerDashBordPage.getColumn(FIRST_NAME);
         Assert.assertTrue(BrowserWrapper.isSorted(emails), "List not sorted by first name ascending");
     }
 
     @Then("^Doctors in table is sorted by their first name descending$")
     public void doctors_in_table_is_sorted_by_their_first_name_descending() throws Throwable {
-        List<String> emails = managerDashBordPage.getColumn("firstName");
+        List<String> emails = managerDashBordPage.getColumn(FIRST_NAME);
         Collections.reverse(emails);
         Assert.assertTrue(BrowserWrapper.isSorted(emails), "List not sorted by first name descending");
     }
@@ -85,13 +91,13 @@ public class DoctorSortingSteps {
 
     @Then("^Doctors in table is sorted by their last name ascending$")
     public void doctors_in_table_is_sorted_by_their_last_name_ascending() throws Throwable {
-        List<String> emails = managerDashBordPage.getColumn("lastName");
+        List<String> emails = managerDashBordPage.getColumn(LAST_NAME);
         Assert.assertTrue(BrowserWrapper.isSorted(emails), "List not sorted by last name ascending");
     }
 
     @Then("^Doctors in table is sorted by their last name descending$")
     public void doctors_in_table_is_sorted_by_their_last_name_descending() throws Throwable {
-        List<String> emails = managerDashBordPage.getColumn("lastName");
+        List<String> emails = managerDashBordPage.getColumn(LAST_NAME);
         Collections.reverse(emails);
         Assert.assertTrue(BrowserWrapper.isSorted(emails), "List not sorted by last name descending");
     }
@@ -109,13 +115,13 @@ public class DoctorSortingSteps {
 
     @Then("^Doctors in table is sorted by their specialization ascending$")
     public void doctors_in_table_is_sorted_by_their_specialization_ascending() throws Throwable {
-        List<String> emails = managerDashBordPage.getColumn("specialization");
+        List<String> emails = managerDashBordPage.getColumn(SPECIALIZATION);
         Assert.assertTrue(BrowserWrapper.isSorted(emails), "List not sorted by specialization ascending");
     }
 
     @Then("^Doctors in table is sorted by their specialization descending$")
     public void doctors_in_table_is_sorted_by_their_specialization_descending() throws Throwable {
-        List<String> emails = managerDashBordPage.getColumn("specialization");
+        List<String> emails = managerDashBordPage.getColumn(SPECIALIZATION);
         Collections.reverse(emails);
         Assert.assertTrue(BrowserWrapper.isSorted(emails), "List not sorted by specialization descending");
     }
@@ -132,13 +138,13 @@ public class DoctorSortingSteps {
 
     @Then("^Doctors in table is sorted by their category ascending$")
     public void doctors_in_table_is_sorted_by_their_category_ascending() throws Throwable {
-        List<String> emails = managerDashBordPage.getColumn("category");
+        List<String> emails = managerDashBordPage.getColumn(CATEGORY);
         Assert.assertTrue(BrowserWrapper.isSorted(emails), "List not sorted by category ascending");
     }
 
     @Then("^Doctors in table is sorted by their category descending$")
     public void doctors_in_table_is_sorted_by_their_category_descending() throws Throwable {
-        List<String> emails = managerDashBordPage.getColumn("category");
+        List<String> emails = managerDashBordPage.getColumn(CATEGORY);
         Collections.reverse(emails);
         Assert.assertTrue(BrowserWrapper.isSorted(emails), "List not sorted by category descending");
     }
