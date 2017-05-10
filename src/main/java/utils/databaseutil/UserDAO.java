@@ -1,10 +1,12 @@
 package utils.databaseutil;
 
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
-import java.lang.String;
 /**
  * Created by Evgen on 07.04.2017.
  */
@@ -31,6 +33,18 @@ public class UserDAO {
             e.printStackTrace();
         }
 
+        return null;
+    }
+
+    public static List<String> getWindowDataFromDatabase(String email, String webElement){
+        if (webElement.equals("userInfoWindow")) {
+            List<String> list = getUserFromDatabaseByEmail(email);
+            List<String> result = new LinkedList<>();
+            result.add(list.get(0));
+            result.add(list.get(1));
+            result.add(String.valueOf(getStatusByEmail(email)));
+            return result;
+        }
         return null;
     }
 

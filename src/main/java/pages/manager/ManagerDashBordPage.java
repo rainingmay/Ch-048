@@ -17,7 +17,6 @@ public class ManagerDashBordPage implements PageInitializer{
     @FindBy(className = "h1.text-center")
     private WebElement hospitalName;
 
-    //maybe no work
     @FindBy(className = "label[for=\"doctorPerPage\"]")
     private WebElement showDoctorsLabel;
 

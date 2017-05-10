@@ -42,9 +42,6 @@ public class MyAppointmentPage implements PageInitializer {
     private WebElement monthTabButton;
 
 
-    //
-
-
     public MyAppointmentPage() {
         patientHeader= new PatientHeader();
         pageInitialization();

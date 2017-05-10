@@ -78,7 +78,6 @@ public class AddNewDoctorPage implements PageInitializer {
 
     @FindBy(id = "datepicker")
     private WebElement dadePicker;
-    //Ask about calendr
 
     @FindBy(xpath = "//*[@id=\"registerNewUser\"]/div[7]/div[3]/div")
     private WebElement phoneLabel;
