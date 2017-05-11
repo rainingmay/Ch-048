@@ -16,7 +16,7 @@ public class PatientHeader extends AuthorizedHeader implements PageInitializer {
         pageInitialization();
     }
 
-    @FindBy(css = "div#bs-example-navbar-collapse-1 ul li:nth-child(3)")
+    @FindBy(css = "div#bs-example-navbar-collapse-1 ul li:nth-child(4)")
     private WebElement actions;
 
     @FindBy(css = "a[href=\"/HospitalSeeker/card\"]")
@@ -32,6 +32,7 @@ public class PatientHeader extends AuthorizedHeader implements PageInitializer {
     private WebElement patientProfileName;
 
     public CardPage goToCardPage() {
+        BrowserWrapper.sleep(1);
         BrowserWrapper.waitUntilElementClickable(actions);
         actions.click();
         BrowserWrapper.waitUntilElementClickable(card);
